@@ -1,0 +1,20 @@
+import { SubMenuActions } from '@window/app_bar/SubMenu'
+
+import store from '@redux-store/root'
+import { openModal } from '@redux-store/app/actions'
+
+const RenderActions: SubMenuActions = [
+    {
+        name: 'Render Image',
+        action: () => { 
+            store.dispatch(openModal('render-image'))
+        }
+    }, {
+        name: 'Render Animation',
+        action: () => { 
+            store.dispatch(openModal('render-animation'))
+         }
+    }
+]
+
+export default RenderActions

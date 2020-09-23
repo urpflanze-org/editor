@@ -1,0 +1,37 @@
+module.exports = {
+	version: '1.0.0',
+	palette: {
+		colors: [
+			{ id: '1', name: 'primary', value: '#1fcc9a', tags: ['custom'] },
+			// { "id": "2", "name": "primary", "value": "#00FFB5", "tags": ["custom"] },
+			{ id: '3', name: 'dark', value: '#111413', tags: ['custom'] },
+			{ id: '3', name: 'dark-lighten', value: '#1d2220', tags: ['custom'] },
+			{ id: '3', name: 'dark-verylighten', value: '#343e3a', tags: ['custom'] },
+			{ id: '3', name: 'dark-darken', value: '#050606', tags: ['custom'] },
+			{ id: '3', name: 'gray-dark', value: '#404b47', tags: ['custom'] },
+			{ id: '4', name: 'secondary', value: '#cc1f51', tags: ['custom'] },
+			{ id: '4', name: 'red', value: '#cc2200', tags: ['custom'] },
+			{ id: '5', name: 'green', value: '#22cc00', tags: ['custom'] },
+		],
+		format: 'hex',
+	},
+	modularScale: {
+		rootBase: '16px',
+		base: 1,
+		unit: 'rem',
+		ratio: 'PHI',
+	},
+	mediaQuery: {
+		xs: '(max-width: 480px)',
+		s: '(min-width: 481px) and (max-width: 992px)',
+		mp: '(min-width: 481px) and (max-width: 992px) and (orientation: portrait)',
+		ml: '(min-width: 481px) and (max-width: 992px) and (orientation: landscape)',
+		l: '(min-width: 1241px) and (max-width: 1440px)',
+		xl: '(min-width: 1441px) and (max-width: 0px)',
+		mi: 'only screen and (max-width: 992px)',
+		ma: 'only screen and (min-width: 993px)',
+		dpx: '(min-width-resolution: 2dppx) and (color: true)',
+		print: 'print and (monocrome: true)',
+	},
+	typography: {},
+}

@@ -1,0 +1,38 @@
+{
+	"compilerOptions": {
+		"sourceMap": true,
+		"outDir": "dist",
+		"jsx": "react",
+		"module": "esnext",
+		"target": "es6",
+		"removeComments": true,
+		"moduleResolution": "Node",
+		"preserveConstEnums": true,
+		"baseUrl": "src",
+		"declaration": false,
+		"noImplicitAny": false,
+		"noImplicitThis": false,
+		"strictPropertyInitialization": false,
+		"allowSyntheticDefaultImports": true,
+		"suppressExcessPropertyErrors": true,
+		"strict": true,
+		"typeRoots": ["./node_modules/@types"],
+		"paths": {
+			"&types/*": ["./types/*"],
+			"@bootstrap/*": ["./bootstrap/*"],
+			"@hooks/*": ["./hooks/*"],
+			"@workers/*": ["./workers/*"],
+			"@redux-store/*": ["./redux-store/*"],
+			"@window/*": ["./window/*"],
+			"@modals/*": ["./modals/*"],
+			"@components/*": ["./components/*"],
+			"@ui-services/*": ["./ui-services/*"],
+			"@popup-windows/*": ["./popup-windows/*"],
+			"@executor/*": ["./ui-services/executor/*"]
+		},
+		"noErrorTruncation": true
+	},
+	"compileOnSave": true,
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Hi! ∴ Urpflanze</title>
+		<base href="/" />
+
+		<style>
+			html {
+				background: #111413;
+			}
+
+			@font-face {
+				font-family: 'JetBrains Mono';
+				font-weight: normal;
+				font-style: normal;
+				src: url(/assets/fonts/JetBrainsMono/JetBrainsMono-SemiLight.woff2) format('woff2');
+			}
+			@font-face {
+				font-family: 'JetBrains Mono';
+				font-weight: 600;
+				font-style: normal;
+				src: url(/assets/fonts/JetBrainsMono/JetBrainsMono-ExtraBold.woff2) format('woff2');
+			}
+
+			html,
+			input,
+			textarea,
+			button {
+				-webkit-font-feature-settings: 'liga' on, 'calt' on;
+				-webkit-font-smoothing: antialiased;
+				text-rendering: optimizeLegibility;
+				font-family: 'JetBrains Mono';
+			}
+
+			button {
+				font-weight: 600;
+				letter-spacing: -0.01rem;
+			}
+		</style>
+	</head>
+	<body>
+		<main id="app-root"></main>
+
+		<div id="modal-root"></div>
+		<div id="picker-root"></div>
+		<div id="prompt-root"></div>
+		<div id="alert-root"></div>
+
+		<script src="app.js"></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177081800-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || []
+			function gtag() {
+				dataLayer.push(arguments)
+			}
+			gtag('js', new Date())
+
+			gtag('config', 'UA-177081800-1')
+		</script>
+	</body>
+</html>

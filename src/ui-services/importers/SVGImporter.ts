@@ -1,7 +1,7 @@
 import { fromTransformAttribute, fromDefinition, compose, toSVG } from 'transformation-matrix'
 import Snap from 'snapsvg-cjs'
-
 import simplify from 'simplify-js'
+
 import ShapePrimitive from '@genbs/urpflanze/dist/core/shapes/ShapePrimitive'
 
 class SVGImporter {

@@ -1,5 +1,6 @@
 import React from 'react'
 import pups from '@pups/js'
+import styled from 'styled-components'
 
 import Icon from '@components/icons/Icon'
 import { TSliderMode } from '@hooks/useSlider'
@@ -42,11 +43,16 @@ const DynamicColor: React.FunctionComponent<IDynamicColorProp> = ({
 		<div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
 			<div style={{ lineHeight: 1, marginBottom: pups.ms(-2) }}>{name}</div>
 			<div style={{ display: 'flex' }}>
-				{bAnimation ? (
-					<Icon size={pups.add(1, -1)} name="animate-color" />
-				) : (
-					<Color onChange={onChange} value={value} size={pups.add(1, -1)} />
-				)}
+				<ColorContainer>
+					<RemoveColor style={{}} onClick={() => onChange(undefined)}>
+						<Icon size={0} name="close" />
+					</RemoveColor>
+					{bAnimation ? (
+						<Icon size={pups.add(1, -1)} name="animate-color" />
+					) : (
+						<Color onChange={onChange} value={value} size={pups.add(1, -1)} />
+					)}
+				</ColorContainer>
 
 				<Tooltip title="Animate prop" position="right">
 					<Icon name={bAnimation ? 'animated' : 'not-animated'} onClick={() => setBOpenSimpleAnimation(true)} />
@@ -65,5 +71,26 @@ const DynamicColor: React.FunctionComponent<IDynamicColorProp> = ({
 		</div>
 	)
 }
+
+const RemoveColor = styled.div`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: ${pups.color('dark')};
+	border-radius: 0 2px 0 0;
+	line-height: 1;
+	z-index: 1;
+	transform: scale(0);
+	transform-origin: left bottom;
+	transition: transform 0.1s 0.5s ease-out;
+`
+
+const ColorContainer = styled.div`
+	position: relative;
+
+	&:hover ${RemoveColor} {
+		transform: scale(1);
+	}
+`
 
 export default React.memo(DynamicColor)

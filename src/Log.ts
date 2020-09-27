@@ -17,7 +17,7 @@ const colors: Record<LogLevelStrings, string> = {
 }
 
 const Log = {
-	forceLocalWorker: true,
+	forceLocalWorker: true, // if webpack hot reload is enabled
 	// forceLocalWorker: false,
 	// levels: LogLevel,
 	// level: LogLevel.Temporany | LogLevel.Comunication | LogLevel.ComunicationResponse | LogLevel.SetProp,

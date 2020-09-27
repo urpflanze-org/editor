@@ -50,7 +50,7 @@ const SimpleAnimationAdvanceSettings: React.FunctionComponent<SimpleAnimationAdv
 				/>
 			</div>
 
-			{(state.type === 'static' || state.type === 'uncontroller-loop') && (
+			{state.type !== 'loop' && (
 				<React.Fragment>
 					<div>Delay</div>
 					<Range
@@ -64,20 +64,20 @@ const SimpleAnimationAdvanceSettings: React.FunctionComponent<SimpleAnimationAdv
 				</React.Fragment>
 			)}
 
-			{(state.type === 'loop' || state.type === 'uncontroller-loop') && (
-				<div style={{ width: pups.ms(5), gridColumn: '1 / span 2' }}>
-					<Radio
-						name="Mode"
-						align="flex-start"
-						values={[
-							{ key: 'Sinusoidal', value: 'sinusoidal' },
-							{ key: 'Easing', value: 'easing' },
-						]}
-						selected={state.mode}
-						onChange={v => onChange('mode', v)}
-					/>
-				</div>
-			)}
+			{/* {(state.type === 'loop' || state.type === 'uncontroller-loop') && ( */}
+			<div style={{ width: pups.ms(5), gridColumn: '1 / span 2' }}>
+				<Radio
+					name="Mode"
+					align="flex-start"
+					values={[
+						{ key: 'Sinusoidal', value: 'sinusoidal' },
+						{ key: 'Easing', value: 'easing' },
+					]}
+					selected={state.mode}
+					onChange={v => onChange('mode', v)}
+				/>
+			</div>
+			{/* )} */}
 
 			<div>Mode function</div>
 			<Select

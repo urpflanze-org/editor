@@ -12,7 +12,7 @@ export interface ICommandSetPropArgs {
 	name: string
 	value: any
 	prev_value: any
-	prev_animated_value: any
+
 	passive: boolean
 }
 

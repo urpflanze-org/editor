@@ -83,7 +83,7 @@ const SimpleAnimationAdvanceSettings: React.FunctionComponent<SimpleAnimationAdv
 			<Select
 				onChange={v => onChange('mode_function', v)}
 				placeholder={`${state.mode} function`}
-				options={MODE_FUNCTIONS[state.mode]}
+				options={MODE_FUNCTIONS[state.mode || 'cos']}
 				value={state.mode_function}
 			/>
 

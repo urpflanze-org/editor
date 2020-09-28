@@ -22,7 +22,7 @@ import { ISceneChildPropData } from '@genbs/urpflanze/dist/services/scene-utilit
 import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
 import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
 import { IProjectSceneChild, IProjectSceneChildDataProps } from '@genbs/urpflanze/dist/services/types/project'
-import { TAnimation } from '@genbs/urpflanze/dist/services/types/animation'
+import { TAnimation, TDrawerValue } from '@genbs/urpflanze/dist/services/types/animation'
 
 function copy(v: any): any {
 	return Array.isArray(v) ? v.slice() : v
@@ -45,6 +45,12 @@ function isEqual(a: any, b: any): boolean {
 }
 
 const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, forceArray }: IProp) => {
+	console.log('value1', name, value)
+	if (ScenePropUtilities.bValueDrawer(value)) {
+		value = value.value
+		console.log('value2', value)
+	}
+
 	const propContainerRef = React.useRef<HTMLDivElement>(null)
 	const sceneChildProp = SceneChildPropsData[name] as ISceneChildPropData
 	let initValue = value ?? sceneChildProp.default
@@ -64,12 +70,16 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 	}
 
 	function handleChange(
-		new_value: TAnimation | string | number | [number, number] | boolean,
+		new_value: TAnimation | TDrawerValue | string | number | [number, number] | boolean,
 		preventPushToHistory?: boolean
 	) {
 		if (new_value != initValue) {
 			if (!ScenePropUtilities.bValueAnimation(new_value)) {
 				new_value = forceArray ? toArray(new_value as number) : new_value
+
+				if (ScenePropUtilities.bPropTransformable(name, value)) {
+					new_value = { type: 'drawer-transformation', value: new_value }
+				}
 			}
 
 			executor.run(

@@ -1,11 +1,10 @@
-import { ShapeBaseProps } from '@genbs/urpflanze/dist/core/interfaces/shapes/Interfaces'
-
 import Executor from '@executor/Executor'
 import Command from '@ui-services/executor/Command/Command'
 import { ICommandEffects } from '&types/command'
 import Group from '@genbs/urpflanze/dist/core/Group'
 import SceneUtilties from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
 import SceneChild from '@genbs/urpflanze/dist/core/SceneChild'
+import { ISceneChildProps } from '@genbs/urpflanze/dist/core/types/scene-child'
 
 export interface ICommandSetPropArgs {
 	id: string | number
@@ -56,7 +55,7 @@ class SetProp extends Command {
 
 				const parent = SceneUtilties.getParent(sceneChild)
 				if (parent && parent instanceof Group) {
-					parent.setPropUnsafe(name as keyof ShapeBaseProps, undefined)
+					parent.setPropUnsafe(name as keyof ISceneChildProps, undefined)
 					;(this.effects.scene_child_prop_update as Array<any>)[effect_index++] = {
 						id: parent.id,
 						name,
@@ -92,7 +91,7 @@ class SetProp extends Command {
 
 				const parent = SceneUtilties.getParent(sceneChild)
 				if (parent && parent instanceof Group) {
-					parent.setPropUnsafe(name as keyof ShapeBaseProps, prev_value)
+					parent.setPropUnsafe(name as keyof ISceneChildProps, prev_value)
 					;(this.effects.scene_child_prop_update as Array<any>)[effect_index++] = {
 						id: parent.id,
 						name,

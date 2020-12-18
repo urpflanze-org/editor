@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { IProjectScene, IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 import { findLayer } from '@window/workspace/layers/layer_utilities'
 
@@ -11,7 +11,7 @@ interface PopupWindowState {
 
 export default function (
 	popup: 'animate' | 'shape-loop' | 'vertex-callback' | 'code',
-	scene: IProjectScene,
+	scene: { [key: string]: IProjectSceneChild },
 	layer_id?: number | string,
 	prop_name?: string
 ): [PopupWindowState, React.Dispatch<React.SetStateAction<PopupWindowState>>] {
@@ -19,12 +19,13 @@ export default function (
 		layer: {
 			id: '',
 			name: '',
-			order: 0,
 			type: '',
+			order: 0,
 			props: {},
+			//@ts-ignore
 			data: {
-				highlighted: false,
-				visible: false,
+				// highlighted: false,
+				// visible: false,
 				disableGhost: false,
 			},
 			bPrimitive: false,

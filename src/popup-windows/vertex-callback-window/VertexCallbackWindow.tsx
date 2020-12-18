@@ -13,14 +13,14 @@ import pups from '@pups/js'
 
 import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
 import VertexCallbackWindowVisualEditor from '@popup-windows/vertex-callback-window/VertexCallbackWindowVisualEditor'
-import { IProjectScene, IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
 
 import PopupStateHook from '@popup-windows/PupupStateHook'
 
 interface VertexCallbackWindowProps {
 	layer_id?: string
-	scene: IProjectScene
+	scene: { [key: string]: IProjectSceneChild }
 }
 
 const VertexCallbackWindow: React.FunctionComponent<VertexCallbackWindowProps> = (props: VertexCallbackWindowProps) => {

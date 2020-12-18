@@ -12,7 +12,7 @@ import Tooltip from '@components/Tooltip'
 import SimpleAnimationProp from '@window/workspace/properties/simple-animation/SimpleAnimation'
 import Modal from '@components/Modal'
 import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 import { TAnimation } from '@genbs/urpflanze/dist/services/types/animation'
 
 interface IDynamicRangeProp {

@@ -1,9 +1,9 @@
-import { ShapeBaseProps } from '@genbs/urpflanze/dist/core/interfaces/shapes/Interfaces'
+import { ISceneChildProps } from '@genbs/urpflanze/dist/core/types/scene-child'
 
 import { ICommand } from '&types/command'
 import { ProjectState } from '&types/state'
-import { SequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
-import { IProjectSceneChild, IProjectSceneChildData } from '@genbs/urpflanze/dist/services/types/project'
+import { ISequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
+import { IProjectSceneChild, IProjectSceneChildData } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 export const IMPORT_PROJECT_STATE = 'IMPORT_PROJECT_STATE'
 
@@ -74,7 +74,7 @@ interface UpdateSceneClearAction {
 
 interface UpdateSequenceAction {
 	type: typeof UPDATE_SEQUENCE
-	sequence: SequenceMeta
+	sequence: ISequenceMeta
 }
 
 interface UpdateLayersAction {
@@ -87,7 +87,7 @@ interface UpdateLayerPropsAction {
 	type: typeof UPDATE_LAYER_PROPS
 	props: Array<{
 		id: number | string
-		name: keyof ShapeBaseProps
+		name: keyof ISceneChildProps
 		value: any
 	}>
 }

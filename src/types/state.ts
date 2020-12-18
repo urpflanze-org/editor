@@ -1,6 +1,6 @@
 // import { IScene, ILayer } from '&types/scene'
 import { ICommand } from '&types/command'
-import { IProject, IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProject, IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 export interface AppMessage {
 	id: number

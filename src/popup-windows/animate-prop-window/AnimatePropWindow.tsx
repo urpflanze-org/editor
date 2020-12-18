@@ -15,7 +15,7 @@ import pups from '@pups/js'
 import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
 import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
 import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
-import { IProjectScene } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 import PopupStateHook from '@popup-windows/PupupStateHook'
 import { openAnimatePropWindow } from '@popup-windows/PupupUtilities'
@@ -23,7 +23,7 @@ import { openAnimatePropWindow } from '@popup-windows/PupupUtilities'
 interface AnimatePropWindowProps {
 	layer_id?: number | string
 	prop_name?: string
-	scene: IProjectScene
+	scene: { [key: string]: IProjectSceneChild }
 }
 
 const AnimatePropWindow: React.FunctionComponent<AnimatePropWindowProps> = (props: AnimatePropWindowProps) => {

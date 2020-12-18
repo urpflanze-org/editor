@@ -20,19 +20,19 @@ import {
 } from '@window/workspace/properties/simple-animation/SimpleAnimationUtilities'
 import SimpleAnimationInput from '@window/workspace/properties/simple-animation/SimpleAnimationInput'
 
-import { SequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
+import { ISequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
 import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
 import { ISceneChildPropData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildPropsData'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
 
 import { TAnimation, ISimpleAnimation } from '@genbs/urpflanze/dist/services/types/animation'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 interface SimpleAnimationPropProps {
 	layer: IProjectSceneChild
 	value: any
 	prop_name: string
-	sequence: SequenceMeta
+	sequence: ISequenceMeta
 	close: () => void
 	onChange: (value: TAnimation | undefined) => void
 }
@@ -63,7 +63,7 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 				type: value,
 				mode: value === 'static' ? 'easing' : state.mode,
 				mode_function:
-					value === 'static' && state.mode != 'easing' ? MODE_FUNCTIONS.easing[0].value : state.mode_function,
+					value === 'static' && state.mode != 'easing' ? MODE_FUNCTIONS.easing[0].value : state.modeFunction,
 			})
 		} else {
 			setState({ ...state, [key]: value })
@@ -152,6 +152,6 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 
 export default React.memo(
 	connect((state: RootState) => ({
-		sequence: state.project.sequence as SequenceMeta,
+		sequence: state.project.sequence as ISequenceMeta,
 	}))(SimpleAnimationProp)
 )

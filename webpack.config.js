@@ -41,23 +41,24 @@ module.exports = (env, args) => {
 					/*configFile: "./path/to/tsconfig.json" */
 				}),
 			],
+			fallback: { stream: false },
 		},
 		optimization: {
 			minimize: args.mode === 'production',
 			minimizer: [
 				new TerserPlugin({
 					terserOptions: {
-						// keep_classnames: true
+						// keep_classnames: true,
 					},
 				}),
 			],
 		},
 		devServer: {
 			contentBase: path.join(__dirname, 'dist'),
-			compress: true,
+			// compress: true,
 			host: '0.0.0.0',
 			port: 3000,
-			hot: true,
+			// hot: true,
 			historyApiFallback: {
 				rewrites: [{ from: /^\/$/, to: '/index.html' }],
 			},

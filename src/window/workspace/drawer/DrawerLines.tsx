@@ -5,7 +5,7 @@ import executor from '@redux-store/executor'
 
 import Grid from '@components/Grid'
 import Icon from '@components/icons/Icon'
-import { clamp } from '@genbs/urpflanze/dist/core/Utilites'
+import { clamp } from '@genbs/urpflanze/dist/Utilites'
 
 const DrawerLines: React.FunctionComponent<{}> = () => {
 	const [lines, setLines] = React.useState<number>(0)

@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components'
 import pups from '@pups/js'
 import { randomElement } from '@pups/utility/build/Array'
 
-import DrawerCanvas from '@genbs/urpflanze/dist/services/drawer-canvas/DrawerCanvas'
+import DrawerCanvas from '@genbs/urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
 import JSONImporter from '@genbs/urpflanze/dist/services/importers/JSONImporter'
 
 const examples = [
@@ -34,7 +34,7 @@ const SplashScreenImage: React.FunctionComponent<{}> = () => {
 				image.src = '/assets/images/examples/' + randomElement(examples_images)
 			} else {
 				// drawer = new DrawerCanvas(undefined, undefined, {}, 500)
-				drawer = new JSONImporter().parse(randomElement(examples))
+				drawer = JSONImporter.parse(randomElement(examples))
 				if (drawer) {
 					drawer.setBuffering(true)
 					drawer.setCanvas(canvas.current)

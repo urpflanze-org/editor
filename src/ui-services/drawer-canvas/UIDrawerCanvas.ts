@@ -1,7 +1,7 @@
 import Scene from '@genbs/urpflanze/dist/core/Scene'
-import DrawerCanvas from '@genbs/urpflanze/dist/services/drawer-canvas/DrawerCanvas'
+import DrawerCanvas from '@genbs/urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
 
-import { ShapeBounding } from '@genbs/urpflanze/dist/core/types/ShapeBase'
+import { IShapeBounding } from '@genbs/urpflanze/dist/core/types/shape-base'
 import ShapePrimitive from '@genbs/urpflanze/dist/core/shapes/ShapePrimitive'
 import SceneUtilities from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
 import SceneChild from '@genbs/urpflanze/dist/core/SceneChild'
@@ -62,7 +62,7 @@ class UIDrawerCanvas extends DrawerCanvas {
 	 */
 	public static adaptShapeToScene(shape: SceneChild, scene: Scene, scale = 1): number {
 		scene.update(0)
-		const rect: ShapeBounding = ShapePrimitive.getBounding(shape.getBuffer() as Float32Array)
+		const rect: IShapeBounding = ShapePrimitive.getBounding(shape.getBuffer() as Float32Array)
 
 		if (rect.width > scene.width || rect.height > scene.height)
 			scale = (Math.min(scene.width, scene.height) / Math.max(rect.width, rect.height)) * scale
@@ -93,7 +93,8 @@ class UIDrawerCanvas extends DrawerCanvas {
 			if (typeof OffscreenCanvas !== 'undefined') {
 				const canvas: OffscreenCanvas = new OffscreenCanvas(width, height)
 				const context: OffscreenCanvasRenderingContext2D | null = canvas.getContext('2d')
-				UIDrawerCanvas.draw(scene, context, { time: 0, fixedLineWidth, scale }, width)
+				// UIDrawerCanvas.draw(scene, context, { time: 0, fixedLineWidth, scale }, width)
+				UIDrawerCanvas.draw(scene, context, { time: 0, fixedLineWidth, scale })
 
 				canvas.convertToBlob({ type: 'image/png', quality: 0.95 }).then(blob => {
 					const fileReader = new FileReader()
@@ -113,7 +114,8 @@ class UIDrawerCanvas extends DrawerCanvas {
 				canvas.style.width = width + 'px'
 				canvas.style.height = height + 'px'
 
-				UIDrawerCanvas.draw(scene, context, { time: 0, fixedLineWidth, scale }, width)
+				//UIDrawerCanvas.draw(scene, context, { time: 0, fixedLineWidth, scale }, width)
+				UIDrawerCanvas.draw(scene, context, { time: 0, fixedLineWidth, scale })
 
 				resolve(canvas.toDataURL())
 			}

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { relativeClamp } from '@genbs/urpflanze/dist/core/Utilites'
+import { relativeClamp } from '@genbs/urpflanze/dist/Utilites'
 import pups from '@pups/js'
 
 import Grid from '@components/Grid'
@@ -27,9 +27,9 @@ const DrawerOffsetsViewer: React.FunctionComponent<DrawerOffsets & { height: str
 
 	const viewerStyle: React.CSSProperties = {
 		top:
-			relativeClamp(translate[1], -1, 1, containerSizeScaledCenter, containerSize - containerSizeScaledCenter) + 'rem',
+			relativeClamp(-1, 1, translate[1], containerSizeScaledCenter, containerSize - containerSizeScaledCenter) + 'rem',
 		left:
-			relativeClamp(translate[0], -1, 1, containerSizeScaledCenter, containerSize - containerSizeScaledCenter) + 'rem',
+			relativeClamp(-1, 1, translate[0], containerSizeScaledCenter, containerSize - containerSizeScaledCenter) + 'rem',
 		transform: `scale(${1 / scale}) translate(-50%, -50%)`,
 	}
 

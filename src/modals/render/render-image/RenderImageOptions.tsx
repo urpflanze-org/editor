@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { IRenderSettings } from '@genbs/urpflanze/dist/services/renderer/interfaces'
+import { IRenderSettings } from '@genbs/urpflanze/dist/services/types/renderer'
 
 import Select from '@components/input/Select'
 import Slider from '@components/input/Slider'

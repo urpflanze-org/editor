@@ -17,7 +17,7 @@ import { ICommandEffects } from '&types/command'
 import { resize } from '@executor/Ask/answer/drawers'
 // import JSONImporter from '@ui-services/exporter-importer/json/Importer'
 import Log from 'Log'
-import DrawerCanvas from '@genbs/urpflanze/dist/services/drawer-canvas/DrawerCanvas'
+import DrawerCanvas from '@genbs/urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
 import JSONExporter from '@genbs/urpflanze/dist/services/exporters/JSONExporter'
 
 import SceneUtilities from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
@@ -39,11 +39,11 @@ class Executor extends Emitter<EventIterceptor> {
 		super()
 
 		const scene = new Scene()
-		scene.mainColor = pups.color('primary').toString('hex')
+		scene.color = pups.color('primary').toString('hex')
 		scene.background = pups.color('dark').toString('hex')
 
 		const initialDrawer = new UIDrawerCanvas(scene)
-		initialDrawer.getTimeline().setSequence(0, 6000, 60)
+		initialDrawer.getTimeline().setSequence(6000, 60)
 		this.updateDrawer(initialDrawer)
 
 		this.renderer = new Renderer()
@@ -140,7 +140,8 @@ class Executor extends Emitter<EventIterceptor> {
 		this.drawer = drawer
 		this.drawer.setBuffering(true)
 
-		this.setScene(this.drawer.getScene())
+		const scene = this.drawer.getScene()
+		if (scene) this.setScene(scene)
 
 		this.drawer.attach('drawer-canvas:buffer_loaded', this.sendEvent.bind(this, 'drawer-canvas:buffer_loaded'))
 		this.drawer.attach('drawer-canvas:buffer_flush', this.sendEvent.bind(this, 'drawer-canvas:buffer_flush'))
@@ -232,7 +233,7 @@ class Executor extends Emitter<EventIterceptor> {
 					response.effect = 'scene:update-layers'
 					response.data = JSON.stringify({
 						// layers: ILayerExport.export(this.scene, this.drawer),
-						layers: Object.values(new JSONExporter().parseAsProject(this.drawer).scene),
+						layers: Object.values(JSONExporter.parseAsProject(this.drawer).scene),
 						selecteds: execution_effects.select_layer ? execution_effects.select_layer : undefined,
 					})
 				}

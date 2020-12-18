@@ -10,7 +10,7 @@ import Icon from '@components/icons/Icon'
 import Bar from '@window/workspace/timeline/Bar'
 import Select from '@components/input/Select'
 import Tooltip from '@components/Tooltip'
-import { IProjectSequence } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSequence } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 interface SequenceState {
 	current_frame: number
@@ -76,14 +76,14 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 				{bRealTime || slow === 1 ? 'realtime' : `${slow}x slow`}
 			</div>
 			<div style={{ display: 'flex', justifyContent: 'center', marginBottom: pups.ms(0) }}>
-				<Icon name="sequence-start" onClick={() => executor.ask('set-timeline', sequence.start)} />
+				<Icon name="sequence-start" onClick={() => executor.ask('set-timeline', 0)} />
 				<Icon
 					name={bTimelineStarted ? 'pause' : 'play'}
 					onClick={() =>
 						executor.ask('change-timeline-state', bTimelineStarted ? TimelineClass.PAUSE : TimelineClass.START)
 					}
 				/>
-				<Icon name="sequence-end" onClick={() => executor.ask('set-timeline', sequence.end)} />
+				<Icon name="sequence-end" onClick={() => executor.ask('set-timeline', sequence.durate)} />
 			</div>
 
 			<div style={{ position: 'absolute', right: pups.ms(0), top: pups.ms(0), display: 'flex' }}>
@@ -93,7 +93,7 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 				<Select
 					position="top"
 					options={DURATES}
-					value={(sequence.start + sequence.end) / 1000}
+					value={sequence.durate / 1000}
 					placeholder="durate"
 					onChange={v => executor.ask('set-timeline-duration', v * 1000)}
 				/>
@@ -105,9 +105,8 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 
 			<Bar
 				enableMoveTime={bEnableMoveBar}
-				sequence_start={sequence.start}
 				sequence_framerate={sequence.framerate}
-				sequence_end={sequence.end}
+				sequence_durate={sequence.durate}
 				current_time={sequenceState.current_time}
 				onChange={t => executor.ask('set-timeline', t)}
 				renderedFrames={renderedFrames}
@@ -131,8 +130,7 @@ const TimelineContainerStyle: React.CSSProperties = {
 export default React.memo(
 	connect((state: RootState) => ({
 		sequence: state.project.sequence,
-		bEnableMoveBar:
-			state.project.clearCanvas || (typeof state.project.ghosts !== undefined && state.project.ghosts > 0),
+		bEnableMoveBar: state.project.clear || (typeof state.project.ghosts !== undefined && state.project.ghosts > 0),
 		ghosts: state.project.ghosts,
 		bTimelineStarted: state.app.bTimelineStarted,
 	}))(Timeline)

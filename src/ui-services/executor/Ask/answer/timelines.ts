@@ -2,7 +2,7 @@ import Executor from '@ui-services/executor/Executor'
 
 import { IComunication } from '&types/comunication'
 import Timeline from '@genbs/urpflanze/dist/services/timeline/Timeline'
-import { SequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
+import { ISequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
 
 export const toggle = (comunication: IComunication, executor: Executor): void => {
 	const drawer = executor.getDrawer()
@@ -25,7 +25,7 @@ export const changeState = (comunication: IComunication, executor: Executor): vo
 export const setDuration = (comunication: IComunication, executor: Executor): void => {
 	const drawer = executor.getDrawer()
 	const time = comunication.args
-	drawer.getTimeline().setSequenceEndTime(time)
+	drawer.getTimeline().setDurate(time)
 }
 
 export const setFramerate = (comunication: IComunication, executor: Executor): void => {
@@ -42,6 +42,6 @@ export const setTime = (comunication: IComunication, executor: Executor): void =
 	drawer.redraw()
 }
 
-export const getSequence = (comunication: IComunication, executor: Executor): SequenceMeta => {
+export const getSequence = (comunication: IComunication, executor: Executor): ISequenceMeta => {
 	return executor.getDrawer().getTimeline().getSequence()
 }

@@ -56,7 +56,7 @@ export function svgBufferToScene(
 	drawer: UIDrawerCanvas,
 	buffers: Array<{ buffer: Float32Array; closed: boolean }>
 ): SceneChild | null {
-	const scene: Scene = drawer.getScene()
+	const scene: Scene | undefined = drawer.getScene()
 	let sceneChild: SceneChild | null = null
 
 	if (buffers.length) {
@@ -91,7 +91,7 @@ export function svgBufferToScene(
 				break
 		}
 
-		if (sceneChild) scene.add(sceneChild)
+		if (scene && sceneChild) scene.add(sceneChild)
 	}
 
 	return sceneChild

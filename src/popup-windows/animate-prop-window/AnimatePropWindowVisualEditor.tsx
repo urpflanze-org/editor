@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import VisualEditor from '@components/VisualEditor/VisualEditor'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
 

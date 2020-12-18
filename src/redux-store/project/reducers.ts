@@ -22,14 +22,14 @@ import { ProjectState } from '&types/state'
 import { findLayer, toSceneLayers } from '@window/workspace/layers/layer_utilities'
 import app_utilities from 'app_utilities'
 import pups from '@pups/js'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 export const initialProjectState: ProjectState = {
 	id: uuidv1(),
 	name: '',
 	background: pups.color('dark').toString('hex'),
-	mainColor: pups.color('primary').toString('hex'),
-	clearCanvas: true,
+	color: pups.color('primary').toString('hex'),
+	clear: true,
 	scene: {},
 	ghosts: 0,
 	ghost_skip_time: 30,
@@ -99,6 +99,7 @@ export function projectReducer(state = initialProjectState, action: ProjectActio
 				const layer = findLayer(action.props[i].id, Object.values(state.scene))
 				const current_layer_prop = action.props[i]
 				if (layer && layer.data[current_layer_prop.name] != current_layer_prop.value) {
+					//@ts-ignore
 					layer.data[current_layer_prop.name] = current_layer_prop.value
 					update = true
 				}

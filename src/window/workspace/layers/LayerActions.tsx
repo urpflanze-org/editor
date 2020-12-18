@@ -12,15 +12,11 @@ import { canBeSorted, find, hasSameParent } from '@window/workspace/layers/layer
 import dispatchMessage from '@window/messages/dispatchMessage'
 
 import { PossibleCommand } from '@executor/Command/CommandHistory'
-import {
-	IProjectScene,
-	IProjectSceneChild,
-	IProjectSceneChildDataProps,
-} from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild, IProjectSceneChildProps } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 interface LayerActionProps {
 	selecteds: Array<string | number>
-	layers: IProjectScene
+	layers: { [kye: string]: IProjectSceneChild }
 }
 
 const ShapesList = [
@@ -40,8 +36,8 @@ const ShapesList = [
 
 function prepareProps(
 	layer_id: string,
-	props: IProjectSceneChildDataProps,
-	oldprops: IProjectSceneChildDataProps
+	props: IProjectSceneChildProps,
+	oldprops: IProjectSceneChildProps
 ): Array<{ id: string; name: string; value: any; prev_value: any }> {
 	const result: Array<{ id: string; name: string; value: any; prev_value: any }> = []
 
@@ -60,7 +56,7 @@ function prepareProps(
 function canBeShapeOperation(selecteds: Array<IProjectSceneChild>): boolean {
 	if (selecteds.length == 2) {
 		return (
-			selecteds[0].parent_id == selecteds[1].parent_id &&
+			selecteds[0].parentId == selecteds[1].parentId &&
 			((selecteds[0].bPrimitive &&
 				selecteds[0].type !== 'Line' &&
 				typeof selecteds[0].props.repetitions === 'undefined') ||
@@ -132,7 +128,7 @@ const LayerActions: React.FunctionComponent<LayerActionProps> = (props: LayerAct
 	function call(e: React.MouseEvent, action: string, args?: any) {
 		switch (action) {
 			case 'add': {
-				executor.run('add', { type: args, parent_id: oneSelected && selected ? selected.id : undefined })
+				executor.run('add', { type: args, parentId: oneSelected && selected ? selected.id : undefined })
 				setAdd(false)
 				break
 			}
@@ -140,7 +136,7 @@ const LayerActions: React.FunctionComponent<LayerActionProps> = (props: LayerAct
 				if (lastAction && lastAction.type !== 'copy-properties') {
 					executor.run(lastAction.type, {
 						id: lastAction.layer.id,
-						parent_id: oneSelected && selected ? selected.id : undefined,
+						parentId: oneSelected && selected ? selected.id : undefined,
 						props: lastAction.layer.props,
 					})
 				}

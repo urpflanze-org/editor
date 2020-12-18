@@ -1,5 +1,5 @@
 import { indexOfObjectProperty } from '@pups/utility/build/Array'
-import { IProjectScene, IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 import store from '@redux-store/root'
 import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
 
@@ -25,7 +25,7 @@ export function handleSelection(
 		const selected_layers: Array<IProjectSceneChild> = selectedsToLayer(new_selecteds, layers)
 
 		if (hasSameParent(new_selecteds, layers, selected_layers)) {
-			const parent = findLayer(selected_layers[0].parent_id as string | number, layers)
+			const parent = findLayer(selected_layers[0].parentId as string | number, layers)
 			const children = parent ? parent.children || [] : layers
 
 			const index = indexOfObjectProperty(children, 'id', id)
@@ -54,9 +54,9 @@ export function hasSameParent(
 
 	if (len <= 1) return true
 
-	const parent_id = selected_layers[0].parent_id
+	const parentId = selected_layers[0].parentId
 
-	for (let i = 1; i < len; i++) if (selected_layers[i].parent_id != parent_id) return false
+	for (let i = 1; i < len; i++) if (selected_layers[i].parentId != parentId) return false
 
 	return true
 }
@@ -106,7 +106,7 @@ export function canBeSorted(layer: IProjectSceneChild, layers: Array<IProjectSce
 }
 
 export function getNeighbors(layer: IProjectSceneChild, layers: Array<IProjectSceneChild>): Array<IProjectSceneChild> {
-	const parent: IProjectSceneChild | undefined = layer.parent_id ? findLayer(layer.parent_id, layers) : undefined
+	const parent: IProjectSceneChild | undefined = layer.parentId ? findLayer(layer.parentId, layers) : undefined
 	let neighbors: Array<IProjectSceneChild> = []
 
 	if (typeof parent === 'undefined') neighbors = Object.values(store.getState().project.scene)
@@ -133,7 +133,7 @@ export function findLayer(
 	return
 }
 
-export function toSceneLayers(layers: Array<IProjectSceneChild>): IProjectScene {
+export function toSceneLayers(layers: Array<IProjectSceneChild>): { [key: string]: IProjectSceneChild } {
 	const result: { [e: string]: IProjectSceneChild } = {}
 	for (let i = 0, len = layers.length; i < len; i++) {
 		// setParentLayer(layers[i])

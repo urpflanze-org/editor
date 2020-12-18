@@ -1,7 +1,7 @@
 import { toNumber } from '@ui-services/utilities/utilies'
 import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
-import Easings, { TEasing } from '@genbs/urpflanze/dist/services/animation/Easings'
-import { ISimpleAnimation, TAnimation } from '@genbs/urpflanze/dist/services/types/animation'
+import Easings from '@genbs/urpflanze/dist/services/animation/Easings'
+import { ISimpleAnimation, TAnimation, TEasing } from '@genbs/urpflanze/dist/services/types/animation'
 import { ISceneChildPropData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildPropsData'
 
 export const MODE_FUNCTIONS: {
@@ -65,7 +65,7 @@ export function isAdvancedAnimation(animation: ISimpleAnimation): boolean {
 	return (
 		animation.type !== 'loop' ||
 		animation.mode !== 'sinusoidal' ||
-		animation.mode_function !== 'sin' ||
+		animation.modeFunction !== 'sin' ||
 		animation.invertOdd !== false ||
 		animation.colorTransitionMode !== 'rgb'
 	)

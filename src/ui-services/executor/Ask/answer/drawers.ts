@@ -8,17 +8,18 @@ import Scene from '@genbs/urpflanze/dist/core/Scene'
 
 import UIDrawerCanvas from '@ui-services/drawer-canvas/UIDrawerCanvas'
 
-import { IRenderSettings } from '@genbs/urpflanze/dist/services/renderer/interfaces'
-import SVGExporter from '@ui-services/exporters/SVGExporter'
-import DrawerCanvas from '@genbs/urpflanze/dist/services/drawer-canvas/DrawerCanvas'
+import { IRenderSettings } from '@genbs/urpflanze/dist/services/types/renderer'
+import DrawerCanvas from '@genbs/urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
 import JSONImporter from '@genbs/urpflanze/dist/services/importers/JSONImporter'
 import JSONExporter from '@genbs/urpflanze/dist/services/exporters/JSONExporter'
+import { SVGExporter } from '@genbs/urpflanze'
 
 export const setOffsets = (comunication: IComunication, executor: Executor): void => {
 	const drawer = executor.getDrawer()
 	const { scale, translate } = comunication.args
 
-	drawer.setOption({ scale, translate })
+	// drawer.setOption({ scale, translate })
+
 	drawer.redraw()
 }
 
@@ -26,31 +27,31 @@ export const setLines = (comunication: IComunication, executor: Executor): void 
 	const drawer = executor.getDrawer()
 	const lines = comunication.args
 
-	drawer.setOption('simmetricLine', lines)
+	drawer.setOption('simmetricLines', lines)
 	drawer.redraw()
 }
 
 export const setClearCanvas = (comunication: IComunication, executor: Executor): void => {
 	const drawer = executor.getDrawer()
-	const clearCanvas = comunication.args
+	const clear = comunication.args
 
-	drawer.setOption('clearCanvas', clearCanvas)
+	drawer.setOption('clear', clear)
 	drawer.redraw()
 
-	executor.sendEvent('project:update-properties', { clearCanvas })
+	executor.sendEvent('project:update-properties', { clear })
 }
 
 export const setGhosts = (comunication: IComunication, executor: Executor): void => {
 	const drawer = executor.getDrawer()
-	const { ghosts, ghost_skip_time } = comunication.args
+	const { ghosts, ghostSkipTime } = comunication.args
 
 	drawer.setOption('ghosts', ghosts)
-	drawer.setOption('ghost_skip_time', ghost_skip_time)
+	drawer.setOption('ghostSkipTime', ghostSkipTime)
 	drawer.redraw()
 
 	executor.sendEvent('project:update-properties', {
 		ghosts: Math.round(ghosts * 10) / 10,
-		ghost_skip_time: Math.round(ghost_skip_time * 10) / 10,
+		ghost_skip_time: Math.round(ghostSkipTime * 10) / 10,
 	})
 }
 
@@ -65,7 +66,8 @@ export const resize = (
 	const resolution_scale = resolution_t == 'low' ? 5 : resolution_t == 'medium' ? 2 : resolution_t == 'ultra' ? 0.5 : 1
 	const finalResolution = size / resolution_scale
 
-	drawer.resize(size, size, ratio, finalResolution)
+	// drawer.resize(size, size, ratio, finalResolution)
+	drawer.resize(size, size, ratio)
 	drawer.redraw()
 }
 
@@ -106,14 +108,16 @@ export const setBackgroundImage = (comunication: IComunication, executor: Execut
 }
 
 function prepareRender(d: UIDrawerCanvas, projectData: string, settings: IRenderSettings): DrawerCanvas {
-	const drawer = new JSONImporter().parse(projectData) as DrawerCanvas
+	const drawer = JSONImporter.parse(projectData) as DrawerCanvas
 
 	const canvas: HTMLCanvasElement | OffscreenCanvas =
 		typeof OffscreenCanvas !== undefined
 			? new OffscreenCanvas(settings.size, settings.size)
 			: document.createElement('canvas')
 
-	drawer.resize(settings.size, settings.size, drawer.getRatio(), settings.size)
+	// TODO: resolution
+	// drawer.resize(settings.size, settings.size, drawer.getRatio(), settings.size)
+	drawer.resize(settings.size, settings.size, drawer.getRatio())
 	drawer.setCanvas(canvas)
 	drawer.setOption({
 		noBackground: settings.type === 'image/png' && settings.noBackground,
@@ -129,12 +133,12 @@ export const render = (comunication: IComunication, executor: Executor): Promise
 	drawer.stopAnimation()
 
 	const settings: IRenderSettings = comunication.args.settings
-	const projectData: string = new JSONExporter().parse(drawer)
+	const projectData: string = JSONExporter.parse(drawer)
 	const renderer: Renderer = executor.getRenderer()
 
 	if (settings.type === 'image/svg+xml') {
 		const prepared = prepareRender(drawer, projectData, settings)
-		return JSON.stringify({ svg: SVGExporter.export(prepared, settings) })
+		return JSON.stringify({ svg: SVGExporter.parse(prepared, settings) })
 	}
 
 	const prepared = prepareRender(drawer, projectData, settings)
@@ -147,7 +151,7 @@ export const renderAnimation = (comunication: IComunication, executor: Executor)
 	drawer.stopAnimation()
 
 	const settings: IRenderSettings = comunication.args.settings
-	const projectData: string = new JSONExporter().parse(drawer)
+	const projectData: string = JSONExporter.parse(drawer)
 	const renderer: Renderer = executor.getRenderer()
 
 	const prepared = prepareRender(drawer, projectData, settings)

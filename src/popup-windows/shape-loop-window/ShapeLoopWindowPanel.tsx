@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IProjectScene, IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 import pups from '@pups/js'
 import Range from '@components/input/Range'
@@ -15,7 +15,7 @@ export interface LoopMeta {
 }
 
 interface ShapeLoopWindowPanelProp {
-	scene: IProjectScene
+	scene: { [key: string]: IProjectSceneChild }
 	layer: IProjectSceneChild
 	loopMeta: LoopMeta
 	setLoopMeta: (loopMeta: LoopMeta) => void

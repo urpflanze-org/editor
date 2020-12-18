@@ -5,7 +5,7 @@ import Range from '@components/input/Range'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
 import { ISceneChildPropData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildPropsData'
 import Checkbox from '@components/input/Checkbox'
-import { IProjectScene, IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 export interface LoopMeta {
 	start: number
@@ -15,7 +15,7 @@ export interface LoopMeta {
 }
 
 interface VertexCallbackWindowWindowPanelProp {
-	scene: IProjectScene
+	scene: { [key: string]: IProjectSceneChild }
 	layer: IProjectSceneChild
 	loopMeta: LoopMeta
 	setLoopMeta: (loopMeta: LoopMeta) => void

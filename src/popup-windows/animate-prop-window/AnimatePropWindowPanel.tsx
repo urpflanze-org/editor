@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IProjectScene, IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 import pups from '@pups/js'
 
@@ -8,7 +8,7 @@ import Select from '@components/input/Select'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
 
 interface AnimatePropWindowPanelProp {
-	scene: IProjectScene
+	scene: { [key: string]: IProjectSceneChild }
 	prop_name: string | undefined
 	layer: IProjectSceneChild | undefined
 	selectLayer: (layer: IProjectSceneChild) => void

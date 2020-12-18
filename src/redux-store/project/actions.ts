@@ -16,12 +16,12 @@ import {
 	IMPORT_PROJECT_STATE,
 	UPDATE_PROJECT_PROPERTIES,
 } from '@redux-store/project/types'
-import { ShapeBaseProps } from '@genbs/urpflanze/dist/core/interfaces/shapes/Interfaces'
+import { ISceneChildProps } from '@genbs/urpflanze/dist/core/types/scene-child'
 
 import { ICommand } from '&types/command'
 import { ProjectState } from '&types/state'
-import { SequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
-import { IProjectSceneChild, IProjectSceneChildData } from '@genbs/urpflanze/dist/services/types/project'
+import { ISequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
+import { IProjectSceneChild, IProjectSceneChildData } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 export function importProjectState(state: ProjectState): ProjectActionTypes {
 	return {
@@ -71,7 +71,7 @@ export function updateSceneClear(clearCanvas: boolean): ProjectActionTypes {
 //     }
 // }
 
-export function updateSequence(sequence: SequenceMeta): ProjectActionTypes {
+export function updateSequence(sequence: ISequenceMeta): ProjectActionTypes {
 	return {
 		type: UPDATE_SEQUENCE,
 		sequence,
@@ -90,7 +90,7 @@ export function updateLayers(
 }
 
 export function updateLayerProps(
-	props: Array<{ id: number | string; name: keyof ShapeBaseProps; value: any }>
+	props: Array<{ id: number | string; name: keyof ISceneChildProps; value: any }>
 ): ProjectActionTypes {
 	return {
 		type: UPDATE_LAYER_PROPS,

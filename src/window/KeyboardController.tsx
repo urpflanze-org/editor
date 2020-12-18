@@ -8,10 +8,10 @@ import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
 import Prompt from '@components/Prompt'
 import Confirm from '@components/Confirm'
 import app_utilities from 'app_utilities'
-import SVGImporter from '@ui-services/importers/SVGImporter'
 import { openModal } from '@redux-store/app/actions'
 import store from '@redux-store/root'
 import { isOpenPopup } from '@popup-windows/PupupUtilities'
+import { SVGImporter } from '../../../js/dist'
 
 interface KeyboardControllerProps {
 	project: ProjectState

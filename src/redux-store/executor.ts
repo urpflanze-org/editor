@@ -15,8 +15,8 @@ import { ProjectState } from '&types/state'
 
 import { setTimelineStarted } from '@redux-store/app/actions'
 import { bRunOnServiceWorker } from '@ui-services/utilities/utilies'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
-import { SequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { ISequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
 
 const executor = new ExecutorProxy(!bRunOnServiceWorker())
 
@@ -51,10 +51,10 @@ executor.attach('timeline:change_status', data => {
 })
 
 executor.attach('timeline:update_sequence', data => {
-	store.dispatch(updateSequence(data as SequenceMeta))
+	store.dispatch(updateSequence(data as ISequenceMeta))
 })
 
-// executor.ask('timeline-sequence').then(data => store.dispatch(updateSequence(data as SequenceMeta)))
+// executor.ask('timeline-sequence').then(data => store.dispatch(updateSequence(data as ISequenceMeta)))
 
 executor.attach('command_history:update_history', data => {
 	store.dispatch(historyChange(data as Array<ICommand>))

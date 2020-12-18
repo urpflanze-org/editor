@@ -1,10 +1,10 @@
 import { ICommand } from '&types/command'
 import { ProjectState } from '&types/state'
-import { IRenderFrame, IRenderStart } from '@genbs/urpflanze/dist/services/renderer/interfaces'
+import { IRenderFrame, IRenderStart } from '@genbs/urpflanze/dist/services/types/renderer'
 
-import { TimelineEvents } from '@genbs/urpflanze/dist/services/types/timeline'
-import { DrawerCanvasEvents } from '@genbs/urpflanze/dist/services/types/drawer-canvas'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { ITimelineEvents } from '@genbs/urpflanze/dist/services/types/timeline'
+import { IDrawerCanvasEvents } from '@genbs/urpflanze/dist/services/types/drawer'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 export interface IRenderEvents {
 	'renderer:start': IRenderStart
@@ -30,8 +30,8 @@ interface IExecutorProxyEvents {
 }
 
 export interface ExecutorEvents
-	extends DrawerCanvasEvents,
-		TimelineEvents,
+	extends IDrawerCanvasEvents,
+		ITimelineEvents,
 		IExecutorProxyEvents,
 		ICommandHistoryEvents,
 		IRenderEvents {}

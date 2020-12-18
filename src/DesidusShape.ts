@@ -1,7 +1,7 @@
 import Group from '@genbs/urpflanze/dist/core/Group'
 import Shape from '@genbs/urpflanze/dist/core/shapes/Shape'
 import ShapeBuffer from '@genbs/urpflanze/dist/core/shapes/ShapeBuffer'
-import { ShapeSettings } from '@genbs/urpflanze/dist/core/interfaces/shapes/Interfaces'
+import { IShapeSettings } from '@genbs/urpflanze/dist/core/types/shape-base'
 
 import SceneUtilties from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
@@ -25,7 +25,7 @@ const fs2 = Float32Array.from([
 class DesidusShape extends Shape {
 	created: boolean
 
-	constructor(settings: ShapeSettings = {}) {
+	constructor(settings: IShapeSettings = {}) {
 		settings.type = 'Desidus'
 
 		super(settings)

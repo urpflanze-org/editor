@@ -9,7 +9,7 @@ import Log from 'Log'
 export function exportJSON(comunication: IComunication, executor: Executor): string {
 	// const project: ProjectState = comunication.args
 
-	const data = new JSONExporter().parse(executor.getDrawer())
+	const data = JSONExporter.parse(executor.getDrawer())
 
 	return data
 }
@@ -17,7 +17,7 @@ export function exportJSON(comunication: IComunication, executor: Executor): str
 export function importJSON(comunication: IComunication, executor: Executor): ProjectState | null {
 	const json_data = comunication.args
 
-	const drawer = new JSONImporter().parse(json_data)
+	const drawer = JSONImporter.parse(json_data)
 
 	Log.log('Temporany', 'importJSON', json_data, drawer)
 
@@ -26,7 +26,7 @@ export function importJSON(comunication: IComunication, executor: Executor): Pro
 
 		executor.getCommandHistory().clear()
 
-		const project: Partial<ProjectState> = new JSONExporter().parseAsProject(drawer)
+		const project: Partial<ProjectState> = JSONExporter.parseAsProject(drawer)
 
 		project.open_layer_properties = undefined
 		project.selected_layers = []
@@ -47,18 +47,20 @@ export function appendJSON(comunication: IComunication, executor: Executor): boo
 	const drawer = executor.getDrawer()
 	const scene = executor.getScene()
 
-	const imported_drawer = new JSONImporter().parse(json_data)
+	const imported_drawer = JSONImporter.parse(json_data)
 
 	if (imported_drawer) {
 		const imported_scene = imported_drawer.getScene()
 
-		imported_scene.getChildren().forEach(sceneChild => {
-			if (!scene.find(sceneChild.id)) {
-				scene.add(sceneChild)
-			}
-		})
+		if (imported_scene) {
+			imported_scene.getChildren().forEach(sceneChild => {
+				if (!scene.find(sceneChild.id)) {
+					scene.add(sceneChild)
+				}
+			})
+		}
 
-		const layers = Object.values(new JSONExporter().parseAsProject(drawer).scene)
+		const layers = Object.values(JSONExporter.parseAsProject(drawer).scene)
 		executor.sendEvent('scene:update-layers', { layers })
 
 		drawer.redraw()

@@ -12,7 +12,7 @@ import pups from '@pups/js'
 
 import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
 import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
-import { IProjectScene, IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 import CodeEditorWindowEditor from '@popup-windows/code-editor-window/CodeEditorWindowEditor'
 import CodeEditorWindowPanel from '@popup-windows/animate-prop-window/AnimatePropWindowPanel'
@@ -25,13 +25,13 @@ import ShapeBase from '@genbs/urpflanze/dist/core/shapes/ShapeBase'
 interface CodeEditorWindowProps {
 	layer_id?: number | string
 	prop_name?: string
-	scene: IProjectScene
+	scene: { [key: string]: IProjectSceneChild }
 }
 
 const INITAL = `(${ScenePropUtilities.RAW_ARGUMENTS}) => {
 
 }`
-const INITAL_WITH_PARENT = `(${ScenePropUtilities.RAW_ARGUMENTS_WIT_PARENT}) => {
+const INITAL_WITH_PARENT = `(${ScenePropUtilities.RAW_ARGUMENTS_WITH_PARENT}) => {
 
 }`
 

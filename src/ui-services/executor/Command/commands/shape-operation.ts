@@ -26,22 +26,20 @@ interface ICommandAddArgs {
 
 function sceneChildToShape(sceneChild: ShapeBase, type: TShapeOperationType): ClipperShape {
 	const buffer = sceneChild.getBuffer()
-	let shape: ClipperShape | null = null
+	// let shape: ClipperShape | null = null
+	const shape: ClipperShape | null = null
 
 	if (buffer) {
-		const repetitions = sceneChild.getProp('repetitions', undefined, 1)
-
-		const single_repetition_lengths = sceneChild.getSingleRepetitionBufferLength()
-		let vertex_index = 0
-		for (let r = 0; r < repetitions; r++) {
-			const buffer_length = single_repetition_lengths[r]
-			const points = new Array(buffer_length / 2)
-
-			for (let i = 0, j = 0; i < buffer_length; i += 2, j++, vertex_index += 2)
-				points[j] = { X: buffer[vertex_index], Y: buffer[vertex_index + 1] }
-
-			shape = shape ? shape[type](new ClipperShape([points])) : new ClipperShape([points])
-		}
+		// const repetitions = sceneChild.getProp('repetitions', undefined, 1)
+		// const single_repetition_lengths = sceneChild.getSingleRepetitionBufferLength()
+		// let vertex_index = 0
+		// for (let r = 0; r < repetitions; r++) {
+		// 	const buffer_length = single_repetition_lengths[r]
+		// 	const points = new Array(buffer_length / 2)
+		// 	for (let i = 0, j = 0; i < buffer_length; i += 2, j++, vertex_index += 2)
+		// 		points[j] = { X: buffer[vertex_index], Y: buffer[vertex_index + 1] }
+		// 	shape = shape ? shape[type](new ClipperShape([points])) : new ClipperShape([points])
+		// }
 	}
 	return shape ? shape : new ClipperShape([[]])
 }

@@ -298,7 +298,7 @@ class ExecutorProxy extends Emitter<ExecutorEvents> {
 			promise: undefined,
 		}
 
-		const promise = new Promise<IComunicationResponse | IEffectResponse>((resolve: () => void, reject: () => void) => {
+		const promise = new Promise<IComunicationResponse | IEffectResponse>((resolve, reject) => {
 			deferred.resolve = resolve
 			deferred.reject = reject
 		})

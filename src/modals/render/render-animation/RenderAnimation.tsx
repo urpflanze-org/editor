@@ -7,7 +7,7 @@ import executor from '@redux-store/executor'
 import { bytesToHuman, now } from '@ui-services/utilities/utilies'
 import app_utilities from 'app_utilities'
 import { createDownload } from '@window/app_bar/menu/FileUtility'
-import { IRenderFrame, IRenderSettings, IRenderStart } from '@genbs/urpflanze/dist/services/renderer/interfaces'
+import { IRenderFrame, IRenderSettings, IRenderStart } from '@genbs/urpflanze/dist/services/types/renderer'
 import Select from '@components/input/Select'
 
 interface RenderAnimationProps {

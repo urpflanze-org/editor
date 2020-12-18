@@ -1,4 +1,4 @@
-import { ShapeBaseProps } from '@genbs/urpflanze/dist/core/interfaces/shapes/Interfaces'
+import { ISceneChildProps } from '@genbs/urpflanze/dist/core/types/scene-child'
 
 import Executor from '@executor/Executor'
 import Command from '@ui-services/executor/Command/Command'

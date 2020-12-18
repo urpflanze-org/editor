@@ -94,7 +94,7 @@ export const answers: Record<PossibleAnswer, AskCallback | [AskCallback, ...Arra
 				.getChildren()
 				.reduce((a, b) => a + b.getBufferLength(), 0) / 2
 
-		const ghosts = executor.getDrawer().getOption('ghosts') as number
+		const ghosts = executor.getDrawer().getOption('ghosts', 0) as number
 		return ghosts && ghosts > 0 ? points * ghosts : points
 	},
 	'get-buffer-length': (comunication: IComunication, executor: Executor) => {

@@ -9,7 +9,7 @@ import SimpleAnimationProp from '@window/workspace/properties/simple-animation/S
 import Modal from '@components/Modal'
 import Slider from '@components/input/Slider'
 import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 interface IDynamicSliderProp {
 	value: any

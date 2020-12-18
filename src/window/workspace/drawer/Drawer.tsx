@@ -74,9 +74,9 @@ export default React.memo(
 	connect((state: RootState) => ({
 		backgroundImage: state.project.backgroundImage,
 		background: state.project.background,
-		clearCanvas: state.project.clearCanvas,
+		clear: state.project.clear,
 		ghosts: state.project.ghosts,
-		ghost_skip_time: state.project.ghost_skip_time,
+		ghostSkipTime: state.project.ghostSkipTime,
 		ratio: state.project.ratio,
 	}))(Drawer)
 )

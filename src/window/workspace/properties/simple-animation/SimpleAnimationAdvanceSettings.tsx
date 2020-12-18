@@ -8,14 +8,14 @@ import Grid from '@components/Grid'
 import pups from '@pups/js'
 import { MODE_FUNCTIONS } from '@window/workspace/properties/simple-animation/SimpleAnimationUtilities'
 import Checkbox from '@components/input/Checkbox'
-import { SequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
+import { ISequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
 import { ISimpleAnimation } from '@genbs/urpflanze/dist/services/types/animation'
 
 interface SimpleAnimationAdvanceSettingsProps {
 	state: ISimpleAnimation
 	bColor: boolean
 	onChange: (key: keyof ISimpleAnimation, value: ISimpleAnimation[keyof ISimpleAnimation]) => void
-	sequence: SequenceMeta
+	sequence: ISequenceMeta
 }
 
 const SimpleAnimationAdvanceSettings: React.FunctionComponent<SimpleAnimationAdvanceSettingsProps> = ({
@@ -81,10 +81,10 @@ const SimpleAnimationAdvanceSettings: React.FunctionComponent<SimpleAnimationAdv
 
 			<div>Mode function</div>
 			<Select
-				onChange={v => onChange('mode_function', v)}
+				onChange={v => onChange('modeFunction', v)}
 				placeholder={`${state.mode} function`}
 				options={MODE_FUNCTIONS[state.mode || 'cos']}
-				value={state.mode_function}
+				value={state.modeFunction}
 			/>
 
 			{state.type === 'loop' && state.mode === 'easing' && (

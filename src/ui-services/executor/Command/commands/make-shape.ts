@@ -32,7 +32,7 @@ class MakeShape extends Command {
 		this.data = {
 			ids: args,
 			sceneChilds: (args.map(id => executor.getScene().find(id)).filter(e => e !== null) as Array<SceneChild>).sort(
-				(a, b) => a.order - b.order
+				(a, b) => (a.order || 0) - (b.order || 0)
 			),
 		}
 	}

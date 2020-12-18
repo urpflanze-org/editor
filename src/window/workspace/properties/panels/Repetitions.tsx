@@ -1,26 +1,25 @@
 import * as React from 'react'
 
 import executor from '@redux-store/executor'
-import { RepetitionType } from '@genbs/urpflanze/dist/core/types/ShapeBase'
-
+import { ERepetitionType } from '@genbs/urpflanze/dist/core/types/scene-child'
 import Radio from '@components/input/Radio'
 
 import Panel, { ISceneChildPanel } from '@window/workspace/properties/Panel'
 import Prop from '@window/workspace/properties/Prop'
 import { toArray, toNumber, clampArray } from '@ui-services/utilities/utilies'
-import { clamp } from '@genbs/urpflanze/dist/core/Utilites'
+import { clamp } from '@genbs/urpflanze/dist/Utilites'
 import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 const REPETITION_TYPES = [
-	{ key: 'Matrix', value: RepetitionType.Matrix },
-	{ key: 'Ring', value: RepetitionType.Ring },
-	// { key: 'Random', value: RepetitionType.Random }
+	{ key: 'Matrix', value: ERepetitionType.Matrix },
+	{ key: 'Ring', value: ERepetitionType.Ring },
+	// { key: 'Random', value: ERepetitionType.Random }
 ]
 
-function getRepetitionType(layer: IProjectSceneChild): RepetitionType {
-	return Array.isArray(layer.props.repetitions) ? RepetitionType.Matrix : RepetitionType.Ring
-	// : layer.props.randomSeed ? RepetitionType.Random : RepetitionType.Ring
+function getRepetitionType(layer: IProjectSceneChild): ERepetitionType {
+	return Array.isArray(layer.props.repetitions) ? ERepetitionType.Matrix : ERepetitionType.Ring
+	// : layer.props.randomSeed ? ERepetitionType.Random : ERepetitionType.Ring
 }
 
 const Repetition: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChildPanel) => {
@@ -29,7 +28,7 @@ const Repetition: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChil
 	let repetitions = layer.props.repetitions || 1
 	let distance = layer.props.distance || 0
 
-	const [repetition_type, setRepetitionType] = React.useState<RepetitionType>(getRepetitionType(layer))
+	const [repetition_type, setRepetitionType] = React.useState<ERepetitionType>(getRepetitionType(layer))
 	// const [randomSeed] = React.useState<string>(layer.props.randomSeed || layer.id as string)
 
 	React.useEffect(() => {
@@ -37,19 +36,19 @@ const Repetition: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChil
 		_repetition_type != repetition_type && setRepetitionType(_repetition_type)
 	}, [layer])
 
-	function setRepetition(type: RepetitionType) {
+	function setRepetition(type: ERepetitionType) {
 		if (type != repetition_type) {
 			const _repetitions =
-				type == RepetitionType.Matrix
+				type == ERepetitionType.Matrix
 					? clampArray(1, 20, repetitions as number | Array<number>)
 					: clamp(1, 100, toNumber(repetitions as number | Array<number>))
-			// const _randomSeed: string | undefined = type == RepetitionType.Random ? randomSeed : undefined
+			// const _randomSeed: string | undefined = type == ERepetitionType.Random ? randomSeed : undefined
 
 			const props = [{ id: layer.id, name: 'repetitions', value: _repetitions, prev_value: repetitions }]
 
 			if (!ScenePropUtilities.bValueAnimation(distance)) {
 				const _distance =
-					type == RepetitionType.Matrix
+					type == ERepetitionType.Matrix
 						? clampArray(-100, 100, distance as number | Array<number>)
 						: clamp(-100, 100, toNumber(distance as number | Array<number>))
 				props.push({ id: layer.id, name: 'distance', value: _distance, prev_value: distance })
@@ -69,7 +68,7 @@ const Repetition: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChil
 	// }
 
 	async function distribute() {
-		if (repetition_type == RepetitionType.Matrix) {
+		if (repetition_type == ERepetitionType.Matrix) {
 			const _repetitions = toArray(repetitions as number | Array<number>)
 			const new_distance = [
 				_repetitions[0] <= 1 ? 0 : 200 / _repetitions[0],
@@ -111,12 +110,12 @@ const Repetition: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChil
 				layer={layer}
 				name="repetitions"
 				onChange={v => (repetitions = v)}
-				forceArray={repetition_type == RepetitionType.Matrix}
+				forceArray={repetition_type == ERepetitionType.Matrix}
 			/>
 			<Prop layer={layer} name="distance" onChange={v => (distance = v)} />
-			{repetition_type == RepetitionType.Ring && <Prop layer={layer} name="displace" />}
+			{repetition_type == ERepetitionType.Ring && <Prop layer={layer} name="displace" />}
 
-			{/* { repetition_type == RepetitionType.Random ? (
+			{/* { repetition_type == ERepetitionType.Random ? (
                 <small style={{ textAlign: 'right', cursor: 'pointer' }} onClick={() => regenerateRandomSeed()}>randomSeed</small>
             ) : (
                 <small style={{ textAlign: 'right', cursor: 'pointer' }} onClick={() => distribute()}>distribute</small>

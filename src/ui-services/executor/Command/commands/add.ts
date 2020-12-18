@@ -3,12 +3,12 @@ import Executor from '@executor/Executor'
 import SceneUtilties from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
 import { ICommandEffects } from '&types/command'
 import Command from '@executor/Command/Command'
-import { ShapeBaseProps } from '@genbs/urpflanze/dist/core/interfaces/shapes/Interfaces'
+import { ISceneChildProps } from '@genbs/urpflanze/dist/core/types/scene-child'
 
 interface ICommandAddArgs {
 	type: string
 	parent_id?: string | number
-	props?: ShapeBaseProps
+	props?: ISceneChildProps
 
 	added_id?: string | number
 	added_name?: string

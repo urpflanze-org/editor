@@ -12,10 +12,10 @@ import Icon from '@components/icons/Icon'
 import { handleSelection, findLayer } from '@window/workspace/layers/layer_utilities'
 import LayerActions from '@window/workspace/layers/LayerActions'
 import Layer from '@window/workspace/layers/Layer'
-import { IProjectScene, IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 interface ILayerProps {
-	layers: IProjectScene
+	layers: { [key: string]: IProjectSceneChild }
 	open_layer_id: number | string | undefined
 	selectLayers: (selecteds?: Array<string | number>, preventPushToHistory?: boolean) => any
 	selecteds: Array<string | number>

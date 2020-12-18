@@ -2,7 +2,7 @@ import * as React from 'react'
 import Loading from '@bootstrap/Loading'
 import pups from '@pups/js'
 import useWindowSize from '@hooks/useWindowSize'
-import { relativeClamp } from '@genbs/urpflanze/dist/core/Utilites'
+import { relativeClamp } from '@genbs/urpflanze/dist/Utilites'
 import executor from '@redux-store/executor'
 import CodeEditorWindow from '@popup-windows/code-editor-window/CodeEditorWindow'
 
@@ -93,7 +93,7 @@ const Router: React.FunctionComponent = () => {
 
 	const size = useWindowSize()
 
-	const rootBase = Math.floor(relativeClamp(size.width, 600, 2560, 10, 16))
+	const rootBase = Math.floor(relativeClamp(600, 2560, size.width, 10, 16))
 
 	pups.modularScale.setRootBase(rootBase + 'px')
 	document.documentElement.style.fontSize = rootBase + 'px'

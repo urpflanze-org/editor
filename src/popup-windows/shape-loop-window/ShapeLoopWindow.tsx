@@ -13,14 +13,14 @@ import pups from '@pups/js'
 
 import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
 import ShapeLoopWindowVisualEditor from '@popup-windows/shape-loop-window/ShapeLoopWindowVisualEditor'
-import { IProjectScene, IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/project'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
 
 import PopupStateHook from '@popup-windows/PupupStateHook'
 
 interface ShapeLoopWindowProps {
 	layer_id?: number | string
-	scene: IProjectScene
+	scene: { [key: string]: IProjectSceneChild }
 }
 
 // const defaultLayer = {

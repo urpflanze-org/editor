@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import executor from '@redux-store/executor'
 
-import { ShapeBaseProp } from '@genbs/urpflanze/dist/core/types/ShapeBase'
 import { getProperty } from '@pups/utility/build/Object'
 
 import { RootState } from '&types/state'
@@ -21,17 +20,20 @@ import DynamicSlider from '@window/workspace/properties/animable-props-input/Dyn
 import { ISceneChildPropData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildPropsData'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
 import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
-import { IProjectSceneChild, IProjectSceneChildDataProps } from '@genbs/urpflanze/dist/services/types/project'
-import { TAnimation, TDrawerValue } from '@genbs/urpflanze/dist/services/types/animation'
+
+import { TAnimation } from '@genbs/urpflanze/dist/services/types/animation'
+import { TDrawerValue } from '@genbs/urpflanze/dist/services/types/drawer'
+import { IProjectSceneChild, IProjectSceneChildProps } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { TSceneChildProp } from '@genbs/urpflanze/dist/core/types/scene-child'
 
 function copy(v: any): any {
 	return Array.isArray(v) ? v.slice() : v
 }
 
 interface IProp {
-	name: keyof IProjectSceneChildDataProps
+	name: keyof IProjectSceneChildProps
 	layer: IProjectSceneChild
-	value: ShapeBaseProp<any>
+	value: TSceneChildProp<any>
 	forceArray?: boolean
 	onChange?: (new_value: any, prev_value: any) => any
 }

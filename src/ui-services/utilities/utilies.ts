@@ -1,4 +1,4 @@
-import { clamp } from '@genbs/urpflanze/dist/core/Utilites'
+import { clamp } from '@genbs/urpflanze/dist/Utilites'
 import Log from 'Log'
 
 export const debounce = function <T>(func: Function, wait = 0, immediate = false): (args?: T) => any {

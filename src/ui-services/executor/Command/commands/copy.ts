@@ -39,7 +39,7 @@ class Copy extends Command {
 		const sceneChildReference = scene.find(this.data.id)
 
 		if (sceneChildReference) {
-			const sceneChild = SceneUtilities.copy(sceneChildReference, scene, drawer)
+			const sceneChild = SceneUtilities.copy(sceneChildReference, scene)
 
 			if (sceneChild) {
 				if (this.data.parent_id) {

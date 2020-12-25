@@ -51,7 +51,7 @@ const Bar: React.FunctionComponent<BarProps> = ({
 
 	function handleChange(time) {
 		const t = clamp(0, sequence_durate, time)
-		t != current_time && onChange(time)
+		t !== current_time && onChange(t)
 	}
 
 	const cursorRef = useDraggable<HTMLDivElement>({

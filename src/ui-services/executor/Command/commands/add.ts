@@ -37,8 +37,7 @@ class Add extends Command {
 				name: this.data.added_name,
 				order: this.data.added_order,
 			},
-			scene,
-			drawer
+			scene
 		)
 
 		if (sceneChild && scene.find(this.data.added_id) == null) {
@@ -46,7 +45,7 @@ class Add extends Command {
 
 			if (this.data.props) {
 				Object.keys(this.data.props).forEach(propKey =>
-					SceneUtilties.setProp(sceneChild, propKey, this.data.props[propKey], drawer)
+					SceneUtilties.setProp(sceneChild, propKey as keyof ISceneChildProps, this.data.props[propKey], scene)
 				)
 			}
 

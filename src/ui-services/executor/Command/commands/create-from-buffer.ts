@@ -70,20 +70,18 @@ export function svgBufferToScene(
 				sceneChild = SceneUtilities.create(
 					'ShapeBuffer',
 					{ shape: buffers[0].buffer, sideLength, bCloseShape: buffers[0].closed },
-					scene,
-					drawer
+					scene
 				)
 				break
 			default:
-				sceneChild = SceneUtilities.create('Shape', undefined, scene, drawer)
+				sceneChild = SceneUtilities.create('Shape', undefined, scene)
 
 				if (sceneChild) {
 					buffers.forEach((buffer, index) => {
 						const child = SceneUtilities.create(
 							'ShapeBuffer',
 							{ shape: buffer.buffer, sideLength, order: index, bCloseShape: buffer.closed },
-							scene,
-							drawer
+							scene
 						)
 						child && SceneUtilities.add(sceneChild as SceneChild, child, undefined, scene)
 					})

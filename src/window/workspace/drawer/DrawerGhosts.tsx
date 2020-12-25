@@ -8,20 +8,20 @@ import Icon from '@components/icons/Icon'
 import Tooltip from '@components/Tooltip'
 
 interface DrawerGhostsProps {
-	clearCanvas: boolean
-	ghost_skip_time: number
+	clear: boolean
+	ghostSkipTime: number
 	ghosts: number
 }
 
 const DrawerGhosts: React.FunctionComponent<DrawerGhostsProps> = ({
-	clearCanvas,
-	ghost_skip_time,
+	clear,
+	ghostSkipTime,
 	ghosts,
 }: DrawerGhostsProps) => {
-	function setGhosts(_ghosts: number = ghosts, _ghost_skip_time: number = ghost_skip_time) {
+	function setGhosts(_ghosts: number = ghosts, _ghostSkipTime: number = ghostSkipTime) {
 		_ghosts = _ghosts < 0 ? 0 : _ghosts
-		if ((_ghosts >= 0 && _ghosts != ghosts) || _ghost_skip_time != ghost_skip_time)
-			executor.ask('set-drawer-ghosts', { ghosts: _ghosts, ghost_skip_time: _ghost_skip_time })
+		if ((_ghosts >= 0 && _ghosts != ghosts) || _ghostSkipTime != ghostSkipTime)
+			executor.ask('set-drawer-ghosts', { ghosts: _ghosts, ghostSkipTime: _ghostSkipTime })
 	}
 
 	function getOffset(e: MouseEvent, t, k, l = 1) {
@@ -32,7 +32,7 @@ const DrawerGhosts: React.FunctionComponent<DrawerGhostsProps> = ({
 		<Grid
 			rows={2}
 			flow="max-content auto"
-			style={{ justifyItems: 'center', pointerEvent: !clearCanvas ? 'none' : '', opacity: !clearCanvas ? '.2' : '' }}
+			style={{ justifyItems: 'center', pointerEvent: !clear ? 'none' : '', opacity: !clear ? '.2' : '' }}
 			gap={pups.ms(-2)}
 		>
 			<small style={{ color: ghosts > 0 ? pups.color('primary').toString('hex') : '' }}>Ghosts</small>
@@ -42,23 +42,23 @@ const DrawerGhosts: React.FunctionComponent<DrawerGhostsProps> = ({
 						size={0}
 						rotate={180}
 						name="arrow-right"
-						onClick={e => setGhosts(ghosts - getOffset(e, 5, 10), ghost_skip_time)}
+						onClick={e => setGhosts(ghosts - getOffset(e, 5, 10), ghostSkipTime)}
 					/>
 					<small>{ghosts || 0}</small>
-					<Icon size={0} name="arrow-right" onClick={e => setGhosts(ghosts + getOffset(e, 5, 10), ghost_skip_time)} />
+					<Icon size={0} name="arrow-right" onClick={e => setGhosts(ghosts + getOffset(e, 5, 10), ghostSkipTime)} />
 				</Tooltip>
 				<Tooltip title="Ghost frame skip">
 					<Icon
 						size={0}
 						rotate={180}
 						name="arrow-right"
-						onClick={e => setGhosts(ghosts, ghost_skip_time - getOffset(e, 100, 10, 0.1))}
+						onClick={e => setGhosts(ghosts, ghostSkipTime - getOffset(e, 100, 10, 0.1))}
 					/>
-					<small>{ghost_skip_time || 1}</small>
+					<small>{ghostSkipTime || 1}</small>
 					<Icon
 						size={0}
 						name="arrow-right"
-						onClick={e => setGhosts(ghosts, ghost_skip_time + getOffset(e, 100, 10, 0.1))}
+						onClick={e => setGhosts(ghosts, ghostSkipTime + getOffset(e, 100, 10, 0.1))}
 					/>
 				</Tooltip>
 			</div>

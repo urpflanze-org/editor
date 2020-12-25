@@ -55,6 +55,16 @@ const Primitive: React.FunctionComponent<ISceneChildPanel> = ({ layer }: ISceneC
 					</div>
 				</React.Fragment>
 			)}
+			{layer.type === 'SuperShape' && (
+				<React.Fragment>
+					<Prop layer={layer} name="a" />
+					<Prop layer={layer} name="b" />
+					<Prop layer={layer} name="m" />
+					<Prop layer={layer} name="n1" />
+					<Prop layer={layer} name="n2" />
+					<Prop layer={layer} name="n3" />
+				</React.Fragment>
+			)}
 
 			<div style={{ textAlign: 'right' }}>
 				<div style={{ display: 'inline-block', verticalAlign: 'middle' }}>

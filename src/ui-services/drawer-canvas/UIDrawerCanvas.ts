@@ -14,7 +14,7 @@ import {
 import Drawer from '@genbs/urpflanze/dist/services/drawers/Drawer'
 import Context from '@genbs/urpflanze/dist/core/Context'
 import { IStreamArguments } from '@genbs/urpflanze/dist/core/types/scene-child'
-import { Vec2 } from '@genbs/urpflanze'
+import Vec2 from '@genbs/urpflanze/dist/core/math/Vec2'
 
 interface IUIDrawerCanvasOptions extends IDrawerCanvasOptions {
 	scale?: number
@@ -63,13 +63,13 @@ class UIDrawerCanvas extends DrawerCanvas<IUIDrawerCanvasOptions> {
 		const sceneChild = SceneUtilities.create(type)
 
 		if (sceneChild) {
-			const shape = SceneUtilities.copy(sceneChild, scene, undefined, true)
+			const shape = SceneUtilities.copy(sceneChild, scene, true)
 
 			if (shape) {
 				scene.add(shape)
 				scene.update(0)
 
-				const fixedLineWidth = true
+				const fixedLineWidth = false
 				const scale = UIDrawerCanvas.adaptShapeToScene(shape, scene)
 
 				return UIDrawerCanvas.getSceneImage(scene, width, height, fixedLineWidth, scale).then(image =>
@@ -95,8 +95,8 @@ class UIDrawerCanvas extends DrawerCanvas<IUIDrawerCanvasOptions> {
 		scene.update(0)
 		const rect: IShapeBounding = ShapePrimitive.getBounding(shape.getBuffer() as Float32Array)
 
-		if (rect.width > scene.width || rect.height > scene.height)
-			scale = (Math.min(scene.width, scene.height) / Math.max(rect.width, rect.height)) * scale
+		// if (rect.width > scene.width || rect.height > scene.height)
+		scale = (Math.min(scene.width, scene.height) / Math.max(rect.width, rect.height)) * scale
 
 		return scale * 0.9
 	}

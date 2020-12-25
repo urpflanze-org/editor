@@ -7,12 +7,12 @@ import Grid from '@components/Grid'
 import Checkbox from '@components/input/Checkbox'
 
 interface DrawerClearCanvasProps {
-	clearCanvas: boolean
+	clear: boolean
 	ghosts: number
 }
 
 const DrawerClearCanvas: React.FunctionComponent<DrawerClearCanvasProps> = ({
-	clearCanvas,
+	clear,
 	ghosts,
 }: DrawerClearCanvasProps) => {
 	return (
@@ -30,19 +30,14 @@ const DrawerClearCanvas: React.FunctionComponent<DrawerClearCanvasProps> = ({
 				<label
 					style={{
 						cursor: 'pointer',
-						color: ghosts === 0 && !clearCanvas ? pups.color('primary').toString('hex') : '',
+						color: ghosts === 0 && !clear ? pups.color('primary').toString('hex') : '',
 					}}
-					htmlFor="cb_clearCanvas"
+					htmlFor="cb_clear"
 				>
 					Clear
 				</label>
 			</small>
-			<Checkbox
-				size={1}
-				checked={clearCanvas}
-				id="cb_clearCanvas"
-				onChange={v => executor.ask('set-drawer-clear', v)}
-			/>
+			<Checkbox size={1} checked={clear} id="cb_clear" onChange={v => executor.ask('set-drawer-clear', v)} />
 		</Grid>
 	)
 }

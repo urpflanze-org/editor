@@ -5,10 +5,11 @@ import Group from '@genbs/urpflanze/dist/core/Group'
 import SceneUtilties from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
 import SceneChild from '@genbs/urpflanze/dist/core/SceneChild'
 import { ISceneChildProps } from '@genbs/urpflanze/dist/core/types/scene-child'
+import { IProjectSceneChildProps } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 export interface ICommandSetPropArgs {
 	id: string | number
-	name: string
+	name: keyof IProjectSceneChildProps
 	value: any
 	prev_value: any
 
@@ -45,7 +46,7 @@ class SetProp extends Command {
 			const sceneChild = executor.getScene().find(id) as SceneChild
 
 			if (sceneChild && this.effects.scene_child_prop_update) {
-				SceneUtilties.setProp(sceneChild, name, value, executor.getDrawer())
+				SceneUtilties.setProp(sceneChild, name, value, executor.getScene())
 				this.effects.scene_child_prop_update[effect_index++].value = value
 
 				if (sceneChild instanceof Group)
@@ -77,7 +78,7 @@ class SetProp extends Command {
 			const sceneChild = executor.getScene().find(id)
 
 			if (sceneChild && this.effects.scene_child_prop_update) {
-				SceneUtilties.setProp(sceneChild, name, prev_value, executor.getDrawer())
+				SceneUtilties.setProp(sceneChild, name, prev_value, executor.getScene())
 				this.effects.scene_child_prop_update[effect_index++].value = prev_value
 
 				if (sceneChild instanceof Group)

@@ -18,18 +18,18 @@ import Storage from '@ui-services/storage/Storage'
 
 interface IDrawerProps {
 	background: string
-	clearCanvas: boolean
+	clear: boolean
 	backgroundImage: string
-	ghost_skip_time: number
+	ghostSkipTime: number
 	ghosts: number
 	ratio: number
 }
 
 const Drawer: React.FunctionComponent<IDrawerProps> = ({
 	background,
-	clearCanvas,
+	clear,
 	backgroundImage,
-	ghost_skip_time,
+	ghostSkipTime,
 	ghosts,
 	ratio,
 }: IDrawerProps) => {
@@ -56,9 +56,9 @@ const Drawer: React.FunctionComponent<IDrawerProps> = ({
 
 				<DrawerBackground offsets={offsets} background={background} backgroundImage={backgroundImage} />
 
-				<DrawerClearCanvas ghosts={ghosts} clearCanvas={clearCanvas} />
+				<DrawerClearCanvas ghosts={ghosts} clear={clear} />
 
-				<DrawerGhosts clearCanvas={clearCanvas} ghosts={ghosts} ghost_skip_time={ghost_skip_time} />
+				<DrawerGhosts clear={clear} ghosts={ghosts} ghostSkipTime={ghostSkipTime} />
 
 				<DrawerLines />
 

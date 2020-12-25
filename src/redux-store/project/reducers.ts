@@ -32,7 +32,7 @@ export const initialProjectState: ProjectState = {
 	clear: true,
 	scene: {},
 	ghosts: 0,
-	ghost_skip_time: 30,
+	ghostSkipTime: 30,
 	history: [],
 	ratio: 1,
 	sequence: {

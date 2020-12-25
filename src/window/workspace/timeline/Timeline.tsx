@@ -45,14 +45,14 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 			setSequenceState(data as SequenceState)
 		})
 
-		const itv = setInterval(async () => {
-			const _renderedFrames = await executor.ask('get-rendered-frames')
+		// const itv = setInterval(async () => {
+		// 	const _renderedFrames = await executor.ask('get-rendered-frames')
 
-			setRenderedFrames(_renderedFrames)
-		}, 300)
+		// 	setRenderedFrames(_renderedFrames)
+		// }, 500)
 
 		return () => {
-			clearInterval(itv)
+			// clearInterval(itv)
 		}
 	}, [])
 

@@ -51,7 +51,6 @@ class MakeGroup extends Command {
 
 	protected handleRedo(executor: Executor): boolean | undefined {
 		const scene = executor.getScene()
-		const drawer = executor.getDrawer()
 
 		if (this.data.sceneChilds.length > 0 && this.hasSameParents(this.data.sceneChilds)) {
 			const sceneChilds = this.data.sceneChilds
@@ -62,8 +61,7 @@ class MakeGroup extends Command {
 				{
 					id: this.data.new_shape_id,
 				},
-				scene,
-				drawer
+				scene
 			) as SceneChild
 
 			sceneChilds.forEach(sceneChild => {

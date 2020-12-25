@@ -2,7 +2,7 @@ import Executor from '@executor/Executor'
 import { IComunication } from '&types/comunication'
 import ShapeLoop from '@genbs/urpflanze/dist/core/shapes/ShapeLoop'
 import ShapePrimitive from '@genbs/urpflanze/dist/core/shapes/ShapePrimitive'
-import { IShapeBounding } from '@genbs/urpflanze'
+import { IShapeBounding } from '@genbs/urpflanze/dist/core/types/shape-base'
 
 export const getProp = (comunication: IComunication, executor: Executor): any => {
 	const { id, name } = comunication.args

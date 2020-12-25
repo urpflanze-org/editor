@@ -22,9 +22,9 @@ import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
 import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
 
 import { TAnimation } from '@genbs/urpflanze/dist/services/types/animation'
-import { TDrawerValue } from '@genbs/urpflanze/dist/services/types/drawer'
 import { IProjectSceneChild, IProjectSceneChildProps } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 import { TSceneChildProp } from '@genbs/urpflanze/dist/core/types/scene-child'
+import { TSceneUtilityPropValue } from '@genbs/urpflanze/dist/services/types/scene-utilities'
 
 function copy(v: any): any {
 	return Array.isArray(v) ? v.slice() : v
@@ -47,7 +47,7 @@ function isEqual(a: any, b: any): boolean {
 }
 
 const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, forceArray }: IProp) => {
-	if (ScenePropUtilities.bValueDrawer(value)) {
+	if (ScenePropUtilities.bTransformableValue(value)) {
 		value = value.value
 	}
 
@@ -69,7 +69,7 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 	}
 
 	function handleChange(
-		new_value: TAnimation | TDrawerValue | string | number | [number, number] | boolean,
+		new_value: TAnimation | TSceneUtilityPropValue | string | number | [number, number] | boolean,
 		preventPushToHistory?: boolean
 	) {
 		if (new_value != initValue) {
@@ -77,7 +77,7 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 				new_value = forceArray ? toArray(new_value as number) : new_value
 
 				if (ScenePropUtilities.bPropTransformable(name, value)) {
-					new_value = { type: 'drawer-transformation', value: new_value }
+					new_value = { type: 'transformable-prop', value: new_value }
 				}
 			}
 

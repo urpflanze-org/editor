@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { clamp, relativeClamp } from '@pups/utility/build/Number'
 
 import useDraggable from '@hooks/useDraggable'
 import useRect from '@hooks/useRect'
 import useWheel from '@hooks/useWheel'
+import { clamp, relativeClamp } from '@genbs/urpflanze/dist/Utilites'
 
 type TChangeMode = 'slider' | 'none'
 

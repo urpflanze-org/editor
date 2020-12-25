@@ -113,13 +113,13 @@ class ShapeOperation extends Command {
 					let sceneChild: SceneChild | null = null
 
 					if (buffers.length == 1) {
-						sceneChild = SceneUtilities.create('ShapeBuffer', { shape: buffers[0] }, scene, drawer)
+						sceneChild = SceneUtilities.create('ShapeBuffer', { shape: buffers[0] }, scene)
 					} else {
 						sceneChild = SceneUtilities.create('Shape', undefined, scene)
 						const sb_count = SceneUtilities.getCountSceneChildOfType(scene, 'ShapeBuffer') + 1
 						if (sceneChild) {
 							for (let i = 0; i < buffers.length; i++) {
-								const item = SceneUtilities.create('ShapeBuffer', { shape: buffers[i] }, scene, drawer)
+								const item = SceneUtilities.create('ShapeBuffer', { shape: buffers[i] }, scene)
 								item && SceneUtilities.add(sceneChild, item, { name: `ShapeBuffer_${sb_count + i}` }, scene)
 							}
 						}

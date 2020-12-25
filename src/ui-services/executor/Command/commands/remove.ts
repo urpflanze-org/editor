@@ -37,7 +37,7 @@ class Remove extends Command {
 				if (sceneChild) {
 					return {
 						id,
-						copied_sceneChild: SceneUtilities.copy(sceneChild, scene, drawer, true) as SceneChild,
+						copied_sceneChild: SceneUtilities.copy(sceneChild, scene, true) as SceneChild,
 						parent_id: SceneUtilities.getParent(sceneChild)?.id || null,
 					}
 				}

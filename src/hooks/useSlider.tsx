@@ -38,8 +38,7 @@ function useSlider<T extends HTMLElement>({
 	onChange,
 	events,
 }: ISliderInteface): TSliderValueInteface<T> {
-	let initialValuePercentage = relativeClamp(min, max, value, 0, 100)
-
+	const initialValuePercentage = relativeClamp(min, max, value, 0, 100)
 	const [currentValue, setCurrentValue] = React.useState({
 		value,
 		valuePercentage: initialValuePercentage,
@@ -77,8 +76,7 @@ function useSlider<T extends HTMLElement>({
 	})
 
 	React.useEffect(() => {
-		initialValuePercentage = relativeClamp(min, max, value, 0, 100)
-		setCurrentValue({ value, valuePercentage: initialValuePercentage })
+		setCurrentValue({ value, valuePercentage: relativeClamp(min, max, value, 0, 100) })
 	}, [value])
 
 	function valueFromCoords(coords: { x: number; y: number }) {

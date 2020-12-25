@@ -31,7 +31,7 @@ export function getSimpleAnimationInitialState(
 		colorTransitionMode: 'rgb',
 		type: 'loop',
 		mode: 'sinusoidal',
-		mode_function: 'sin',
+		modeFunction: 'sin',
 
 		type_value: sceneChildProp.type_value,
 

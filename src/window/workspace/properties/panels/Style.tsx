@@ -53,9 +53,9 @@ const Style: React.FunctionComponent<ISceneChildPanel & { bGhost: boolean }> = (
 				valign="center"
 				style={{ width: '100%', overflow: 'hidden' }}
 			>
-				<Prop layer={layer} name="fillColor" />
-				<Prop layer={layer} name="strokeColor" />
-				<Prop layer={layer} name="lineWidth" />
+				<Prop layer={layer} name="style.fill" />
+				<Prop layer={layer} name="style.stroke" />
+				<Prop layer={layer} name="style.lineWidth" />
 				<div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
 					{bGhost && (
 						<React.Fragment>

@@ -3,7 +3,7 @@ import Loading from '@bootstrap/Loading'
 import pups from '@pups/js'
 import useWindowSize from '@hooks/useWindowSize'
 import { relativeClamp } from '@genbs/urpflanze/dist/Utilites'
-import executor from '@redux-store/executor'
+// import executor from '@redux-store/executor'
 import CodeEditorWindow from '@popup-windows/code-editor-window/CodeEditorWindow'
 
 const Main = React.lazy(
@@ -32,10 +32,10 @@ const VertexCallbackWindow = React.lazy(
 		)
 )
 
-const animatePropWindowRegex = /^\/animate(\/([0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})(\/(\w+)?)?)?$/i
-const codeEditorWindowRegex = /^\/code(\/([0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})(\/(\w+)?)?)?$/i
-const shapeLoopWindowRegex = /^\/shape-loop(\/([0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}))?$/i
-const vertexCallbackWindowRegex = /^\/vertex-callback(\/([0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}))?$/i
+const animatePropWindowRegex = /^\/animate(\/([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})(\/(\w+)?)?)?$/i
+const codeEditorWindowRegex = /^\/code(\/([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})(\/(\w+)?)?)?$/i
+const shapeLoopWindowRegex = /^\/shape-loop(\/([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}))?$/i
+const vertexCallbackWindowRegex = /^\/vertex-callback(\/([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}))?$/i
 
 const NotFound: React.FunctionComponent = () => <div>404</div>
 const Fallback = NotFound

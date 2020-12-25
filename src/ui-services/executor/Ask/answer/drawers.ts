@@ -59,12 +59,12 @@ export const resize = (
 	scene: Scene,
 	drawer: UIDrawerCanvas,
 	size: number,
-	ratio: number,
-	resolution: 'low' | 'medium' | 'high' | 'ultra'
+	ratio: number
+	// resolution: 'low' | 'medium' | 'high' | 'ultra'
 ): void => {
-	const resolution_t = resolution || size
-	const resolution_scale = resolution_t == 'low' ? 5 : resolution_t == 'medium' ? 2 : resolution_t == 'ultra' ? 0.5 : 1
-	const finalResolution = size / resolution_scale
+	// const resolution_t = resolution || size
+	// const resolution_scale = resolution_t == 'low' ? 5 : resolution_t == 'medium' ? 2 : resolution_t == 'ultra' ? 0.5 : 1
+	// const finalResolution = size / resolution_scale
 
 	// drawer.resize(size, size, ratio, finalResolution)
 	drawer.resize(size, size, ratio)
@@ -72,9 +72,10 @@ export const resize = (
 }
 
 export const setRatio = (comunication: IComunication, executor: Executor): void => {
-	const { size, ratio, resolution } = comunication.args
+	const { size, ratio } = comunication.args
 
-	resize(executor.getScene(), executor.getDrawer(), size, ratio, resolution)
+	// resize(executor.getScene(), executor.getDrawer(), size, ratio, resolution)
+	resize(executor.getScene(), executor.getDrawer(), size, ratio)
 
 	executor.sendEvent('project:update-properties', { ratio })
 }

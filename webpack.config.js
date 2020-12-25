@@ -53,12 +53,13 @@ module.exports = (env, args) => {
 				}),
 			],
 		},
+		mode: args.mode === 'production',
 		devServer: {
 			contentBase: path.join(__dirname, 'dist'),
-			// compress: true,
+			compress: false,
 			host: '0.0.0.0',
 			port: 3000,
-			// hot: true,
+			hot: true,
 			historyApiFallback: {
 				rewrites: [{ from: /^\/$/, to: '/index.html' }],
 			},

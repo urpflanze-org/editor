@@ -25,7 +25,7 @@ const Primitive: React.FunctionComponent<ISceneChildPanel> = ({ layer }: ISceneC
 				</div>
 			)}
 
-			{layer.type === 'RegularPolygon' && <Prop layer={layer} name="sideNumber" />}
+			{layer.type === 'Polygon' && <Prop layer={layer} name="sideNumber" />}
 
 			{layer.type === 'Rose' && (
 				<React.Fragment>
@@ -45,7 +45,7 @@ const Primitive: React.FunctionComponent<ISceneChildPanel> = ({ layer }: ISceneC
 			{layer.type === 'Spiral' && (
 				<React.Fragment>
 					<Prop layer={layer} name="twists" />
-					<Prop layer={layer} name="twists_start" />
+					<Prop layer={layer} name="twistsStart" />
 
 					<div style={{ display: 'flex', gap: pups.ms(0) }}>
 						<span>Spiral type</span>
@@ -58,10 +58,10 @@ const Primitive: React.FunctionComponent<ISceneChildPanel> = ({ layer }: ISceneC
 
 			<div style={{ textAlign: 'right' }}>
 				<div style={{ display: 'inline-block', verticalAlign: 'middle' }}>
-					<Prop layer={layer} name="bCloseShape" />
+					<Prop layer={layer} name="bClosed" />
 				</div>
 			</div>
-			<Prop layer={layer} name="bAdaptBuffer" />
+			<Prop layer={layer} name="adaptMode" />
 		</Panel>
 	)
 }

@@ -32,7 +32,7 @@ function useDraggable<T extends HTMLElement>(events: IDraggableEvents): React.Re
 
 			if (!drag) events.onNotDrag && events.onNotDrag()
 		},
-		[ref.current, state.bDrag, events.onNotDrag]
+		[ref.current, state.bDrag]
 	)
 
 	const onDocumentMouseUp = React.useCallback(

@@ -122,7 +122,7 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 			{bAdvanceMode && (
 				<SimpleAnimationAdvanceSettings
 					state={state}
-					bColor={sceneChildProp.type == 'color'}
+					bColor={sceneChildProp.type === 'color'}
 					sequence={sequence}
 					onChange={set}
 				/>

@@ -47,7 +47,6 @@ class Executor extends Emitter<EventIterceptor> {
 		this.updateDrawer(initialDrawer)
 
 		this.renderer = new Renderer()
-
 		this.commandHistory = new CommandHistory()
 
 		this.commandHistory.attach(
@@ -117,12 +116,12 @@ class Executor extends Emitter<EventIterceptor> {
 		canvas: HTMLElement | HTMLCanvasElement | OffscreenCanvas
 		size: number
 		ratio: number
-		resolution: 'low' | 'medium' | 'high' | 'ultra'
+		// resolution: 'low' | 'medium' | 'high' | 'ultra'
 	}): void {
 		if (props.canvas) this.drawer.setCanvas(props.canvas)
 
-		if (props.size || props.ratio || props.resolution)
-			resize(this.scene, this.drawer, props.size, props.ratio, props.resolution)
+		// if (props.size || props.ratio || props.resolution)
+		if (props.size || props.ratio) resize(this.scene, this.drawer, props.size, props.ratio)
 
 		this.sendEvent('drawer:update', {})
 	}
@@ -145,6 +144,7 @@ class Executor extends Emitter<EventIterceptor> {
 
 		this.drawer.attach('drawer-canvas:buffer_loaded', this.sendEvent.bind(this, 'drawer-canvas:buffer_loaded'))
 		this.drawer.attach('drawer-canvas:buffer_flush', this.sendEvent.bind(this, 'drawer-canvas:buffer_flush'))
+		// this.drawer.attach('drawer-canvas:resize', this.sendEvent.bind(this, 'drawer-canvas:resize'))
 		this.drawer.getTimeline().attach('timeline:update_sequence', this.sendEvent.bind(this, 'timeline:update_sequence'))
 		this.drawer.getTimeline().attach('timeline:change_status', this.sendEvent.bind(this, 'timeline:change_status'))
 		this.drawer.getTimeline().attach('timeline:progress', this.sendEvent.bind(this, 'timeline:progress'))

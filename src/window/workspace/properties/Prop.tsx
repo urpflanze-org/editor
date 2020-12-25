@@ -47,16 +47,13 @@ function isEqual(a: any, b: any): boolean {
 }
 
 const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, forceArray }: IProp) => {
-	console.log('value1', name, value)
 	if (ScenePropUtilities.bValueDrawer(value)) {
 		value = value.value
-		console.log('value2', value)
 	}
 
 	const propContainerRef = React.useRef<HTMLDivElement>(null)
 	const sceneChildProp = SceneChildPropsData[name] as ISceneChildPropData
 	let initValue = value ?? sceneChildProp.default
-
 	// const bAngle = sceneChildProp.bAngle || false
 	const bDefaultValue = typeof value === 'undefined' || isEqual(value, sceneChildProp.default)
 
@@ -180,7 +177,9 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 }
 
 export default React.memo(
-	connect((state: RootState, props: IProp) => ({
-		value: props.layer ? getProperty(props.layer.props, props.name) : undefined,
-	}))(Prop)
+	connect((state: RootState, props: IProp) => {
+		return {
+			value: props.layer ? getProperty(props.layer.props, props.name) : undefined,
+		}
+	})(Prop)
 )

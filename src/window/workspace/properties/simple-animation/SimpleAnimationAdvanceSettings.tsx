@@ -59,7 +59,7 @@ const SimpleAnimationAdvanceSettings: React.FunctionComponent<SimpleAnimationAdv
 						max={sequence.durate}
 						step={100}
 						value={state.delay || 0}
-						onChange={(e, mode) => mode == 'none' && onChange('delay', e)}
+						onChange={(e, mode) => mode === 'none' && onChange('delay', e)}
 					/>
 				</React.Fragment>
 			)}

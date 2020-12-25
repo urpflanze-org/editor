@@ -23,6 +23,7 @@ const Log = {
 	// level: LogLevel.Temporany | LogLevel.Comunication | LogLevel.ComunicationResponse | LogLevel.SetProp,
 	// level: LogLevel.SetProp,
 	level: LogLevel.None,
+	// level: LogLevel.Temporany | LogLevel.Comunication | LogLevel.ComunicationResponse | LogLevel.SetProp,
 
 	log: (level: LogLevelStrings, ...args: any[]): void => {
 		if (Log.level !== LogLevel.None) {

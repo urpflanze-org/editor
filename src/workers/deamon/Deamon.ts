@@ -7,8 +7,7 @@ executor.attach('event', event => {
 	if (event) {
 		const response: IEventResponse = { type: 'event', ...event }
 
-		//@ts-ignore
-		self.postMessage(response)
+		self.postMessage(response, '*')
 	}
 })
 
@@ -18,7 +17,6 @@ self.onmessage = async function (e: MessageEvent) {
 		const response: IComunicationResponse = await executor.read(comunication)
 
 		// console.log('deamon response', response)
-		//@ts-ignore
-		self.postMessage(response)
+		self.postMessage(response, '*')
 	}
 }

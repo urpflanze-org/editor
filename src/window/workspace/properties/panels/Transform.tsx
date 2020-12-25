@@ -25,7 +25,7 @@ const Transform: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChild
 			<Prop layer={layer} name="rotateX" />
 			<Prop layer={layer} name="rotateY" />
 			<Prop layer={layer} name="rotateZ" />
-			<Prop layer={layer} name="rotationOrigin" />
+			<Prop layer={layer} name="transformOrigin" />
 
 			{layer.bPrimitive && (
 				<div style={{ textAlign: 'right' }}>

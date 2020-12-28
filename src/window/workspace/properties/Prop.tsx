@@ -17,21 +17,21 @@ import Select from '@components/input/Select'
 import DynamicColor from '@window/workspace/properties/animable-props-input/DynamicColor'
 import DynamicRange from '@window/workspace/properties/animable-props-input/DynamicRange'
 import DynamicSlider from '@window/workspace/properties/animable-props-input/DynamicSlider'
-import { ISceneChildPropData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildPropsData'
-import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
-import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
+import SceneChildUtilitiesData, {
+	ISceneChildUtiltiesData,
+} from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
+import SceneUtilitiesExtends from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
 
-import { TAnimation } from '@genbs/urpflanze/dist/services/types/animation'
-import { IProjectSceneChild, IProjectSceneChildProps } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 import { TSceneChildProp } from '@genbs/urpflanze/dist/core/types/scene-child'
-import { TSceneUtilityPropValue } from '@genbs/urpflanze/dist/services/types/scene-utilities'
 
 function copy(v: any): any {
 	return Array.isArray(v) ? v.slice() : v
 }
 
 interface IProp {
-	name: keyof IProjectSceneChildProps
+	name: keyof typeof SceneChildUtilitiesData
 	layer: IProjectSceneChild
 	value: TSceneChildProp<any>
 	forceArray?: boolean
@@ -47,12 +47,12 @@ function isEqual(a: any, b: any): boolean {
 }
 
 const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, forceArray }: IProp) => {
-	if (ScenePropUtilities.bTransformableValue(value)) {
+	if (SceneUtilitiesExtends.bValueTransformable(value)) {
 		value = value.value
 	}
 
 	const propContainerRef = React.useRef<HTMLDivElement>(null)
-	const sceneChildProp = SceneChildPropsData[name] as ISceneChildPropData
+	const sceneChildProp = SceneChildPropsData[name] as ISceneChildUtiltiesData
 	let initValue = value ?? sceneChildProp.default
 	// const bAngle = sceneChildProp.bAngle || false
 	const bDefaultValue = typeof value === 'undefined' || isEqual(value, sceneChildProp.default)
@@ -68,17 +68,20 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 		input_type = 'range'
 	}
 
-	function handleChange(
-		new_value: TAnimation | TSceneUtilityPropValue | string | number | [number, number] | boolean,
-		preventPushToHistory?: boolean
-	) {
+	function handleChange(new_value: any, preventPushToHistory?: boolean) {
 		if (new_value != initValue) {
-			if (!ScenePropUtilities.bValueAnimation(new_value)) {
-				new_value = forceArray ? toArray(new_value as number) : new_value
+			// Convert value to transformable-prop (responsivity)
 
-				if (ScenePropUtilities.bPropTransformable(name, value)) {
+			if (SceneUtilitiesExtends.bPropInSceneChildUtilitiesData(name)) {
+				if (SceneUtilitiesExtends.bValueAnimation(new_value)) {
+					new_value.value.from = { type: 'transformable-prop', value: new_value.value.from }
+					new_value.value.to = { type: 'transformable-prop', value: new_value.value.to }
+				} else {
+					new_value = forceArray ? toArray(new_value as number) : new_value
 					new_value = { type: 'transformable-prop', value: new_value }
 				}
+			} else {
+				new_value = forceArray ? toArray(new_value as number) : new_value
 			}
 
 			executor.run(
@@ -178,8 +181,25 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 
 export default React.memo(
 	connect((state: RootState, props: IProp) => {
-		return {
-			value: props.layer ? getProperty(props.layer.props, props.name) : undefined,
+		if (typeof props.layer === 'undefined') return undefined
+
+		let value = props.value
+
+		switch (SceneChildUtilitiesData[props.name].dataType) {
+			case 'props': {
+				value = getProperty(props.layer.props, props.name)
+				break
+			}
+			case 'drawer': {
+				value = getProperty(props.layer.style || {}, props.name)
+				break
+			}
+			case 'settings': {
+				value = getProperty(props.layer, props.name)
+				break
+			}
 		}
+
+		return { value }
 	})(Prop)
 )

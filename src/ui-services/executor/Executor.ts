@@ -136,7 +136,14 @@ class Executor extends Emitter<EventIterceptor> {
 			drawer.setCanvas(canvas)
 		}
 
-		this.drawer = drawer
+		this.drawer = new UIDrawerCanvas(
+			drawer.getScene(),
+			drawer.getCanvas(),
+			drawer.getOptions(),
+			drawer.getRatio(),
+			drawer.getTimeline().getSequence().durate,
+			drawer.getTimeline().getSequence().framerate
+		)
 		this.drawer.setBuffering(true)
 
 		const scene = this.drawer.getScene()

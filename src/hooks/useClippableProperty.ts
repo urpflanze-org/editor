@@ -1,7 +1,10 @@
 import * as React from 'react'
 import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
 import dispatchMessage from '@window/messages/dispatchMessage'
-import { ISceneChildPropData, TPropInputType } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildPropsData'
+import {
+	ISceneChildUtiltiesData,
+	TPropInputType,
+} from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 import { TAnimation } from '@genbs/urpflanze/dist/services/types/animation'
 
 interface ClippedProp {
@@ -14,7 +17,7 @@ let lastClipped: ClippedProp | null = null
 
 function useClippableProperty(
 	ref: React.RefObject<HTMLDivElement>,
-	sceneChildProp: ISceneChildPropData,
+	sceneChildProp: ISceneChildUtiltiesData,
 	currentValue: any,
 	handleChange: (
 		new_value: TAnimation | string | number | [number, number] | boolean,

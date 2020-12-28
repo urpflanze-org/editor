@@ -27,6 +27,9 @@ const Transform: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChild
 			<Prop layer={layer} name="rotateZ" />
 			<Prop layer={layer} name="transformOrigin" />
 
+			<Prop layer={layer} name="perspective" />
+			<Prop layer={layer} name="perspectiveOrigin" />
+
 			{layer.bPrimitive && (
 				<div style={{ textAlign: 'right' }}>
 					<div style={{ display: 'inline-block', verticalAlign: 'middle', cursor: 'pointer' }}>

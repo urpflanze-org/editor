@@ -5,7 +5,7 @@ import Command from '@executor/Command/Command'
 import UIDrawerCanvas from '@ui-services/drawer-canvas/UIDrawerCanvas'
 import Scene from '@genbs/urpflanze/dist/core/Scene'
 import SceneUtilities from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
-import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
+import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
 import SceneChild from '@genbs/urpflanze/dist/core/SceneChild'
 
 interface ICommandCreateFromBufferArgs {

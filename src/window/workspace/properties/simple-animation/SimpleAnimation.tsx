@@ -21,9 +21,9 @@ import {
 import SimpleAnimationInput from '@window/workspace/properties/simple-animation/SimpleAnimationInput'
 
 import { ISequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
-import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
-import { ISceneChildPropData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildPropsData'
-import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
+import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
+import { ISceneChildUtiltiesData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
 
 import { TAnimation, ISimpleAnimation } from '@genbs/urpflanze/dist/services/types/animation'
 import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
@@ -45,8 +45,8 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 	layer,
 	prop_name,
 }: SimpleAnimationPropProps) => {
-	const sceneChildProp: ISceneChildPropData = SceneChildPropsData[prop_name]
-	const _bValueIsAnimation = ScenePropUtilities.bValueAnimation(value)
+	const sceneChildProp: ISceneChildUtiltiesData = SceneChildPropsData[prop_name]
+	const _bValueIsAnimation = SceneUtilitiesExtended.bValueAnimation(value)
 	const initialState = getSimpleAnimationInitialState(value, sceneChildProp, Math.min(2000, sequence.durate))
 	const [state, setState] = React.useState<ISimpleAnimation>(initialState)
 	const [bAdvanceMode, setAdvanceMode] = React.useState<boolean>(
@@ -56,13 +56,13 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 	function set(key: keyof ISimpleAnimation, value: any) {
 		if (key === 'mode') {
 			const mf = MODE_FUNCTIONS[value]
-			setState({ ...state, mode: value, mode_function: mf[0].value })
+			setState({ ...state, mode: value, modeFunction: mf[0].value })
 		} else if (key === 'type') {
 			setState({
 				...state,
 				type: value,
 				mode: value === 'static' ? 'easing' : state.mode,
-				mode_function:
+				modeFunction:
 					value === 'static' && state.mode != 'easing' ? MODE_FUNCTIONS.easing[0].value : state.modeFunction,
 			})
 		} else {

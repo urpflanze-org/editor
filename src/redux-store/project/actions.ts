@@ -12,7 +12,6 @@ import {
 	UPDATE_LAYER_UI_PROPS,
 	SELECT_LAYERS,
 	UPDATE_SEQUENCE,
-	OPEN_LAYER_PROPERTIES,
 	IMPORT_PROJECT_STATE,
 	UPDATE_PROJECT_PROPERTIES,
 } from '@redux-store/project/types'
@@ -21,7 +20,8 @@ import { ISceneChildProps } from '@genbs/urpflanze/dist/core/types/scene-child'
 import { ICommand } from '&types/command'
 import { ProjectState } from '&types/state'
 import { ISequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
-import { IProjectSceneChild, IProjectSceneChildData } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { ISceneChildDrawerData } from '@genbs/urpflanze/dist/services/types/drawer'
 
 export function importProjectState(state: ProjectState): ProjectActionTypes {
 	return {
@@ -98,7 +98,7 @@ export function updateLayerProps(
 	}
 }
 export function updateLayerDataProps(
-	props: Array<{ id: number | string; name: keyof IProjectSceneChildData; value: any }>
+	props: Array<{ id: number | string; name: keyof ISceneChildDrawerData; value: any }>
 ): ProjectActionTypes {
 	return {
 		type: UPDATE_LAYER_UI_PROPS,

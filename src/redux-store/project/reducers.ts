@@ -23,9 +23,12 @@ import { findLayer, toSceneLayers } from '@window/workspace/layers/layer_utiliti
 import app_utilities from 'app_utilities'
 import pups from '@pups/js'
 import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { version } from '@genbs/urpflanze/dist/meta'
+import SceneChildUtilitiesData from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 
 export const initialProjectState: ProjectState = {
 	id: uuidv1(),
+	urpflanze_version: version,
 	name: '',
 	background: pups.color('dark').toString('hex'),
 	color: pups.color('primary').toString('hex'),
@@ -82,9 +85,28 @@ export function projectReducer(state = initialProjectState, action: ProjectActio
 
 			for (let i = 0, len = action.props.length; i < len; i++) {
 				const layer = findLayer(action.props[i].id, Object.values(state.scene))
-				const current_layer_prop = action.props[i]
-				if (layer && layer.props[current_layer_prop.name] != current_layer_prop.value) {
-					layer.props[current_layer_prop.name] = current_layer_prop.value
+				if (layer) {
+					const current_layer_prop = action.props[i]
+					switch (SceneChildUtilitiesData[current_layer_prop.name].dataType) {
+						case 'props': {
+							if (layer.props[current_layer_prop.name] !== current_layer_prop.value) {
+								layer.props[current_layer_prop.name] = current_layer_prop.value
+							}
+							break
+						}
+						case 'drawer': {
+							if (layer.style[current_layer_prop.name] !== current_layer_prop.value) {
+								layer.style[current_layer_prop.name] = current_layer_prop.value
+							}
+							break
+						}
+						case 'settings': {
+							if (layer[current_layer_prop.name] !== current_layer_prop.value) {
+								layer[current_layer_prop.name] = current_layer_prop.value
+							}
+							break
+						}
+					}
 					updated = true
 				}
 			}
@@ -98,7 +120,7 @@ export function projectReducer(state = initialProjectState, action: ProjectActio
 			for (let i = 0, len = action.props.length; i < len; i++) {
 				const layer = findLayer(action.props[i].id, Object.values(state.scene))
 				const current_layer_prop = action.props[i]
-				if (layer && layer.data[current_layer_prop.name] != current_layer_prop.value) {
+				if (layer && layer.data && layer.data[current_layer_prop.name] != current_layer_prop.value) {
 					//@ts-ignore
 					layer.data[current_layer_prop.name] = current_layer_prop.value
 					update = true
@@ -120,6 +142,7 @@ export function projectReducer(state = initialProjectState, action: ProjectActio
 						: selected_layers.length == 1
 						? findLayer(selected_layers[0], Object.values(sceneLayers))
 						: state.open_layer_properties
+
 				pushToHistory(open_layer_properties, state.name)
 
 				return { ...state, scene: sceneLayers, selected_layers, open_layer_properties }
@@ -136,7 +159,7 @@ export function projectReducer(state = initialProjectState, action: ProjectActio
 					? findLayer(action.selecteds[0], Object.values(state.scene))
 					: state.open_layer_properties
 
-			const open_layer_properties = layer && layer.data.visible ? layer : undefined
+			const open_layer_properties = layer && layer.data && layer.data.visible ? layer : undefined
 
 			!action.preventPushToHistory && pushToHistory(open_layer_properties, state.name)
 

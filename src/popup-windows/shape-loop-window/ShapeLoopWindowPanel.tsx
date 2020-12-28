@@ -3,8 +3,8 @@ import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporte
 
 import pups from '@pups/js'
 import Range from '@components/input/Range'
-import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
-import { ISceneChildPropData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildPropsData'
+import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
+import { ISceneChildUtiltiesData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 import Checkbox from '@components/input/Checkbox'
 
 export interface LoopMeta {
@@ -22,7 +22,7 @@ interface ShapeLoopWindowPanelProp {
 }
 
 const ShapeLoopWindowPanel: React.FunctionComponent<ShapeLoopWindowPanelProp> = (props: ShapeLoopWindowPanelProp) => {
-	const inputs: Array<ISceneChildPropData> = [
+	const inputs: Array<ISceneChildUtiltiesData> = [
 		SceneChildPropsData['loop.start'],
 		SceneChildPropsData['loop.end'],
 		SceneChildPropsData['loop.inc'],

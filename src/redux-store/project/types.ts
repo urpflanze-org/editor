@@ -3,7 +3,8 @@ import { ISceneChildProps } from '@genbs/urpflanze/dist/core/types/scene-child'
 import { ICommand } from '&types/command'
 import { ProjectState } from '&types/state'
 import { ISequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
-import { IProjectSceneChild, IProjectSceneChildData } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { ISceneChildDrawerData } from '@genbs/urpflanze/dist/services/types/drawer'
 
 export const IMPORT_PROJECT_STATE = 'IMPORT_PROJECT_STATE'
 
@@ -96,7 +97,7 @@ interface UpdateLayerDataPropsAction {
 	type: typeof UPDATE_LAYER_UI_PROPS
 	props: Array<{
 		id: number | string
-		name: keyof IProjectSceneChildData
+		name: keyof ISceneChildDrawerData
 		value: any
 	}>
 }

@@ -51,6 +51,7 @@ const Layers: React.FunctionComponent<ILayerProps> = ({
 
 	function toggleSelection(event: React.MouseEvent, id: string | number) {
 		const new_selecteds: Array<string | number> = handleSelection(event, id, selecteds, layers_array)
+		console.log('new_selecteds', new_selecteds)
 		selectLayers(new_selecteds)
 	}
 

@@ -45,7 +45,7 @@ class Add extends Command {
 
 			if (this.data.props) {
 				Object.keys(this.data.props).forEach(propKey =>
-					SceneUtilties.setProp(sceneChild, propKey as keyof ISceneChildProps, this.data.props[propKey], scene)
+					SceneUtilties.set(sceneChild, propKey as keyof ISceneChildProps, this.data.props[propKey], scene)
 				)
 			}
 

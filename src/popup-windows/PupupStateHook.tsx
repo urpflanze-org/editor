@@ -22,7 +22,7 @@ export default function (
 			type: '',
 			order: 0,
 			props: {},
-			//@ts-ignore
+			style: {},
 			data: {
 				// highlighted: false,
 				// visible: false,

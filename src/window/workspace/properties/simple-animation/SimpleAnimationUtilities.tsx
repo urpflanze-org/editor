@@ -1,8 +1,8 @@
 import { toNumber } from '@ui-services/utilities/utilies'
-import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
+import { ISceneChildUtiltiesData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 import Easings from '@genbs/urpflanze/dist/services/animation/Easings'
 import { ISimpleAnimation, TAnimation, TEasing } from '@genbs/urpflanze/dist/services/types/animation'
-import { ISceneChildPropData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildPropsData'
+import SceneUtilitiesExtend from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
 
 export const MODE_FUNCTIONS: {
 	sinusoidal: Array<{ key: 'sin' | 'cos'; value: 'sin' | 'cos' }>
@@ -17,11 +17,11 @@ export const MODE_FUNCTIONS: {
 
 export function getSimpleAnimationInitialState(
 	value: any,
-	sceneChildProp: ISceneChildPropData,
+	sceneChildProp: ISceneChildUtiltiesData,
 	defaultDuration = 1000
 ): ISimpleAnimation {
 	const initialValue =
-		ScenePropUtilities.bValueAnimation(value) && (value as TAnimation).type == 'simple' ? value.value : {}
+		SceneUtilitiesExtend.bValueAnimation(value) && (value as TAnimation).type == 'simple' ? value.value : {}
 
 	const initialState: ISimpleAnimation = {
 		from: Array.isArray(sceneChildProp.default) ? toNumber(sceneChildProp.default) : sceneChildProp.default,
@@ -49,7 +49,7 @@ export function getSimpleAnimationInitialState(
 	return initialState
 }
 
-export function sanitizeAnimation(sceneChildProp: ISceneChildPropData, value: ISimpleAnimation): ISimpleAnimation {
+export function sanitizeAnimation(sceneChildProp: ISceneChildUtiltiesData, value: ISimpleAnimation): ISimpleAnimation {
 	// const newValue = {
 	// 	...value,
 	// 	from: sceneChildProp.type == 'color' ? value.from : parseFloat(value.from + ''),

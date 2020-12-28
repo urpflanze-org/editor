@@ -10,6 +10,7 @@ import pups from '@pups/js'
 // pups.palette.addColor(primary2.toString('hex'), 'primary')
 
 import VisualEditorStyle from '@components/VisualEditor/VisualEditorStyle'
+import CodeEditorStyle from '@popup-windows/code-editor-window/CodeEditorStyle'
 
 const promptAnimation = keyframes`
     from { transform: translateX(-50%) scale(1.05); box-shadow: 0 ${pups.ms(-1)} ${pups.ms(1)} rgba(20,20,20,.9); }
@@ -123,9 +124,5 @@ export default createGlobalStyle`
     }
 
     ${VisualEditorStyle}
-
-    .ace_editor {
-        font-family: inherit;
-        line-height: 1.618;
-    }
+    ${CodeEditorStyle}
 `

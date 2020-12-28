@@ -81,7 +81,7 @@ const AppBar: React.FunctionComponent<AppBarProps> = ({ project }: AppBarProps) 
 			<List enableSubMenu={bOpenSubMenu}>
 				<Item>
 					<img
-						src="/assets/images/logo.svg"
+						src="/assets/images/logo-full.svg"
 						style={{ height: '18px', display: 'inline-block', verticalAlign: 'middle' }}
 					/>
 					<SubMenu actions={AppMenuActions} />

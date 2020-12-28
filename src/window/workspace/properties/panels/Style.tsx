@@ -27,7 +27,7 @@ const Style: React.FunctionComponent<ISceneChildPanel & { bGhost: boolean }> = (
 	//     })
 	// }
 
-	const [disableGhost, setDisableGhost] = React.useState<boolean>(layer.data.disableGhost)
+	const [disableGhost, setDisableGhost] = React.useState<boolean>(!!layer.data.disableGhost)
 
 	async function toggleGhost() {
 		const _disableGhost = !disableGhost
@@ -41,7 +41,7 @@ const Style: React.FunctionComponent<ISceneChildPanel & { bGhost: boolean }> = (
 	}
 
 	React.useEffect(() => {
-		layer.data.disableGhost != disableGhost && setDisableGhost(layer.data.disableGhost)
+		layer.data.disableGhost !== disableGhost && setDisableGhost(!!layer.data.disableGhost)
 	}, [layer.id])
 
 	return (
@@ -53,9 +53,9 @@ const Style: React.FunctionComponent<ISceneChildPanel & { bGhost: boolean }> = (
 				valign="center"
 				style={{ width: '100%', overflow: 'hidden' }}
 			>
-				<Prop layer={layer} name="style.fill" />
-				<Prop layer={layer} name="style.stroke" />
-				<Prop layer={layer} name="style.lineWidth" />
+				<Prop layer={layer} name="fill" />
+				<Prop layer={layer} name="stroke" />
+				<Prop layer={layer} name="lineWidth" />
 				<div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
 					{bGhost && (
 						<React.Fragment>

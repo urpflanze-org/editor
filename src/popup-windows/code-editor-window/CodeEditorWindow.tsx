@@ -3,13 +3,6 @@ import { connect } from 'react-redux'
 
 import { RootState } from '&types/state'
 
-import useRef from '@hooks/useRef'
-
-import { findLayer } from '@window/workspace/layers/layer_utilities'
-
-import Icon from '@components/icons/Icon'
-import pups from '@pups/js'
-
 import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
 import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
 import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
@@ -19,8 +12,10 @@ import CodeEditorWindowPanel from '@popup-windows/animate-prop-window/AnimatePro
 
 import PopupStateHook from '@popup-windows/PupupStateHook'
 import AlertPromise from '@components/Alert'
-import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
+import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
 import ShapeBase from '@genbs/urpflanze/dist/core/shapes/ShapeBase'
+import Rect from '@genbs/urpflanze/dist/core/shapes/primitives/Rect'
+import Scene from '@genbs/urpflanze/dist/core/Scene'
 
 interface CodeEditorWindowProps {
 	layer_id?: number | string
@@ -28,19 +23,19 @@ interface CodeEditorWindowProps {
 	scene: { [key: string]: IProjectSceneChild }
 }
 
-const INITAL = `(${ScenePropUtilities.RAW_ARGUMENTS}) => {
+const INITIAL = `(${SceneUtilitiesExtended.RAW_ARGUMENTS}) => {
 
 }`
-const INITAL_WITH_PARENT = `(${ScenePropUtilities.RAW_ARGUMENTS_WITH_PARENT}) => {
+const INITIAL_WITH_PARENT = `(${SceneUtilitiesExtended.RAW_ARGUMENTS_WITH_PARENT}) => {
 
 }`
 
 const CodeEditorWindow: React.FunctionComponent<CodeEditorWindowProps> = (props: CodeEditorWindowProps) => {
-	const [initialCodeState, setInitialCodeState] = React.useState<string>(INITAL)
+	const [initialCodeState, setInitialCodeState] = React.useState<string>(INITIAL)
 	const [copy, setCopy] = React.useState<{ prop_name: string; value: string | null } | null>(null)
 	const [state, setState] = PopupStateHook('code', props.scene, props.layer_id, props.prop_name)
 	const [currentRawCode, setCurrentRawCode] = React.useState<IRawState>({
-		raw: INITAL,
+		raw: INITIAL,
 		state: null,
 	})
 
@@ -66,8 +61,8 @@ const CodeEditorWindow: React.FunctionComponent<CodeEditorWindowProps> = (props:
 				state.layer.props[state.prop_name].type === 'raw'
 					? state.layer.props[state.prop_name].value.raw
 					: state.layer.bUseParent
-					? INITAL_WITH_PARENT
-					: INITAL
+					? INITIAL_WITH_PARENT
+					: INITIAL
 
 			setInitialCodeState(newInitialCodeState)
 		}
@@ -107,6 +102,9 @@ const CodeEditorWindow: React.FunctionComponent<CodeEditorWindowProps> = (props:
 			if (layer.bUseParent) {
 				prop_arguments.parent = ShapeBase.EMPTY_PROP_ARGUMENTS
 			}
+			prop_arguments.shape = new Rect({})
+			prop_arguments.shape.scene = new Scene()
+
 			t(prop_arguments)
 			return true
 		} catch (e) {

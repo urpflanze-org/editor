@@ -31,12 +31,11 @@ const VertexCallbackWindow: React.FunctionComponent<VertexCallbackWindowProps> =
 
 	React.useEffect(() => {
 		if (layer && layer.id && (layer.id + '').length > 0) {
-			const newInitialReteState =
-				layer.id && layer.props.vertexCallback ? (layer.props.vertexCallback.state as string) : null
+			const newInitialReteState = layer.id && layer.vertexCallback ? (layer.vertexCallback.state as string) : null
 
 			setInitialReteState(newInitialReteState)
 		}
-	}, [layer?.id, layer?.props.vertexCallback])
+	}, [layer?.id, layer?.vertexCallback])
 
 	React.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
@@ -49,7 +48,7 @@ const VertexCallbackWindow: React.FunctionComponent<VertexCallbackWindowProps> =
 		window.addEventListener('keydown', handleKeyDown, { passive: false })
 
 		return () => window.removeEventListener('keydown', handleKeyDown)
-	}, [layer?.id, layer?.props.vertexCallback, reteAnimationRef.current])
+	}, [layer?.id, layer?.vertexCallback, reteAnimationRef.current])
 
 	function save() {
 		if (layer && (layer.id + '').length > 0) {
@@ -59,7 +58,7 @@ const VertexCallbackWindow: React.FunctionComponent<VertexCallbackWindowProps> =
 				value: {
 					...reteAnimationRef.current,
 				},
-				prev_value: layer.props.vertexCallback,
+				prev_value: layer.vertexCallback,
 			}
 			window.opener.postMessage({ event: 'set-popup-window-value', value: data }, location.origin)
 		}

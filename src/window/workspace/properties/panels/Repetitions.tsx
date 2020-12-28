@@ -8,14 +8,19 @@ import Panel, { ISceneChildPanel } from '@window/workspace/properties/Panel'
 import Prop from '@window/workspace/properties/Prop'
 import { toArray, toNumber, clampArray } from '@ui-services/utilities/utilies'
 import { clamp } from '@genbs/urpflanze/dist/Utilites'
-import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
+import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
 import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { TTransformable } from '@genbs/urpflanze/dist/services/types/scene-utilities'
+import SceneChildUtilitiesData from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 
 const REPETITION_TYPES = [
 	{ key: 'Matrix', value: ERepetitionType.Matrix },
 	{ key: 'Ring', value: ERepetitionType.Ring },
 	// { key: 'Random', value: ERepetitionType.Random }
 ]
+
+const MAX_REPETITIONS = SceneChildUtilitiesData.repetitions.max as number
+const MAX_DISTANCE = SceneChildUtilitiesData.distance.max as number
 
 function getRepetitionType(layer: IProjectSceneChild): ERepetitionType {
 	return Array.isArray(layer.props.repetitions) ? ERepetitionType.Matrix : ERepetitionType.Ring
@@ -37,21 +42,30 @@ const Repetition: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChil
 	}, [layer])
 
 	function setRepetition(type: ERepetitionType) {
-		if (type != repetition_type) {
+		if (type !== repetition_type) {
 			const _repetitions =
-				type == ERepetitionType.Matrix
-					? clampArray(1, 20, repetitions as number | Array<number>)
-					: clamp(1, 100, toNumber(repetitions as number | Array<number>))
+				type == ERepetitionType.Matrix // '==' is
+					? clampArray(1, Math.round(MAX_REPETITIONS / 5), toArray(repetitions as number | Array<number>))
+					: clamp(1, MAX_REPETITIONS, toNumber(repetitions as number | Array<number>))
 			// const _randomSeed: string | undefined = type == ERepetitionType.Random ? randomSeed : undefined
 
-			const props = [{ id: layer.id, name: 'repetitions', value: _repetitions, prev_value: repetitions }]
+			const props: Array<any> = [{ id: layer.id, name: 'repetitions', value: _repetitions, prev_value: repetitions }]
 
-			if (!ScenePropUtilities.bValueAnimation(distance)) {
+			if (!SceneUtilitiesExtended.bValueAnimation(distance)) {
+				const currentDistance = SceneUtilitiesExtended.bValueTransformable(distance)
+					? (distance as TTransformable).value
+					: distance
 				const _distance =
 					type == ERepetitionType.Matrix
-						? clampArray(-100, 100, distance as number | Array<number>)
-						: clamp(-100, 100, toNumber(distance as number | Array<number>))
-				props.push({ id: layer.id, name: 'distance', value: _distance, prev_value: distance })
+						? clampArray(-MAX_DISTANCE, MAX_DISTANCE, toArray(currentDistance as number | Array<number>))
+						: clamp(-MAX_DISTANCE, MAX_DISTANCE, toNumber(currentDistance as number | Array<number>))
+
+				props.push({
+					id: layer.id,
+					name: 'distance',
+					value: { type: 'transformable-prop', value: _distance },
+					prev_value: distance,
+				})
 			}
 
 			executor.run('set-prop', props)
@@ -71,14 +85,14 @@ const Repetition: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChil
 		if (repetition_type == ERepetitionType.Matrix) {
 			const _repetitions = toArray(repetitions as number | Array<number>)
 			const new_distance = [
-				_repetitions[0] <= 1 ? 0 : 200 / _repetitions[0],
-				_repetitions[1] <= 1 ? 0 : 200 / _repetitions[1],
+				_repetitions[0] <= 1 ? 0 : 100 / _repetitions[0],
+				_repetitions[1] <= 1 ? 0 : 100 / _repetitions[1],
 			]
 
 			executor.run('set-prop', {
 				id: layer.id,
 				name: 'distance',
-				value: new_distance,
+				value: { type: 'transformable-prop', value: new_distance },
 				prev_value: distance,
 			})
 		} else {
@@ -88,21 +102,23 @@ const Repetition: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChil
 				executor.run('set-prop', { id: layer.id, name: 'distance', value: 0, prev_value: distance })
 			} else {
 				const result = await executor.ask('single-bounding', { id: layer.id })
-				const new_distance = _repetitions <= 1 ? 0 : (result.width * 100) / (Math.PI / (_repetitions + 1))
+				const new_distance = _repetitions <= 1 ? 0 : (result.width * 50) / (Math.PI / (_repetitions + 1))
 
 				executor.run('set-prop', {
 					id: layer.id,
 					name: 'distance',
-					value: clamp(-100, 100, new_distance),
+					value: { type: 'transformable-prop', value: clamp(-100, 100, new_distance) },
 					prev_value: distance,
 				})
 			}
 		}
 	}
 
+	console.log('repetition_type', repetition_type)
+
 	return (
 		<Panel name="Repetition" icon="repetitions" expandable={true} expanded={true}>
-			{!ScenePropUtilities.bValueAnimation(repetitions) && (
+			{!SceneUtilitiesExtended.bValueAnimation(repetitions) && (
 				<Radio selected={repetition_type} values={REPETITION_TYPES} name="Type" onChange={setRepetition} />
 			)}
 
@@ -121,7 +137,7 @@ const Repetition: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChil
                 <small style={{ textAlign: 'right', cursor: 'pointer' }} onClick={() => distribute()}>distribute</small>
             )} */}
 
-			{!ScenePropUtilities.bValueAnimation(repetitions) && (
+			{!SceneUtilitiesExtended.bValueAnimation(repetitions) && (
 				<small style={{ textAlign: 'right', cursor: 'pointer' }} onClick={() => distribute()}>
 					Distribute
 				</small>

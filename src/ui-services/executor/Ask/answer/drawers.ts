@@ -18,7 +18,7 @@ export const setOffsets = (comunication: IComunication, executor: Executor): voi
 	const drawer = executor.getDrawer()
 	const { scale, translate } = comunication.args
 
-	// drawer.setOption({ scale, translate })
+	drawer.setOption({ scale, translate })
 
 	drawer.redraw()
 }

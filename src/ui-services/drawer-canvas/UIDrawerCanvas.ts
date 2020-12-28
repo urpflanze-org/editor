@@ -152,6 +152,22 @@ class UIDrawerCanvas extends DrawerCanvas<IUIDrawerCanvasOptions> {
 	}
 
 	/**
+	 * Set draw option
+	 *
+	 * @template K
+	 * @param {(K | IDrawerOptions)} name
+	 * @param {Required<IDrawerOptions>[K]} [value]
+	 * @memberof CanvasDrawer
+	 */
+	public setOption<K extends keyof IUIDrawerCanvasOptions>(
+		name: K | IUIDrawerCanvasOptions,
+		value?: Required<IUIDrawerCanvasOptions>[K]
+	): void {
+		//@ts-ignore
+		super.setOption(name as keyof IDrawerCanvasOptions, value)
+	}
+
+	/**
 	 * draw scene
 	 *
 	 * @static
@@ -163,6 +179,8 @@ class UIDrawerCanvas extends DrawerCanvas<IUIDrawerCanvasOptions> {
 		const start_time = now()
 		const scene = this.scene as Scene
 		const context = this.context as CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
+
+		if (!context) return 0
 
 		context.globalCompositeOperation = 'source-over'
 

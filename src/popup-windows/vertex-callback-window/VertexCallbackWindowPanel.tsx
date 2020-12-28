@@ -2,8 +2,9 @@ import * as React from 'react'
 
 import pups from '@pups/js'
 import Range from '@components/input/Range'
-import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
-import { ISceneChildPropData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildPropsData'
+import SceneChildUtilitiesData, {
+	ISceneChildUtiltiesData,
+} from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 import Checkbox from '@components/input/Checkbox'
 import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
@@ -24,10 +25,10 @@ interface VertexCallbackWindowWindowPanelProp {
 const VertexCallbackWindowWindowPanel: React.FunctionComponent<VertexCallbackWindowWindowPanelProp> = (
 	props: VertexCallbackWindowWindowPanelProp
 ) => {
-	const inputs: Array<ISceneChildPropData> = [
-		SceneChildPropsData['loop.start'],
-		SceneChildPropsData['loop.end'],
-		SceneChildPropsData['loop.inc'],
+	const inputs: Array<ISceneChildUtiltiesData> = [
+		SceneChildUtilitiesData['loop.start'],
+		SceneChildUtilitiesData['loop.end'],
+		SceneChildUtilitiesData['loop.inc'],
 	]
 
 	return (

@@ -12,7 +12,7 @@ import { canBeSorted, find, hasSameParent } from '@window/workspace/layers/layer
 import dispatchMessage from '@window/messages/dispatchMessage'
 
 import { PossibleCommand } from '@executor/Command/CommandHistory'
-import { IProjectSceneChild, IProjectSceneChildProps } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSceneChild, TProjectSceneChildProps } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 interface LayerActionProps {
 	selecteds: Array<string | number>
@@ -36,8 +36,8 @@ const ShapesList = [
 
 function prepareProps(
 	layer_id: string,
-	props: IProjectSceneChildProps,
-	oldprops: IProjectSceneChildProps
+	props: TProjectSceneChildProps,
+	oldprops: TProjectSceneChildProps
 ): Array<{ id: string; name: string; value: any; prev_value: any }> {
 	const result: Array<{ id: string; name: string; value: any; prev_value: any }> = []
 

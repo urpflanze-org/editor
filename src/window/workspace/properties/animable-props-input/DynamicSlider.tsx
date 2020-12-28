@@ -8,7 +8,7 @@ import Tooltip from '@components/Tooltip'
 import SimpleAnimationProp from '@window/workspace/properties/simple-animation/SimpleAnimation'
 import Modal from '@components/Modal'
 import Slider from '@components/input/Slider'
-import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
+import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
 import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 
 interface IDynamicSliderProp {
@@ -36,7 +36,7 @@ const DynamicSlider: React.FunctionComponent<IDynamicSliderProp> = ({
 }: IDynamicSliderProp) => {
 	const [bOpenSimpleAnimation, setBOpenSimpleAnimation] = React.useState<boolean>(false)
 
-	const bAnimation = ScenePropUtilities.bValueAnimation(value)
+	const bAnimation = SceneUtilitiesExtended.bValueAnimation(value)
 
 	function handleChange(new_value: any, mode: TSliderMode) {
 		onChange(new_value, mode)

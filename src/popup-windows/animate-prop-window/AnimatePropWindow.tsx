@@ -12,7 +12,7 @@ import AnimatePropWindowVisualEditor from '@popup-windows/animate-prop-window/An
 import Icon from '@components/icons/Icon'
 import pups from '@pups/js'
 
-import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
+import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
 import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
 import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
 import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
@@ -56,7 +56,7 @@ const AnimatePropWindow: React.FunctionComponent<AnimatePropWindowProps> = (prop
 			const newInitialReteState =
 				state.layer &&
 				state.prop_name &&
-				ScenePropUtilities.bValueAnimation(state.layer.props[state.prop_name]) &&
+				SceneUtilitiesExtended.bValueAnimation(state.layer.props[state.prop_name]) &&
 				state.layer.props[state.prop_name].type === 'raw'
 					? state.layer.props[state.prop_name].value.state
 					: null
@@ -77,7 +77,7 @@ const AnimatePropWindow: React.FunctionComponent<AnimatePropWindowProps> = (prop
 	function save() {
 		if (state.layer && state.prop_name) {
 			const value = {
-				raw: `(${ScenePropUtilities.RAW_ARGUMENTS}) => ${reteAnimation?.raw}`,
+				raw: `(${SceneUtilitiesExtended.RAW_ARGUMENTS}) => ${reteAnimation?.raw}`,
 				state: reteAnimation?.state,
 			}
 			const data = {

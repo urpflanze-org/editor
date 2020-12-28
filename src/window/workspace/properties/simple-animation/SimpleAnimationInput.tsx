@@ -1,20 +1,21 @@
 import * as React from 'react'
 import pups from '@pups/js'
 
-import { ISceneChildPropData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildPropsData'
-import { ISimpleAnimation } from '@genbs/urpflanze/dist/services/types/animation'
+import { ISceneChildUtiltiesData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 
 import Color from '@components/input/Color'
 import Range from '@components/input/Range'
 import Slider from '@components/input/Slider'
 import MultipleRange from '@components/input/MultipleRange'
 import Icon from '@components/icons/Icon'
+import { ISimpleAnimation } from '@genbs/urpflanze/dist/services/types/animation'
+import { TTransformable } from '@genbs/urpflanze/dist/services/types/scene-utilities'
 
 interface ISimpleAnimationInputProp {
-	value: string | number | Array<number>
+	value: TTransformable | string | number | Array<number>
 	name: keyof ISimpleAnimation
 	onChange: (key: keyof ISimpleAnimation, value: ISimpleAnimation[keyof ISimpleAnimation]) => void
-	sceneChildProp: ISceneChildPropData
+	sceneChildProp: ISceneChildUtiltiesData
 }
 
 const SimpleAnimationInput: React.FunctionComponent<ISimpleAnimationInputProp> = ({
@@ -35,7 +36,7 @@ const SimpleAnimationInput: React.FunctionComponent<ISimpleAnimationInputProp> =
 		case 'range':
 			return (
 				<Range
-					value={value as number}
+					value={(typeof value === 'object' ? (value as TTransformable).value : value) as number}
 					onChange={(value, p) => p === 'none' && onChange(name, value)}
 					min={sceneChildProp.min as number}
 					max={sceneChildProp.max as number}
@@ -55,7 +56,7 @@ const SimpleAnimationInput: React.FunctionComponent<ISimpleAnimationInputProp> =
 					/>
 					<MultipleRange
 						locked={locked}
-						value={value as Array<number>}
+						value={(typeof value === 'object' ? (value as TTransformable).value : value) as Array<number>}
 						onChange={(value, p) => p === 'none' && onChange(name, value)}
 						min={sceneChildProp.min as number}
 						max={sceneChildProp.max as number}

@@ -11,7 +11,7 @@ import Tooltip from '@components/Tooltip'
 
 import SimpleAnimationProp from '@window/workspace/properties/simple-animation/SimpleAnimation'
 import Modal from '@components/Modal'
-import ScenePropUtilities from '@genbs/urpflanze/dist/services/scene-utilities/ScenePropUtilities'
+import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
 import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 import { TAnimation } from '@genbs/urpflanze/dist/services/types/animation'
 
@@ -46,7 +46,7 @@ const DynamicRange: React.FunctionComponent<IDynamicRangeProp> = ({
 	const [bOpenSimpleAnimation, setBOpenSimpleAnimation] = React.useState<boolean>(false)
 	const [locked, setLocked] = React.useState<boolean>(Array.isArray(value) && value[0] === value[1])
 
-	const bAnimation = ScenePropUtilities.bValueAnimation(value)
+	const bAnimation = SceneUtilitiesExtended.bValueAnimation(value)
 
 	const can_lock_unlock = true
 	const multiple = type == 'multiple-range'
@@ -98,7 +98,10 @@ const DynamicRange: React.FunctionComponent<IDynamicRangeProp> = ({
 					{(value as TAnimation).type == 'simple' ? (
 						<small>
 							<i>
-								{value.value.from.toString()} → {value.value.to.toString()} in{' '}
+								{SceneUtilitiesExtended.bValueTransformable(value.value.from)
+									? value.value.from.value
+									: value.value.from}{' '}
+								→{SceneUtilitiesExtended.bValueTransformable(value.value.to) ? value.value.to.value : value.value.to} in{' '}
 								{Math.round(value.value.durate / 100) / 10}s
 							</i>
 						</small>

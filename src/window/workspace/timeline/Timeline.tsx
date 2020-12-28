@@ -30,7 +30,7 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 	bTimelineStarted,
 }: TimelineProps) => {
 	const DURATES = new Array(15).fill(0).map((v, i) => ({ key: i + 1 + 's', value: i + 1 }))
-	// const FRAMERATES = [15, 30, 60, 120].map((v) => ({ key: v, value: v }))
+	const FRAMERATES = [10, 24, 30, 60, 120, 144].map(v => ({ key: v, value: v }))
 
 	const [sequenceState, setSequenceState] = React.useState<SequenceState>({
 		current_frame: 0,
@@ -45,14 +45,14 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 			setSequenceState(data as SequenceState)
 		})
 
-		// const itv = setInterval(async () => {
-		// 	const _renderedFrames = await executor.ask('get-rendered-frames')
+		const itv = setInterval(async () => {
+			const _renderedFrames = await executor.ask('get-rendered-frames')
 
-		// 	setRenderedFrames(_renderedFrames)
-		// }, 500)
+			setRenderedFrames(_renderedFrames)
+		}, 500)
 
 		return () => {
-			// clearInterval(itv)
+			clearInterval(itv)
 		}
 	}, [])
 
@@ -97,10 +97,18 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 					placeholder="durate"
 					onChange={v => executor.ask('set-timeline-duration', v * 1000)}
 				/>
-				{/* <Tooltip title="FPS">
-                    <Icon name="time" />
-                </Tooltip>
-                <Select position="top" options={FRAMERATES} value={sequence.framerate} placeholder="framerate" onChange={(v) => executor.ask('set-timeline-framerate', v)} /> */}
+				<Tooltip title="FPS">
+					<Icon name="time" />
+				</Tooltip>
+				<Select
+					position="top"
+					options={FRAMERATES}
+					value={sequence.framerate}
+					placeholder="framerate"
+					onChange={v => executor.ask('set-timeline-framerate', v)}
+				/>
+
+				<div>Frames: {Math.round((sequence.durate / 1000) * sequence.framerate)}</div>
 			</div>
 
 			<Bar

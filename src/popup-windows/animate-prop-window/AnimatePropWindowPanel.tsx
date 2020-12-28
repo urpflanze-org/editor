@@ -5,7 +5,7 @@ import pups from '@pups/js'
 
 import SceneTree from '@popup-windows/animate-prop-window/SceneTree'
 import Select from '@components/input/Select'
-import SceneChildPropsData from '@ui-services/utilities/SceneChildPropsData'
+import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
 
 interface AnimatePropWindowPanelProp {
 	scene: { [key: string]: IProjectSceneChild }

@@ -10,7 +10,7 @@ export interface AppMessage {
 
 export type AppMessages = { [id: number]: AppMessage }
 
-export type TOpenModal = 'render-image' | 'render-animation' | 'import-svg' | undefined
+export type TOpenModal = 'render-image' | 'render-animation' | 'import-svg' | 'generate-gcode' | undefined
 
 export interface AppState {
 	messages: AppMessages

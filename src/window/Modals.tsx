@@ -8,6 +8,7 @@ import Modal from '@components/Modal'
 
 import RenderImage from 'modals/render/render-image/RenderImage'
 import RenderAnimation from 'modals/render/render-animation/RenderAnimation'
+import GenerateGCODE from '@modals/generateGCODE/GenerateGCODE'
 // import SVGImport from '@modals/SVGImport'
 
 interface ModalsProps {
@@ -23,6 +24,8 @@ const Modals: React.FunctionComponent<ModalsProps> = ({ modal, modal_props, clos
 				return <RenderImage {...modal_props} closeModal={closeModal} />
 			case 'render-animation':
 				return <RenderAnimation {...modal_props} closeModal={closeModal} />
+			case 'generate-gcode':
+				return <GenerateGCODE {...modal_props} closeModal={closeModal} />
 			// case 'import-svg':
 			// 	return <SVGImport {...modal_props} closeModal={closeModal} />
 		}

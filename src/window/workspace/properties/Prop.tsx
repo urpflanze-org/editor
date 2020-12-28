@@ -109,9 +109,11 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 			Component = (
 				<DynamicRange
 					// value={typeof initValue == 'number' || Array.isArray(initValue) ? copy(bAngle ? toDegrees(initValue as number) : initValue) : initValue}
-					value={typeof initValue == 'number' || Array.isArray(initValue) ? copy(initValue) : initValue}
+					// value={typeof initValue === 'number' || Array.isArray(initValue) ? copy(initValue) : initValue}
+					value={copy(initValue)}
 					bDefaultValue={bDefaultValue}
 					canBArray={sceneChildProp.canBArray || false}
+					initialArray={sceneChildProp.initialArray || false}
 					min={sceneChildProp.min as number}
 					max={(name == 'repetitions' ? (input_type == 'multiple-range' ? 20 : 100) : sceneChildProp.max) as number}
 					step={sceneChildProp.step as number}

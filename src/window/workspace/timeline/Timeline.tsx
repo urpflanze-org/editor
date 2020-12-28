@@ -11,6 +11,7 @@ import Bar from '@window/workspace/timeline/Bar'
 import Select from '@components/input/Select'
 import Tooltip from '@components/Tooltip'
 import { IProjectSequence } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import Log, { LogLevel } from 'Log'
 
 interface SequenceState {
 	current_frame: number
@@ -45,14 +46,16 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 			setSequenceState(data as SequenceState)
 		})
 
-		const itv = setInterval(async () => {
-			const _renderedFrames = await executor.ask('get-rendered-frames')
+		if (Log.level < LogLevel.ComunicationResponse) {
+			const itv = setInterval(async () => {
+				const _renderedFrames = await executor.ask('get-rendered-frames')
 
-			setRenderedFrames(_renderedFrames)
-		}, 500)
+				setRenderedFrames(_renderedFrames)
+			}, 500)
 
-		return () => {
-			clearInterval(itv)
+			return () => {
+				clearInterval(itv)
+			}
 		}
 	}, [])
 

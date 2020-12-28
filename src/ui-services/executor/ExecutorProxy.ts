@@ -52,7 +52,7 @@ class ExecutorProxy extends Emitter<ExecutorEvents> {
 			this.executor.attach('event', event => {
 				if (event) {
 					const response: IEventResponse = { type: 'event', ...event }
-					this.dispatch(response.event as keyof ExecutorEvents, response.data ? JSON.parse(response.data) : undefined)
+					this.dispatch(response.event as keyof ExecutorEvents, response.data)
 				}
 			})
 		} else {
@@ -205,10 +205,11 @@ class ExecutorProxy extends Emitter<ExecutorEvents> {
 	 */
 	private onDeamonMessage(e: MessageEvent) {
 		const message: IMessage = e.data
+
 		// if event is receved (executor events), dispatch it
 		if (message.type == 'event') {
 			const response: IEventResponse = message as IEventResponse
-			this.dispatch(response.event as keyof ExecutorEvents, response.data ? JSON.parse(response.data) : undefined)
+			this.dispatch(response.event as keyof ExecutorEvents, response.data)
 		} // handle comunication
 		else {
 			const response: IComunicationResponse = message as IComunicationResponse
@@ -258,7 +259,7 @@ class ExecutorProxy extends Emitter<ExecutorEvents> {
 	private proxyComunicationResponse(response: IComunicationResponse | IEffectResponse) {
 		Log.log('ComunicationResponse', response.deferred_id, response)
 		// Service worker cominicate with json so convert response data to object
-		if (response && response.data && typeof response.data == 'string') response.data = JSON.parse(response.data)
+		// if (response && response.data && typeof response.data == 'string') response.data = JSON.parse(response.data)
 
 		// find deferred, resolve and remove from promises
 		for (let i = 0, len = this.response_promises.length; i < len; i++) {

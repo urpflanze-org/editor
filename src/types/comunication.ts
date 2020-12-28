@@ -18,7 +18,7 @@ export interface IComunication {
 export interface IMessage {
 	// Service Worker message
 	type: TResponseType
-	data?: string
+	data?: any
 }
 
 export interface IComunicationResponse extends IMessage {

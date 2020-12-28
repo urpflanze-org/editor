@@ -23,6 +23,7 @@ interface IDynamicRangeProp {
 	bDefaultValue: boolean
 	min: number
 	canBArray: boolean
+	initialArray: boolean
 	animable?: boolean
 	max: number
 	step: number
@@ -40,11 +41,12 @@ const DynamicRange: React.FunctionComponent<IDynamicRangeProp> = ({
 	type,
 	animable,
 	layer,
+	initialArray,
 	onChange,
 	bDefaultValue,
 }: IDynamicRangeProp) => {
 	const [bOpenSimpleAnimation, setBOpenSimpleAnimation] = React.useState<boolean>(false)
-	const [locked, setLocked] = React.useState<boolean>(Array.isArray(value) && value[0] === value[1])
+	const [locked, setLocked] = React.useState<boolean>(!initialArray && Array.isArray(value) && value[0] === value[1])
 
 	const bAnimation = SceneUtilitiesExtended.bValueAnimation(value)
 

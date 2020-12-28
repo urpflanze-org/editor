@@ -114,8 +114,6 @@ const Repetition: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChil
 		}
 	}
 
-	console.log('repetition_type', repetition_type)
-
 	return (
 		<Panel name="Repetition" icon="repetitions" expandable={true} expanded={true}>
 			{!SceneUtilitiesExtended.bValueAnimation(repetitions) && (

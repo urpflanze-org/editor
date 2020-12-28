@@ -62,7 +62,7 @@ const Drawer: React.FunctionComponent<IDrawerProps> = ({
 
 				<DrawerLines />
 
-				<DrawerResolution resolution={resolution} setResolution={setResolution} ratio={ratio} size={size} />
+				{/* <DrawerResolution resolution={resolution} setResolution={setResolution} ratio={ratio} size={size} /> */}
 
 				<DrawerRatio ratio={ratio} size={size} resolution={resolution} />
 			</Grid>

@@ -91,7 +91,6 @@ const FileActions: SubMenuActions = [
 			)
 
 			const project_json = await executor.ask('export-json', { name })
-
 			// project.name = name
 			// const project_json = new JSONExporter().parse(project)
 			const utf8encoder = new TextEncoder()

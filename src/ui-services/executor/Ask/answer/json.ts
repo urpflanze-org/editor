@@ -7,9 +7,9 @@ import { ProjectState } from '&types/state'
 import Log from 'Log'
 
 export function exportJSON(comunication: IComunication, executor: Executor): string {
-	// const project: ProjectState = comunication.args
+	const { name } = comunication.args
 
-	const data = JSONExporter.parse(executor.getDrawer())
+	const data = JSONExporter.parse(executor.getDrawer(), name)
 
 	return data
 }
@@ -32,7 +32,6 @@ export function importJSON(comunication: IComunication, executor: Executor): Pro
 		project.selected_layers = []
 		project.history = []
 
-		console.log(drawer, project)
 		executor.sendEvent('project:init', project)
 		Log.log('Temporany', 'importJSON init', project)
 

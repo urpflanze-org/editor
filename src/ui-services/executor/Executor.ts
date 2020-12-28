@@ -67,7 +67,7 @@ class Executor extends Emitter<EventIterceptor> {
 	 * @memberof Executor
 	 */
 	public sendEvent(event: string, data: any): void {
-		this.dispatch('event', { event, data: data ? JSON.stringify(data) : undefined })
+		this.dispatch('event', { event, data })
 	}
 
 	/**
@@ -238,19 +238,19 @@ class Executor extends Emitter<EventIterceptor> {
 
 				if (execution_effects.scene_layers_update) {
 					response.effect = 'scene:update-layers'
-					response.data = JSON.stringify({
+					response.data = {
 						// layers: ILayerExport.export(this.scene, this.drawer),
 						layers: Object.values(JSONExporter.parseAsProject(this.drawer).scene),
 						selecteds: execution_effects.select_layer ? execution_effects.select_layer : undefined,
-					})
+					}
 				}
 				if (execution_effects.scene_child_prop_update) {
 					response.effect = 'scene:update-scene_child-prop'
-					response.data = JSON.stringify(execution_effects.scene_child_prop_update)
+					response.data = execution_effects.scene_child_prop_update
 				}
 				if (execution_effects.scene_child_ui_prop_update) {
 					response.effect = 'scene:update-scene_child-ui-prop'
-					response.data = JSON.stringify(execution_effects.scene_child_ui_prop_update)
+					response.data = execution_effects.scene_child_ui_prop_update
 				}
 
 				return response

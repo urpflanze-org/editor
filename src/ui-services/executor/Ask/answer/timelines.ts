@@ -25,7 +25,7 @@ export const changeState = (comunication: IComunication, executor: Executor): vo
 export const setDuration = (comunication: IComunication, executor: Executor): void => {
 	const drawer = executor.getDrawer()
 	const time = comunication.args
-	drawer.getTimeline().setDurate(time)
+	drawer.getTimeline().setDuration(time)
 }
 
 export const setFramerate = (comunication: IComunication, executor: Executor): void => {

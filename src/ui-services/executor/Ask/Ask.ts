@@ -7,10 +7,11 @@ import * as drawers from '@executor/Ask/answer/drawers'
 import * as sceneChild from '@executor/Ask/answer/sceneChild'
 
 import toolbar from '@executor/Ask/answer/toolbar'
-import { exportJSON, importJSON, appendJSON } from '@ui-services/executor/Ask/answer/json'
+import { exportJSON, importJSON, appendJSON, exportGCODE } from '@ui-services/executor/Ask/answer/export-import'
 import { ICommandEffects } from '&types/command'
 
 export type PossibleAnswer =
+	| 'export-gcode'
 	| 'export-json'
 	| 'import-json'
 	| 'append-json'
@@ -47,6 +48,7 @@ type AskEffectCallback = (args: any) => ICommandEffects
 
 export const answers: Record<PossibleAnswer, AskCallback | [AskCallback, ...Array<string | AskEffectCallback>]> = {
 	'export-json': exportJSON,
+	'export-gcode': exportGCODE,
 	'import-json': importJSON,
 	'append-json': appendJSON,
 

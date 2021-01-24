@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import executor from '@redux-store/executor'
+import { connect } from 'react-redux'
 import { ERepetitionType } from '@genbs/urpflanze/dist/core/types/scene-child'
 import Radio from '@components/input/Radio'
 
@@ -12,6 +13,7 @@ import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utiliti
 import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
 import { TTransformable } from '@genbs/urpflanze/dist/services/types/scene-utilities'
 import SceneChildUtilitiesData from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+import { RootState } from '&types/state'
 
 const REPETITION_TYPES = [
 	{ key: 'Matrix', value: ERepetitionType.Matrix },
@@ -27,7 +29,9 @@ function getRepetitionType(layer: IProjectSceneChild): ERepetitionType {
 	// : layer.props.randomSeed ? ERepetitionType.Random : ERepetitionType.Ring
 }
 
-const Repetition: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChildPanel) => {
+const Repetition: React.FunctionComponent<ISceneChildPanel & { projectRatio: number }> = (
+	props: ISceneChildPanel & { projectRatio: number }
+) => {
 	const layer = props.layer
 
 	let repetitions = layer.props.repetitions || 1
@@ -85,8 +89,8 @@ const Repetition: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChil
 		if (repetition_type == ERepetitionType.Matrix) {
 			const _repetitions = toArray(repetitions as number | Array<number>)
 			const new_distance = [
-				_repetitions[0] <= 1 ? 0 : 100 / _repetitions[0],
 				_repetitions[1] <= 1 ? 0 : 100 / _repetitions[1],
+				_repetitions[0] <= 1 ? 0 : 100 / _repetitions[0],
 			]
 
 			executor.run('set-prop', {
@@ -152,4 +156,8 @@ const Repetition: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChil
 	)
 }
 
-export default React.memo(Repetition)
+export default React.memo(
+	connect((state: RootState) => ({
+		projectRatio: state.project.ratio,
+	}))(Repetition)
+)

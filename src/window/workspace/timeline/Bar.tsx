@@ -7,7 +7,7 @@ import useRect from '@hooks/useRect'
 import useDraggable from '@hooks/useDraggable'
 
 interface BarProps {
-	sequence_durate: number
+	sequence_duration: number
 	sequence_framerate: number
 	current_time: number
 	steps: number
@@ -21,7 +21,7 @@ function toTime(v: number): string {
 }
 
 const Bar: React.FunctionComponent<BarProps> = ({
-	sequence_durate,
+	sequence_duration,
 	sequence_framerate,
 	current_time,
 	renderedFrames,
@@ -29,13 +29,13 @@ const Bar: React.FunctionComponent<BarProps> = ({
 	enableMoveTime,
 	onChange,
 }: BarProps) => {
-	const frames = Math.floor((sequence_durate / 1000) * sequence_framerate)
+	const frames = Math.floor((sequence_duration / 1000) * sequence_framerate)
 	const barRef = React.useRef<HTMLDivElement>() as React.RefObject<HTMLDivElement>
 	const { width } = useRect(barRef)
 
 	const Steps = new Array(steps).fill(0).map((v, i) => (
-		<span key={i} onClick={() => handleChange((i * sequence_durate) / steps)} style={{ left: i * (100 / steps) + '%' }}>
-			{toTime((i * sequence_durate) / steps)}
+		<span key={i} onClick={() => handleChange((i * sequence_duration) / steps)} style={{ left: i * (100 / steps) + '%' }}>
+			{toTime((i * sequence_duration) / steps)}
 		</span>
 	))
 
@@ -44,20 +44,20 @@ const Bar: React.FunctionComponent<BarProps> = ({
 		.map((v, i) => (
 			<span
 				style={{ left: i * (100 / (steps * 2)) + '%' }}
-				onClick={() => handleChange(i * (sequence_durate / (steps * 2)))}
+				onClick={() => handleChange(i * (sequence_duration / (steps * 2)))}
 				key={i}
 			></span>
 		))
 
 	function handleChange(time) {
-		const t = clamp(0, sequence_durate, time)
+		const t = clamp(0, sequence_duration, time)
 		t !== current_time && onChange(t)
 	}
 
 	const cursorRef = useDraggable<HTMLDivElement>({
 		onDrag: e => {
-			const s = current_time + ((clamp(0, width, Math.abs(e.x)) * Math.sign(e.x)) / width) * sequence_durate
-			const time = clamp(0, sequence_durate, s)
+			const s = current_time + ((clamp(0, width, Math.abs(e.x)) * Math.sign(e.x)) / width) * sequence_duration
+			const time = clamp(0, sequence_duration, s)
 			enableMoveTime && handleChange(time)
 		},
 	})
@@ -66,7 +66,7 @@ const Bar: React.FunctionComponent<BarProps> = ({
 		<Container>
 			<TimeSteps>
 				{Steps}
-				<span style={{ left: '100%' }}>{toTime(sequence_durate)}</span>
+				<span style={{ left: '100%' }}>{toTime(sequence_duration)}</span>
 			</TimeSteps>
 			<Progress ref={barRef}>
 				<LoadedFrames>
@@ -82,7 +82,7 @@ const Bar: React.FunctionComponent<BarProps> = ({
 					))}
 				</LoadedFrames>
 				<LinesSteps>{Lines}</LinesSteps>
-				<Cursor style={{ left: relativeClamp(0, sequence_durate, current_time, 0, 100) + '%' }}>
+				<Cursor style={{ left: relativeClamp(0, sequence_duration, current_time, 0, 100) + '%' }}>
 					<CursorLabel style={{ cursor: enableMoveTime ? 'ew-resize' : 'not-allowed' }} ref={cursorRef}>
 						{toTime(current_time)}
 					</CursorLabel>

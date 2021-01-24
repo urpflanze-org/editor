@@ -33,15 +33,11 @@ const Range: React.FunctionComponent<IRange> = ({
 	const expMatch = step.toExponential(1).match(/e(-?[0-9]+)/)
 	const exp = 10 ** (expMatch ? -expMatch[1] : 0)
 
-	React.useEffect(() => {
-		bRawEdit && setRawEdit(false)
-	}, [value])
-
 	function handleChange(next_value: number, mode: TSliderMode): boolean {
 		next_value = clamp(min, max, next_value)
 		// next_value != value && onChange(next_value, mode)
 		onChange(next_value, mode)
-		return next_value != value
+		return next_value !== value
 	}
 
 	function incValue(sign: number, mul = 1) {
@@ -49,9 +45,16 @@ const Range: React.FunctionComponent<IRange> = ({
 		handleChange(result, 'none')
 	}
 
-	function handleInputValue(value: string): boolean {
-		const parsed: number = parseFloat(value.replace(/,/g, '.'))
-		return !Number.isNaN(parsed) ? handleChange(clamp(min, max, parsed), 'none') : false
+	function handleInputValue(newValue: string): boolean {
+		const parsed: number = parseFloat(newValue.replace(/,/g, '.'))
+		if (!Number.isNaN(parsed)) {
+			if (parsed == value) {
+				return true
+			}
+
+			return handleChange(parsed, 'none')
+		}
+		return false
 	}
 
 	const [currentValue, sliderRef] = useSlider<HTMLDivElement>({
@@ -63,7 +66,7 @@ const Range: React.FunctionComponent<IRange> = ({
 		onChange: handleChange,
 		events: {
 			notDrag: () => {
-				!(bRawEdit && inputRef.current && handleInputValue(inputRef.current.value)) && setRawEdit(false)
+				inputRef.current && handleInputValue(inputRef.current.value) && setRawEdit(false)
 			},
 			dragEnd: dragged => {
 				!dragged && setRawEdit(true)
@@ -78,7 +81,9 @@ const Range: React.FunctionComponent<IRange> = ({
 					ref={inputRef}
 					defaultValue={value}
 					autoFocus={true}
-					onKeyUp={e => e.keyCode == 13 && handleInputValue((e.target as HTMLInputElement).value)}
+					onKeyDown={e =>
+						e.key === 'Enter' && handleInputValue((e.target as HTMLInputElement).value) && setRawEdit(false)
+					}
 					onFocus={(e: React.FocusEvent) => (e.target as HTMLInputElement).select()}
 				/>
 			) : (

@@ -3,16 +3,16 @@ import Rete, { Node } from 'rete'
 import * as sockets from '../Sockets'
 
 const variables = [
-	{ key: 'repetition.current_index', label: 'Current index' },
-	{ key: 'repetition.current_offset', label: 'Current offset' },
-	{ key: 'repetition.current_row', label: 'Current row' },
-	{ key: 'repetition.current_row_offset', label: 'Current row offset' },
-	{ key: 'repetition.current_col', label: 'Current col' },
-	{ key: 'repetition.current_col_offset', label: 'Current col offset' },
-	{ key: 'repetition.current_angle', label: 'Current angle' },
+	{ key: 'repetition.index', label: 'Current index' },
+	{ key: 'repetition.offset', label: 'Current offset' },
+	{ key: 'repetition.row.index', label: 'Current row index' },
+	{ key: 'repetition.row.offset', label: 'Current row offset' },
+	{ key: 'repetition.col.index', label: 'Current col index' },
+	{ key: 'repetition.col.offset', label: 'Current col offset' },
+	{ key: 'repetition.angle', label: 'Current angle' },
 	{ key: 'repetition.count', label: 'Count' },
-	{ key: 'repetition.count_col', label: 'Count col' },
-	{ key: 'repetition.count_row', label: 'Count row' },
+	{ key: 'repetition.col.count', label: 'Count col' },
+	{ key: 'repetition.row.count', label: 'Count row' },
 ]
 
 class ReptitionComponent extends Rete.Component {

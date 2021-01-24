@@ -141,7 +141,7 @@ class Executor extends Emitter<EventIterceptor> {
 			drawer.getCanvas(),
 			drawer.getOptions(),
 			drawer.getRatio(),
-			drawer.getTimeline().getSequence().durate,
+			drawer.getTimeline().getSequence().duration,
 			drawer.getTimeline().getSequence().framerate
 		)
 		this.drawer.setBuffering(true)

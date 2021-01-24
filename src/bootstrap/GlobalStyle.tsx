@@ -125,4 +125,9 @@ export default createGlobalStyle`
 
     ${VisualEditorStyle}
     ${CodeEditorStyle}
+
+    .input, .textarea {
+        background: ${pups.color('dark')};
+        color: ${pups.color('lighten')};
+    }
 `

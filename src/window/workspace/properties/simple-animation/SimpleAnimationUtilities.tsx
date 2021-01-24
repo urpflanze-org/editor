@@ -26,7 +26,7 @@ export function getSimpleAnimationInitialState(
 	const initialState: ISimpleAnimation = {
 		from: Array.isArray(sceneChildProp.default) ? toNumber(sceneChildProp.default) : sceneChildProp.default,
 		to: sceneChildProp.default_animate,
-		durate: defaultDuration,
+		duration: defaultDuration,
 		invertOdd: false,
 		colorTransitionMode: 'rgb',
 		type: 'loop',

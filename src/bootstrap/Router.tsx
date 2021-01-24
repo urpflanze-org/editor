@@ -93,7 +93,7 @@ const Router: React.FunctionComponent = () => {
 
 	const size = useWindowSize()
 
-	const rootBase = Math.floor(relativeClamp(600, 2560, size.width, 10, 16))
+	const rootBase = Math.floor(relativeClamp(600, 2560, size.width, 13, 18))
 
 	pups.modularScale.setRootBase(rootBase + 'px')
 	document.documentElement.style.fontSize = rootBase + 'px'

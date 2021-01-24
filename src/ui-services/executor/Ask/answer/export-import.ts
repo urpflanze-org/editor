@@ -3,15 +3,20 @@ import { IComunication } from '&types/comunication'
 
 import JSONExporter from '@genbs/urpflanze/dist/services/exporters/JSONExporter'
 import JSONImporter from '@genbs/urpflanze/dist/services/importers/JSONImporter'
+import GCODEExporter from '@genbs/urpflanze/dist/services/exporters/GCODEExporter'
 import { ProjectState } from '&types/state'
 import Log from 'Log'
+
+export function exportGCODE(comunication: IComunication, executor: Executor): string {
+	const { settings } = comunication.args
+
+	return GCODEExporter.parse(executor.getDrawer(), settings)
+}
 
 export function exportJSON(comunication: IComunication, executor: Executor): string {
 	const { name } = comunication.args
 
-	const data = JSONExporter.parse(executor.getDrawer(), name)
-
-	return data
+	return JSONExporter.parse(executor.getDrawer(), name)
 }
 
 export function importJSON(comunication: IComunication, executor: Executor): ProjectState | null {

@@ -30,18 +30,16 @@ const Transform: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChild
 			<Prop layer={layer} name="perspective" />
 			<Prop layer={layer} name="perspectiveOrigin" />
 
-			{layer.bPrimitive && (
-				<div style={{ textAlign: 'right' }}>
-					<div style={{ display: 'inline-block', verticalAlign: 'middle', cursor: 'pointer' }}>
-						<div onClick={vertexCallback}>
-							<Icon name="visual-editor" />
-							<span style={{ display: 'inline-block', verticalAlign: 'middle', marginLeft: pups.ms(-2) }}>
-								Apply point transformation
-							</span>
-						</div>
+			<div style={{ textAlign: 'right' }}>
+				<div style={{ display: 'inline-block', verticalAlign: 'middle', cursor: 'pointer' }}>
+					<div onClick={vertexCallback}>
+						<Icon name="visual-editor" />
+						<span style={{ display: 'inline-block', verticalAlign: 'middle', marginLeft: pups.ms(-2) }}>
+							Apply point transformation
+						</span>
 					</div>
 				</div>
-			)}
+			</div>
 		</Panel>
 	)
 }

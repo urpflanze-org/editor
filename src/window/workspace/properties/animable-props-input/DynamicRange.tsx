@@ -104,7 +104,7 @@ const DynamicRange: React.FunctionComponent<IDynamicRangeProp> = ({
 									? value.value.from.value
 									: value.value.from}{' '}
 								→{SceneUtilitiesExtended.bValueTransformable(value.value.to) ? value.value.to.value : value.value.to} in{' '}
-								{Math.round(value.value.durate / 100) / 10}s
+								{Math.round(value.value.duration / 100) / 10}s
 							</i>
 						</small>
 					) : (

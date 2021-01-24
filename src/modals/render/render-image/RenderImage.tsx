@@ -126,7 +126,7 @@ const RenderImage: React.FunctionComponent<RenderImageProps> = ({ project, close
 			<div style={{ padding: `${pups.ms(0)} ${pups.ms(-1)} 0` }}>
 				<Bar
 					enableMoveTime={true}
-					sequence_durate={project.sequence.durate}
+					sequence_duration={project.sequence.duration}
 					sequence_framerate={project.sequence.framerate}
 					renderedFrames={[]}
 					current_time={settings.time}

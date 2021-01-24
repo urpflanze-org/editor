@@ -47,7 +47,7 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 }: SimpleAnimationPropProps) => {
 	const sceneChildProp: ISceneChildUtiltiesData = SceneChildPropsData[prop_name]
 	const _bValueIsAnimation = SceneUtilitiesExtended.bValueAnimation(value)
-	const initialState = getSimpleAnimationInitialState(value, sceneChildProp, Math.min(2000, sequence.durate))
+	const initialState = getSimpleAnimationInitialState(value, sceneChildProp, Math.min(2000, sequence.duration))
 	const [state, setState] = React.useState<ISimpleAnimation>(initialState)
 	const [bAdvanceMode, setAdvanceMode] = React.useState<boolean>(
 		_bValueIsAnimation && isAdvancedAnimation(initialState)
@@ -110,10 +110,10 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 				<Range
 					size={pups.add(1, -1)}
 					min={0}
-					max={sequence.durate}
+					max={sequence.duration}
 					step={100}
-					value={state.durate}
-					onChange={(e, mode) => mode == 'none' && set('durate', e)}
+					value={state.duration}
+					onChange={(e, mode) => mode == 'none' && set('duration', e)}
 				/>
 			</Grid>
 

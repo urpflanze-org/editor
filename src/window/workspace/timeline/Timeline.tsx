@@ -86,7 +86,7 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 						executor.ask('change-timeline-state', bTimelineStarted ? TimelineClass.PAUSE : TimelineClass.START)
 					}
 				/>
-				<Icon name="sequence-end" onClick={() => executor.ask('set-timeline', sequence.durate)} />
+				<Icon name="sequence-end" onClick={() => executor.ask('set-timeline', sequence.duration)} />
 			</div>
 
 			<div style={{ position: 'absolute', right: pups.ms(0), top: pups.ms(0), display: 'flex' }}>
@@ -96,7 +96,7 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 				<Select
 					position="top"
 					options={DURATES}
-					value={sequence.durate / 1000}
+					value={sequence.duration / 1000}
 					placeholder="durate"
 					onChange={v => executor.ask('set-timeline-duration', v * 1000)}
 				/>
@@ -111,13 +111,13 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 					onChange={v => executor.ask('set-timeline-framerate', v)}
 				/>
 
-				<div>Frames: {Math.round((sequence.durate / 1000) * sequence.framerate)}</div>
+				<div>Frames: {Math.round((sequence.duration / 1000) * sequence.framerate)}</div>
 			</div>
 
 			<Bar
 				enableMoveTime={bEnableMoveBar}
 				sequence_framerate={sequence.framerate}
-				sequence_durate={sequence.durate}
+				sequence_duration={sequence.duration}
 				current_time={sequenceState.current_time}
 				onChange={t => executor.ask('set-timeline', t)}
 				renderedFrames={renderedFrames}

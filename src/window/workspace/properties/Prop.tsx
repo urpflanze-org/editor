@@ -69,16 +69,22 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 	}
 
 	function handleChange(new_value: any, preventPushToHistory?: boolean) {
-		if (new_value != initValue) {
+		if (new_value !== initValue) {
 			// Convert value to transformable-prop (responsivity)
 
 			if (SceneUtilitiesExtends.bPropInSceneChildUtilitiesData(name)) {
-				if (SceneUtilitiesExtends.bValueAnimation(new_value)) {
-					new_value.value.from = { type: 'transformable-prop', value: new_value.value.from }
-					new_value.value.to = { type: 'transformable-prop', value: new_value.value.to }
-				} else {
-					new_value = forceArray ? toArray(new_value as number) : new_value
-					new_value = { type: 'transformable-prop', value: new_value }
+				if (!SceneUtilitiesExtends.bValueTransformable(new_value)) {
+					if (SceneUtilitiesExtends.bValueAnimation(new_value)) {
+						if (!SceneUtilitiesExtends.bValueTransformable(new_value.value.from)) {
+							new_value.value.from = { type: 'transformable-prop', value: new_value.value.from }
+						}
+						if (!SceneUtilitiesExtends.bValueTransformable(new_value.value.to)) {
+							new_value.value.to = { type: 'transformable-prop', value: new_value.value.to }
+						}
+					} else {
+						new_value = forceArray ? toArray(new_value as number) : new_value
+						new_value = { type: 'transformable-prop', value: new_value }
+					}
 				}
 			} else {
 				new_value = forceArray ? toArray(new_value as number) : new_value
@@ -183,8 +189,6 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 
 export default React.memo(
 	connect((state: RootState, props: IProp) => {
-		if (typeof props.layer === 'undefined') return undefined
-
 		let value = props.value
 
 		switch (SceneChildUtilitiesData[props.name].dataType) {
@@ -193,7 +197,7 @@ export default React.memo(
 				break
 			}
 			case 'drawer': {
-				value = getProperty(props.layer.style || {}, props.name)
+				value = getProperty(props.layer.style, props.name)
 				break
 			}
 			case 'settings': {

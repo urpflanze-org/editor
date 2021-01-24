@@ -12,7 +12,7 @@ import { IRenderSettings } from '@genbs/urpflanze/dist/services/types/renderer'
 import DrawerCanvas from '@genbs/urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
 import JSONImporter from '@genbs/urpflanze/dist/services/importers/JSONImporter'
 import JSONExporter from '@genbs/urpflanze/dist/services/exporters/JSONExporter'
-// import SVGExporter from '@genbs/urpflanze/dist/services/exporters/SVGExporter'
+import SVGExporter from '@genbs/urpflanze/dist/services/exporters/SVGExporter'
 
 export const setOffsets = (comunication: IComunication, executor: Executor): void => {
 	const drawer = executor.getDrawer()
@@ -139,8 +139,7 @@ export const render = (comunication: IComunication, executor: Executor): Promise
 
 	if (settings.type === 'image/svg+xml') {
 		const prepared = prepareRender(drawer, projectData, settings)
-		return ''
-		// return JSON.stringify({ svg: SVGExporter.parse(prepared, settings) })
+		return JSON.stringify({ svg: SVGExporter.parse(prepared, settings) })
 	}
 
 	const prepared = prepareRender(drawer, projectData, settings)

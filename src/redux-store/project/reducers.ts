@@ -42,7 +42,7 @@ export const initialProjectState: ProjectState = {
 		start: 0,
 		end: 6000,
 		framerate: 60,
-		durate: 6000,
+		duration: 6000,
 	},
 	selected_layers: [],
 }

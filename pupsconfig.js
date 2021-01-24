@@ -3,9 +3,10 @@ module.exports = {
 	palette: {
 		colors: [
 			// { id: '1', name: 'primary', value: '#1fcc9a', tags: ['custom'] },
-			{ id: '1', name: 'primary', value: '#49504e', tags: ['custom'] },
+			{ id: '1', name: 'primary', value: '#5c6361', tags: ['custom'] },
 			// { "id": "2", "name": "primary", "value": "#00FFB5", "tags": ["custom"] },
 			{ id: '3', name: 'dark', value: '#111413', tags: ['custom'] },
+			{ id: '3', name: 'lighten', value: '#fff', tags: ['custom'] },
 			{ id: '3', name: 'dark-lighten', value: '#1d2220', tags: ['custom'] },
 			{ id: '3', name: 'dark-verylighten', value: '#343e3a', tags: ['custom'] },
 			{ id: '3', name: 'dark-darken', value: '#050606', tags: ['custom'] },

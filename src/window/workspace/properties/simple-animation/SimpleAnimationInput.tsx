@@ -10,6 +10,7 @@ import MultipleRange from '@components/input/MultipleRange'
 import Icon from '@components/icons/Icon'
 import { ISimpleAnimation } from '@genbs/urpflanze/dist/services/types/animation'
 import { TTransformable } from '@genbs/urpflanze/dist/services/types/scene-utilities'
+import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
 
 interface ISimpleAnimationInputProp {
 	value: TTransformable | string | number | Array<number>
@@ -36,7 +37,9 @@ const SimpleAnimationInput: React.FunctionComponent<ISimpleAnimationInputProp> =
 		case 'range':
 			return (
 				<Range
-					value={(typeof value === 'object' ? (value as TTransformable).value : value) as number}
+					value={
+						(SceneUtilitiesExtended.bValueTransformable(value) ? (value as TTransformable).value : value) as number
+					}
 					onChange={(value, p) => p === 'none' && onChange(name, value)}
 					min={sceneChildProp.min as number}
 					max={sceneChildProp.max as number}
@@ -56,7 +59,11 @@ const SimpleAnimationInput: React.FunctionComponent<ISimpleAnimationInputProp> =
 					/>
 					<MultipleRange
 						locked={locked}
-						value={(typeof value === 'object' ? (value as TTransformable).value : value) as Array<number>}
+						value={
+							(SceneUtilitiesExtended.bValueTransformable(value)
+								? (value as TTransformable).value
+								: value) as Array<number>
+						}
 						onChange={(value, p) => p === 'none' && onChange(name, value)}
 						min={sceneChildProp.min as number}
 						max={sceneChildProp.max as number}

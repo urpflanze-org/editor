@@ -56,7 +56,7 @@ const SimpleAnimationAdvanceSettings: React.FunctionComponent<SimpleAnimationAdv
 					<Range
 						size={2}
 						min={0}
-						max={sequence.durate}
+						max={sequence.duration}
 						step={100}
 						value={state.delay || 0}
 						onChange={(e, mode) => mode === 'none' && onChange('delay', e)}

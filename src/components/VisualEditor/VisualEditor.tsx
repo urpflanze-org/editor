@@ -4,7 +4,7 @@ import { IReteEditorOptions } from '&types/visual-editor'
 
 import { createEditor } from './Rete.jsx'
 import { Engine, NodeEditor } from 'rete'
-import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
+import { IRawState } from 'urpflanze/dist/services/types/animation'
 
 interface VisualEditorProps {
 	initialReteState: string | null

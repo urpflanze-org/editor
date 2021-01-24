@@ -2,7 +2,7 @@ import * as React from 'react'
 import Loading from '@bootstrap/Loading'
 import pups from '@pups/js'
 import useWindowSize from '@hooks/useWindowSize'
-import { relativeClamp } from '@genbs/urpflanze/dist/Utilites'
+import { relativeClamp } from 'urpflanze/dist/Utilites'
 // import executor from '@redux-store/executor'
 import CodeEditorWindow from '@popup-windows/code-editor-window/CodeEditorWindow'
 

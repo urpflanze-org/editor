@@ -4,9 +4,9 @@ import pups from '@pups/js'
 import Range from '@components/input/Range'
 import SceneChildUtilitiesData, {
 	ISceneChildUtiltiesData,
-} from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+} from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 import Checkbox from '@components/input/Checkbox'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 export interface LoopMeta {
 	start: number

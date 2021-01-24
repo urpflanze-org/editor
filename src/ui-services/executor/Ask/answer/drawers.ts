@@ -1,18 +1,18 @@
-import Renderer from '@genbs/urpflanze/dist/services/renderer/Renderer'
+import Renderer from 'urpflanze/dist/services/renderer/Renderer'
 
 import Executor from '@ui-services/executor/Executor'
 
 import { IComunication } from '&types/comunication'
 
-import Scene from '@genbs/urpflanze/dist/core/Scene'
+import Scene from 'urpflanze/dist/core/Scene'
 
 import UIDrawerCanvas from '@ui-services/drawer-canvas/UIDrawerCanvas'
 
-import { IRenderSettings } from '@genbs/urpflanze/dist/services/types/renderer'
-import DrawerCanvas from '@genbs/urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
-import JSONImporter from '@genbs/urpflanze/dist/services/importers/JSONImporter'
-import JSONExporter from '@genbs/urpflanze/dist/services/exporters/JSONExporter'
-import SVGExporter from '@genbs/urpflanze/dist/services/exporters/SVGExporter'
+import { IRenderSettings } from 'urpflanze/dist/services/types/renderer'
+import DrawerCanvas from 'urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
+import JSONImporter from 'urpflanze/dist/services/importers/JSONImporter'
+import JSONExporter from 'urpflanze/dist/services/exporters/JSONExporter'
+import SVGExporter from 'urpflanze/dist/services/exporters/SVGExporter'
 
 export const setOffsets = (comunication: IComunication, executor: Executor): void => {
 	const drawer = executor.getDrawer()

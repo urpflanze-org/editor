@@ -3,8 +3,8 @@ import AceEditor from 'react-ace'
 import 'ace-builds/src-noconflict/mode-javascript'
 import 'ace-builds/src-noconflict/theme-monokai'
 
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
-import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
+import { IRawState } from 'urpflanze/dist/services/types/animation'
 import useRect from '@hooks/useRect'
 
 interface CodeEditorWindowEditorProp {

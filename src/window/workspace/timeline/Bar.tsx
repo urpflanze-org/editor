@@ -2,7 +2,7 @@ import * as React from 'react'
 import pups from '@pups/js'
 import styled from 'styled-components'
 
-import { relativeClamp, clamp } from '@genbs/urpflanze/dist/Utilites'
+import { relativeClamp, clamp } from 'urpflanze/dist/Utilites'
 import useRect from '@hooks/useRect'
 import useDraggable from '@hooks/useDraggable'
 
@@ -34,7 +34,11 @@ const Bar: React.FunctionComponent<BarProps> = ({
 	const { width } = useRect(barRef)
 
 	const Steps = new Array(steps).fill(0).map((v, i) => (
-		<span key={i} onClick={() => handleChange((i * sequence_duration) / steps)} style={{ left: i * (100 / steps) + '%' }}>
+		<span
+			key={i}
+			onClick={() => handleChange((i * sequence_duration) / steps)}
+			style={{ left: i * (100 / steps) + '%' }}
+		>
 			{toTime((i * sequence_duration) / steps)}
 		</span>
 	))

@@ -12,10 +12,10 @@ import AnimatePropWindowVisualEditor from '@popup-windows/animate-prop-window/An
 import Icon from '@components/icons/Icon'
 import pups from '@pups/js'
 
-import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
+import SceneUtilitiesExtended from 'urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
 import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
-import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IRawState } from 'urpflanze/dist/services/types/animation'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 import PopupStateHook from '@popup-windows/PupupStateHook'
 import { openAnimatePropWindow } from '@popup-windows/PupupUtilities'

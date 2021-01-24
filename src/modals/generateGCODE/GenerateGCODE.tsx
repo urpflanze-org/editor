@@ -2,8 +2,8 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { RootState } from '&types/state'
-import { IGCODESettings } from '@genbs/urpflanze/dist/services/types/exporters-importers'
-import GCODEExporter from '@genbs/urpflanze/dist/services/exporters/GCODEExporter'
+import { IGCODESettings } from 'urpflanze/dist/services/types/exporters-importers'
+import GCODEExporter from 'urpflanze/dist/services/exporters/GCODEExporter'
 import executor from '@redux-store/executor'
 
 const GenerateGCODE = () => {

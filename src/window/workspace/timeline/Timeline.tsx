@@ -4,13 +4,13 @@ import { connect } from 'react-redux'
 import pups from '@pups/js'
 import { RootState } from '&types/state'
 import executor from '@redux-store/executor'
-import TimelineClass from '@genbs/urpflanze/dist/services/timeline/Timeline'
+import TimelineClass from 'urpflanze/dist/services/timeline/Timeline'
 
 import Icon from '@components/icons/Icon'
 import Bar from '@window/workspace/timeline/Bar'
 import Select from '@components/input/Select'
 import Tooltip from '@components/Tooltip'
-import { IProjectSequence } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSequence } from 'urpflanze/dist/services/types/exporters-importers'
 import Log, { LogLevel } from 'Log'
 
 interface SequenceState {

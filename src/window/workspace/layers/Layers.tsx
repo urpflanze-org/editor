@@ -12,7 +12,7 @@ import Icon from '@components/icons/Icon'
 import { handleSelection, findLayer } from '@window/workspace/layers/layer_utilities'
 import LayerActions from '@window/workspace/layers/LayerActions'
 import Layer from '@window/workspace/layers/Layer'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 interface ILayerProps {
 	layers: { [key: string]: IProjectSceneChild }

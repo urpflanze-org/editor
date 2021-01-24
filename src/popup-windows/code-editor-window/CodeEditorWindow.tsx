@@ -4,18 +4,18 @@ import { connect } from 'react-redux'
 import { RootState } from '&types/state'
 
 import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
-import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IRawState } from 'urpflanze/dist/services/types/animation'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 import CodeEditorWindowEditor from '@popup-windows/code-editor-window/CodeEditorWindowEditor'
 import CodeEditorWindowPanel from '@popup-windows/animate-prop-window/AnimatePropWindowPanel'
 
 import PopupStateHook from '@popup-windows/PupupStateHook'
 import AlertPromise from '@components/Alert'
-import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
-import ShapeBase from '@genbs/urpflanze/dist/core/shapes/ShapeBase'
-import Rect from '@genbs/urpflanze/dist/core/shapes/primitives/Rect'
-import Scene from '@genbs/urpflanze/dist/core/Scene'
+import SceneUtilitiesExtended from 'urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
+import ShapeBase from 'urpflanze/dist/core/shapes/ShapeBase'
+import Rect from 'urpflanze/dist/core/shapes/primitives/Rect'
+import Scene from 'urpflanze/dist/core/Scene'
 
 interface CodeEditorWindowProps {
 	layer_id?: number | string

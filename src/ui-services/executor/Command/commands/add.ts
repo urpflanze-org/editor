@@ -1,9 +1,9 @@
 import Executor from '@executor/Executor'
 
-import SceneUtilties from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
+import SceneUtilties from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
 import { ICommandEffects } from '&types/command'
 import Command from '@executor/Command/Command'
-import { ISceneChildProps } from '@genbs/urpflanze/dist/core/types/scene-child'
+import { ISceneChildProps } from 'urpflanze/dist/core/types/scene-child'
 
 interface ICommandAddArgs {
 	type: string

@@ -1,11 +1,11 @@
-import { ISceneChildProps } from '@genbs/urpflanze/dist/core/types/scene-child'
+import { ISceneChildProps } from 'urpflanze/dist/core/types/scene-child'
 
 import Executor from '@executor/Executor'
 import Command from '@ui-services/executor/Command/Command'
 import { ICommandEffects } from '&types/command'
 
-import SceneChild from '@genbs/urpflanze/dist/core/SceneChild'
-import ShapeBuffer from '@genbs/urpflanze/dist/core/shapes/ShapeBuffer'
+import SceneChild from 'urpflanze/dist/core/SceneChild'
+import ShapeBuffer from 'urpflanze/dist/core/shapes/ShapeBuffer'
 
 export interface ICommandSubdivideArgs {
 	id: string | number

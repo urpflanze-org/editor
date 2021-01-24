@@ -1,9 +1,9 @@
 import Executor from '@executor/Executor'
 import { IComunication } from '&types/comunication'
 
-import JSONExporter from '@genbs/urpflanze/dist/services/exporters/JSONExporter'
-import JSONImporter from '@genbs/urpflanze/dist/services/importers/JSONImporter'
-import GCODEExporter from '@genbs/urpflanze/dist/services/exporters/GCODEExporter'
+import JSONExporter from 'urpflanze/dist/services/exporters/JSONExporter'
+import JSONImporter from 'urpflanze/dist/services/importers/JSONImporter'
+import GCODEExporter from 'urpflanze/dist/services/exporters/GCODEExporter'
 import { ProjectState } from '&types/state'
 import Log from 'Log'
 

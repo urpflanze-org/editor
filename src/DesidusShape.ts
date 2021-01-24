@@ -1,9 +1,9 @@
-import Group from '@genbs/urpflanze/dist/core/Group'
-import Shape from '@genbs/urpflanze/dist/core/shapes/Shape'
-import ShapeBuffer from '@genbs/urpflanze/dist/core/shapes/ShapeBuffer'
-import { IShapeSettings } from '@genbs/urpflanze/dist/core/types/shape-base'
+import Group from 'urpflanze/dist/core/Group'
+import Shape from 'urpflanze/dist/core/shapes/Shape'
+import ShapeBuffer from 'urpflanze/dist/core/shapes/ShapeBuffer'
+import { IShapeSettings } from 'urpflanze/dist/core/types/shape-base'
 
-import SceneUtilties from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
+import SceneUtilties from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
 
 const fs1 = Float32Array.from([-1, 0.4957, 0, -0.0813, 1, 0.4957, 1, -0.0813, 0, -0.6582, -1, -0.0813])

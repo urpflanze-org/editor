@@ -1,10 +1,10 @@
 import { ICommand } from '&types/command'
 import { ProjectState } from '&types/state'
-import { IRenderFrame, IRenderStart } from '@genbs/urpflanze/dist/services/types/renderer'
+import { IRenderFrame, IRenderStart } from 'urpflanze/dist/services/types/renderer'
 
-import { ITimelineEvents } from '@genbs/urpflanze/dist/services/types/timeline'
-import { IDrawerCanvasEvents } from '@genbs/urpflanze/dist/services/types/drawer'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { ITimelineEvents } from 'urpflanze/dist/services/types/timeline'
+import { IDrawerCanvasEvents } from 'urpflanze/dist/services/types/drawer'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 export interface IRenderEvents {
 	'renderer:start': IRenderStart

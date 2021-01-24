@@ -1,5 +1,5 @@
 import ExecutorProxy from '@ui-services/executor/ExecutorProxy'
-import TimelineClass from '@genbs/urpflanze/dist/services/timeline/Timeline'
+import TimelineClass from 'urpflanze/dist/services/timeline/Timeline'
 import store from '@redux-store/root'
 import {
 	updateLayers,
@@ -15,8 +15,8 @@ import { ProjectState } from '&types/state'
 
 import { setTimelineStarted } from '@redux-store/app/actions'
 import { bRunOnServiceWorker } from '@ui-services/utilities/utilies'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
-import { ISequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
+import { ISequenceMeta } from 'urpflanze/dist/services/types/timeline'
 
 const executor = new ExecutorProxy(!bRunOnServiceWorker())
 

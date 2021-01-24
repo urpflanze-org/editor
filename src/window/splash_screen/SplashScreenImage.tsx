@@ -3,8 +3,8 @@ import styled, { keyframes } from 'styled-components'
 import pups from '@pups/js'
 import { randomElement } from '@pups/utility/build/Array'
 
-import DrawerCanvas from '@genbs/urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
-import JSONImporter from '@genbs/urpflanze/dist/services/importers/JSONImporter'
+import DrawerCanvas from 'urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
+import JSONImporter from 'urpflanze/dist/services/importers/JSONImporter'
 
 //prettier-ignore
 const examples = [

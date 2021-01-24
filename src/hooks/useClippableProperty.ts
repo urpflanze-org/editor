@@ -4,8 +4,8 @@ import dispatchMessage from '@window/messages/dispatchMessage'
 import {
 	ISceneChildUtiltiesData,
 	TPropInputType,
-} from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
-import { TAnimation } from '@genbs/urpflanze/dist/services/types/animation'
+} from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+import { TAnimation } from 'urpflanze/dist/services/types/animation'
 
 interface ClippedProp {
 	value: any

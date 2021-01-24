@@ -1,8 +1,8 @@
 import * as React from 'react'
 
 import VisualEditor from '@components/VisualEditor/VisualEditor'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
-import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
+import { IRawState } from 'urpflanze/dist/services/types/animation'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
 
 interface AnimatePropWindowVisualEditorProp {

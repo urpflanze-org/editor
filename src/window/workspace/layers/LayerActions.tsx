@@ -12,7 +12,7 @@ import { canBeSorted, find, hasSameParent } from '@window/workspace/layers/layer
 import dispatchMessage from '@window/messages/dispatchMessage'
 
 import { PossibleCommand } from '@executor/Command/CommandHistory'
-import { IProjectSceneChild, TProjectSceneChildProps } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSceneChild, TProjectSceneChildProps } from 'urpflanze/dist/services/types/exporters-importers'
 
 interface LayerActionProps {
 	selecteds: Array<string | number>

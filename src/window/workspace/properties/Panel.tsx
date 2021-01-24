@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import pups from '@pups/js'
 
 import Icon from '@components/icons/Icon'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 interface IPanelProps {
 	icon: string

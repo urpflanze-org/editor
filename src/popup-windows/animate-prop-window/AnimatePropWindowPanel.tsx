@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 import pups from '@pups/js'
 

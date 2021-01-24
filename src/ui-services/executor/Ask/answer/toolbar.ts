@@ -2,7 +2,7 @@ import Executor from '@executor/Executor'
 import { IComunication } from '&types/comunication'
 
 import UIDrawerCanvas from '@ui-services/drawer-canvas/UIDrawerCanvas'
-import SceneUtilities from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
+import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
 
 export default async function (
 	comunication: IComunication,

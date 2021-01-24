@@ -15,7 +15,7 @@ import RenderImageOptions from '@modals/render/render-image/RenderImageOptions'
 import Loading from '@bootstrap/Loading'
 
 import { bytesToHuman } from '@ui-services/utilities/utilies'
-import { IRenderSettings } from '@genbs/urpflanze/dist/services/types/renderer'
+import { IRenderSettings } from 'urpflanze/dist/services/types/renderer'
 import styled from 'styled-components'
 import { createDownload } from '@window/app_bar/menu/FileUtility'
 

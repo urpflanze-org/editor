@@ -11,9 +11,9 @@ import Tooltip from '@components/Tooltip'
 
 import SimpleAnimationProp from '@window/workspace/properties/simple-animation/SimpleAnimation'
 import Modal from '@components/Modal'
-import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
-import { TAnimation } from '@genbs/urpflanze/dist/services/types/animation'
+import SceneUtilitiesExtended from 'urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
+import { TAnimation } from 'urpflanze/dist/services/types/animation'
 
 interface IDynamicRangeProp {
 	type: 'range' | 'multiple-range'

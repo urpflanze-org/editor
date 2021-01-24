@@ -1,16 +1,16 @@
-import Scene from '@genbs/urpflanze/dist/core/Scene'
-import DrawerCanvas from '@genbs/urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
+import Scene from 'urpflanze/dist/core/Scene'
+import DrawerCanvas from 'urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
 
-import { IBufferIndex, IShapeBounding } from '@genbs/urpflanze/dist/core/types/shape-base'
-import ShapePrimitive from '@genbs/urpflanze/dist/core/shapes/ShapePrimitive'
-import SceneUtilities from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
-import SceneChild from '@genbs/urpflanze/dist/core/SceneChild'
+import { IBufferIndex, IShapeBounding } from 'urpflanze/dist/core/types/shape-base'
+import ShapePrimitive from 'urpflanze/dist/core/shapes/ShapePrimitive'
+import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
+import SceneChild from 'urpflanze/dist/core/SceneChild'
 import { now } from '@ui-services/utilities/utilies'
-import { IDrawerCanvasOptions, IDrawerCanvasPropArguments } from '@genbs/urpflanze/dist/services/types/drawer'
-import Drawer from '@genbs/urpflanze/dist/services/drawers/Drawer'
-import Context from '@genbs/urpflanze/dist/core/Context'
-import { IStreamArguments } from '@genbs/urpflanze/dist/core/types/scene-child'
-import Vec2 from '@genbs/urpflanze/dist/core/math/Vec2'
+import { IDrawerCanvasOptions, IDrawerCanvasPropArguments } from 'urpflanze/dist/services/types/drawer'
+import Drawer from 'urpflanze/dist/services/drawers/Drawer'
+import Context from 'urpflanze/dist/core/Context'
+import { IStreamArguments } from 'urpflanze/dist/core/types/scene-child'
+import Vec2 from 'urpflanze/dist/core/math/Vec2'
 
 interface IUIDrawerCanvasOptions extends IDrawerCanvasOptions {
 	scale?: number

@@ -1,4 +1,4 @@
-import { clamp } from '@genbs/urpflanze/dist/Utilites'
+import { clamp } from 'urpflanze/dist/Utilites'
 import Log from 'Log'
 
 export const debounce = function <T>(func: Function, wait = 0, immediate = false): (args?: T) => any {
@@ -15,7 +15,7 @@ export const debounce = function <T>(func: Function, wait = 0, immediate = false
 		const callNow = immediate && !timeout
 
 		timeout && clearTimeout(timeout)
-		timeout = setTimeout(later, wait)
+		timeout = window.setTimeout(later, wait)
 
 		callNow && func.apply(self, args)
 	}

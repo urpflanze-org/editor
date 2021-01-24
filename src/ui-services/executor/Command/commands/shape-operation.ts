@@ -4,9 +4,9 @@ import Executor from '@executor/Executor'
 
 import { ICommandEffects } from '&types/command'
 import Command from '@executor/Command/Command'
-import ShapePrimitive from '@genbs/urpflanze/dist/core/shapes/ShapePrimitive'
-import SceneUtilities from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
-import SceneChild from '@genbs/urpflanze/dist/core/SceneChild'
+import ShapePrimitive from 'urpflanze/dist/core/shapes/ShapePrimitive'
+import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
+import SceneChild from 'urpflanze/dist/core/SceneChild'
 
 type TShapeOperationType = 'union' | 'difference' | 'intersect' | 'xor'
 

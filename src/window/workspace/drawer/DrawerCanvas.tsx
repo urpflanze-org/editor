@@ -4,7 +4,7 @@ import executor from '@redux-store/executor'
 import useRef from '@hooks/useRef'
 import useRect from '@hooks/useRect'
 import useMouseWheel from '@hooks/useWheel'
-import { clamp } from '@genbs/urpflanze/dist/Utilites'
+import { clamp } from 'urpflanze/dist/Utilites'
 import useDraggable from '@hooks/useDraggable'
 
 import { DrawerOffsets } from '@window/workspace/drawer/DrawerOffsetsViewer'

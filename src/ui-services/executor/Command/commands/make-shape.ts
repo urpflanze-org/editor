@@ -2,9 +2,9 @@ import Executor from '@executor/Executor'
 
 import { ICommandEffects } from '&types/command'
 import Command from '@executor/Command/Command'
-import SceneChild from '@genbs/urpflanze/dist/core/SceneChild'
+import SceneChild from 'urpflanze/dist/core/SceneChild'
 
-import SceneUtilities from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
+import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
 
 interface ICommandMakeShapeData {
 	ids: Array<string | number>

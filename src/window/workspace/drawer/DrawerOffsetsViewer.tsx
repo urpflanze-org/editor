@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { relativeClamp } from '@genbs/urpflanze/dist/Utilites'
+import { relativeClamp } from 'urpflanze/dist/Utilites'
 import pups from '@pups/js'
 
 import Grid from '@components/Grid'

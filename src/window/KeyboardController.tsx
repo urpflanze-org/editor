@@ -49,7 +49,7 @@ function KeyboardController({ project, updateProjectProperties }: KeyboardContro
 		let tid = 0
 
 		if (autosaveState.interval && autosaveState.project_id === project.id) {
-			tid = setTimeout(() => {
+			tid = window.setTimeout(() => {
 				if (!isOpenPopup()) {
 					dispatchMessage('autosave')
 					executor.autosave(project)

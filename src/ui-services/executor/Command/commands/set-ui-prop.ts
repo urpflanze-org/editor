@@ -1,7 +1,7 @@
 import Executor from '@executor/Executor'
 import Command from '@ui-services/executor/Command/Command'
 import { ICommandEffects } from '&types/command'
-import SceneChild from '@genbs/urpflanze/dist/core/SceneChild'
+import SceneChild from 'urpflanze/dist/core/SceneChild'
 
 export interface ICommandSetPropArgs {
 	id: string | number

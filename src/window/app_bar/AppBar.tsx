@@ -62,7 +62,7 @@ const AppBar: React.FunctionComponent<AppBarProps> = ({ project }: AppBarProps) 
 				iid && clearTimeout(iid)
 			else
 				!iid &&
-					(iid = setTimeout(() => {
+					(iid = window.setTimeout(() => {
 						bOpenSubMenu && setOpenSubMenu(false)
 					}, 1000))
 		}

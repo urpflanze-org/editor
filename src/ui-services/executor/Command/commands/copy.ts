@@ -3,7 +3,7 @@ import Executor from '@executor/Executor'
 import { ICommandEffects } from '&types/command'
 import Command from '@executor/Command/Command'
 
-import SceneUtilities from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
+import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
 
 interface ICommandCopyArgs {
 	id: string | number

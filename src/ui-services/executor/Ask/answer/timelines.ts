@@ -1,8 +1,8 @@
 import Executor from '@ui-services/executor/Executor'
 
 import { IComunication } from '&types/comunication'
-import Timeline from '@genbs/urpflanze/dist/services/timeline/Timeline'
-import { ISequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
+import Timeline from 'urpflanze/dist/services/timeline/Timeline'
+import { ISequenceMeta } from 'urpflanze/dist/services/types/timeline'
 
 export const toggle = (comunication: IComunication, executor: Executor): void => {
 	const drawer = executor.getDrawer()

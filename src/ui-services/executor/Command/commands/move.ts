@@ -4,11 +4,11 @@ import { indexOfObjectProperty } from '@pups/utility/build/Array'
 
 import { ICommandEffects } from '&types/command'
 import Command from '@executor/Command/Command'
-import Scene from '@genbs/urpflanze/dist/core/Scene'
-import Group from '@genbs/urpflanze/dist/core/Group'
+import Scene from 'urpflanze/dist/core/Scene'
+import Group from 'urpflanze/dist/core/Group'
 
-import SceneUtilities from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
-import SceneChild from '@genbs/urpflanze/dist/core/SceneChild'
+import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
+import SceneChild from 'urpflanze/dist/core/SceneChild'
 
 export type TMoveType = 'up' | 'down' | 'top' | 'bottom'
 

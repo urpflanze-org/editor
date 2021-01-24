@@ -1,8 +1,8 @@
 import pups from '@pups/js'
 
-import Scene from '@genbs/urpflanze/dist/core/Scene'
-import Emitter from '@genbs/urpflanze/dist/services/events/Emitter'
-import Renderer from '@genbs/urpflanze/dist/services/renderer/Renderer'
+import Scene from 'urpflanze/dist/core/Scene'
+import Emitter from 'urpflanze/dist/services/events/Emitter'
+import Renderer from 'urpflanze/dist/services/renderer/Renderer'
 
 import UIDrawerCanvas from '@ui-services/drawer-canvas/UIDrawerCanvas'
 
@@ -17,10 +17,10 @@ import { ICommandEffects } from '&types/command'
 import { resize } from '@executor/Ask/answer/drawers'
 // import JSONImporter from '@ui-services/exporter-importer/json/Importer'
 import Log from 'Log'
-import DrawerCanvas from '@genbs/urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
-import JSONExporter from '@genbs/urpflanze/dist/services/exporters/JSONExporter'
+import DrawerCanvas from 'urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
+import JSONExporter from 'urpflanze/dist/services/exporters/JSONExporter'
 
-import SceneUtilities from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
+import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
 
 interface EventIterceptor {
 	event: {

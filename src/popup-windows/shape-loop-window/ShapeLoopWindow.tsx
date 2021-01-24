@@ -13,8 +13,8 @@ import pups from '@pups/js'
 
 import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
 import ShapeLoopWindowVisualEditor from '@popup-windows/shape-loop-window/ShapeLoopWindowVisualEditor'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
-import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
+import { IRawState } from 'urpflanze/dist/services/types/animation'
 
 import PopupStateHook from '@popup-windows/PupupStateHook'
 

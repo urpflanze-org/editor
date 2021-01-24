@@ -1,5 +1,5 @@
 import { indexOfObjectProperty } from '@pups/utility/build/Array'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 import store from '@redux-store/root'
 import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
 

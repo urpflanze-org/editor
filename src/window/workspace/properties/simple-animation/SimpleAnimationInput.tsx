@@ -1,16 +1,16 @@
 import * as React from 'react'
 import pups from '@pups/js'
 
-import { ISceneChildUtiltiesData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+import { ISceneChildUtiltiesData } from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 
 import Color from '@components/input/Color'
 import Range from '@components/input/Range'
 import Slider from '@components/input/Slider'
 import MultipleRange from '@components/input/MultipleRange'
 import Icon from '@components/icons/Icon'
-import { ISimpleAnimation } from '@genbs/urpflanze/dist/services/types/animation'
-import { TTransformable } from '@genbs/urpflanze/dist/services/types/scene-utilities'
-import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
+import { ISimpleAnimation } from 'urpflanze/dist/services/types/animation'
+import { TTransformable } from 'urpflanze/dist/services/types/scene-utilities'
+import SceneUtilitiesExtended from 'urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
 
 interface ISimpleAnimationInputProp {
 	value: TTransformable | string | number | Array<number>

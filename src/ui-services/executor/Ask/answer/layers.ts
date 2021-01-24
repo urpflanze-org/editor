@@ -2,8 +2,8 @@ import Executor from '@ui-services/executor/Executor'
 
 import { IComunication } from '&types/comunication'
 // import ILayerExport from '@ui-services/exporter-importer/ILayer/Exporter'
-import SceneUtilities from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
-import SceneChild from '@genbs/urpflanze/dist/core/SceneChild'
+import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
+import SceneChild from 'urpflanze/dist/core/SceneChild'
 
 export function visibility(comunication: IComunication, executor: Executor): void {
 	const sceneChild = executor.getScene().find(comunication.args.id)

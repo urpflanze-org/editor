@@ -22,9 +22,9 @@ import { ProjectState } from '&types/state'
 import { findLayer, toSceneLayers } from '@window/workspace/layers/layer_utilities'
 import app_utilities from 'app_utilities'
 import pups from '@pups/js'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
-import { version } from '@genbs/urpflanze/dist/meta'
-import SceneChildUtilitiesData from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
+import { version } from 'urpflanze/dist/meta'
+import SceneChildUtilitiesData from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 
 export const initialProjectState: ProjectState = {
 	id: uuidv1(),

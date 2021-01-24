@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 import pups from '@pups/js'
 import Range from '@components/input/Range'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
-import { ISceneChildUtiltiesData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+import { ISceneChildUtiltiesData } from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 import Checkbox from '@components/input/Checkbox'
 
 export interface LoopMeta {

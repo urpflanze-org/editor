@@ -9,7 +9,7 @@ import { getPrimitives } from '@window/workspace/layers/layer_utilities'
 import Icon from '@components/icons/Icon'
 import Grid from '@components/Grid'
 import Tooltip from '@components/Tooltip'
-import { cancelablePromise } from '@genbs/urpflanze/dist/Utilites'
+import { cancelablePromise } from 'urpflanze/dist/Utilites'
 import { getIcon } from '@ui-services/utilities/utilies'
 
 const SceneChildInfo: React.FunctionComponent<ISceneChildPanel> = (props: ISceneChildPanel) => {

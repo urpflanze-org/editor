@@ -1,11 +1,11 @@
-import Emitter from '@genbs/urpflanze/dist/services/events/Emitter'
+import Emitter from 'urpflanze/dist/services/events/Emitter'
 
 import Executor from '@executor/Executor'
 import { ICommandHistoryEvents } from '&types/events'
 import Command from '@executor/Command/Command'
 import { ICommandEffects, ECommandStatus, ICommand } from '&types/command'
 
-import { clamp } from '@genbs/urpflanze/dist/Utilites'
+import { clamp } from 'urpflanze/dist/Utilites'
 
 import Add from '@executor/Command/commands/add'
 import Remove from '@executor/Command/commands/remove'

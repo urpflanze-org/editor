@@ -7,7 +7,7 @@ import Tooltip from '@components/Tooltip'
 import executor from '@redux-store/executor'
 import { isParentOf } from '@window/workspace/layers/layer_utilities'
 import { getIcon } from '@ui-services/utilities/utilies'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 interface LayerProps {
 	layer: IProjectSceneChild

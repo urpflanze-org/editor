@@ -1,5 +1,5 @@
 import Executor from '@executor/Executor'
-import Emitter from '@genbs/urpflanze/dist/services/events/Emitter'
+import Emitter from 'urpflanze/dist/services/events/Emitter'
 import { ExecutorEvents } from '&types/events'
 import {
 	IEventResponse,

@@ -3,10 +3,10 @@ import Executor from '@executor/Executor'
 import { ICommandEffects } from '&types/command'
 import Command from '@executor/Command/Command'
 import UIDrawerCanvas from '@ui-services/drawer-canvas/UIDrawerCanvas'
-import Scene from '@genbs/urpflanze/dist/core/Scene'
-import SceneUtilities from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
+import Scene from 'urpflanze/dist/core/Scene'
+import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
-import SceneChild from '@genbs/urpflanze/dist/core/SceneChild'
+import SceneChild from 'urpflanze/dist/core/SceneChild'
 
 interface ICommandCreateFromBufferArgs {
 	buffers: Array<{ buffer: Float32Array; closed: boolean }>

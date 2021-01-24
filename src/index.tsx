@@ -3,7 +3,7 @@ import '@babel/polyfill'
 import * as React from 'react'
 import { render } from 'react-dom'
 
-import * as Urpflanze from '@genbs/urpflanze/dist/index'
+import * as Urpflanze from 'urpflanze/dist/index'
 
 //@ts-ignore
 window.Urpflanze = Urpflanze

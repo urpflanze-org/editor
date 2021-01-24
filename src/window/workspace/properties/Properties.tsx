@@ -10,7 +10,7 @@ import Primitive from '@window/workspace/properties/panels/Primitive'
 import Transform from '@window/workspace/properties/panels/Transform'
 import ShapeLoop from '@window/workspace/properties/panels/ShapeLoop'
 import Style from '@window/workspace/properties/panels/Style'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 interface PropertiesProp {
 	selected_layer: IProjectSceneChild

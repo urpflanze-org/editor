@@ -2,17 +2,17 @@ import * as React from 'react'
 
 import executor from '@redux-store/executor'
 import { connect } from 'react-redux'
-import { ERepetitionType } from '@genbs/urpflanze/dist/core/types/scene-child'
+import { ERepetitionType } from 'urpflanze/dist/core/types/scene-child'
 import Radio from '@components/input/Radio'
 
 import Panel, { ISceneChildPanel } from '@window/workspace/properties/Panel'
 import Prop from '@window/workspace/properties/Prop'
 import { toArray, toNumber, clampArray } from '@ui-services/utilities/utilies'
-import { clamp } from '@genbs/urpflanze/dist/Utilites'
-import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
-import { TTransformable } from '@genbs/urpflanze/dist/services/types/scene-utilities'
-import SceneChildUtilitiesData from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+import { clamp } from 'urpflanze/dist/Utilites'
+import SceneUtilitiesExtended from 'urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
+import { TTransformable } from 'urpflanze/dist/services/types/scene-utilities'
+import SceneChildUtilitiesData from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 import { RootState } from '&types/state'
 
 const REPETITION_TYPES = [

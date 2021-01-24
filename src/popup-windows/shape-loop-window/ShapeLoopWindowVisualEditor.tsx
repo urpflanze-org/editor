@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import VisualEditor from '@components/VisualEditor/VisualEditor'
-import { IRawState } from '@genbs/urpflanze/dist/services/types/animation'
+import { IRawState } from 'urpflanze/dist/services/types/animation'
 
 interface ShapeLoopWindowVisualEditorProp {
 	initialReteState: string | null

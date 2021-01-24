@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { IRenderSettings } from '@genbs/urpflanze/dist/services/types/renderer'
+import { IRenderSettings } from 'urpflanze/dist/services/types/renderer'
 
 import Icon from '@components/icons/Icon'
 import Radio from '@components/input/Radio'

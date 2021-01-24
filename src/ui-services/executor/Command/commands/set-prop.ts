@@ -1,11 +1,11 @@
 import Executor from '@executor/Executor'
 import Command from '@ui-services/executor/Command/Command'
 import { ICommandEffects } from '&types/command'
-import Group from '@genbs/urpflanze/dist/core/Group'
-import SceneUtilties from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilities'
-import SceneChild from '@genbs/urpflanze/dist/core/SceneChild'
-import { ISceneChildProps } from '@genbs/urpflanze/dist/core/types/scene-child'
-import SceneChildUtilitiesData from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+import Group from 'urpflanze/dist/core/Group'
+import SceneUtilties from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
+import SceneChild from 'urpflanze/dist/core/SceneChild'
+import { ISceneChildProps } from 'urpflanze/dist/core/types/scene-child'
+import SceneChildUtilitiesData from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 
 export interface ICommandSetPropArgs {
 	id: string | number

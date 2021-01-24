@@ -20,13 +20,13 @@ import {
 } from '@window/workspace/properties/simple-animation/SimpleAnimationUtilities'
 import SimpleAnimationInput from '@window/workspace/properties/simple-animation/SimpleAnimationInput'
 
-import { ISequenceMeta } from '@genbs/urpflanze/dist/services/types/timeline'
-import SceneUtilitiesExtended from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
-import { ISceneChildUtiltiesData } from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+import { ISequenceMeta } from 'urpflanze/dist/services/types/timeline'
+import SceneUtilitiesExtended from 'urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
+import { ISceneChildUtiltiesData } from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
 
-import { TAnimation, ISimpleAnimation } from '@genbs/urpflanze/dist/services/types/animation'
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
+import { TAnimation, ISimpleAnimation } from 'urpflanze/dist/services/types/animation'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 interface SimpleAnimationPropProps {
 	layer: IProjectSceneChild

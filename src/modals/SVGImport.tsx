@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-// import DrawerCanvas from '@genbs/urpflanze/dist/services/drawer-canvas/DrawerCanvas'
+// import DrawerCanvas from 'urpflanze/dist/services/drawer-canvas/DrawerCanvas'
 
 import executor from '@redux-store/executor'
 import { SVGImporter } from '../../../js/dist'

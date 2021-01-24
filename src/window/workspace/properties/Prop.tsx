@@ -19,12 +19,12 @@ import DynamicRange from '@window/workspace/properties/animable-props-input/Dyna
 import DynamicSlider from '@window/workspace/properties/animable-props-input/DynamicSlider'
 import SceneChildUtilitiesData, {
 	ISceneChildUtiltiesData,
-} from '@genbs/urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+} from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
-import SceneUtilitiesExtends from '@genbs/urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
+import SceneUtilitiesExtends from 'urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
 
-import { IProjectSceneChild } from '@genbs/urpflanze/dist/services/types/exporters-importers'
-import { TSceneChildProp } from '@genbs/urpflanze/dist/core/types/scene-child'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
+import { TSceneChildProp } from 'urpflanze/dist/core/types/scene-child'
 
 function copy(v: any): any {
 	return Array.isArray(v) ? v.slice() : v

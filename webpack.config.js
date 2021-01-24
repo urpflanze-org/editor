@@ -12,7 +12,7 @@ module.exports = (env, args) => {
 		output: {
 			filename: '[name].js',
 			chunkFilename: '[name].chunk.js',
-			publicPath: '/',
+			publicPath: '/urpflanze-gui/dist/',
 			path: path.resolve(__dirname, 'dist'),
 		},
 		module: {

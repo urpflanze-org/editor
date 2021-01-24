@@ -1,0 +1,38 @@
+/*!
+ * Vue.js v2.6.12
+ * (c) 2014-2020 Evan You
+ * Released under the MIT License.
+ */
+
+/*!
+* rete v1.4.5-rc.1 
+* (c) 2020 Vitaliy Stoliarov 
+* Released under the MIT license.
+*/
+
+/*!
+* rete-area-plugin v0.2.1 
+* (c) 2019  
+* Released under the ISC license.
+*/
+
+/*!
+* rete-code-plugin v0.2.0 
+* (c) 2019 Vitaliy Stoliarov 
+* Released under the MIT license.
+*/
+
+/*!
+* rete-connection-plugin v0.9.0 
+* (c) 2019 Vitaliy Stoliarov 
+* Released under the MIT license.
+*/
+
+/*!
+* rete-react-render-plugin v0.2.1 
+* (c) 2020  
+* Released under the ISC license.
+*/
+
+/*! Case - v1.6.2 - 2020-03-24
+* Copyright (c) 2020 Nathan Bubna; Licensed MIT, GPL */

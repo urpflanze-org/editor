@@ -102,7 +102,7 @@ const RenderImagePreview: React.FunctionComponent<RenderImagePreviewProps> = ({
 					height: '100%',
 					lineHeight: 0,
 					fontSize: 0,
-					backgroundImage: 'url(/assets/images/png-background.png)',
+					backgroundImage: 'url(assets/images/png-background.png)',
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'center',

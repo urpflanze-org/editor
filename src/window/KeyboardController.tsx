@@ -11,7 +11,7 @@ import app_utilities from 'app_utilities'
 import { openModal } from '@redux-store/app/actions'
 import store from '@redux-store/root'
 import { isOpenPopup } from '@popup-windows/PupupUtilities'
-import { SVGImporter } from '../../../js/dist'
+import SVGImporter from 'urpflanze/dist/services/importers/SVGImporter'
 
 interface KeyboardControllerProps {
 	project: ProjectState
@@ -34,9 +34,10 @@ function KeyboardController({ project, updateProjectProperties }: KeyboardContro
 	React.useEffect(() => {
 		function handlePaste(e: ClipboardEvent) {
 			const data = e.clipboardData?.getData('text') || ''
+
 			if (SVGImporter.isSVG(data)) {
-				// executor.ask('import-svg', SVGImporter.toBuffers(data))
-				store.dispatch(openModal('import-svg', { svg: data }))
+				executor.ask('import-svg', SVGImporter.SVGStringToBuffers(data))
+				// store.dispatch(openModal('import-svg', { svg: data }))
 			}
 		}
 

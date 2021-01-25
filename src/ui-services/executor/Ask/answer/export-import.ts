@@ -6,6 +6,10 @@ import JSONImporter from 'urpflanze/dist/services/importers/JSONImporter'
 import GCODEExporter from 'urpflanze/dist/services/exporters/GCODEExporter'
 import { ProjectState } from '&types/state'
 import Log from 'Log'
+import { ISVGParsed } from 'urpflanze/dist/services/types/exporters-importers'
+import Shape from 'urpflanze/dist/core/shapes/Shape'
+import ShapeBuffer from 'urpflanze/dist/core/shapes/ShapeBuffer'
+import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
 
 export function exportGCODE(comunication: IComunication, executor: Executor): string {
 	const { settings } = comunication.args
@@ -67,10 +71,47 @@ export function appendJSON(comunication: IComunication, executor: Executor): boo
 		const layers = Object.values(JSONExporter.parseAsProject(drawer).scene)
 		executor.sendEvent('scene:update-layers', { layers })
 
+		drawer.buffer.flush()
 		drawer.redraw()
 
 		return true
 	}
 
 	return false
+}
+
+export function importSVG(comunication: IComunication, executor: Executor): boolean {
+	const svgParsed: ISVGParsed = comunication.args
+	const drawer = executor.getDrawer()
+	const scene = executor.getScene()
+
+	const importedShape = SceneUtilities.create('Shape', undefined, scene) as Shape
+
+	svgParsed.buffers.forEach(buffer => {
+		const imported = SceneUtilities.create(
+			'ShapeBuffer',
+			{
+				shape: buffer.buffer,
+				bClosed: buffer.closed,
+				style: {
+					fill: buffer.fill,
+					stroke: buffer.stroke,
+					lineWidth: buffer.lineWidth,
+				},
+			},
+			scene
+		) as ShapeBuffer
+
+		SceneUtilities.add(importedShape, imported, undefined, scene)
+	})
+
+	scene.add(importedShape)
+
+	const layers = Object.values(JSONExporter.parseAsProject(drawer).scene)
+	executor.sendEvent('scene:update-layers', { layers })
+
+	drawer.buffer.flush()
+	drawer.redraw()
+
+	return true
 }

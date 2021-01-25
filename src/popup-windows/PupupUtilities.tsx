@@ -13,6 +13,7 @@ export const LOCAL_STORAGE_KEY = 'redux-storage'
 
 // Window controller
 
+const baseURI = document.baseURI
 let popupWindow: Window | null
 let popupWindowRoute: 'animate' | 'shape-loop' | 'vertex-callback' | 'code' | '' = ''
 
@@ -35,7 +36,7 @@ const popupWindowOptions: string = [
 
 export function openAnimatePropWindow(layer_id: string, prop_name?: string): void {
 	if (!popupWindow) {
-		popupWindow = window.open('/animate/' + layer_id + '/' + prop_name, '_blank', popupWindowOptions)
+		popupWindow = window.open(baseURI + 'animate/' + layer_id + '/' + prop_name, '_blank', popupWindowOptions)
 		if (popupWindow) {
 			popupWindowRoute = 'animate'
 			popupWindow.addEventListener('beforeunload', () => {
@@ -61,7 +62,7 @@ export function openAnimatePropWindow(layer_id: string, prop_name?: string): voi
 
 export function openCodeEditorWindow(layer_id: string, prop_name?: string): void {
 	if (!popupWindow) {
-		popupWindow = window.open('/code/' + layer_id + '/' + prop_name, '_blank', popupWindowOptions)
+		popupWindow = window.open(baseURI + 'code/' + layer_id + '/' + prop_name, '_blank', popupWindowOptions)
 		if (popupWindow) {
 			popupWindowRoute = 'code'
 			popupWindow.addEventListener('beforeunload', () => {
@@ -87,7 +88,7 @@ export function openCodeEditorWindow(layer_id: string, prop_name?: string): void
 
 export function openShapeLoopWindow(layer_id: string): void {
 	if (!popupWindow) {
-		popupWindow = window.open('/shape-loop/' + layer_id, '_blank', popupWindowOptions)
+		popupWindow = window.open(baseURI + 'shape-loop/' + layer_id, '_blank', popupWindowOptions)
 		if (popupWindow) {
 			popupWindowRoute = 'shape-loop'
 			popupWindow.addEventListener('beforeunload', () => {
@@ -113,7 +114,7 @@ export function openShapeLoopWindow(layer_id: string): void {
 
 export function openVertexCallbackWindow(layer_id: string): void {
 	if (!popupWindow) {
-		popupWindow = window.open('/vertex-callback/' + layer_id, '_blank', popupWindowOptions)
+		popupWindow = window.open(baseURI + 'vertex-callback/' + layer_id, '_blank', popupWindowOptions)
 		if (popupWindow) {
 			popupWindowRoute = 'vertex-callback'
 			popupWindow.addEventListener('beforeunload', () => {

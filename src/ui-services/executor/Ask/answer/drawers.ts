@@ -56,7 +56,6 @@ export const setGhosts = (comunication: IComunication, executor: Executor): void
 }
 
 export const resize = (
-	scene: Scene,
 	drawer: UIDrawerCanvas,
 	size: number,
 	ratio: number
@@ -75,7 +74,7 @@ export const setRatio = (comunication: IComunication, executor: Executor): void 
 	const { size, ratio } = comunication.args
 
 	// resize(executor.getScene(), executor.getDrawer(), size, ratio, resolution)
-	resize(executor.getScene(), executor.getDrawer(), size, ratio)
+	resize(executor.getDrawer(), size, ratio)
 
 	executor.sendEvent('project:update-properties', { ratio })
 }

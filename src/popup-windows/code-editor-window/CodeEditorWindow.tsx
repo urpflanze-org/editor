@@ -98,9 +98,10 @@ const CodeEditorWindow: React.FunctionComponent<CodeEditorWindowProps> = (props:
 		if (raw === undefined) return true
 		try {
 			const t = eval(raw)
-			const prop_arguments = ShapeBase.EMPTY_PROP_ARGUMENTS
+			const prop_arguments: any = { repetition: ShapeBase.getEmptyRepetition(), shape: undefined, parent: undefined }
+
 			if (layer.bUseParent) {
-				prop_arguments.parent = ShapeBase.EMPTY_PROP_ARGUMENTS
+				prop_arguments.parent = { repetition: ShapeBase.getEmptyRepetition() }
 			}
 			prop_arguments.shape = new Rect({})
 			prop_arguments.shape.scene = new Scene()

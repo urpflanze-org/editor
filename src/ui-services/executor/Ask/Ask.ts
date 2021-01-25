@@ -7,7 +7,13 @@ import * as drawers from '@executor/Ask/answer/drawers'
 import * as sceneChild from '@executor/Ask/answer/sceneChild'
 
 import toolbar from '@executor/Ask/answer/toolbar'
-import { exportJSON, importJSON, appendJSON, exportGCODE } from '@ui-services/executor/Ask/answer/export-import'
+import {
+	exportJSON,
+	importJSON,
+	appendJSON,
+	exportGCODE,
+	importSVG,
+} from '@ui-services/executor/Ask/answer/export-import'
 import { ICommandEffects } from '&types/command'
 
 export type PossibleAnswer =
@@ -15,6 +21,7 @@ export type PossibleAnswer =
 	| 'export-json'
 	| 'import-json'
 	| 'append-json'
+	| 'import-svg'
 	// | 'scene-layers'
 	| 'layer-highlight'
 	| 'layer-visibility'
@@ -51,6 +58,8 @@ export const answers: Record<PossibleAnswer, AskCallback | [AskCallback, ...Arra
 	'export-gcode': exportGCODE,
 	'import-json': importJSON,
 	'append-json': appendJSON,
+
+	'import-svg': importSVG,
 
 	// 'scene-layers': layers.sceneLayers,
 	'layer-highlight': layers.highlight,

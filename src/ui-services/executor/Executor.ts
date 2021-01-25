@@ -30,7 +30,6 @@ interface EventIterceptor {
 }
 
 class Executor extends Emitter<EventIterceptor> {
-	private scene: Scene
 	private drawer: UIDrawerCanvas
 	private renderer: Renderer
 	private commandHistory: CommandHistory
@@ -77,7 +76,7 @@ class Executor extends Emitter<EventIterceptor> {
 	 * @memberof Executor
 	 */
 	public getScene(): Scene {
-		return this.scene
+		return this.drawer.getScene() as Scene
 	}
 
 	/**
@@ -87,12 +86,12 @@ class Executor extends Emitter<EventIterceptor> {
 	 * @memberof Executor
 	 */
 	public setScene(scene: Scene): void {
-		if (this.scene) this.scene.resize(this.scene.width, this.scene.height)
+		const currentScene = this.getScene()
+		if (currentScene) currentScene.resize(currentScene.width, currentScene.height)
 
-		this.scene = scene
+		this.drawer.setScene(scene)
 
-		this.drawer.setScene(this.scene)
-
+		this.drawer.buffer.flush()
 		this.drawer.redraw()
 	}
 
@@ -121,7 +120,7 @@ class Executor extends Emitter<EventIterceptor> {
 		if (props.canvas) this.drawer.setCanvas(props.canvas)
 
 		// if (props.size || props.ratio || props.resolution)
-		if (props.size || props.ratio) resize(this.scene, this.drawer, props.size, props.ratio)
+		if (props.size || props.ratio) resize(this.drawer, props.size, props.ratio)
 
 		this.sendEvent('drawer:update', {})
 	}

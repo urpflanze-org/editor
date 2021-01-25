@@ -31,7 +31,7 @@
 		"rete-context-menu-plugin": "^0.6.0-rc.1",
 		"rete-react-render-plugin": "^0.2.1",
 		"styled-components": "^5.2.1",
-		"urpflanze": "^0.2.4-beta",
+		"urpflanze": "^0.3.0-beta",
 		"uuid": "^8.3.2"
 	},
 	"devDependencies": {

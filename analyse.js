@@ -9,13 +9,11 @@ const webpackConfig = require('./webpack.config.js')
 
 const config = webpackConfig(process.env, { mode: node_env })
 
-if (!config.plugins)
-    config.plugins = [new BundleAnalyzerPlugin()]
-else
-    config.plugins.push(new BundleAnalyzerPlugin())
+if (!config.plugins) config.plugins = [new BundleAnalyzerPlugin()]
+else config.plugins.push(new BundleAnalyzerPlugin())
 
 webpack(config, (err, stats) => {
-    if (err || stats.hasErrors()) {
-        console.error(err)
-    }
+	if (err || stats.hasErrors()) {
+		console.error(err)
+	}
 })

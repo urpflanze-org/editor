@@ -12,7 +12,7 @@ module.exports = (env, args) => {
 		output: {
 			filename: '[name].js',
 			chunkFilename: '[name].chunk.js',
-			publicPath: '/assets/js',
+			publicPath: '/assets/js/',
 			path: path.resolve(__dirname, 'dist/assets/js'),
 		},
 		module: {
@@ -57,7 +57,7 @@ module.exports = (env, args) => {
 		devServer: {
 			contentBase: path.join(__dirname, 'dist'),
 			compress: false,
-			publicPath: '/assets/js',
+			publicPath: '/assets/js/',
 			host: '0.0.0.0',
 			port: 3000,
 			hot: true,

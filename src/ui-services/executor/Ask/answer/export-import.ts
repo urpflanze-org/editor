@@ -79,39 +79,3 @@ export function appendJSON(comunication: IComunication, executor: Executor): boo
 
 	return false
 }
-
-export function importSVG(comunication: IComunication, executor: Executor): boolean {
-	const svgParsed: ISVGParsed = comunication.args
-	const drawer = executor.getDrawer()
-	const scene = executor.getScene()
-
-	const importedShape = SceneUtilities.create('Shape', undefined, scene) as Shape
-
-	svgParsed.buffers.forEach(buffer => {
-		const imported = SceneUtilities.create(
-			'ShapeBuffer',
-			{
-				shape: buffer.buffer,
-				bClosed: buffer.closed,
-				style: {
-					fill: buffer.fill,
-					stroke: buffer.stroke,
-					lineWidth: buffer.lineWidth,
-				},
-			},
-			scene
-		) as ShapeBuffer
-
-		SceneUtilities.add(importedShape, imported, undefined, scene)
-	})
-
-	scene.add(importedShape)
-
-	const layers = Object.values(JSONExporter.parseAsProject(drawer).scene)
-	executor.sendEvent('scene:update-layers', { layers })
-
-	drawer.buffer.flush()
-	drawer.redraw()
-
-	return true
-}

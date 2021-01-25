@@ -12,8 +12,8 @@ module.exports = (env, args) => {
 		output: {
 			filename: '[name].js',
 			chunkFilename: '[name].chunk.js',
-			publicPath: '/urpflanze-gui/dist/',
-			path: path.resolve(__dirname, 'dist'),
+			publicPath: '/assets/js',
+			path: path.resolve(__dirname, 'dist/assets/js'),
 		},
 		module: {
 			rules: [
@@ -57,6 +57,7 @@ module.exports = (env, args) => {
 		devServer: {
 			contentBase: path.join(__dirname, 'dist'),
 			compress: false,
+			publicPath: '/assets/js',
 			host: '0.0.0.0',
 			port: 3000,
 			hot: true,

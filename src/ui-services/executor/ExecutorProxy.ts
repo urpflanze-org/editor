@@ -56,7 +56,7 @@ class ExecutorProxy extends Emitter<ExecutorEvents> {
 				}
 			})
 		} else {
-			this.deamonWorker = new Worker('deamon.js')
+			this.deamonWorker = new Worker('assets/js/deamon.js')
 			this.deamonWorker.addEventListener('message', this.onDeamonMessage)
 		}
 	}

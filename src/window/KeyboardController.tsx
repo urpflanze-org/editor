@@ -36,8 +36,7 @@ function KeyboardController({ project, updateProjectProperties }: KeyboardContro
 			const data = e.clipboardData?.getData('text') || ''
 
 			if (SVGImporter.isSVG(data)) {
-				executor.ask('import-svg', SVGImporter.SVGStringToBuffers(data))
-				// store.dispatch(openModal('import-svg', { svg: data }))
+				store.dispatch(openModal('import-svg', { svg: data }))
 			}
 		}
 

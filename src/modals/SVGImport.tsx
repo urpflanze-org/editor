@@ -2,8 +2,8 @@ import * as React from 'react'
 
 // import DrawerCanvas from 'urpflanze/dist/services/drawer-canvas/DrawerCanvas'
 
+import SVGImporter from 'urpflanze/dist/services/importers/SVGImporter'
 import executor from '@redux-store/executor'
-import { SVGImporter } from '../../../js/dist'
 
 interface SVGImprtModalProps {
 	closeModal: () => void
@@ -70,7 +70,7 @@ const SVGImport: React.FunctionComponent<SVGImprtModalProps> = ({ svg, closeModa
 	// )
 
 	React.useEffect(() => {
-		executor.run('create-from-buffer', { buffers: SVGImporter.SVGStringToBuffers(svg) }).then(closeModal)
+		executor.run('create-from-buffer', SVGImporter.SVGStringToBuffers(svg)).then(closeModal)
 	}, [])
 
 	return <div>import svg</div>

@@ -7,10 +7,9 @@ import Scene from 'urpflanze/dist/core/Scene'
 import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
 import SceneChild from 'urpflanze/dist/core/SceneChild'
+import { ISVGParsed } from 'urpflanze/dist/services/types/exporters-importers'
 
-interface ICommandCreateFromBufferArgs {
-	buffers: Array<{ buffer: Float32Array; closed: boolean }>
-
+interface ICommandCreateFromBufferArgs extends ISVGParsed {
 	added_id?: string | number
 }
 
@@ -29,9 +28,9 @@ class CreateFromBuffer extends Command {
 		const scene = executor.getScene()
 		const drawer = executor.getDrawer()
 
-		const sceneChild = svgBufferToScene(drawer, this.data.buffers)
+		const sceneChild = svgBufferToScene(drawer, this.data)
 
-		if (sceneChild && scene.find(this.data.added_id) == null) {
+		if (sceneChild && scene.find(this.data.added_id) === null) {
 			this.data.added_id = sceneChild.id
 			this.effects.select_layer = [this.data.added_id]
 			return true
@@ -52,24 +51,29 @@ class CreateFromBuffer extends Command {
 	}
 }
 
-export function svgBufferToScene(
-	drawer: UIDrawerCanvas,
-	buffers: Array<{ buffer: Float32Array; closed: boolean }>
-): SceneChild | null {
+export function svgBufferToScene(drawer: UIDrawerCanvas, svgParsed: ISVGParsed): SceneChild | null {
 	const scene: Scene | undefined = drawer.getScene()
 	let sceneChild: SceneChild | null = null
 
-	if (buffers.length) {
+	if (svgParsed.buffers.length) {
 		const sideLength = SceneChildPropsData.sideLength?.default
 
-		switch (buffers.length) {
+		switch (svgParsed.buffers.length) {
 			case 0:
 				sceneChild = null
 				break
 			case 1:
 				sceneChild = SceneUtilities.create(
 					'ShapeBuffer',
-					{ shape: buffers[0].buffer, sideLength, bCloseShape: buffers[0].closed },
+					{
+						shape: svgParsed.buffers[0].buffer,
+						bClosed: svgParsed.buffers[0].closed,
+						style: {
+							fill: svgParsed.buffers[0].fill,
+							stroke: svgParsed.buffers[0].stroke,
+							lineWidth: svgParsed.buffers[0].lineWidth,
+						},
+					},
 					scene
 				)
 				break
@@ -77,10 +81,18 @@ export function svgBufferToScene(
 				sceneChild = SceneUtilities.create('Shape', undefined, scene)
 
 				if (sceneChild) {
-					buffers.forEach((buffer, index) => {
+					svgParsed.buffers.forEach((buffer, index) => {
 						const child = SceneUtilities.create(
 							'ShapeBuffer',
-							{ shape: buffer.buffer, sideLength, order: index, bCloseShape: buffer.closed },
+							{
+								shape: buffer.buffer,
+								bClosed: buffer.closed,
+								style: {
+									fill: buffer.fill,
+									stroke: buffer.stroke,
+									lineWidth: buffer.lineWidth,
+								},
+							},
 							scene
 						)
 						child && SceneUtilities.add(sceneChild as SceneChild, child, undefined, scene)

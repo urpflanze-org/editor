@@ -56,8 +56,6 @@ export function svgBufferToScene(drawer: UIDrawerCanvas, svgParsed: ISVGParsed):
 	let sceneChild: SceneChild | null = null
 
 	if (svgParsed.buffers.length) {
-		const sideLength = SceneChildPropsData.sideLength?.default
-
 		switch (svgParsed.buffers.length) {
 			case 0:
 				sceneChild = null

@@ -14,7 +14,7 @@ const AnimatePropWindow = React.lazy(
 	() =>
 		import(
 			/* webpackChunkName: "animate-prop-window" */ /* webpackPreload: true */ /* webpackMode: "lazy" */
-			'@popup-windows/animate-prop-window/AnimatePropWindow'
+			'@popup-windows/visual-editor-window/VisualEditorWindow'
 		)
 )
 const ShapeLoopWindow = React.lazy(

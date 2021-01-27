@@ -2,6 +2,7 @@ import * as React from 'react'
 import AceEditor from 'react-ace'
 import 'ace-builds/src-noconflict/mode-javascript'
 import 'ace-builds/src-noconflict/theme-monokai'
+import 'ace-builds/src-noconflict/ext-language_tools'
 
 import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 import { IRawState } from 'urpflanze/dist/services/types/animation'
@@ -45,8 +46,8 @@ const CodeEditorWindowEditor: React.FunctionComponent<CodeEditorWindowEditorProp
 						editorProps={{ $blockScrolling: true }}
 						setOptions={{
 							enableBasicAutocompletion: true,
-							enableLiveAutocompletion: true,
-							enableSnippets: false,
+							enableLiveAutocompletion: false,
+							enableSnippets: true,
 							showLineNumbers: true,
 							tabSize: 4,
 							fontSize: '1rem / 1.618',

@@ -5,15 +5,15 @@ import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-impo
 import { IRawState } from 'urpflanze/dist/services/types/animation'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
 
-interface AnimatePropWindowVisualEditorProp {
+interface VisualEditorWindowVisualEditorProp {
 	prop_name: string | undefined
 	layer: IProjectSceneChild | undefined
 	initialReteState: string | null
 	setReteAnimation: (reteAnimation: IRawState) => void
 }
 
-const AnimatePropWindowVisualEditor: React.FunctionComponent<AnimatePropWindowVisualEditorProp> = (
-	props: AnimatePropWindowVisualEditorProp
+const VisualEditorWindowVisualEditor: React.FunctionComponent<VisualEditorWindowVisualEditorProp> = (
+	props: VisualEditorWindowVisualEditorProp
 ) => {
 	const options = {
 		bMatrixRepetitions: props.layer?.props.repetitions ? Array.isArray(props.layer?.props.repetitions) : false,
@@ -40,4 +40,4 @@ const AnimatePropWindowVisualEditor: React.FunctionComponent<AnimatePropWindowVi
 	)
 }
 
-export default React.memo(AnimatePropWindowVisualEditor)
+export default React.memo(VisualEditorWindowVisualEditor)

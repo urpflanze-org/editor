@@ -7,8 +7,8 @@ import useRef from '@hooks/useRef'
 
 import { findLayer } from '@window/workspace/layers/layer_utilities'
 
-import AnimatePropWindowPanel from '@popup-windows/animate-prop-window/AnimatePropWindowPanel'
-import AnimatePropWindowVisualEditor from '@popup-windows/animate-prop-window/AnimatePropWindowVisualEditor'
+import VisualEditorWindowPanel from '@popup-windows/visual-editor-window/VisualEditorWindowPanel'
+import VisualEditorWindowVisualEditor from '@popup-windows/visual-editor-window/VisualEditorWindowVisualEditor'
 import Icon from '@components/icons/Icon'
 import pups from '@pups/js'
 
@@ -18,15 +18,16 @@ import { IRawState } from 'urpflanze/dist/services/types/animation'
 import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 import PopupStateHook from '@popup-windows/PupupStateHook'
-import { openAnimatePropWindow } from '@popup-windows/PupupUtilities'
+import { SceneChildPropHeadWithParent, validateRawCode } from '@ui-services/utilities/ValidateCode'
+import AlertPromise from '@components/Alert'
 
-interface AnimatePropWindowProps {
+interface VisualEditorWindowProps {
 	layer_id?: number | string
 	prop_name?: string
 	scene: { [key: string]: IProjectSceneChild }
 }
 
-const AnimatePropWindow: React.FunctionComponent<AnimatePropWindowProps> = (props: AnimatePropWindowProps) => {
+const VisualEditorWindow: React.FunctionComponent<VisualEditorWindowProps> = (props: VisualEditorWindowProps) => {
 	const [reteAnimation, setReteAnimation] = React.useState<IRawState | null>(null)
 	const [copy, setCopy] = React.useState<{ prop_name: string; value: string | null } | null>(null)
 	const [initialReteState, setInitialReteState] = React.useState<string | null>(null)
@@ -80,14 +81,18 @@ const AnimatePropWindow: React.FunctionComponent<AnimatePropWindowProps> = (prop
 				raw: `(${SceneUtilitiesExtended.RAW_ARGUMENTS}) => ${reteAnimation?.raw}`,
 				state: reteAnimation?.state,
 			}
-			const data = {
-				id: state.layer.id,
-				name: state.prop_name,
-				value: { type: 'raw', value },
-				prev_value: state.layer.props[state.prop_name],
+			const validator = validateRawCode(state.layer, value.raw)
+			if (validator.valid) {
+				const data = {
+					id: state.layer.id,
+					name: state.prop_name,
+					value: { type: 'raw', value },
+					prev_value: state.layer.props[state.prop_name],
+				}
+				window.opener.postMessage({ event: 'set-popup-window-value', value: data }, location.origin)
+			} else {
+				AlertPromise(`Code error:\n ${validator.error}`)
 			}
-
-			window.opener.postMessage({ event: 'set-popup-window-value', value: data }, location.origin)
 		}
 	}
 
@@ -99,14 +104,14 @@ const AnimatePropWindow: React.FunctionComponent<AnimatePropWindowProps> = (prop
 					<Icon name="copy" size={2} onClick={handleCopy} />
 					<Icon name="paste" disabled={copy === null} size={2} onClick={paste} />
 				</div>
-				<AnimatePropWindowVisualEditor
+				<VisualEditorWindowVisualEditor
 					layer={state.layer}
 					prop_name={state.prop_name}
 					initialReteState={initialReteState}
 					setReteAnimation={setReteAnimation}
 				/>
 			</div>
-			<AnimatePropWindowPanel
+			<VisualEditorWindowPanel
 				scene={props.scene}
 				layer={state.layer}
 				prop_name={state.prop_name}
@@ -130,4 +135,4 @@ const Header: React.CSSProperties = {
 
 export default connect((state: RootState) => ({
 	scene: state.project.scene,
-}))(AnimatePropWindow)
+}))(VisualEditorWindow)

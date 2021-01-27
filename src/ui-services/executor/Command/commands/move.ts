@@ -38,6 +38,7 @@ abstract class Move extends Command {
 			sceneChild: executor.getScene().find(args),
 		}
 
+		console.log(args, this.data)
 		this.setDescriptor()
 	}
 

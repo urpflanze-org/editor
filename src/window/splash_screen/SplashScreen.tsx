@@ -72,7 +72,11 @@ const SplashScreen: React.FunctionComponent<SplashScreenProps> = ({ hide, showTu
 									Recover Last Session
 								</div>
 							</div>
-							<div>{/* Support */}</div>
+							<div>
+								<a href="https://ko-fi.com/urpflanze" target="_blank" rel="noreferrer">
+									Support this project
+								</a>
+							</div>
 						</Grid>
 					</Grid>
 				</div>

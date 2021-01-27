@@ -9,10 +9,19 @@ const AppMenuActions: SubMenuActions = [
 			store.dispatch(showSplashScreen())
 		},
 	},
-	// }, {
-	//     name: 'Support',
-	//     action: () => { console.log('support') }
-	// }
+	{
+		name: 'Support',
+		action: () => {
+			const link = document.createElement('a')
+			link.href = 'https://ko-fi.com/urpflanze'
+			link.target = '_blank'
+
+			document.body.appendChild(link)
+			link.click()
+
+			link.remove()
+		},
+	},
 ]
 
 export default AppMenuActions

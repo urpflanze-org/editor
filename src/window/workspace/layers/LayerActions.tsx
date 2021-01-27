@@ -246,7 +246,7 @@ const LayerActions: React.FunctionComponent<LayerActionProps> = (props: LayerAct
 						size={0}
 						rotate={90}
 						disabled={multipleSelected || cbs <= -2 || cbs == -1}
-						onClick={(e: React.MouseEvent) => call(e, e.shiftKey ? 'move-to-bottom' : 'move-down', props.selecteds)}
+						onClick={(e: React.MouseEvent) => call(e, e.shiftKey ? 'move-to-bottom' : 'move-down', props.selecteds[0])}
 					/>
 				</Tooltip>
 				<Tooltip position="top" title="Move up" disabled={multipleSelected || cbs <= -2 || cbs == 1}>
@@ -255,7 +255,7 @@ const LayerActions: React.FunctionComponent<LayerActionProps> = (props: LayerAct
 						size={0}
 						rotate={270}
 						disabled={multipleSelected || cbs <= -2 || cbs == 1}
-						onClick={(e: React.MouseEvent) => call(e, e.shiftKey ? 'move-to-top' : 'move-up', props.selecteds)}
+						onClick={(e: React.MouseEvent) => call(e, e.shiftKey ? 'move-to-top' : 'move-up', props.selecteds[0])}
 					/>
 				</Tooltip>
 				<Tooltip position="top" title="Make shape" disabled={onScene || !bSameParent}>

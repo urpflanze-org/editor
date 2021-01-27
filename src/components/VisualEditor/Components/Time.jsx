@@ -10,7 +10,7 @@ class TimeComponent extends Rete.Component {
 
 	builder(node) {
 		const time = new Rete.Output('time', 'Current time (ms)', sockets.variable)
-		const mstime = new Rete.Output('mstime', 'Current time (s)', sockets.variable)
+		const time_sec = new Rete.Output('mstime', 'Current time (s)', sockets.variable)
 
 		// const input = new Rete.Input('input_scale', 'scale', sockets.numberOrVariable)
 
@@ -19,7 +19,7 @@ class TimeComponent extends Rete.Component {
 		// node.addInput(input)
 
 		node.addOutput(time)
-		node.addOutput(mstime)
+		node.addOutput(time_sec)
 	}
 
 	worker(node, inputs, outputs) {
@@ -27,8 +27,8 @@ class TimeComponent extends Rete.Component {
 		// 	inputs['input_scale'] && inputs['input_scale'].length > 0 ? inputs['input_scale'][0] : node.data['scale']
 
 		// outputs['time'] = `(time / ${scale})`
-		outputs['time'] = `time`
-		outputs['mstime'] = `(time / 1000)`
+		outputs['time'] = `scene.currentTime`
+		outputs['time_sec'] = `(scene.currentTime / 1000)`
 	}
 
 	code() {}

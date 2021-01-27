@@ -80,7 +80,7 @@ export const setRatio = (comunication: IComunication, executor: Executor): void 
 }
 
 export const getRenderedFrames = (comunication: IComunication, executor: Executor): Array<number> => {
-	return executor.getDrawer().getRenderedFrames()
+	return executor.getDrawer().getStoredFrames()
 }
 
 export const setBackground = (comunication: IComunication, executor: Executor): void => {

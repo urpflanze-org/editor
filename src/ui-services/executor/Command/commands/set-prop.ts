@@ -41,12 +41,13 @@ class SetProp extends Command {
 	protected handleRedo(executor: Executor): boolean | undefined {
 		let executed = false
 		let effect_index = 0
+		const scene = executor.getScene()
 
 		this.data.forEach(({ id, name, value }) => {
-			const sceneChild = executor.getScene().find(id) as SceneChild
+			const sceneChild = scene.find(id) as SceneChild
 
 			if (sceneChild && this.effects.scene_child_prop_update) {
-				SceneUtilties.set(sceneChild, name, value, executor.getScene())
+				SceneUtilties.set(sceneChild, name, value, scene)
 				this.effects.scene_child_prop_update[effect_index++].value = value
 
 				if (sceneChild instanceof Group)
@@ -74,11 +75,14 @@ class SetProp extends Command {
 	protected handleUndo(executor: Executor): boolean | undefined {
 		let executed = false
 		let effect_index = 0
+
+		const scene = executor.getScene()
+
 		this.data.forEach(({ id, name, prev_value }) => {
-			const sceneChild = executor.getScene().find(id)
+			const sceneChild = scene.find(id)
 
 			if (sceneChild && this.effects.scene_child_prop_update) {
-				SceneUtilties.set(sceneChild, name, prev_value, executor.getScene())
+				SceneUtilties.set(sceneChild, name, prev_value, scene)
 				this.effects.scene_child_prop_update[effect_index++].value = prev_value
 
 				if (sceneChild instanceof Group)

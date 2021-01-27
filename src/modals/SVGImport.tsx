@@ -70,8 +70,10 @@ const SVGImport: React.FunctionComponent<SVGImprtModalProps> = ({ svg, closeModa
 	// )
 
 	React.useEffect(() => {
-		executor.run('create-from-buffer', SVGImporter.SVGStringToBuffers(svg)).then(closeModal)
-	}, [])
+		executor.run('create-from-buffer', SVGImporter.SVGStringToBuffers(svg)).then(() => {
+			closeModal()
+		})
+	}, [svg])
 
 	return <div>import svg</div>
 }

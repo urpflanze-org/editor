@@ -30,7 +30,7 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 	bEnableMoveBar,
 	bTimelineStarted,
 }: TimelineProps) => {
-	const DURATES = new Array(15).fill(0).map((v, i) => ({ key: i + 1 + 's', value: i + 1 }))
+	const DURATES = new Array(30).fill(0).map((v, i) => ({ key: i + 1 + 's', value: i + 1 }))
 	const FRAMERATES = [10, 24, 30, 60, 120, 144].map(v => ({ key: v, value: v }))
 
 	const [sequenceState, setSequenceState] = React.useState<SequenceState>({

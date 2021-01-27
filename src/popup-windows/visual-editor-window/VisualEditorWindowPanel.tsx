@@ -1,13 +1,13 @@
 import * as React from 'react'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 import pups from '@pups/js'
 
-import SceneTree from '@popup-windows/animate-prop-window/SceneTree'
+import SceneTree from '@popup-windows/visual-editor-window/SceneTree'
 import Select from '@components/input/Select'
 import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
+import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
-interface AnimatePropWindowPanelProp {
+interface VisualEditorWindowPanelProp {
 	scene: { [key: string]: IProjectSceneChild }
 	prop_name: string | undefined
 	layer: IProjectSceneChild | undefined
@@ -15,8 +15,8 @@ interface AnimatePropWindowPanelProp {
 	selectPropName: (prop_name: string) => void
 }
 
-const AnimatePropWindowPanel: React.FunctionComponent<AnimatePropWindowPanelProp> = (
-	props: AnimatePropWindowPanelProp
+const VisualEditorWindowPanel: React.FunctionComponent<VisualEditorWindowPanelProp> = (
+	props: VisualEditorWindowPanelProp
 ) => {
 	return (
 		<React.Fragment>
@@ -67,4 +67,4 @@ const SceneTreeContainer: React.CSSProperties = {
 	background: pups.color('dark-lighten').toString('hex'),
 }
 
-export default AnimatePropWindowPanel
+export default VisualEditorWindowPanel

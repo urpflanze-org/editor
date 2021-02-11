@@ -9,7 +9,7 @@ import SceneChild from 'urpflanze/dist/core/SceneChild'
 interface ICommandRemoveData {
 	id: number | string
 	copied_sceneChild: SceneChild
-	parent_id?: string | number | null
+	parentId?: string | number | null
 }
 
 class Remove extends Command {
@@ -38,7 +38,7 @@ class Remove extends Command {
 					return {
 						id,
 						copied_sceneChild: SceneUtilities.copy(sceneChild, scene, true) as SceneChild,
-						parent_id: SceneUtilities.getParent(sceneChild)?.id || null,
+						parentId: SceneUtilities.getParent(sceneChild)?.id || null,
 					}
 				}
 
@@ -72,12 +72,12 @@ class Remove extends Command {
 		this.data.forEach(data => {
 			if (data.copied_sceneChild && !executor.getScene().find(data.id)) {
 				const sceneChild = data.copied_sceneChild
-				const parent = data.parent_id ? executor.getScene().find(data.parent_id) : null
+				const parent = data.parentId ? executor.getScene().find(data.parentId) : null
 
-				if (data.parent_id && parent) {
+				if (data.parentId && parent) {
 					SceneUtilities.add(parent, sceneChild)
 					executed = true
-				} else if (data.parent_id == null) {
+				} else if (data.parentId == null) {
 					executor.getScene().add(sceneChild)
 					executed = true
 				}

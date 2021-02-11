@@ -11,7 +11,7 @@ interface ICommandMakeRecursionData {
 
 	sceneChild: SceneChild | null
 
-	parent_id?: string | number | null
+	parentId?: string | number | null
 	new_shape_id?: string | number
 }
 
@@ -56,7 +56,7 @@ class MakeRecursion extends Command {
 			if (parent) SceneUtilities.add(parent, shape)
 			else scene.add(shape)
 
-			this.data.parent_id = parent ? parent.id : null
+			this.data.parentId = parent ? parent.id : null
 			this.data.new_shape_id = shape.id
 
 			this.effects.select_layer = [this.data.new_shape_id]
@@ -69,7 +69,7 @@ class MakeRecursion extends Command {
 
 		if (this.data.sceneChild && this.data.new_shape_id) {
 			scene.removeFromId(this.data.new_shape_id)
-			const parent = this.data.parent_id ? scene.find(this.data.parent_id) : null
+			const parent = this.data.parentId ? scene.find(this.data.parentId) : null
 
 			if (parent) SceneUtilities.add(parent, this.data.sceneChild)
 			else scene.add(this.data.sceneChild)

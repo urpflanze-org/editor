@@ -88,8 +88,8 @@ const Repetition = (props: ISceneChildPanel & { projectRatio: number; layers: Ar
 		if (repetition_type == ERepetitionType.Matrix) {
 			const _repetitions = toArray(repetitions as number | Array<number>)
 			const new_distance = [
-				_repetitions[1] <= 1 ? 0 : 100 / _repetitions[1],
 				_repetitions[0] <= 1 ? 0 : 100 / _repetitions[0],
+				_repetitions[1] <= 1 ? 0 : 100 / _repetitions[1],
 			]
 
 			executor.run('set-prop', {

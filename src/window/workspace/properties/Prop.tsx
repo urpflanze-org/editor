@@ -89,7 +89,6 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 			} else {
 				new_value = forceArray ? toArray(new_value as number) : new_value
 			}
-
 			executor.run(
 				'set-prop',
 				{

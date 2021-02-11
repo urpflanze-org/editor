@@ -11,7 +11,7 @@ interface ICommandMakeShapeData {
 
 	sceneChilds: Array<SceneChild>
 
-	parent_id?: string | number | null
+	parentId?: string | number | null
 	new_shape_id?: string | number
 }
 
@@ -74,7 +74,7 @@ class MakeShape extends Command {
 			if (parent) SceneUtilities.add(parent, shape)
 			else executor.getScene().add(shape)
 
-			this.data.parent_id = parent ? parent.id : null
+			this.data.parentId = parent ? parent.id : null
 			this.data.new_shape_id = shape.id
 
 			this.effects.select_layer = [this.data.new_shape_id]
@@ -87,7 +87,7 @@ class MakeShape extends Command {
 
 		if (this.data.sceneChilds.length > 0 && this.data.new_shape_id) {
 			scene.removeFromId(this.data.new_shape_id)
-			const parent = this.data.parent_id ? scene.find(this.data.parent_id) : null
+			const parent = this.data.parentId ? scene.find(this.data.parentId) : null
 
 			if (parent) this.data.sceneChilds.forEach(sceneChild => SceneUtilities.add(parent, sceneChild))
 			else this.data.sceneChilds.forEach(sceneChild => scene.add(sceneChild))

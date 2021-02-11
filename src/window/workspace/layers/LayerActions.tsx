@@ -268,7 +268,7 @@ const LayerActions: React.FunctionComponent<LayerActionProps> = (props: LayerAct
 				</Tooltip>
 				<Tooltip position="top" title="Make recursion" disabled={onScene || !bSameParent}>
 					<Icon
-						name="shape"
+						name="recursion"
 						disabled={onScene || multipleSelected}
 						onClick={(e: React.MouseEvent) => call(e, 'make-recursion', props.selecteds)}
 					/>

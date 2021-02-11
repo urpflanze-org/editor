@@ -34,9 +34,15 @@ export function validateRawCode(
 		}
 
 		if (layer.bUseParent || layer.bUseRecursion) {
-			prop_arguments.parent = {
-				repetition: ShapeBase.getEmptyRepetition(),
-				recursion: ShapeRecursive.getEmptyRecursion(),
+			let current = prop_arguments
+
+			for (let i = 0; i < 20; i++) {
+				current.parent = {
+					repetition: ShapeBase.getEmptyRepetition(),
+					recursion: ShapeRecursive.getEmptyRecursion(),
+				}
+				//@ts-ignore
+				current = current.parent
 			}
 		}
 

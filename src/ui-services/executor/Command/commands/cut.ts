@@ -8,7 +8,7 @@ import SceneChild from 'urpflanze/dist/core/SceneChild'
 
 interface ICommandCutArgs {
 	id: string | number
-	parent_id?: string | number
+	parentId?: string | number
 
 	parentSceneChild: SceneChild | null
 	refName: string
@@ -43,8 +43,8 @@ class Cut extends Command {
 
 		if (sceneChild) {
 			SceneUtilities.remove(sceneChild)
-			if (this.data.parent_id) {
-				const parent = scene.find(this.data.parent_id)
+			if (this.data.parentId) {
+				const parent = scene.find(this.data.parentId)
 				parent && SceneUtilities.add(parent, sceneChild, undefined, scene)
 			} else {
 				scene.add(sceneChild)

@@ -17,8 +17,8 @@ interface ICommandAddArgs {
 
 	a?: ShapePrimitive
 	b?: ShapePrimitive
-	a_parent_id?: string | number
-	b_parent_id?: string | number
+	a_parentId?: string | number
+	b_parentId?: string | number
 
 	new_id?: number | string
 }
@@ -154,8 +154,8 @@ class ShapeOperation extends Command {
 		if (scene.find(this.data.new_id)) {
 			scene.removeFromId(this.data.new_id)
 
-			const a_parent = this.data.a_parent_id ? scene.find(this.data.a_parent_id) : null
-			const b_parent = this.data.b_parent_id ? scene.find(this.data.b_parent_id) : null
+			const a_parent = this.data.a_parentId ? scene.find(this.data.a_parentId) : null
+			const b_parent = this.data.b_parentId ? scene.find(this.data.b_parentId) : null
 
 			a_parent ? SceneUtilities.add(a_parent, this.data.a, undefined, scene) : scene.add(this.data.a)
 			b_parent ? SceneUtilities.add(b_parent, this.data.b, undefined, scene) : scene.add(this.data.b)

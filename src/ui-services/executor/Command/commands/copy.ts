@@ -7,7 +7,7 @@ import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtiliti
 
 interface ICommandCopyArgs {
 	id: string | number
-	parent_id?: string | number
+	parentId?: string | number
 	refName: string
 
 	added_id?: string | number
@@ -42,8 +42,8 @@ class Copy extends Command {
 			const sceneChild = SceneUtilities.copy(sceneChildReference, scene)
 
 			if (sceneChild) {
-				if (this.data.parent_id) {
-					const parent = scene.find(this.data.parent_id)
+				if (this.data.parentId) {
+					const parent = scene.find(this.data.parentId)
 					if (parent) SceneUtilities.add(parent, sceneChild, undefined, scene)
 					else return false
 				} else {

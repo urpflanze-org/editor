@@ -7,7 +7,7 @@ import { ISceneChildProps } from 'urpflanze/dist/core/types/scene-child'
 
 interface ICommandAddArgs {
 	type: string
-	parent_id?: string | number
+	parentId?: string | number
 	props?: ISceneChildProps
 
 	added_id?: string | number
@@ -49,8 +49,8 @@ class Add extends Command {
 				)
 			}
 
-			if (this.data.parent_id) {
-				const parent = scene.find(this.data.parent_id)
+			if (this.data.parentId) {
+				const parent = scene.find(this.data.parentId)
 				if (parent) SceneUtilties.add(parent, sceneChild, undefined, scene)
 				else return false
 			} else {
@@ -77,7 +77,7 @@ class Add extends Command {
 	}
 
 	protected setDescriptor(): void {
-		if (this.data.parent_id) this.descriptor = `add "${this.data.type}" to ${this.data.parent_id}`
+		if (this.data.parentId) this.descriptor = `add "${this.data.type}" to ${this.data.parentId}`
 		else this.descriptor = `add "${this.data.type}" to Scene`
 	}
 }

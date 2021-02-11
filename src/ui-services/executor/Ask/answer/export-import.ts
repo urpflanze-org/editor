@@ -6,10 +6,6 @@ import JSONImporter from 'urpflanze/dist/services/importers/JSONImporter'
 import GCODEExporter from 'urpflanze/dist/services/exporters/GCODEExporter'
 import { ProjectState } from '&types/state'
 import Log from 'Log'
-import { ISVGParsed } from 'urpflanze/dist/services/types/exporters-importers'
-import Shape from 'urpflanze/dist/core/shapes/Shape'
-import ShapeBuffer from 'urpflanze/dist/core/shapes/ShapeBuffer'
-import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
 
 export function exportGCODE(comunication: IComunication, executor: Executor): string {
 	const { settings } = comunication.args

@@ -10,7 +10,7 @@ import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-impo
 import CodeEditorWindowEditor from '@popup-windows/code-editor-window/CodeEditorWindowEditor'
 import CodeEditorWindowPanel from '@popup-windows/visual-editor-window/VisualEditorWindowPanel'
 
-import PopupStateHook from '@popup-windows/PupupStateHook'
+import PopupStateHook, { getPropTypeFromName } from '@popup-windows/PupupStateHook'
 import AlertPromise from '@components/Alert'
 
 import { SceneChildPropHead, SceneChildPropHeadWithParent, validateRawCode } from '@ui-services/utilities/ValidateCode'
@@ -45,23 +45,17 @@ const CodeEditorWindow: React.FunctionComponent<CodeEditorWindowProps> = (props:
 		return () => window.removeEventListener('keydown', handleKeyDown)
 	}, [state.layer?.id, state.prop_name, currentRawCode])
 
-	const propType = props.prop_name
-		? SceneChildUtilitiesData[props.prop_name].dataType === 'drawer'
-			? 'style'
-			: 'props'
-		: 'props'
-
-	console.log('propType', props.prop_name, propType)
-
+	console.log('propType', props.prop_name, props, state.prop_type, state)
 	React.useEffect(() => {
 		if (state.layer && state.prop_name && state.layer.id && (state.layer.id + '').length > 0) {
 			const newInitialCodeState =
 				state.layer &&
 				state.prop_name &&
-				state.layer[propType][state.prop_name] &&
-				state.layer[propType][state.prop_name].type === 'raw'
-					? state.layer[propType][state.prop_name].value.raw
-					: state.layer.bUseParent
+				state.prop_type &&
+				state.layer[state.prop_type][state.prop_name] &&
+				state.layer[state.prop_type][state.prop_name].type === 'raw'
+					? state.layer[state.prop_type][state.prop_name].value.raw
+					: state.layer.bUseParent || state.layer.bUseRecursion
 					? SceneChildPropHeadWithParent
 					: SceneChildPropHead
 
@@ -70,8 +64,8 @@ const CodeEditorWindow: React.FunctionComponent<CodeEditorWindowProps> = (props:
 	}, [
 		state.prop_name,
 		state.layer,
-		state.layer[propType],
-		state.prop_name ? state.layer[propType][state.prop_name] : null,
+		state.layer[state.prop_type],
+		state.prop_name ? state.layer[state.prop_type][state.prop_name] : null,
 	])
 
 	function save() {
@@ -82,7 +76,7 @@ const CodeEditorWindow: React.FunctionComponent<CodeEditorWindowProps> = (props:
 					id: state.layer.id,
 					name: state.prop_name,
 					value: { type: 'raw', value: currentRawCode },
-					prev_value: state.layer[propType][state.prop_name],
+					prev_value: state.layer[state.prop_type][state.prop_name],
 				}
 				window.opener.postMessage({ event: 'set-popup-window-value', value: data }, location.origin)
 			} else {
@@ -107,10 +101,10 @@ const CodeEditorWindow: React.FunctionComponent<CodeEditorWindowProps> = (props:
 				layer={state.layer}
 				prop_name={state.prop_name}
 				selectLayer={layer => {
-					setState({ prop_name: state.prop_name, layer })
+					setState({ prop_name: state.prop_name, layer, prop_type: state.prop_type })
 				}}
 				selectPropName={prop_name => {
-					setState({ layer: state.layer, prop_name })
+					setState({ layer: state.layer, prop_name, prop_type: getPropTypeFromName(prop_name) })
 				}}
 			/>
 		</div>

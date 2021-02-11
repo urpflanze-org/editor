@@ -11,7 +11,7 @@ export default async function (
 	const { size, color } = comunication.args
 	const shapes = SceneUtilities.getRegistered()
 
-	;['ShapeLoop', 'ShapeBuffer', 'Shape', 'Group'].forEach(shape => {
+	;['ShapeLoop', 'ShapeBuffer', 'Shape', 'ShapeRecursive', 'Group'].forEach(shape => {
 		shapes.splice(shapes.indexOf(shape), 1)
 	})
 	const result: Array<{ name: string; image: string }> = []

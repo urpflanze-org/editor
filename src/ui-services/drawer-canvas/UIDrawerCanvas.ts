@@ -8,7 +8,6 @@ import SceneChild from 'urpflanze/dist/core/SceneChild'
 import { now } from '@ui-services/utilities/utilies'
 import { IDrawerCanvasOptions, IDrawerCanvasPropArguments } from 'urpflanze/dist/services/types/drawer'
 import Drawer from 'urpflanze/dist/services/drawers/Drawer'
-import Context from 'urpflanze/dist/core/Context'
 import { IStreamArguments } from 'urpflanze/dist/core/types/scene-child'
 import Vec2 from 'urpflanze/dist/core/math/Vec2'
 
@@ -165,7 +164,6 @@ class UIDrawerCanvas extends DrawerCanvas<IUIDrawerCanvasOptions> {
 							repetition: currentIndex.repetition,
 							parent: currentIndex.parent,
 							time: scene.currentTime,
-							context: Context,
 						}
 
 						// const composite = Drawer.getStreamDrawerProp<IDrawerCanvasStreamProps>(
@@ -322,6 +320,13 @@ class UIDrawerCanvas extends DrawerCanvas<IUIDrawerCanvasOptions> {
 
 		if (sceneChild) {
 			const shape = SceneUtilities.copy(sceneChild, scene, true)
+			// if (shape instanceof ShapePrimitive) {
+			// 	shape.style.lineWidth = 3
+			// } else if (shape) {
+			// 	SceneUtilities.getChildrenPrimitives(shape).forEach(shape => {
+			// 		shape.style.lineWidth = 3
+			// 	})
+			// }
 
 			if (shape) {
 				scene.add(shape)
@@ -384,7 +389,7 @@ class UIDrawerCanvas extends DrawerCanvas<IUIDrawerCanvasOptions> {
 				const drawer = new UIDrawerCanvas(scene, canvas)
 				drawer.applyDraw({ time: 0, fixedLineWidth, scale })
 
-				canvas.convertToBlob({ type: 'image/png', quality: 0.95 }).then(blob => {
+				canvas.convertToBlob({ type: 'image/png', quality: 1 }).then(blob => {
 					const fileReader = new FileReader()
 					fileReader.addEventListener(
 						'load',

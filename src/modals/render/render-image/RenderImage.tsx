@@ -37,6 +37,7 @@ const RenderImage: React.FunctionComponent<RenderImageProps> = ({ project, close
 	const [loading, setLoading] = React.useState<boolean>(false)
 
 	const [renderImage, setRenderImage] = React.useState<HTMLImageElement | null>(null)
+	const [blob, setBlob] = React.useState<Blob | null>(null)
 	const [renderImageStorageSize, setRenderImageStorageSize] = React.useState<string | null>(null)
 
 	async function getImage() {
@@ -58,6 +59,7 @@ const RenderImage: React.FunctionComponent<RenderImageProps> = ({ project, close
 					'load',
 					() => {
 						setRenderImage(renderImage)
+						setBlob(blob)
 						setLoading(false)
 						setRenderImageStorageSize(bytesToHuman(blob.size))
 					},
@@ -69,9 +71,9 @@ const RenderImage: React.FunctionComponent<RenderImageProps> = ({ project, close
 	}
 
 	function download() {
-		if (svg || renderImage) {
+		if (svg || blob) {
 			const ext = settings.type === 'image/jpeg' ? 'jpg' : settings.type === 'image/svg+xml' ? 'svg' : 'png'
-			createDownload(project.name + '.' + ext, svg ? svg : renderImage, settings.type)
+			createDownload(project.name + '.' + ext, svg ? svg : blob, settings.type)
 		}
 	}
 

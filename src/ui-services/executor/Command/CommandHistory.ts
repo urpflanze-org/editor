@@ -21,6 +21,7 @@ import CreateFromBuffer from '@executor/Command/commands/create-from-buffer'
 import Copy from '@executor/Command/commands/copy'
 import Cut from '@executor/Command/commands/cut'
 import Subdivide from '@executor/Command/commands/subdivide'
+import MakeRecursion from '@executor/Command/commands/make-recursion'
 
 export type PossibleCommand =
 	| 'add'
@@ -60,6 +61,7 @@ class CommandHistory extends Emitter<ICommandHistoryEvents> {
 			'set-prop': SetProp,
 			'set-ui-prop': SetUIProp,
 			'make-shape': MakeShape,
+			'make-recursion': MakeRecursion,
 			'move-up': MoveUp,
 			'move-down': MoveDown,
 			'move-to-top': MoveToTop,

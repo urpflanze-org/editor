@@ -10,6 +10,7 @@ import Primitive from '@window/workspace/properties/panels/Primitive'
 import Transform from '@window/workspace/properties/panels/Transform'
 import ShapeLoop from '@window/workspace/properties/panels/ShapeLoop'
 import Style from '@window/workspace/properties/panels/Style'
+import ShapeRecursive from '@window/workspace/properties/panels/ShapeRecursive'
 import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 interface PropertiesProp {
@@ -26,6 +27,7 @@ const Properties: React.FunctionComponent<PropertiesProp> = ({ selected_layer, s
 
 					{selected_layer.type === 'ShapeLoop' && <ShapeLoop layer={selected_layer} />}
 					{(selected_layer.bPrimitive || selected_layer.type === 'Group') && <Style layer={selected_layer} />}
+					{selected_layer.type === 'ShapeRecursive' && <ShapeRecursive layer={selected_layer} />}
 					<Repetition layer={selected_layer} />
 					{selected_layer.bPrimitive && <Primitive layer={selected_layer} />}
 					<Transform layer={selected_layer} />

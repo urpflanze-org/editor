@@ -3,6 +3,7 @@ import { IComunication } from '&types/comunication'
 import ShapeLoop from 'urpflanze/dist/core/shapes/ShapeLoop'
 import ShapePrimitive from 'urpflanze/dist/core/shapes/ShapePrimitive'
 import { IShapeBounding } from 'urpflanze/dist/core/types/shape-base'
+import ShapeBase from 'urpflanze/dist/core/shapes/ShapeBase'
 
 export const getProp = (comunication: IComunication, executor: Executor): any => {
 	const { id, name } = comunication.args
@@ -10,8 +11,7 @@ export const getProp = (comunication: IComunication, executor: Executor): any =>
 
 	if (name.indexOf('loop.') == 0 && sceneChild instanceof ShapeLoop) {
 		const key = name.substr(5) as 'start' | 'end' | 'inc'
-		// @ts-ignore
-		const loop = sceneChild.getLoop()
+		const loop = sceneChild.getLoop(ShapeBase.getEmptyPropArguments(sceneChild))
 		return loop[key] ?? undefined
 	}
 

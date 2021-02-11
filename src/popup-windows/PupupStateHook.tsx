@@ -3,10 +3,16 @@ import * as React from 'react'
 import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 import { findLayer } from '@window/workspace/layers/layer_utilities'
+import SceneChildUtilitiesData from '@ui-services/utilities/SceneChildUtilitiesData'
 
 interface PopupWindowState {
 	prop_name?: string
+	prop_type: 'props' | 'style'
 	layer: IProjectSceneChild
+}
+
+export function getPropTypeFromName(prop_name: string) {
+	return prop_name ? (SceneChildUtilitiesData[prop_name].dataType === 'drawer' ? 'style' : 'props') : 'props'
 }
 
 export default function (
@@ -16,6 +22,7 @@ export default function (
 	prop_name?: string
 ): [PopupWindowState, React.Dispatch<React.SetStateAction<PopupWindowState>>] {
 	const [state, setState] = React.useState<PopupWindowState>({
+		prop_type: 'props',
 		layer: {
 			id: '',
 			name: '',
@@ -51,6 +58,7 @@ export default function (
 			const finded = findLayer(layer_id, Object.values(scene))
 			finded &&
 				setState({
+					prop_type: getPropTypeFromName(prop_name),
 					prop_name: prop_name,
 					layer: finded,
 				})
@@ -59,7 +67,6 @@ export default function (
 		window.addEventListener('message', handleMessage, false)
 
 		function handleHistoryChange(e) {
-			console.log('sadfsd', e)
 			const path = window.location.pathname
 
 			if (path.indexOf('/' + popup) === 0) {

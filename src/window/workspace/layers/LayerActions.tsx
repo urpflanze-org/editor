@@ -23,11 +23,12 @@ const ShapesList = [
 	'Line',
 	'Triangle',
 	'Rect',
-	'RegularPolygon',
+	'Polygon',
 	'Circle',
 	'Rose',
 	'Spiral',
 	'Lissajous',
+	'SuperShape',
 	'Desidus',
 	'Shape',
 	'ShapeLoop',
@@ -265,6 +266,13 @@ const LayerActions: React.FunctionComponent<LayerActionProps> = (props: LayerAct
 						onClick={(e: React.MouseEvent) => call(e, 'make-shape', props.selecteds)}
 					/>
 				</Tooltip>
+				<Tooltip position="top" title="Make recursion" disabled={onScene || !bSameParent}>
+					<Icon
+						name="shape"
+						disabled={onScene || multipleSelected}
+						onClick={(e: React.MouseEvent) => call(e, 'make-recursion', props.selecteds)}
+					/>
+				</Tooltip>
 				{/* <Tooltip position="top" title="Make group" disabled={oneSelected || onScene || !bSameParent}>
 					<Icon
 						name="group"
@@ -313,7 +321,7 @@ const LayerActions: React.FunctionComponent<LayerActionProps> = (props: LayerAct
 const Container = styled.div`
 	height: ${pups.ms(2)};
 	display: grid;
-	grid-template-columns: repeat(7, max-content);
+	grid-template-columns: repeat(8, max-content);
 	justify-content: right;
 	align-items: center;
 	grid-gap: ${pups.ms(-1)};
@@ -359,7 +367,7 @@ const Shapes = styled.ul<{ open: boolean }>`
 	transform: translate(-92%, -99%) scale(${props => (props.open ? 1 : 0.8)});
 	opacity: ${props => (props.open ? 1 : 0)};
 	display: grid;
-	grid-template-columns: repeat(3, auto);
+	grid-template-columns: repeat(4, auto);
 `
 
 const Shape = styled.li`

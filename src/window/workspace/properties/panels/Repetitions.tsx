@@ -14,6 +14,7 @@ import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-impo
 import { TTransformable } from 'urpflanze/dist/services/types/scene-utilities'
 import SceneChildUtilitiesData from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
 import { RootState } from '&types/state'
+import { find } from '@window/workspace/layers/layer_utilities'
 
 const REPETITION_TYPES = [
 	{ key: 'Matrix', value: ERepetitionType.Matrix },
@@ -29,9 +30,7 @@ function getRepetitionType(layer: IProjectSceneChild): ERepetitionType {
 	// : layer.props.randomSeed ? ERepetitionType.Random : ERepetitionType.Ring
 }
 
-const Repetition: React.FunctionComponent<ISceneChildPanel & { projectRatio: number }> = (
-	props: ISceneChildPanel & { projectRatio: number }
-) => {
+const Repetition = (props: ISceneChildPanel & { projectRatio: number; layers: Array<IProjectSceneChild> }) => {
 	const layer = props.layer
 
 	let repetitions = layer.props.repetitions || 1
@@ -118,6 +117,8 @@ const Repetition: React.FunctionComponent<ISceneChildPanel & { projectRatio: num
 		}
 	}
 
+	const parent = layer.parentId ? find(layer.parentId, props.layers) : undefined
+
 	return (
 		<Panel name="Repetition" icon="repetitions" expandable={true} expanded={true}>
 			{!SceneUtilitiesExtended.bValueAnimation(repetitions) && (
@@ -145,10 +146,17 @@ const Repetition: React.FunctionComponent<ISceneChildPanel & { projectRatio: num
 				</small>
 			)}
 
-			{layer.depth > 0 && (
+			{layer.depth > 0 && parent?.type === 'Shape' && (
 				<div style={{ textAlign: 'right', cursor: 'pointer' }}>
 					<div style={{ display: 'inline-block' }}>
 						<Prop layer={layer} name="bUseParent" />
+					</div>
+				</div>
+			)}
+			{layer.depth > 0 && parent?.type === 'ShapeRecursive' && (
+				<div style={{ textAlign: 'right', cursor: 'pointer' }}>
+					<div style={{ display: 'inline-block' }}>
+						<Prop layer={layer} name="bUseRecursion" />
 					</div>
 				</div>
 			)}
@@ -158,6 +166,7 @@ const Repetition: React.FunctionComponent<ISceneChildPanel & { projectRatio: num
 
 export default React.memo(
 	connect((state: RootState) => ({
+		layers: Object.values(state.project.scene),
 		projectRatio: state.project.ratio,
 	}))(Repetition)
 )

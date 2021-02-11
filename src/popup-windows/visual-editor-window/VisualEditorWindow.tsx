@@ -17,7 +17,7 @@ import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
 import { IRawState } from 'urpflanze/dist/services/types/animation'
 import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
-import PopupStateHook from '@popup-windows/PupupStateHook'
+import PopupStateHook, { getPropTypeFromName } from '@popup-windows/PupupStateHook'
 import { SceneChildPropHeadWithParent, validateRawCode } from '@ui-services/utilities/ValidateCode'
 import AlertPromise from '@components/Alert'
 
@@ -116,10 +116,10 @@ const VisualEditorWindow: React.FunctionComponent<VisualEditorWindowProps> = (pr
 				layer={state.layer}
 				prop_name={state.prop_name}
 				selectLayer={layer => {
-					setState({ prop_name: state.prop_name, layer })
+					setState({ prop_name: state.prop_name, prop_type: state.prop_type, layer })
 				}}
 				selectPropName={prop_name => {
-					setState({ layer: state.layer, prop_name })
+					setState({ layer: state.layer, prop_name, prop_type: getPropTypeFromName(prop_name) })
 				}}
 			/>
 		</div>

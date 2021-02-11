@@ -53,7 +53,7 @@ const Style: React.FunctionComponent<ISceneChildPanel & { bGhost: boolean }> = (
 				valign="center"
 				style={{ width: '100%', overflow: 'hidden' }}
 			>
-				<Prop layer={layer} name="fill" />
+				{layer.type !== 'Line' && <Prop layer={layer} name="fill" />}
 				<Prop layer={layer} name="stroke" />
 				<Prop layer={layer} name="lineWidth" />
 				<div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>

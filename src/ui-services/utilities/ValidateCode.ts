@@ -3,18 +3,13 @@ import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-impo
 import Rect from 'urpflanze/dist/core/shapes/primitives/Rect'
 import Scene from 'urpflanze/dist/core/Scene'
 import { ISceneChildPropArguments } from 'urpflanze/dist/core/types/scene-child'
-import SceneUtilitiesExtended from 'urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
 import * as Urpflanze from 'urpflanze/dist'
-// const INITIAL = `(${SceneUtilitiesExtended.RAW_ARGUMENTS}) => {
+import { ShapeRecursive } from 'urpflanze/dist'
 
-// }`
-// const INITIAL_WITH_PARENT = `(${SceneUtilitiesExtended.RAW_ARGUMENTS_WITH_PARENT}) => {
-
-// }`
-export const SceneChildPropHead = `({ repetition, recursion, shape }) => {
+export const SceneChildPropHead = `({ repetition, shape }) => {
 
 }`
-export const SceneChildPropHeadWithParent = `({ repetition, recursion, shape, parent }) => {
+export const SceneChildPropHeadWithParent = `({ repetition, shape, parent }) => {
 
 }`
 
@@ -28,7 +23,6 @@ export function validateRawCode(
 		const scene = new Scene()
 		const shape = new Rect()
 
-		console.log(raw)
 		const fn = new Function('Urpflanze', 'scene', `"use strict"; return ${raw}`)(Urpflanze, scene)
 
 		scene.add(shape)
@@ -39,8 +33,11 @@ export function validateRawCode(
 			parent: undefined,
 		}
 
-		if (layer.bUseParent) {
-			prop_arguments.parent = { repetition: ShapeBase.getEmptyRepetition() }
+		if (layer.bUseParent || layer.bUseRecursion) {
+			prop_arguments.parent = {
+				repetition: ShapeBase.getEmptyRepetition(),
+				recursion: ShapeRecursive.getEmptyRecursion(),
+			}
 		}
 
 		fn(prop_arguments)

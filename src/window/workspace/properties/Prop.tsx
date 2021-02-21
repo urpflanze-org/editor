@@ -26,8 +26,11 @@ import SceneUtilitiesExtends from 'urpflanze/dist/services/scene-utilities/Scene
 import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 import { TSceneChildProp } from 'urpflanze/dist/core/types/scene-child'
 
-function copy(v: any): any {
-	return Array.isArray(v) ? v.slice() : v
+function valueToComponent(value: any): any {
+	if (SceneUtilitiesExtends.bValueTransformable(value)) {
+		value = value.value
+	}
+	return Array.isArray(value) ? value.slice() : value
 }
 
 interface IProp {
@@ -47,10 +50,6 @@ function isEqual(a: any, b: any): boolean {
 }
 
 const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, forceArray }: IProp) => {
-	if (SceneUtilitiesExtends.bValueTransformable(value)) {
-		value = value.value
-	}
-
 	const propContainerRef = React.useRef<HTMLDivElement>(null)
 	const sceneChildProp = SceneChildPropsData[name] as ISceneChildUtiltiesData
 	let initValue = value ?? sceneChildProp.default
@@ -70,6 +69,12 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 
 	function handleChange(new_value: any, preventPushToHistory?: boolean) {
 		if (new_value !== initValue) {
+			// Convert value from a array to single value.
+			// Is util for sideLength on not 1:1 ratio
+			if (sceneChildProp.canBArray && Array.isArray(new_value) && new_value[0] == new_value[1]) {
+				new_value = new_value[0]
+			}
+
 			// Convert value to transformable-prop (responsivity)
 
 			if (SceneUtilitiesExtends.bPropInSceneChildUtilitiesData(name)) {
@@ -113,9 +118,9 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 		case 'range':
 			Component = (
 				<DynamicRange
-					// value={typeof initValue == 'number' || Array.isArray(initValue) ? copy(bAngle ? toDegrees(initValue as number) : initValue) : initValue}
-					// value={typeof initValue === 'number' || Array.isArray(initValue) ? copy(initValue) : initValue}
-					value={copy(initValue)}
+					// value={typeof initValue == 'number' || Array.isArray(initValue) ? valueToComponent(bAngle ? toDegrees(initValue as number) : initValue) : initValue}
+					// value={typeof initValue === 'number' || Array.isArray(initValue) ? valueToComponent(initValue) : initValue}
+					value={valueToComponent(initValue)}
 					bDefaultValue={bDefaultValue}
 					canBArray={sceneChildProp.canBArray || false}
 					initialArray={sceneChildProp.initialArray || false}
@@ -136,19 +141,25 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 				<Radio
 					onChange={handleChange}
 					name={sceneChildProp.label}
-					selected={initValue}
+					selected={valueToComponent(initValue)}
 					values={sceneChildProp.options as Array<{ key: string; value: any }>}
 				/>
 			)
 			break
 		case 'checkbox':
-			Component = <Checkbox checked={initValue as boolean} onChange={handleChange} name={sceneChildProp.label} />
+			Component = (
+				<Checkbox
+					checked={valueToComponent(initValue) as boolean}
+					onChange={handleChange}
+					name={sceneChildProp.label}
+				/>
+			)
 			break
 		case 'select':
 			Component = (
 				<Select
 					options={sceneChildProp.options as Array<{ key: string; value: any }>}
-					value={initValue}
+					value={valueToComponent(initValue)}
 					placeholder={sceneChildProp.label}
 					onChange={handleChange}
 				/>
@@ -159,7 +170,7 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 				<DynamicColor
 					layer={layer}
 					prop_name={name}
-					value={initValue}
+					value={valueToComponent(initValue)}
 					name={sceneChildProp.label}
 					onChange={handleChange}
 					bDefaultValue={typeof value === 'undefined'}
@@ -172,7 +183,7 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 					layer={layer}
 					name={sceneChildProp.label}
 					prop_name={name}
-					value={initValue}
+					value={valueToComponent(initValue)}
 					min={sceneChildProp.min as number}
 					max={sceneChildProp.max as number}
 					step={sceneChildProp.step as number}

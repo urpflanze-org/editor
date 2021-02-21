@@ -6,6 +6,9 @@ import SceneUtilties from 'urpflanze/dist/services/scene-utilities/SceneUtilitie
 import SceneChild from 'urpflanze/dist/core/SceneChild'
 import { ISceneChildProps } from 'urpflanze/dist/core/types/scene-child'
 import SceneChildUtilitiesData from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+import { TSceneChildPropExtendedValue, TTransformable } from 'urpflanze/dist/services/types/scene-utilities'
+import SceneUtilitiesExtended from 'urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
+import { TAnimation } from 'urpflanze/dist/services/types/animation'
 
 export interface ICommandSetPropArgs {
 	id: string | number
@@ -118,10 +121,28 @@ class SetProp extends Command {
 
 			const label = executor?.getScene().find(id)?.name || id
 
-			this.descriptor = `set prop "${name}" of "${label}" from "${prev_value}" to "${value}"`
+			this.descriptor = `set prop "${name}" of "${label}" from "${SetProp.valueToString(
+				prev_value
+			)}" to "${SetProp.valueToString(value)}"`
 		} else {
 			this.descriptor = `set multiple prop`
 		}
+	}
+
+	static valueToString(value: TSceneChildPropExtendedValue): string | number {
+		if (typeof value === 'string' || typeof value === 'number') return value
+
+		if (SceneUtilitiesExtended.bValueAnimation(value)) {
+			// TODO add from to durate
+			return (value as TAnimation).type + ' anim'
+		}
+
+		if (SceneUtilitiesExtended.bValueTransformable(value)) {
+			// TODO add from to durate
+			return (value as TTransformable).value.toString()
+		}
+
+		return '...'
 	}
 }
 

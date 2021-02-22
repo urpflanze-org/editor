@@ -118,8 +118,6 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 		case 'range':
 			Component = (
 				<DynamicRange
-					// value={typeof initValue == 'number' || Array.isArray(initValue) ? valueToComponent(bAngle ? toDegrees(initValue as number) : initValue) : initValue}
-					// value={typeof initValue === 'number' || Array.isArray(initValue) ? valueToComponent(initValue) : initValue}
 					value={valueToComponent(initValue)}
 					bDefaultValue={bDefaultValue}
 					canBArray={sceneChildProp.canBArray || false}

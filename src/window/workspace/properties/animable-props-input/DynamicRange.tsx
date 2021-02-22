@@ -51,7 +51,7 @@ const DynamicRange: React.FunctionComponent<IDynamicRangeProp> = ({
 	const bAnimation = SceneUtilitiesExtended.bValueAnimation(value)
 
 	const can_lock_unlock = true
-	const multiple = type == 'multiple-range'
+	const multiple = type === 'multiple-range' || Array.isArray(value)
 	const Input = multiple ? MultipleRange : Range
 
 	// React.useEffect(() => {

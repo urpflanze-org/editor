@@ -69,30 +69,32 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 
 	function handleChange(new_value: any, preventPushToHistory?: boolean) {
 		if (new_value !== initValue) {
-			// Convert value from a array to single value.
-			// Is util for sideLength on not 1:1 ratio
-			if (sceneChildProp.canBArray && Array.isArray(new_value) && new_value[0] == new_value[1]) {
-				new_value = new_value[0]
-			}
-
-			// Convert value to transformable-prop (responsivity)
-
-			if (SceneUtilitiesExtends.bPropInSceneChildUtilitiesData(name)) {
-				if (!SceneUtilitiesExtends.bValueTransformable(new_value)) {
-					if (SceneUtilitiesExtends.bValueAnimation(new_value)) {
-						if (!SceneUtilitiesExtends.bValueTransformable(new_value.value.from)) {
-							new_value.value.from = { type: 'transformable-prop', value: new_value.value.from }
-						}
-						if (!SceneUtilitiesExtends.bValueTransformable(new_value.value.to)) {
-							new_value.value.to = { type: 'transformable-prop', value: new_value.value.to }
-						}
-					} else {
-						new_value = forceArray ? toArray(new_value as number) : new_value
-						new_value = { type: 'transformable-prop', value: new_value }
-					}
+			if (typeof new_value !== 'undefined') {
+				// Convert value from a array to single value.
+				// Is util for sideLength on not 1:1 ratio
+				if (sceneChildProp.canBArray && Array.isArray(new_value) && new_value[0] == new_value[1]) {
+					new_value = new_value[0]
 				}
-			} else {
-				new_value = forceArray ? toArray(new_value as number) : new_value
+
+				// Convert value to transformable-prop (responsivity)
+
+				if (SceneUtilitiesExtends.bPropInSceneChildUtilitiesData(name)) {
+					if (!SceneUtilitiesExtends.bValueTransformable(new_value)) {
+						if (SceneUtilitiesExtends.bValueAnimation(new_value)) {
+							if (!SceneUtilitiesExtends.bValueTransformable(new_value.value.from)) {
+								new_value.value.from = { type: 'transformable-prop', value: new_value.value.from }
+							}
+							if (!SceneUtilitiesExtends.bValueTransformable(new_value.value.to)) {
+								new_value.value.to = { type: 'transformable-prop', value: new_value.value.to }
+							}
+						} else {
+							new_value = forceArray ? toArray(new_value as number) : new_value
+							new_value = { type: 'transformable-prop', value: new_value }
+						}
+					}
+				} else {
+					new_value = forceArray ? toArray(new_value as number) : new_value
+				}
 			}
 			executor.run(
 				'set-prop',

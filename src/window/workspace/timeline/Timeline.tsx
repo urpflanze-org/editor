@@ -101,7 +101,7 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 					onChange={v => executor.ask('set-timeline-duration', v * 1000)}
 				/>
 				<Tooltip title="FPS">
-					<Icon name="time" />
+					<Icon name="framerate" />
 				</Tooltip>
 				<Select
 					position="top"

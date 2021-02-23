@@ -95,6 +95,7 @@ const RenderAnimation: React.FunctionComponent<RenderAnimationProps> = ({
 
 		return () => {
 			// executor.ask('render-stop')
+			document.title = app_utilities.getDocumentProjectTitle(project.name)
 			executor.detach('renderer:start', handleRenderStart)
 			executor.detach('renderer:render-frame', handleRenderFrame)
 		}
@@ -147,6 +148,7 @@ const RenderAnimation: React.FunctionComponent<RenderAnimationProps> = ({
 		console.log('stop')
 		setStopped(true)
 		await executor.ask('render-stop')
+		document.title = app_utilities.getDocumentProjectTitle(project.name)
 		setStarted(false)
 		setStopped(false)
 	}

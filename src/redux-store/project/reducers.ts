@@ -87,27 +87,30 @@ export function projectReducer(state = initialProjectState, action: ProjectActio
 				const layer = findLayer(action.props[i].id, Object.values(state.scene))
 				if (layer) {
 					const current_layer_prop = action.props[i]
-					switch (SceneChildUtilitiesData[current_layer_prop.name].dataType) {
-						case 'props': {
-							if (layer.props[current_layer_prop.name] !== current_layer_prop.value) {
-								layer.props[current_layer_prop.name] = current_layer_prop.value
+
+					if (SceneChildUtilitiesData[current_layer_prop.name]) {
+						switch (SceneChildUtilitiesData[current_layer_prop.name].dataType) {
+							case 'props': {
+								if (layer.props[current_layer_prop.name] !== current_layer_prop.value) {
+									layer.props[current_layer_prop.name] = current_layer_prop.value
+								}
+								break
 							}
-							break
-						}
-						case 'drawer': {
-							if (layer.style[current_layer_prop.name] !== current_layer_prop.value) {
-								layer.style[current_layer_prop.name] = current_layer_prop.value
+							case 'drawer': {
+								if (layer.style[current_layer_prop.name] !== current_layer_prop.value) {
+									layer.style[current_layer_prop.name] = current_layer_prop.value
+								}
+								break
 							}
-							break
-						}
-						case 'settings': {
-							if (layer[current_layer_prop.name] !== current_layer_prop.value) {
-								layer[current_layer_prop.name] = current_layer_prop.value
+							case 'settings': {
+								if (layer[current_layer_prop.name] !== current_layer_prop.value) {
+									layer[current_layer_prop.name] = current_layer_prop.value
+								}
+								break
 							}
-							break
 						}
+						updated = true
 					}
-					updated = true
 				}
 			}
 

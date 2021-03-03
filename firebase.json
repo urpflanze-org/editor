@@ -1,16 +1,13 @@
 {
-  "hosting": {
-    "public": "dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
+	"hosting": {
+		"site": "urpflanze-org-editor",
+		"public": "dist",
+		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+		"rewrites": [
+			{
+				"source": "**",
+				"destination": "/index.html"
+			}
+		]
+	}
 }

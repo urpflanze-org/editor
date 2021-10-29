@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 interface Props {
-	title: string
+	title: string | JSX.Element
 	disabled?: boolean
 	small?: boolean
 	position?: 'top' | 'left' | 'bottom' | 'right'
@@ -16,10 +16,9 @@ const Tooltip: React.FunctionComponent<Props> = ({
 	...otherProps
 }: React.PropsWithChildren<Props>) => (
 	<div className={`tooltip ${disabled ? 'tooltip--disabled' : ''}`} disabled={disabled} {...otherProps}>
-		<div
-			className={`tooltip__label ${small ? 'tooltip__label--small' : ''} tooltip__label--${position || 'top'}`}
-			dangerouslySetInnerHTML={{ __html: title }}
-		/>
+		<div className={`tooltip__label ${small ? 'tooltip__label--small' : ''} tooltip__label--${position || 'top'}`}>
+			{title}
+		</div>
 		{children}
 	</div>
 )

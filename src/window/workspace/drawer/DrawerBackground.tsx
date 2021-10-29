@@ -14,7 +14,7 @@ import { imageToCanvas } from '@window/workspace/drawer/DrawerUtilities'
 interface IDrawerBackgroundProps {
 	offsets: DrawerOffsets
 	background: string
-	backgroundImage: string
+	backgroundImage: string | undefined
 }
 
 const DrawerBackground: React.FunctionComponent<IDrawerBackgroundProps> = ({

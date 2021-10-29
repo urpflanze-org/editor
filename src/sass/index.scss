@@ -21,6 +21,29 @@
 	// border-radius: 6px;
 }
 
+@font-face {
+	font-family: 'JetBrains Mono';
+	font-weight: normal;
+	font-style: normal;
+	src: url(assets/fonts/JetBrainsMono/JetBrainsMono-SemiLight.woff2) format('woff2');
+}
+@font-face {
+	font-family: 'JetBrains Mono';
+	font-weight: 600;
+	font-style: normal;
+	src: url(assets/fonts/JetBrainsMono/JetBrainsMono-ExtraBold.woff2) format('woff2');
+}
+
+html,
+input,
+textarea,
+button {
+	-webkit-font-feature-settings: 'liga' on, 'calt' on;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	font-family: 'JetBrains Mono';
+}
+
 html {
 	background: darken(color(dark), 5%);
 	color: rgba(255, 255, 255, 0.8);

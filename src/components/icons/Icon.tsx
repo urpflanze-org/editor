@@ -44,7 +44,6 @@ const Icon = (props: IconProps) => {
 			} ${disabled ? 'icon--disabled' : ''}`}
 			style={{ ...style, cursor, verticalAlign: valign }}
 			onClick={onClick}
-			{...otherProps}
 			dangerouslySetInnerHTML={{ __html: svg }}
 		/>
 	)

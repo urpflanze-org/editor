@@ -7,7 +7,7 @@
 	}
 }
 
-$tooltipColor: ligten(color(dark), 10%);
+$tooltipColor: lighten(color(dark), 10%);
 
 .tooltip {
 	position: relative;

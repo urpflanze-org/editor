@@ -13,10 +13,7 @@ export const SceneChildPropHeadWithParent = `({ repetition, shape, parent }) => 
 
 }`
 
-export function validateRawCode(
-	layer: IProjectSceneChild,
-	raw: string | undefined
-): { valid: boolean; error?: string } {
+export function validateRawCode(layer: IProjectSceneChild, raw: string | undefined): { valid: boolean; error?: any } {
 	if (raw === undefined) return { valid: true }
 
 	try {

@@ -5,7 +5,7 @@ import executor from '@redux-store/executor'
 import styled from 'styled-components'
 import Tooltip from '@components/Tooltip'
 
-const Toolbar: React.FunctionComponent<{}> = () => {
+const Toolbar: React.FunctionComponent = () => {
 	const [shapes, setShapes] = React.useState<Array<{ name: string; image: string }>>([])
 
 	React.useEffect(() => {

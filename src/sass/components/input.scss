@@ -1,0 +1,150 @@
+.button {
+	border: none;
+	color: rgba(255, 255, 255, 0.8);
+	background: none;
+	cursor: pointer;
+	line-height: 1;
+	border-bottom: 2px solid color(primary);
+	padding: ms(-1);
+
+	&:hover {
+		color: rgba(255, 255, 255, 1);
+	}
+}
+
+.checkbox {
+	&__container {
+		display: flex;
+		align-items: center;
+		> label {
+			margin-left: ms(-1);
+		}
+		> * {
+			cursor: pointer;
+		}
+	}
+
+	@for $size from 0 to 3 {
+		&--s#{$size} .checkbox__input {
+			width: ms($size);
+			height: ms($size);
+		}
+	}
+
+	&__input {
+		position: relative;
+		appearance: none;
+		margin: 0;
+		border-radius: 2px;
+		border: 1px solid color(gray-dark);
+		transition: 0.1s border-color ease-out;
+
+		&:after {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			display: block;
+			content: ' ';
+			background: color(gray-dark);
+			transform: scale(0.7);
+			transform-origin: center center;
+			transition: 0.1s background ease-out;
+			border-radius: 2px;
+		}
+
+		&:checked {
+			border-color: color(primary);
+
+			&:after {
+				background: color(primary);
+			}
+		}
+	}
+}
+
+.radio {
+	&__option {
+		position: relative;
+		line-height: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		cursor: pointer;
+		padding-bottom: 3px;
+		color: color(gray-dark);
+		font-size: 0.8rem;
+
+		&__name {
+			cursor: pointer;
+		}
+
+		&__value {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			appearance: none;
+			width: 100%;
+			height: 3px;
+			margin: 0;
+			background: color(gray-dark);
+
+			&:checked {
+				& + .radio__option__name {
+					color: color(primary);
+				}
+				background: color(primary);
+			}
+		}
+	}
+}
+
+.select {
+	position: relative;
+	border: 1px solid color(gray-dark);
+	border-radius: 2px;
+
+	&__value {
+		padding: 0 ms(-1);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		cursor: pointer;
+	}
+
+	&--top {
+		bottom: 100%;
+	}
+
+	&--open .select__options {
+		display: block;
+	}
+
+	&__options {
+		position: absolute;
+		z-index: 1;
+		width: 100%;
+		max-height: 20vh;
+		overflow: auto;
+		top: 100%;
+		border: 1px solid color(gray-dark);
+		display: none;
+		list-style: none;
+		margin: ms(-2) 0;
+		padding: 0;
+		background: color(dark);
+
+		&__option {
+			padding: 0 ms(-1);
+			cursor: pointer;
+
+			&--selected {
+				background: color(primary);
+			}
+
+			$r: &;
+			&:hover:not(#{$r}) {
+				background: lighten(color(dark), 5%);
+			}
+		}
+	}
+}

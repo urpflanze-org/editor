@@ -1,0 +1,44 @@
+.icon {
+	display: inline-block;
+	// vertical-align: ${props => props.valign || 'middle' };
+	font-size: 0;
+	transition: all 0.1s;
+
+	@for $i from 0 to 5 {
+		&--s#{$i} {
+			width: ms($i);
+			height: ms($i);
+			line-height: ms($i);
+		}
+	}
+
+	&--cliccable {
+		cursor: pointer;
+		opacity: 0.8;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	&--disabled {
+		pointer-events: none;
+		opacity: 0.2;
+	}
+
+	$rotations: 45, 90, 180, 270;
+	@each $r in $rotations {
+		&--r#{$r} svg {
+			transform: rotate(#{$r}deg);
+		}
+	}
+
+	> svg {
+		display: inline-block;
+		vertical-align: middle;
+		pointer-events: none;
+		width: 100%;
+		fill: #fff;
+		transition: transform 0.3s;
+	}
+}

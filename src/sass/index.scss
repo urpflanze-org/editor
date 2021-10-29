@@ -1,0 +1,161 @@
+@import 'pupsConfigs';
+
+//////////////////////////////
+
+@import '../../node_modules/@pups/sass/pups.helpers';
+
+//////////////////////////////
+
+@include pups(); // Bootstrap
+
+//////////////////////////////
+
+::-webkit-scrollbar {
+	width: ms(-2);
+	height: ms(-2);
+	background-color: lighten(color(dark), 5%);
+}
+
+::-webkit-scrollbar-thumb {
+	background: lighten(color(dark), 20%);
+	// border-radius: 6px;
+}
+
+html {
+	background: darken(color(dark), 5%);
+	color: rgba(255, 255, 255, 0.8);
+}
+
+html,
+body {
+	margin: 0;
+}
+
+input::-moz-selection {
+	background: lighten(color(dark), 60%);
+}
+input::selection {
+	background: lighten(color(dark), 60%);
+}
+
+input {
+	color: inherit;
+	font-family: inherit;
+	font-size: inherit;
+}
+
+#picker-root {
+	position: relative;
+	z-index: 10000;
+}
+#modal-root {
+	position: relative;
+	z-index: 1000;
+}
+#alert-root {
+	position: relative;
+	z-index: 1000;
+}
+
+* {
+	box-sizing: border-box;
+	scrollbar-width: thin;
+}
+*:not(input) {
+	user-select: none;
+}
+
+*:focus {
+	outline: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+h1,
+h2,
+h3 {
+	margin: 0;
+}
+
+@keyframes promptFocusAnimation {
+	from {
+		transform: translateX(-50%) scale(1.05);
+		box-shadow: 0 ms(-1) ms(1) rgba(20, 20, 20, 0.9);
+	}
+	to {
+		transform: translateX(-50%) scale(1);
+		box-shadow: 0 ms(-1) ms(0) rgba(0, 0, 0, 0.6);
+	}
+}
+
+#prompt-root,
+#alert-root {
+	&.open {
+		position: fixed;
+		z-index: 100000000;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+	}
+	.prompt,
+	.alert {
+		position: fixed;
+		z-index: 1000000000;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		background: color(dark-lighten);
+		box-shadow: 0 ms(-1) ms(0) rgba(0, 0, 0, 0.6);
+		padding: ms(0);
+		border-radius: 0 0 2px 2px;
+
+		&.prompt--focus {
+			animation: promptFocusAnimation 0.3s both;
+		}
+
+		&__label {
+			font-size: ms(0);
+			font-weight: bold;
+			margin-bottom: ms(-1);
+		}
+		&__input {
+			width: ms(6);
+			line-height: 1;
+			background: color(dark);
+			border: none;
+			margin-right: ms(-1);
+			padding: ms(-1);
+		}
+
+		&__confirm_buttons {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-gap: ms(0);
+			justify-content: space-between;
+		}
+
+		&__button {
+			border: none;
+			color: rgba(255, 255, 255, 0.8);
+			background: none;
+			cursor: pointer;
+			line-height: 1;
+			border-bottom: 2px solid color(primary);
+			padding: ms(-1);
+
+			&:hover {
+				color: rgba(255, 255, 255, 1);
+			}
+		}
+	}
+}
+
+@import './popup-windows/visual-editor.scss';
+@import './popup-windows/code-editor.scss';
+
+.input,
+.textarea {
+	background: color(dark);
+	color: color(lighten);
+}
+
+@import './components/index.scss';

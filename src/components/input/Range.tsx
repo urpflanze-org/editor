@@ -1,6 +1,4 @@
 import * as React from 'react'
-import styled from 'styled-components'
-import pups from '@pups/js'
 import { clamp } from '@pups/utility/build/Number'
 
 import Icon from '@components/icons/Icon'
@@ -13,21 +11,11 @@ export interface IRange {
 	step: number
 	value: number
 	small?: boolean
-	size?: number | string
 	onChange: (value: any, mode: TSliderMode) => void
 	bDefaultValue?: boolean
 }
 
-const Range: React.FunctionComponent<IRange> = ({
-	min,
-	max,
-	step,
-	value,
-	small,
-	size,
-	onChange,
-	bDefaultValue,
-}: IRange) => {
+const Range: React.FunctionComponent<IRange> = ({ min, max, step, value, small, onChange, bDefaultValue }: IRange) => {
 	const [inputRef] = useRef<HTMLInputElement>()
 	const [bRawEdit, setRawEdit] = React.useState(false)
 	const expMatch = step.toExponential(1).match(/e(-?[0-9]+)/)
@@ -75,9 +63,10 @@ const Range: React.FunctionComponent<IRange> = ({
 	})
 
 	return (
-		<Input small={small} size={size}>
+		<div className={`range ${small ? 'range--small' : ''}`}>
 			{bRawEdit ? (
-				<InputText
+				<input
+					className="range__input"
 					ref={inputRef}
 					defaultValue={value}
 					autoFocus={true}
@@ -88,92 +77,23 @@ const Range: React.FunctionComponent<IRange> = ({
 				/>
 			) : (
 				<React.Fragment>
-					<Arrow style={{ left: 0 }} onClick={e => incValue(-1, e.shiftKey ? 10 : 1)}>
+					<div className="range__arrow" style={{ left: 0 }} onClick={e => incValue(-1, e.shiftKey ? 10 : 1)}>
 						<Icon size={0} rotate={180} name="arrow-right" />
-					</Arrow>
-					<SliderContainer ref={sliderRef} bDefaultValue={bDefaultValue && currentValue.value === value}>
-						<SliderValue style={{ width: currentValue.valuePercentage + '%' }} />
-						<Value>{currentValue.value.toFixed(Math.log10(exp))}</Value>
-					</SliderContainer>
-					<Arrow style={{ right: 0 }} onClick={e => incValue(1, e.shiftKey ? 10 : 1)}>
+					</div>
+					<div
+						className={`range__slider ${bDefaultValue && currentValue.value === value ? 'range__slider--default' : ''}`}
+						ref={sliderRef}
+					>
+						<div className="range__slider__slide" style={{ width: currentValue.valuePercentage + '%' }} />
+						<div className="range__slider__value">{currentValue.value.toFixed(Math.log10(exp))}</div>
+					</div>
+					<div className="range__arrow" style={{ right: 0 }} onClick={e => incValue(1, e.shiftKey ? 10 : 1)}>
 						<Icon size={0} name="arrow-right" />
-					</Arrow>
+					</div>
 				</React.Fragment>
 			)}
-		</Input>
+		</div>
 	)
 }
-
-const Arrow = styled.div`
-	display: none;
-	position: absolute;
-	z-index: 100;
-	height: 100%;
-	top: 0;
-	background: ${pups.palette.get('dark-lighten', 'hex').lighten(5)};
-	cursor: pointer;
-`
-
-const Input = styled.div<{ small?: boolean; size?: number | string }>`
-	position: relative;
-	height: ${props =>
-		props.small
-			? pups.ms(0)
-			: props.size
-			? typeof props.size === 'string'
-				? props.size
-				: pups.ms(props.size)
-			: '100%'};
-	line-height: ${props =>
-		props.small
-			? pups.ms(0)
-			: props.size
-			? typeof props.size === 'string'
-				? props.size
-				: pups.ms(props.size)
-			: 'inherit'};
-	font-size: ${props => (props.small ? pups.sub(-1) : null)};
-	background: ${pups.palette.get('dark', 'hex')};
-
-	width: 100%;
-	&:hover ${Arrow} {
-		display: block;
-	}
-`
-
-const InputText = styled.input`
-	display: inline-block;
-	width: 100%;
-	height: 100%;
-	padding: 0 ${pups.ms(-1)};
-	background: ${pups.palette.get('dark', 'hex').darken(5)};
-	border: none;
-	color: #fff;
-`
-
-const SliderContainer = styled.div<{ bDefaultValue?: boolean }>`
-	position: relative;
-	height: 100%;
-	opacity: ${props => (props.bDefaultValue ? 0.3 : 1)};
-	cursor: ew-resize;
-
-	&:hover {
-		background: rgba(255, 255, 255, 0.2);
-	}
-`
-
-const SliderValue = styled.div`
-	height: 100%;
-	background: ${pups.palette.get('primary', 'hex')};
-	pointer-events: none;
-`
-
-const Value = styled.div`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	pointer-events: none;
-`
 
 export default React.memo(Range)

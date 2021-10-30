@@ -28,7 +28,8 @@
 			"@components/*": ["./components/*"],
 			"@ui-services/*": ["./ui-services/*"],
 			"@popup-windows/*": ["./popup-windows/*"],
-			"@executor/*": ["./ui-services/executor/*"]
+			"@executor/*": ["./ui-services/executor/*"],
+			"@urpflanze-ext": ["./urpflanze-ext/index.ts"]
 		},
 		"noErrorTruncation": true
 	},

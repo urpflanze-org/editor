@@ -1,8 +1,6 @@
 import pups from '@pups/js'
 
-import Scene from 'urpflanze/dist/core/Scene'
-import Emitter from 'urpflanze/dist/services/events/Emitter'
-import Renderer from 'urpflanze/dist/services/renderer/Renderer'
+import { Scene } from '@urpflanze/core/dist/esm/Scene'
 
 import UIDrawerCanvas from '@ui-services/drawer-canvas/UIDrawerCanvas'
 
@@ -17,10 +15,9 @@ import { ICommandEffects } from '&types/command'
 import { resize } from '@executor/Ask/answer/drawers'
 // import JSONImporter from '@ui-services/exporter-importer/json/Importer'
 import Log from 'Log'
-import DrawerCanvas from 'urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
-import JSONExporter from 'urpflanze/dist/services/exporters/JSONExporter'
 
-import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
+import { Emitter } from '@urpflanze/drawer-canvas/dist/esm/Emitter'
+import { Renderer } from '@urpflanze/drawer-canvas/dist/esm/Renderer'
 
 interface EventIterceptor {
 	event: {
@@ -42,7 +39,7 @@ class Executor extends Emitter<EventIterceptor> {
 		scene.background = pups.color('dark').toString('hex')
 
 		const initialDrawer = new UIDrawerCanvas(scene)
-		initialDrawer.getTimeline().setSequence(6000, 60)
+		initialDrawer.timeline.setSequence(6000, 60)
 		this.updateDrawer(initialDrawer)
 
 		this.renderer = new Renderer()
@@ -55,7 +52,7 @@ class Executor extends Emitter<EventIterceptor> {
 		this.renderer.attach('renderer:start', this.sendEvent.bind(this, 'renderer:start'))
 		this.renderer.attach('renderer:render-frame', this.sendEvent.bind(this, 'renderer:render-frame'))
 
-		SceneUtilities.register('Desidus', DesidusShape)
+		// SceneUtilities.register('Desidus', DesidusShape)
 	}
 
 	/**

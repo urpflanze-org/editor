@@ -8,8 +8,7 @@ import Grid from '@components/Grid'
 import pups from '@pups/js'
 import { MODE_FUNCTIONS } from '@window/workspace/properties/simple-animation/SimpleAnimationUtilities'
 import Checkbox from '@components/input/Checkbox'
-import { ISequenceMeta } from 'urpflanze/dist/services/types/timeline'
-import { ISimpleAnimation } from 'urpflanze/dist/services/types/animation'
+import { ISequenceMeta } from '@urpflanze/drawer-canvas/dist/cjs/types'
 
 interface SimpleAnimationAdvanceSettingsProps {
 	state: ISimpleAnimation

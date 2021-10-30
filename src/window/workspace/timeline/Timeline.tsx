@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import pups from '@pups/js'
 import { RootState } from '&types/state'
 import executor from '@redux-store/executor'
-import TimelineClass from 'urpflanze/dist/services/timeline/Timeline'
+import TimelineClass from '@urpflanze/drawer-canvas/dist/esm/Timeline'
 
 import Icon from '@components/icons/Icon'
 import Bar from '@window/workspace/timeline/Bar'

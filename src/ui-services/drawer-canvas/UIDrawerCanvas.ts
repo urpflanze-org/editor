@@ -1,37 +1,36 @@
-import Scene from 'urpflanze/dist/core/Scene'
-import DrawerCanvas from 'urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
+import { IDrawerCanvasOptions, IDrawerCanvasPropArguments, DrawerCanvas } from '@urpflanze/drawer-canvas/dist/cjs'
 
-import { IBufferIndex, IShapeBounding } from 'urpflanze/dist/core/types/shape-base'
-import ShapePrimitive from 'urpflanze/dist/core/shapes/ShapePrimitive'
-import SceneUtilities from 'urpflanze/dist/services/scene-utilities/SceneUtilities'
-import SceneChild from 'urpflanze/dist/core/SceneChild'
-import { now } from '@ui-services/utilities/utilies'
-import { IDrawerCanvasOptions, IDrawerCanvasPropArguments } from 'urpflanze/dist/services/types/drawer'
-import Drawer from 'urpflanze/dist/services/drawers/Drawer'
-import { IStreamArguments } from 'urpflanze/dist/core/types/scene-child'
-import Vec2 from 'urpflanze/dist/core/math/Vec2'
+import {
+	IStreamArguments,
+	SceneChild,
+	now,
+	IBaseRepetition,
+	IBufferIndex,
+	IShapeBounding,
+	Scene,
+} from '@urpflanze/core/dist/cjs'
 
-interface IUIDrawerCanvasOptions extends IDrawerCanvasOptions {
-	scale?: number
-	translate?: Array<number>
-	fixedLineWidth?: boolean
+import Drawer from '@window/workspace/drawer/Drawer'
+
+type TDrawerOptions = Required<Omit<IDrawerCanvasOptions, 'backgroundImage' | 'ghostSkipFunction'>> & {
+	backgroundImage?: CanvasImageSource
+	ghostSkipFunction?: (ghostRepetition: IBaseRepetition, currentTime: number) => number
 }
+class UIDrawerCanvas extends DrawerCanvas {
+	scale: number
+	translate: [number, number]
 
-class UIDrawerCanvas extends DrawerCanvas<IUIDrawerCanvasOptions> {
 	constructor(
 		scene?: Scene,
 		canvasOrContainer?: HTMLElement | HTMLCanvasElement | OffscreenCanvas,
-		drawerOptions?: IUIDrawerCanvasOptions,
-		ratio: number | undefined = undefined,
+		drawerOptions?: IDrawerCanvasOptions & { translate?: [number, number]; scale: number },
 		duration?: number,
-		framerate?: number,
-		bBuffering = false
+		framerate?: number
 	) {
-		super(scene, canvasOrContainer, drawerOptions, ratio, duration, framerate, bBuffering)
+		super(scene, canvasOrContainer, drawerOptions, duration, framerate, 'linear')
 
-		this.drawerOptions.scale = drawerOptions?.scale ?? 1
-		this.drawerOptions.fixedLineWidth = drawerOptions?.fixedLineWidth ?? false
-		this.drawerOptions.translate = drawerOptions?.translate ?? [0, 0]
+		this.translate = drawerOptions?.translate ?? [0, 0]
+		this.scale = drawerOptions?.scale ?? 1
 	}
 
 	/**
@@ -42,12 +41,20 @@ class UIDrawerCanvas extends DrawerCanvas<IUIDrawerCanvasOptions> {
 	 * @param {Required<IDrawerOptions>[K]} [value]
 	 * @memberof CanvasDrawer
 	 */
-	public setOption<K extends keyof IUIDrawerCanvasOptions>(
-		name: K | IUIDrawerCanvasOptions,
-		value?: Required<IUIDrawerCanvasOptions>[K]
+	public setOption<K extends keyof TDrawerOptions>(
+		name: K | 'translate' | 'scale',
+		value: TDrawerOptions[K] | number | [number, number]
 	): void {
-		//@ts-ignore
-		super.setOption(name as keyof IDrawerCanvasOptions, value)
+		switch (name) {
+			case 'translate':
+				this.translate = value as [number, number]
+				break
+			case 'scale':
+				this.scale = value as number
+				break
+			default:
+				super.setOption(name, value as TDrawerOptions[K])
+		}
 	}
 
 	/**
@@ -58,7 +65,7 @@ class UIDrawerCanvas extends DrawerCanvas<IUIDrawerCanvasOptions> {
 	 * @returns {number}
 	 * @memberof DrawerCanvas
 	 */
-	public applyDraw(options: IUIDrawerCanvasOptions & { ghostIndex?: number }): number {
+	public realDraw(options: IDrawerCanvasOptions & { ghostIndex?: number }): number {
 		const start_time = now()
 		const scene = this.scene as Scene
 		const context = this.context as CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
@@ -67,11 +74,11 @@ class UIDrawerCanvas extends DrawerCanvas<IUIDrawerCanvasOptions> {
 
 		context.globalCompositeOperation = 'source-over'
 
-		const scale: number = options.scale ?? 1
-		const translate: Array<number> = options.translate ?? [0, 0]
+		const scale: number = this.scale
+		const translate: Array<number> = this.translate
 		const time: number = options.time ?? 0
 		const simmetricLines: number = options.simmetricLines ?? 0
-		const fixedLineWidth: boolean | undefined = options.fixedLineWidth
+		// const fixedLineWidth: boolean | undefined = true
 		const clear: boolean | undefined = options.clear
 		const noBackground: boolean | undefined = options.noBackground
 		const backgroundImage: CanvasImageSource | undefined = options.backgroundImage
@@ -280,7 +287,8 @@ class UIDrawerCanvas extends DrawerCanvas<IUIDrawerCanvasOptions> {
 							// context.lineDashOffset = lineDashOffset
 							// context.miterLimit = miterLimit
 
-							context.lineWidth = fixedLineWidth ? lineWidth : lineWidth * scale
+							// context.lineWidth = fixedLineWidth ? lineWidth : lineWidth * scale
+							context.lineWidth = lineWidth * scale
 							context.strokeStyle = stroke
 							context.stroke()
 						}

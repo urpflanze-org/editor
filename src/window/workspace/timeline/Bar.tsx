@@ -1,7 +1,7 @@
 import * as React from 'react'
 import pups from '@pups/js'
 
-import { relativeClamp, clamp } from 'urpflanze/dist/Utilites'
+import { relativeClamp, clamp } from '@urpflanze/core/dist/cjs'
 import useRect from '@hooks/useRect'
 import useDraggable from '@hooks/useDraggable'
 

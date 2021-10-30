@@ -1,8 +1,4 @@
 import { toNumber } from '@ui-services/utilities/utilies'
-import { ISceneChildUtiltiesData } from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
-import Easings from 'urpflanze/dist/services/animation/Easings'
-import { ISimpleAnimation, TAnimation, TEasing } from 'urpflanze/dist/services/types/animation'
-import SceneUtilitiesExtend from 'urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
 
 export const MODE_FUNCTIONS: {
 	sinusoidal: Array<{ key: 'sin' | 'cos'; value: 'sin' | 'cos' }>

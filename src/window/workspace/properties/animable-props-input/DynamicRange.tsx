@@ -73,16 +73,10 @@ const DynamicRange: React.FunctionComponent<IDynamicRangeProp> = ({
 	}
 
 	return (
-		<Grid columns={3} flow="1fr 1fr max-content" gap={pups.ms(0)} style={{ userSelect: 'none' }}>
+		<Grid className="dynamic-range" valign="center" columns={3} flow="1fr 1fr max-content" gap={pups.ms(0)}>
 			<div
 				onClick={() => !bAnimation && can_lock_unlock && multiple && _setLocked()}
-				style={{
-					textAlign: 'right',
-					cursor: can_lock_unlock && multiple ? 'pointer' : undefined,
-					whiteSpace: 'nowrap',
-					textOverflow: 'ellipsis',
-					overflow: 'hidden',
-				}}
+				className="dynamic-range__wrapper"
 			>
 				{!bAnimation && can_lock_unlock && multiple && (
 					<Icon
@@ -96,8 +90,8 @@ const DynamicRange: React.FunctionComponent<IDynamicRangeProp> = ({
 			</div>
 
 			{bAnimation ? (
-				<div style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-					{(value as TAnimation).type == 'simple' ? (
+				<div className="dynamic-range__animation-value">
+					{(value as TAnimation).type === 'simple' ? (
 						<small>
 							<i>
 								{SceneUtilitiesExtended.bValueTransformable(value.value.from)
@@ -125,7 +119,7 @@ const DynamicRange: React.FunctionComponent<IDynamicRangeProp> = ({
 				/>
 			)}
 
-			<div style={{ width: pups.ms(1) }}>
+			<div className="dynamic-range__animate-btn">
 				{animable && (
 					<Tooltip title="Animate prop" position="left">
 						<Icon name={bAnimation ? 'animated' : 'not-animated'} onClick={() => setBOpenSimpleAnimation(true)} />

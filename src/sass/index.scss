@@ -181,4 +181,6 @@ h3 {
 	color: color(lighten);
 }
 
+@import './views/index.scss';
 @import './components/index.scss';
+@import './modals/index.scss';

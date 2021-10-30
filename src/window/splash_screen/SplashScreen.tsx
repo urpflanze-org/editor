@@ -1,7 +1,5 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
-import pups from '@pups/js'
 
 import { hideSplashScreen, showTutorial } from '@redux-store/app/actions'
 
@@ -10,6 +8,7 @@ import executor from '@redux-store/executor'
 import SplashScreenImage from '@window/splash_screen/SplashScreenImage'
 import { openProject, newProject } from '@window/app_bar/menu/File'
 import app_utilities from 'app_utilities'
+import pups from '@pups/js'
 
 interface SplashScreenProps {
 	hide: () => void
@@ -25,19 +24,15 @@ const SplashScreen: React.FunctionComponent<SplashScreenProps> = ({ hide, showTu
 	const bAutosave = executor.hasAutosave()
 
 	return (
-		<React.Fragment>
-			<div
-				style={{ position: 'fixed', zIndex: 11, top: 0, left: 0, width: '100vw', height: '100vh' }}
-				onClick={hide}
-			></div>
-			<Container>
+		<div className="splash-screen">
+			<div className="splash-screen__background" onClick={hide}></div>
+			<div className="splash-screen__wrapper">
 				<SplashScreenImage />
-				<div style={{ padding: pups.ms(2) }}>
-					<h2 style={{ marginBottom: pups.ms(0) }}>
-						Work in progress{' '}
-						<small style={{ fontSize: '.8rem', fontWeight: 'initial' }}>v{app_utilities.app_version}</small>
+				<div className="splash-screen__content">
+					<h2 className="splash-screen__content__title">
+						Work in progress <small className="splash-screen__content__subtitle">v{app_utilities.app_version}</small>
 					</h2>
-					<Grid rows={2} flow={'max-content max-content'} gap={pups.ms(0)}>
+					<Grid className="splash-screen__content__info" rows={2} flow={'max-content max-content'} gap={pups.ms(0)}>
 						<Grid columns={2}>
 							<div onClick={runTutorial}>Tutorial 👋</div>
 							<div></div>
@@ -80,21 +75,10 @@ const SplashScreen: React.FunctionComponent<SplashScreenProps> = ({ hide, showTu
 						</Grid>
 					</Grid>
 				</div>
-			</Container>
-		</React.Fragment>
+			</div>
+		</div>
 	)
 }
-
-const Container = styled.div`
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	background: ${pups.color('dark-lighten')};
-	transform: translate(-50%, -50%);
-	box-shadow: 0 ${pups.ms(0)} ${pups.ms(2)} ${pups.ms(0)} rgba(0, 0, 0, 0.5);
-	border-radius: 2px;
-	z-index: 12;
-`
 
 export default React.memo(
 	connect(null, dispatch => ({

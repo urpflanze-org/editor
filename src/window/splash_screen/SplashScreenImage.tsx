@@ -1,6 +1,5 @@
 import * as React from 'react'
-import styled, { keyframes } from 'styled-components'
-import pups from '@pups/js'
+
 import { randomElement } from '@pups/utility/build/Array'
 
 import DrawerCanvas from 'urpflanze/dist/services/drawers/drawer-canvas/DrawerCanvas'
@@ -57,56 +56,16 @@ const SplashScreenImage: React.FunctionComponent<{}> = () => {
 	}, [canvas.current])
 
 	return (
-		<div style={{ position: 'relative' }}>
-			<Containter>
+		<div className="splash-screen__image">
+			<div className="splash-screen__image__canvas">
 				<canvas ref={canvas} />
-			</Containter>
-			<div
-				style={{
-					background: 'linear-gradient(0deg, rgba(0,0,0, 0.4) 0%, rgba(0,0,0,0) 80%)',
-					position: 'absolute',
-					bottom: -1,
-					left: 0,
-					width: '100%',
-					display: 'flex',
-					alignItems: 'center',
-					justifyContent: 'space-between',
-					padding: `${pups.ms(-1)} ${pups.ms(0)}`,
-					color: 'rgba(255,255,255,.4)',
-				}}
-			>
+			</div>
+			<div className="splash-screen__image__author">
 				<div>Author</div>
 				<div>Send yours</div>
 			</div>
 		</div>
 	)
 }
-
-const Appear = keyframes`from { opacity: 1; } to { opacity: 0; } `
-
-const Containter = styled.div`
-	position: relative;
-	width: 500px;
-	height: 270px;
-	overflow: hidden;
-	position: relative;
-
-	&:after {
-		position: absolute;
-		top: 0;
-		left: 0;
-		display: block;
-		content: ' ';
-		width: 100%;
-		height: 100%;
-		background: ${pups.color('dark')};
-		animation: ${Appear} 0.5s 0.1s linear both;
-	}
-
-	canvas {
-		width: 100% !important;
-		height: auto !important;
-	}
-`
 
 export default React.memo(SplashScreenImage)

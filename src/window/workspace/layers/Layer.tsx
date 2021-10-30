@@ -1,5 +1,4 @@
 import * as React from 'react'
-import styled from 'styled-components'
 import pups from '@pups/js'
 
 import Icon from '@components/icons/Icon'
@@ -46,10 +45,11 @@ const Layer: React.FunctionComponent<LayerProps> = ({
 	}
 
 	return (
-		<Container deep={deep}>
-			<Headline selected={selected}>
+		<div className={`layer ${selected ? 'layer--selected' : ''}`} deep={deep}>
+			<div className="layer__head">
 				{edit ? (
-					<Input
+					<input
+						className="layer__head__input"
 						ref={inputRef}
 						autoFocus={true}
 						defaultValue={layer.name}
@@ -57,17 +57,20 @@ const Layer: React.FunctionComponent<LayerProps> = ({
 						onFocus={(e: React.FocusEvent) => (e.target as HTMLInputElement).select()}
 					/>
 				) : (
-					<div style={{ display: 'flex', alignItems: 'center' }}>
-						<OpenLayerButton onClick={() => layer.children && layer.children.length > 0 && setOpen(!open)}>
+					<div className="layer__head__name-wrapper">
+						<div
+							className="layer__head__name-wrapper__open-btn"
+							onClick={() => layer.children && layer.children.length > 0 && setOpen(!open)}
+						>
 							{layer.children && layer.children.length > 0 && (
 								<Icon name="arrow-right-fill" size={0} rotate={open ? 90 : 0} fill="#fff" />
 							)}
-						</OpenLayerButton>
+						</div>
 
-						<Name onClick={(e: React.MouseEvent) => toggleSelection(e, layer.id)}>
+						<div className="layer__head__name" onClick={(e: React.MouseEvent) => toggleSelection(e, layer.id)}>
 							<Icon size={0} name={getIcon(layer.type)} />
 							<span style={{ marginLeft: pups.ms(-3) }}>{layer.name}</span>
-						</Name>
+						</div>
 					</div>
 				)}
 
@@ -102,7 +105,7 @@ const Layer: React.FunctionComponent<LayerProps> = ({
 						/>
 					)}
 				</Tooltip>
-			</Headline>
+			</div>
 
 			{open && layer.children && layer.children.length > 0 && (
 				<ul style={{ margin: 0, padding: 0 }}>
@@ -118,60 +121,8 @@ const Layer: React.FunctionComponent<LayerProps> = ({
 					))}
 				</ul>
 			)}
-		</Container>
+		</div>
 	)
 }
-
-const Headline = styled.div<{ selected: boolean }>`
-	border: 1px solid ${props => (props.selected ? pups.color('primary') : pups.color('dark'))};
-	display: grid;
-	align-items: center;
-	grid-template-columns: auto max-content max-content max-content;
-	line-height: ${pups.ms(2)};
-	grid-gap: ${pups.ms(-2)};
-	padding-right: ${pups.ms(-2)};
-
-	&:hover {
-		background: ${pups.color('dark').lighten(10)};
-	}
-`
-
-const Container = styled.li<{ deep: number }>`
-	list-style: none;
-	margin: 0;
-	user-select: none;
-
-	position: relative;
-	z-index: 1;
-
-	> ${Headline} {
-		padding-left: ${props => (props.deep > 0 ? pups.mul(pups.add(0, -2, -2), props.deep + 'rem') : 0)};
-	}
-`
-
-const Name = styled.div`
-	display: flex;
-	align-items: center;
-	width: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	cursor: cell;
-`
-
-const Input = styled.input`
-	width: 100%;
-	line-height: inherit;
-	background: ${pups.color('dark-lighten')};
-	border: none;
-	padding: 0 ${pups.ms(-1)};
-`
-
-const OpenLayerButton = styled.div`
-	cursor: pointer;
-	width: ${pups.add(0, -3)};
-	padding-left: ${pups.ms(-3)};
-	height: 100%;
-`
 
 export default React.memo(Layer)

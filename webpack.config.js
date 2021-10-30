@@ -20,17 +20,17 @@ module.exports = (env, args) => {
 				{
 					test: /\.jsx?$/,
 					use: 'babel-loader',
-					exclude: /(node_modules|old)/,
+					exclude: /(node_modules)/,
 				},
 				{
 					test: /\.tsx?$/,
 					use: 'ts-loader',
-					exclude: /(node_modules|old)/,
+					exclude: /(node_modules)/,
 				},
 				{
 					test: /\.svg$/,
 					use: 'raw-loader',
-					exclude: /(node_modules|old)/,
+					exclude: /(node_modules)/,
 				},
 			],
 		},
@@ -55,9 +55,10 @@ module.exports = (env, args) => {
 		},
 		mode: args.mode === 'production',
 		devServer: {
-			contentBase: path.join(__dirname, 'dist'),
+			static: {
+				directory: path.join(__dirname, 'dist'),
+			},
 			compress: false,
-			publicPath: '/assets/js/',
 			host: '0.0.0.0',
 			port: 3000,
 			hot: true,

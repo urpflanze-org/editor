@@ -16,7 +16,7 @@ import Loading from '@bootstrap/Loading'
 
 import { bytesToHuman } from '@ui-services/utilities/utilies'
 import { IRenderSettings } from 'urpflanze/dist/services/types/renderer'
-import styled from 'styled-components'
+
 import { createDownload } from '@window/app_bar/menu/FileUtility'
 
 interface RenderImageProps {
@@ -91,26 +91,18 @@ const RenderImage: React.FunctionComponent<RenderImageProps> = ({ project, close
 	}, [])
 
 	return (
-		<div>
-			<Grid columns={2} style={{ width: pups.add(7, 5) }}>
-				<div style={{ width: pups.ms(7), position: 'relative' }}>
+		<div className="render-image">
+			<Grid columns={2} className="render-image__wrapper">
+				<div className="render-image__wrapper__content">
 					{loading && (
-						<div
-							style={{
-								position: 'absolute',
-								zIndex: 1,
-								background: 'rgba(255,255,255,.4)',
-								width: '100%',
-								height: '100%',
-							}}
-						>
+						<div className="render-image__wrapper__content__loading">
 							<Loading />
 						</div>
 					)}
 					{svg ? (
-						<SVGContainer>
+						<div className="render-image__wrapper__content__preview">
 							<div dangerouslySetInnerHTML={{ __html: svg }}></div>
-						</SVGContainer>
+						</div>
 					) : (
 						<RenderImagePreview ratio={project.ratio} render={renderImage} settings={settings} />
 					)}
@@ -141,13 +133,6 @@ const RenderImage: React.FunctionComponent<RenderImageProps> = ({ project, close
 		</div>
 	)
 }
-
-const SVGContainer = styled.div`
-	svg {
-		width: 100%;
-		height: 100%;
-	}
-`
 
 export default React.memo(
 	connect((state: RootState) => ({

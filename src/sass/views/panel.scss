@@ -1,0 +1,46 @@
+.panel {
+	border: 1px solid color(dark-lighten);
+	border-radius: 2px 2px 0 0;
+
+	& + & {
+		margin-top: ms(0);
+	}
+
+	&__head {
+		&--expandable {
+			cursor: pointer;
+		}
+
+		&--with-actions {
+			grid-template-columns: max-content auto max-content max-content;
+		}
+
+		display: grid;
+		align-items: center;
+		grid-template-columns: max-content auto max-content;
+		grid-gap: ms(-1);
+		padding: 0 ms(0);
+		line-height: ms(2);
+		height: ms(2);
+		background: color(dark);
+		font-size: #{ms(0) - ms(-4)};
+		font-weight: bold;
+		color: color(gray-dark);
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+	&__content {
+		padding: ms(0);
+
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-gap: ms(-2);
+		font-size: #{ms(0) - ms(-4)};
+
+		> * {
+			line-height: #{ms(1) + ms(-1)};
+		}
+	}
+}

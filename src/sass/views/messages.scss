@@ -1,0 +1,26 @@
+@keyframes messageAnimation {
+	from {
+		transform: translate(0%, 0%) scale(0.8);
+	}
+	to {
+		transform: translate(0%, 0%) scale(1);
+	}
+}
+
+.messages {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	&__message {
+		background: color(secondary);
+		color: #fff;
+		padding: ms(-1);
+		margin: ms(-1);
+		transform-origin: left center;
+		animation: messageAnimation 0.1s ease-out both;
+	}
+}

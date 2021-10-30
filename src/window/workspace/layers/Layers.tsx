@@ -17,7 +17,7 @@ import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-impo
 interface ILayerProps {
 	layers: { [key: string]: IProjectSceneChild }
 	open_layer_id: number | string | undefined
-	selectLayers: (selecteds?: Array<string | number>, preventPushToHistory?: boolean) => any
+	selectLayers: (selecteds: Array<string | number>, preventPushToHistory?: boolean) => any
 	selecteds: Array<string | number>
 }
 
@@ -56,10 +56,10 @@ const Layers: React.FunctionComponent<ILayerProps> = ({
 	}
 
 	return (
-		<section data-name="layers" style={{ height: '100%' }}>
-			<div style={HeadStyle}>Layers</div>
+		<section data-name="layers" className="layers">
+			<div className="layers__title">Layers</div>
 
-			<ul style={ListStyle}>
+			<ul className="layers__list">
 				{layers_array.length > 0 ? (
 					layers_array.map(layer => (
 						<Layer
@@ -72,14 +72,7 @@ const Layers: React.FunctionComponent<ILayerProps> = ({
 						/>
 					))
 				) : (
-					<li
-						style={{
-							color: pups.color('gray-dark').toString('hex'),
-							padding: `0 ${pups.ms(0)}`,
-							lineHeight: pups.ms(2),
-							borderTop: '1px solid rgba(0,0,0,0)',
-						}}
-					>
+					<li className="layers__list__empty">
 						<small>
 							<i>
 								Add new shape from Toolbar or <Icon fill={pups.color('gray-dark').toString('hex')} name="add" />
@@ -92,36 +85,6 @@ const Layers: React.FunctionComponent<ILayerProps> = ({
 			<LayerActions selecteds={selecteds} layers={layers} />
 		</section>
 	)
-}
-
-const HeadStyle: React.CSSProperties = {
-	padding: `0 ${pups.ms(0)}`,
-	height: pups.ms(2) as string,
-	lineHeight: pups.ms(2) as string,
-	fonstSize: pups.sub(0, -3) as string,
-	fontWeight: 'bold',
-	color: pups.color('gray-dark').toString('hex'),
-	borderRadius: `2px 2px 0 0`,
-	background: pups.color('dark').toString('hex'),
-	border: `1px solid ${pups.color('dark-lighten')}`,
-	borderBottom: `0px`,
-}
-
-const ListStyle: React.CSSProperties = {
-	maxHeight: `calc(100vh - ${pups.add(
-		2 /* appbar */,
-		1 /* statusbar */,
-		2 /* layers head */,
-		2,
-		2 /* layer actions */
-	)})`,
-	listStyle: 'none',
-	margin: 0,
-	padding: 0,
-	overflowY: 'auto',
-	overflowX: 'hidden',
-	border: `1px solid ${pups.color('dark-lighten')}`,
-	borderWidth: '0 1px',
 }
 
 export default React.memo(

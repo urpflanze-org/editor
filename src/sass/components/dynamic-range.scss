@@ -1,0 +1,22 @@
+.dynamic-range {
+	user-select: none;
+	line-height: 1;
+
+	&__wrapper {
+		text-align: right;
+		cursor: pointer;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+	&__animation-value {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+	&__animate-btn {
+		width: ms(1);
+	}
+}

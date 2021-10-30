@@ -14,8 +14,8 @@ import ShapeRecursive from '@window/workspace/properties/panels/ShapeRecursive'
 import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 interface PropertiesProp {
-	selected_layer: IProjectSceneChild
-	selectLayer: (id: string | number) => void
+	selected_layer?: IProjectSceneChild
+	selectLayer: (id: any) => void
 }
 
 const Properties: React.FunctionComponent<PropertiesProp> = ({ selected_layer, selectLayer }: PropertiesProp) => {

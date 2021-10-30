@@ -108,7 +108,7 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 
 				<div>Durate</div>
 				<Range
-					size={pups.add(1, -1)}
+					small={true}
 					min={0}
 					max={sequence.duration}
 					step={100}

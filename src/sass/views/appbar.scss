@@ -1,0 +1,62 @@
+.appbar {
+	&__list {
+		display: grid;
+		grid-template-columns: repeat(4, max-content);
+		align-items: center;
+		list-style: none;
+		margin: 0 ms(-2);
+		padding: 0 ms(-2);
+		font-size: 0.8rem;
+		line-height: ms(2);
+		height: 100%;
+
+		&__item {
+			position: relative;
+			z-index: 10;
+			padding: ms(-2) ms(-1);
+			line-height: 1;
+
+			&:hover {
+				background: color(dark-verylighten);
+				border-radius: 2px;
+				cursor: pointer;
+			}
+		}
+	}
+
+	$root: &;
+	&--open-submenu {
+		#{$root}__list__item:hover #{$root}__submenu {
+			display: block;
+		}
+	}
+
+	&__submenu {
+		display: none;
+		background: color(dark-lighten);
+		line-height: ms(1);
+		position: absolute;
+		margin: 0;
+		padding: ms(-2) 1px;
+		top: 100%;
+		left: 0;
+		list-style: none;
+		transform: translateY(-2px);
+
+		&__item {
+			padding: 0 ms(0);
+			white-space: nowrap;
+
+			&--no-action {
+				height: 1px;
+				line-height: 0;
+				margin: ms(-2) 0;
+				background: color(dark-verylighten);
+			}
+
+			&:hover {
+				background: color(dark-verylighten);
+			}
+		}
+	}
+}

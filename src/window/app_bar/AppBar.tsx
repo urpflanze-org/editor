@@ -1,7 +1,5 @@
 import * as React from 'react'
-import pups from '@pups/js'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
 
 import History from '@window/app_bar/history/History'
 import SubMenu from '@window/app_bar/SubMenu'
@@ -77,68 +75,33 @@ const AppBar: React.FunctionComponent<AppBarProps> = ({ project }: AppBarProps) 
 	}, [bOpenSubMenu, appBarRef, bOpenHistory])
 
 	return (
-		<nav role="navigation" ref={appBarRef}>
-			<List enableSubMenu={bOpenSubMenu}>
-				<Item>
+		<nav className={`appbar ${bOpenSubMenu ? 'appbar--open-submenu' : ''}`} role="navigation" ref={appBarRef}>
+			<div className="appbar__list">
+				<div className="appbar__list__item">
 					<img
 						src="assets/images/logo-full.svg"
 						style={{ height: '18px', display: 'inline-block', verticalAlign: 'middle' }}
 					/>
 					<SubMenu actions={AppMenuActions} />
-				</Item>
-				<Item>
+				</div>
+				<div className="appbar__list__item">
 					<div>File</div>
 					<SubMenu actions={FileActions} project={project} />
-				</Item>
-				<Item>
+				</div>
+				<div className="appbar__list__item">
 					<div>Edit</div>
 					<SubMenu actions={EditActions} setOpenHistory={setOpenHistory} />
-				</Item>
-				<Item>
+				</div>
+				<div className="appbar__list__item">
 					Render
 					<SubMenu actions={RenderActions} />
-				</Item>
-			</List>
+				</div>
+			</div>
 
 			{bOpenHistory && <History />}
 		</nav>
 	)
 }
-
-const List = styled.ul<{ enableSubMenu: boolean }>`
-	display: grid;
-	grid-template-columns: repeat(4, max-content);
-	align-items: center;
-	list-style: none;
-	margin: 0 ${pups.ms(-2)};
-	padding: 0 ${pups.ms(-2)};
-	font-size: 0.8rem;
-	line-height: ${pups.ms(2)};
-	height: 100%;
-
-	li ul {
-		display: none;
-	}
-
-	${props =>
-		props.enableSubMenu &&
-		`
-        li:hover ul { display: block; }
-    `}
-`
-
-const Item = styled.li`
-	position: relative;
-	z-index: 10;
-	padding: ${pups.ms(-2)} ${pups.ms(-1)};
-	line-height: 1;
-
-	&:hover {
-		background: ${pups.color('dark-verylighten')};
-		border-radius: 2px;
-		cursor: pointer;
-	}
-`
 
 export default React.memo(
 	connect(

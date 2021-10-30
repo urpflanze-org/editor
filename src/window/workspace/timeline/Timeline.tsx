@@ -74,7 +74,7 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 
 	const slow = Math.round((sequence.framerate / (sequenceState.fps || 1)) * 100) / 100
 	return (
-		<section data-name="timeline" style={TimelineContainerStyle}>
+		<section data-name="timeline" className="timeline">
 			<div style={{ position: 'absolute', left: pups.ms(0), top: pups.ms(0), display: 'flex' }}>
 				{bRealTime || slow === 1 ? 'realtime' : `${slow}x slow`}
 			</div>
@@ -125,17 +125,6 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 			/>
 		</section>
 	)
-}
-
-const TimelineContainerStyle: React.CSSProperties = {
-	position: 'relative',
-	padding: `${pups.ms(0)} ${pups.ms(1)}`,
-	width: '100%',
-	fontSize: '.8rem',
-	border: `1px solid ${pups.color('dark-lighten')}`,
-	borderBottomWidth: 0,
-	borderRadius: '2px 0 0 2px',
-	transform: '',
 }
 
 export default React.memo(

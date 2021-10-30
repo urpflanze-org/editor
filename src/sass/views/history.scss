@@ -1,0 +1,48 @@
+.history {
+	position: fixed;
+	top: #{ms(2) + ms(0)};
+	left: #{ms(2) + ms(0)};
+	background: rgba(color(dark-lighten), 0.9);
+	font-size: 1rem;
+	border-radius: 2px;
+	z-index: 2;
+
+	&__title {
+		border-bottom: 1px solid color(dark-verylighten);
+		padding: ms(-1) ms(0);
+	}
+
+	&__list {
+		margin: 0;
+		padding: ms(-2) 1px;
+		list-style: none;
+		max-height: 70vh;
+		overflow: auto;
+
+		&__item {
+			position: relative;
+			padding: 0 ms(0) 0 ms(-1);
+			cursor: pointer;
+
+			&:before {
+				display: inline-block;
+				vertical-align: middle;
+				content: ' ';
+				width: 5px;
+				height: 5px;
+				border-radius: 3px;
+				transform: translateY(-2px);
+				z-index: 1;
+				margin-right: ms(-1);
+			}
+
+			&--active:before {
+				background-color: #fff;
+			}
+
+			&:hover {
+				background: color(dark-verylighten);
+			}
+		}
+	}
+}

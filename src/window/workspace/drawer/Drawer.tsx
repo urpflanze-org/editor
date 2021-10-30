@@ -19,8 +19,8 @@ import Storage from '@ui-services/storage/Storage'
 interface IDrawerProps {
 	background: string
 	clear: boolean
-	backgroundImage: string
-	ghostSkipTime: number
+	backgroundImage: string | undefined
+	ghostSkipTime: number | undefined
 	ghosts: number
 	ratio: number
 }

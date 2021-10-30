@@ -1,0 +1,20 @@
+.dynamic-slider {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	&__name {
+		line-height: 1;
+		margin-bottom: ms(-2);
+	}
+
+	&__content {
+		display: flex;
+		height: #{ms(1) + ms(-1)};
+		line-height: #{ms(1) + ms(-1)};
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+	}
+}

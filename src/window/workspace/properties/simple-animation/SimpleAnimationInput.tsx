@@ -27,13 +27,7 @@ const SimpleAnimationInput: React.FunctionComponent<ISimpleAnimationInputProp> =
 }: ISimpleAnimationInputProp) => {
 	switch (sceneChildProp.type) {
 		case 'color':
-			return (
-				<Color
-					size={pups.add(1, -1)}
-					value={value as string}
-					onChange={(value, p) => p === false && onChange(name, value)}
-				/>
-			)
+			return <Color size={1} value={value as string} onChange={(value, p) => p === false && onChange(name, value)} />
 		case 'range':
 			return (
 				<Range

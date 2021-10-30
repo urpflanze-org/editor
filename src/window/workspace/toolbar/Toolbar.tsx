@@ -2,10 +2,9 @@ import * as React from 'react'
 
 import pups from '@pups/js'
 import executor from '@redux-store/executor'
-import styled from 'styled-components'
 import Tooltip from '@components/Tooltip'
 
-const Toolbar: React.FunctionComponent<{}> = () => {
+const Toolbar: React.FunctionComponent = () => {
 	const [shapes, setShapes] = React.useState<Array<{ name: string; image: string }>>([])
 
 	React.useEffect(() => {
@@ -17,49 +16,30 @@ const Toolbar: React.FunctionComponent<{}> = () => {
 	}
 
 	return (
-		<section data-name="toolbar" style={ContainerStyle}>
-			<ul style={ListStyle}>
+		<section className="toolbar" data-name="toolbar">
+			<ul className="toolbar__list">
 				{shapes.map((shape, index) => (
-					<Item key={index} onClick={() => addShape(shape.name)}>
-						<Tooltip title={`Add <i><b>${shape.name}</b></i> shape to Scene`} position="right">
-							<img src={shape.image} style={{ width: '100%' }} />
+					<div className="toolbar__list__item" key={index} onClick={() => addShape(shape.name)}>
+						<Tooltip title={<ToolbarTooltip name={shape.name} />} position="right">
+							<img src={shape.image} />
 						</Tooltip>
-					</Item>
+					</div>
 				))}
 			</ul>
 		</section>
 	)
 }
 
-const ContainerStyle: React.CSSProperties = {
-	position: 'relative',
-	border: `1px solid ${pups.color('dark-lighten')}`,
-	width: pups.add(2, 0) as string,
-	borderRadius: '2px',
-	maxHeight: '70vh',
-	// overflowY: 'hidden'
+function ToolbarTooltip({ name }: { name: string }) {
+	return (
+		<div>
+			Add{' '}
+			<i>
+				<b>${name}</b>
+			</i>{' '}
+			shape to Scene
+		</div>
+	)
 }
-
-const ListStyle: React.CSSProperties = {
-	listStyle: 'none',
-	margin: 0,
-	padding: 0,
-	width: '100%',
-}
-
-const Item = styled.li`
-	position: relative;
-	width: 100%;
-	cursor: pointer;
-	padding: ${pups.div(1, '2rem')};
-
-	&:hover img {
-		filter: hue-rotate(180deg);
-	}
-
-	& + & {
-		margin-top: 1px;
-	}
-`
 
 export default Toolbar

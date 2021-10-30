@@ -36,9 +36,12 @@ function valueToComponent(value: any): any {
 interface IProp {
 	name: keyof typeof SceneChildUtilitiesData
 	layer: IProjectSceneChild
-	value: TSceneChildProp<any>
 	forceArray?: boolean
 	onChange?: (new_value: any, prev_value: any) => any
+}
+
+interface IPropWithValue extends IProp {
+	value: TSceneChildProp<any>
 }
 
 function isEqual(a: any, b: any): boolean {
@@ -49,7 +52,13 @@ function isEqual(a: any, b: any): boolean {
 	return a === b
 }
 
-const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, forceArray }: IProp) => {
+const Prop: React.FunctionComponent<IPropWithValue> = ({
+	name,
+	layer,
+	value,
+	onChange,
+	forceArray,
+}: IPropWithValue) => {
 	const propContainerRef = React.useRef<HTMLDivElement>(null)
 	const sceneChildProp = SceneChildPropsData[name] as ISceneChildUtiltiesData
 	let initValue = value ?? sceneChildProp.default
@@ -199,7 +208,7 @@ const Prop: React.FunctionComponent<IProp> = ({ name, layer, value, onChange, fo
 
 export default React.memo(
 	connect((state: RootState, props: IProp) => {
-		let value = props.value
+		let value
 
 		switch (SceneChildUtilitiesData[props.name].dataType) {
 			case 'props': {

@@ -1,0 +1,19 @@
+$pupsConfigs: (
+	palette: (
+		primary: #90d4c1,
+		dark: #111413,
+		lighten: #fff,
+		dark-lighten: #1d2220,
+		dark-verylighten: #343e3a,
+		dark-darken: #050606,
+		gray-dark: #404b47,
+		secondary: #cc1f51,
+		red: #cc2200,
+		green: #22cc00,
+	),
+	modularScale: (
+		htmlBasePx: 16px,
+		base: 1rem,
+		ratio: phi,
+	),
+);

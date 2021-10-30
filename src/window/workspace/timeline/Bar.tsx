@@ -1,6 +1,5 @@
 import * as React from 'react'
 import pups from '@pups/js'
-import styled from 'styled-components'
 
 import { relativeClamp, clamp } from 'urpflanze/dist/Utilites'
 import useRect from '@hooks/useRect'
@@ -67,13 +66,13 @@ const Bar: React.FunctionComponent<BarProps> = ({
 	})
 
 	return (
-		<Container>
-			<TimeSteps>
+		<div className="timeline__bar">
+			<div className="timeline__bar__steps">
 				{Steps}
 				<span style={{ left: '100%' }}>{toTime(sequence_duration)}</span>
-			</TimeSteps>
-			<Progress ref={barRef}>
-				<LoadedFrames>
+			</div>
+			<div className="timeline__bar__progress" ref={barRef}>
+				<div className="timeline__bar__progress__loaded-frames">
 					{new Array(frames).fill(0).map((v, index) => (
 						<div
 							key={index}
@@ -84,96 +83,23 @@ const Bar: React.FunctionComponent<BarProps> = ({
 							}}
 						></div>
 					))}
-				</LoadedFrames>
-				<LinesSteps>{Lines}</LinesSteps>
-				<Cursor style={{ left: relativeClamp(0, sequence_duration, current_time, 0, 100) + '%' }}>
-					<CursorLabel style={{ cursor: enableMoveTime ? 'ew-resize' : 'not-allowed' }} ref={cursorRef}>
+				</div>
+				<div className="timeline__bar__progress__step-lines">{Lines}</div>
+				<div
+					className="timeline__bar__progress__cursor"
+					style={{ left: relativeClamp(0, sequence_duration, current_time, 0, 100) + '%' }}
+				>
+					<div
+						className="timeline__bar__progress__cursor__label"
+						style={{ cursor: enableMoveTime ? 'ew-resize' : 'not-allowed' }}
+						ref={cursorRef}
+					>
 						{toTime(current_time)}
-					</CursorLabel>
-				</Cursor>
-			</Progress>
-		</Container>
+					</div>
+				</div>
+			</div>
+		</div>
 	)
 }
-
-const Container = styled.div`
-	line-height: 1;
-`
-
-const TimeSteps = styled.div`
-	display: flex;
-	position: relative;
-	height: 0.8rem;
-	width: 100%;
-	margin: ${pups.ms(-2)} 0;
-
-	> span {
-		position: absolute;
-		transform: translate(-50%, 0);
-	}
-`
-
-const LoadedFrames = styled.div`
-	display: flex;
-`
-
-const LinesSteps = styled.div`
-	display: flex;
-	justify-content: space-between;
-	height: ${pups.ms(0)};
-
-	> span {
-		position: absolute;
-		height: 100%;
-		width: 6px;
-		transform: translate(-50%, 0);
-
-		&:after  {
-			position: absolute;
-			top: 0;
-			left: 2.5px;
-			width: 1px;
-			height: 100%;
-			display: block;
-			content: ' ';
-		}
-		&:nth-child(2n + 1):after {
-			background: rgba(255, 255, 255, 0.05);
-		}
-		&:nth-child(2n):after {
-			background: rgba(0, 0, 0, 0.2);
-		}
-	}
-`
-
-const Progress = styled.div`
-	position: relative;
-	background: ${pups.color('dark-lighten')};
-`
-
-const Cursor = styled.div`
-	position: absolute;
-	top: -${pups.ms(-2)};
-
-	&:after {
-		position: absolute;
-		top: 0;
-		display: block;
-		content: ' ';
-		width: 1px;
-		height: ${pups.add(0, -2)};
-		background: ${pups.color('primary')};
-	}
-`
-
-const CursorLabel = styled.div`
-	position: absolute;
-	bottom: 100%;
-	background: ${pups.color('primary')};
-	padding: ${pups.ms(-3)};
-	font-weight: 600;
-	transform: translateX(-50%);
-	border-radius: 2px;
-`
 
 export default React.memo(Bar)

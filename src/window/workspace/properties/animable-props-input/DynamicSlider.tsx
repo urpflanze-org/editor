@@ -45,19 +45,11 @@ const DynamicSlider: React.FunctionComponent<IDynamicSliderProp> = ({
 	}
 
 	return (
-		<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-			<div style={{ lineHeight: 1, marginBottom: pups.ms(-2) }}>{name}</div>
-			<div
-				style={{
-					display: 'flex',
-					height: pups.add(1, -1),
-					alignItems: 'center',
-					justifyContent: 'center',
-					width: '100%',
-				}}
-			>
+		<div className="dynamic-slider">
+			<div className="dynamic-slider__name">{name}</div>
+			<div className="dynamic-slider__content">
 				{bAnimation ? (
-					<Icon size={pups.add(1, -1)} name="animate-color" />
+					<Icon size={1} name="animate-color" />
 				) : (
 					<Slider min={min} max={max} step={step} onChange={onChange} value={value} />
 				)}

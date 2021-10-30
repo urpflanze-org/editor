@@ -1,0 +1,85 @@
+.color-picker {
+	position: relative;
+	z-index: 1000;
+
+	&__content {
+		position: fixed;
+		background: lighten(color(dark), 2%);
+		border: 1px solid lighten(color(dark), 10%);
+		border-radius: 2px;
+		padding: ms(0);
+		user-select: none;
+		line-height: ms(0);
+
+		&__wrapper {
+			display: flex;
+		}
+	}
+
+	&__value {
+		position: relative;
+		margin-left: #{ms(0) - ms(-3)};
+		padding-left: ms(-1);
+
+		&__label {
+			position: absolute;
+			font-size: 0.8rem;
+			transform: translate(-50%, -50%) rotate(-90deg);
+			left: 0;
+			top: 50%;
+		}
+	}
+
+	&__wheel {
+		position: relative;
+		border-radius: 50%;
+		overflow: hidden;
+		cursor: pointer;
+		border: 1px solid darken(color(dark), 5%);
+
+		&__cursor {
+			position: absolute;
+			cursor: pointer;
+			border-radius: 50%;
+			border: 2px solid;
+			width: 12px;
+			height: 12px;
+			top: -7px;
+			left: -7px;
+			z-index: 1;
+			backface-visibility: hidden;
+			transition: border-color 0.3s ease-in;
+			pointer-events: none;
+		}
+
+		&__canvas {
+			transform: 'scale(1.025)';
+		}
+	}
+
+	&__input {
+		width: 100%;
+
+		&__input {
+			width: #{ms(4) + ms(2)};
+			padding: ms(-3) ms(-2);
+			background: darken(color(dark), 5%);
+			border: none;
+			font-size: 1rem;
+			color: #fff;
+		}
+
+		&__add {
+			cursor: pointer;
+			color: rgba(255, 255, 255, 0.3);
+			&:hover {
+				color: rgba(255, 255, 255, 0.6);
+			}
+		}
+
+		&__empty {
+			width: ms(0);
+			height: ms(0);
+		}
+	}
+}

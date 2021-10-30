@@ -1,0 +1,36 @@
+.dynamic-color {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+
+	&__name {
+		line-height: 1;
+		margin-bottom: ms(-2);
+	}
+
+	&__wrapper {
+		display: flex;
+
+		&__content {
+			position: relative;
+
+			$parent: &;
+			&__remove {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				background: color(dark);
+				border-radius: 0 2px 0 0;
+				line-height: 1;
+				z-index: 1;
+				transform: scale(0);
+				transform-origin: left bottom;
+				transition: transform 0.1s 0.5s ease-out;
+
+				#{$parent}:hover & {
+					transform: scale(1);
+				}
+			}
+		}
+	}
+}

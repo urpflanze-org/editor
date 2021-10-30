@@ -1,8 +1,5 @@
 import * as React from 'react'
 
-import styled from 'styled-components'
-import pups from '@pups/js'
-
 import executor from '@redux-store/executor'
 
 import Tooltip from '@components/Tooltip'
@@ -183,8 +180,8 @@ const LayerActions: React.FunctionComponent<LayerActionProps> = (props: LayerAct
 	}
 
 	return (
-		<React.Fragment>
-			<Container>
+		<div className="layer-actions">
+			<div className="layer-actions__container layer-actions__container--1">
 				{/* <Tooltip position="top" title="Add to custom shapes" disabled={onScene || multipleSelected}>
                     <Icon name="custom-shape" disabled={onScene || multipleSelected}  onClick={(e: React.MouseEvent) => call(e, 'addCustomShape') } />
                 </Tooltip> */}
@@ -219,7 +216,7 @@ const LayerActions: React.FunctionComponent<LayerActionProps> = (props: LayerAct
 					/>
 				</Tooltip>
 				<Tooltip position="top" title="Add shape" disabled={add || !onScene || selectedIsPrimitive}>
-					<Add ref={shapesContainer}>
+					<div className="layer-actions__add" ref={shapesContainer}>
 						<Icon
 							onClick={() => setAdd(!add)}
 							style={{ position: 'relative', zIndex: 2 }}
@@ -227,19 +224,20 @@ const LayerActions: React.FunctionComponent<LayerActionProps> = (props: LayerAct
 							rotate={add ? 45 : 0}
 							disabled={!onScene && selectedIsPrimitive}
 						/>
-						<Shapes open={add}>
+						<div className={`layer-actions__add__list ${add ? 'layer-actions__add__list--open' : ''}`}>
 							{ShapesList.map(shapeName => (
-								<Shape
+								<div
+									className="layer-actions__add__list__item"
 									key={shapeName}
 									onClick={(e: React.MouseEvent) => {
 										call(e, 'add', shapeName)
 									}}
 								>
 									{shapeName}
-								</Shape>
+								</div>
 							))}
-						</Shapes>
-					</Add>
+						</div>
+					</div>
 				</Tooltip>
 				<Tooltip position="top" title="Move down" disabled={multipleSelected || cbs <= -2 || cbs == -1}>
 					<Icon
@@ -287,8 +285,8 @@ const LayerActions: React.FunctionComponent<LayerActionProps> = (props: LayerAct
 						onClick={(e: React.MouseEvent) => call(e, 'remove', props.selecteds)}
 					/>
 				</Tooltip>
-			</Container>
-			<Container2>
+			</div>
+			<div className="layer-actions__container layer-actions__container--2">
 				<Tooltip position="top" title="Union" disabled={disableCombine}>
 					<Icon
 						name="shape-combine-union"
@@ -313,70 +311,9 @@ const LayerActions: React.FunctionComponent<LayerActionProps> = (props: LayerAct
 				<Tooltip position="top" title="XOR" disabled={disableCombine}>
 					<Icon name="shape-combine-xor" disabled={disableCombine} onClick={(e: React.MouseEvent) => call(e, 'xor')} />
 				</Tooltip>
-			</Container2>
-		</React.Fragment>
+			</div>
+		</div>
 	)
 }
-
-const Container = styled.div`
-	height: ${pups.ms(2)};
-	display: grid;
-	grid-template-columns: repeat(8, max-content);
-	justify-content: right;
-	align-items: center;
-	grid-gap: ${pups.ms(-1)};
-	padding: 0 ${pups.ms(-1)};
-
-	background: ${pups.color('dark')};
-	border: 1px solid ${pups.color('dark-lighten')};
-	border-top-width: 0;
-`
-
-const Container2 = styled.div`
-	height: ${pups.ms(2)};
-	display: grid;
-	grid-template-columns: repeat(4, max-content);
-	justify-content: left;
-	align-items: center;
-	grid-gap: ${pups.ms(-1)};
-	padding: 0 ${pups.ms(-1)};
-
-	background: ${pups.color('dark')};
-	border: 1px solid ${pups.color('dark-lighten')};
-	border-top-width: 0;
-`
-
-const Add = styled.div`
-	position: relative;
-	z-index: 10;
-`
-
-const Shapes = styled.ul<{ open: boolean }>`
-	position: fixed;
-	list-style: none;
-	margin: 0;
-	background: ${pups.color('dark')};
-	border: 1px solid ${pups.color('dark').lighten(5)};
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-	padding: 0;
-	font-size: ${pups.sub(0, -4)};
-	z-index: ${props => (props.open ? 1 : -1)};
-	pointer-events: ${props => (props.open ? null : 'none')};
-	transition: transform 0.1s, opacity 0.1s;
-	transform-origin: bottom right;
-	transform: translate(-92%, -99%) scale(${props => (props.open ? 1 : 0.8)});
-	opacity: ${props => (props.open ? 1 : 0)};
-	display: grid;
-	grid-template-columns: repeat(4, auto);
-`
-
-const Shape = styled.li`
-	cursor: pointer;
-	padding: ${pups.ms(-1)} ${pups.ms(0)};
-	display: block;
-	&:hover {
-		background: ${pups.color('dark').darken(10)};
-	}
-`
 
 export default React.memo(LayerActions)

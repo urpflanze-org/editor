@@ -1,7 +1,5 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
-import pups from '@pups/js'
 
 import executor from '@redux-store/executor'
 import { ICommand, ECommandStatus } from '&types/command'
@@ -23,65 +21,33 @@ const History: React.FunctionComponent<HistoryProps> = ({ history }: HistoryProp
 	let hasHistory = false
 
 	return (
-		<Container>
-			<div
-				style={{ borderBottom: '1px solid ' + pups.color('dark-verylighten'), padding: `${pups.ms(-1)} ${pups.ms(0)}` }}
-			>
-				History
-			</div>
+		<div className="history">
+			<div className="history__title">History</div>
 
-			<ul style={{ margin: 0, padding: `${pups.ms(-2)} 1px`, listStyle: 'none', maxHeight: '70vh', overflow: 'auto' }}>
+			<ul className="history__list">
 				{history.length > 0 &&
 					history.map(executed => {
 						hasHistory = hasHistory || executed.bLast
 						return (
-							<HistoryItem current={executed.bLast} key={executed.id} onClick={() => goToHistory(executed.level)}>
+							<div
+								className={`history__list__item ${executed.bLast ? 'history__list__item--active' : ''}`}
+								key={executed.id}
+								onClick={() => goToHistory(executed.level)}
+							>
 								{executed.command}
-							</HistoryItem>
+							</div>
 						)
 					})}
-				<HistoryItem current={!hasHistory} onClick={() => goToHistory(history.length)}>
+				<div
+					className={`history__list__item ${!hasHistory ? 'history__list__item--active' : ''}`}
+					onClick={() => goToHistory(history.length)}
+				>
 					Original
-				</HistoryItem>
+				</div>
 			</ul>
-		</Container>
+		</div>
 	)
 }
-
-const bg = pups.color('dark-lighten').alpha(0.9)
-
-const Container = styled.div`
-	position: fixed;
-	top: ${pups.add(2, 0)};
-	left: ${pups.add(2, 0)};
-	background: ${bg.toString('rgba')};
-	font-size: 1rem;
-	border-radius: 2px;
-	z-index: 2;
-`
-
-const HistoryItem = styled.li<{ current: boolean }>`
-	position: relative;
-	padding: 0 ${pups.ms(0)} 0 ${pups.ms(-1)};
-	cursor: pointer;
-
-	&:hover {
-		background: ${pups.color('dark-verylighten')};
-	}
-
-	&:before {
-		display: inline-block;
-		vertical-align: middle;
-		content: ' ';
-		width: 5px;
-		height: 5px;
-		border-radius: 3px;
-		transform: translateY(-2px);
-		z-index: 1;
-		margin-right: ${pups.ms(-1)};
-		${props => props.current && `background: #fff;`}
-	}
-`
 
 export default connect((state: RootState) => ({
 	history: state.project.history,

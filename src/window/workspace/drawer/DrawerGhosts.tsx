@@ -9,7 +9,7 @@ import Tooltip from '@components/Tooltip'
 
 interface DrawerGhostsProps {
 	clear: boolean
-	ghostSkipTime: number
+	ghostSkipTime: number | undefined
 	ghosts: number
 }
 
@@ -18,7 +18,7 @@ const DrawerGhosts: React.FunctionComponent<DrawerGhostsProps> = ({
 	ghostSkipTime,
 	ghosts,
 }: DrawerGhostsProps) => {
-	function setGhosts(_ghosts: number = ghosts, _ghostSkipTime: number = ghostSkipTime) {
+	function setGhosts(_ghosts: number = ghosts, _ghostSkipTime: number = ghostSkipTime || 0) {
 		_ghosts = _ghosts < 0 ? 0 : _ghosts
 		if ((_ghosts >= 0 && _ghosts != ghosts) || _ghostSkipTime != ghostSkipTime)
 			executor.ask('set-drawer-ghosts', { ghosts: _ghosts, ghostSkipTime: _ghostSkipTime })
@@ -52,13 +52,13 @@ const DrawerGhosts: React.FunctionComponent<DrawerGhostsProps> = ({
 						size={0}
 						rotate={180}
 						name="arrow-right"
-						onClick={e => setGhosts(ghosts, ghostSkipTime - getOffset(e, 100, 10, 0.1))}
+						onClick={e => setGhosts(ghosts, (ghostSkipTime || 0) - getOffset(e, 100, 10, 0.1))}
 					/>
 					<small>{ghostSkipTime || 1}</small>
 					<Icon
 						size={0}
 						name="arrow-right"
-						onClick={e => setGhosts(ghosts, ghostSkipTime + getOffset(e, 100, 10, 0.1))}
+						onClick={e => setGhosts(ghosts, (ghostSkipTime || 0) + getOffset(e, 100, 10, 0.1))}
 					/>
 				</Tooltip>
 			</div>

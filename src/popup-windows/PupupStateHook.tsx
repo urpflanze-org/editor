@@ -1,9 +1,7 @@
 import * as React from 'react'
 
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
-
-import { findLayer } from '@window/workspace/layers/layer_utilities'
-import SceneChildUtilitiesData from '@ui-services/utilities/SceneChildUtilitiesData'
+import { findLayer } from 'app/workspace/layers/layer_utilities'
+import { IProjectSceneChild, SceneChildUtilitiesData } from 'urpflanze-ext'
 
 interface PopupWindowState {
 	prop_name?: string
@@ -29,7 +27,7 @@ export default function (
 			type: '',
 			order: 0,
 			props: {},
-			style: {},
+			drawer: {},
 			data: {
 				// highlighted: false,
 				// visible: false,

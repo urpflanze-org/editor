@@ -1,5 +1,5 @@
-import Executor from '@executor/Executor'
-import { IComunication, IComunicationResponse, IEventResponse } from '&types/comunication'
+import Executor from 'executor/Executor'
+import { IComunication, IComunicationResponse, IEventResponse } from 'types/comunication'
 
 const executor = new Executor()
 

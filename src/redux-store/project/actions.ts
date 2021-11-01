@@ -1,8 +1,9 @@
+import { ISceneChildProps } from '@urpflanze/core/dist/cjs'
+import { ISequenceMeta, ISceneChildDrawerData } from '@urpflanze/drawer-canvas/dist/cjs'
 import {
 	ProjectActionTypes,
 	CREATE_PROJECT,
 	IMPORT_PROJECT,
-	UPDATE_SCENE,
 	UPDATE_SCENE_BACKGROUND,
 	UPDATE_SCENE_CLEAR,
 	// UPDATE_RESOLUTION,
@@ -14,14 +15,11 @@ import {
 	UPDATE_SEQUENCE,
 	IMPORT_PROJECT_STATE,
 	UPDATE_PROJECT_PROPERTIES,
-} from '@redux-store/project/types'
-import { ISceneChildProps } from 'urpflanze/dist/core/types/scene-child'
+} from 'redux-store/project/types'
 
-import { ICommand } from '&types/command'
-import { ProjectState } from '&types/state'
-import { ISequenceMeta } from 'urpflanze/dist/services/types/timeline'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
-import { ISceneChildDrawerData } from 'urpflanze/dist/services/types/drawer'
+import { ICommand } from 'types/command'
+import { ProjectState } from 'types/state'
+import { IProjectSceneChild } from 'urpflanze-ext'
 
 export function importProjectState(state: ProjectState): ProjectActionTypes {
 	return {

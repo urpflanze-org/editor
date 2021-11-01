@@ -7,96 +7,84 @@ import * as sockets from '../Sockets'
 import SelectControl from '../Controls/SelectControl'
 import NumberControl from '../Controls/NumberControl'
 
-class DynamicComponent extends Rete.Component 
-{
-    constructor(name, dynamicFunctions, outputType = sockets.numberOrVariable) 
-    {
-        super(name) 
-        this.dynamicFunctions = dynamicFunctions
-        
-        this.outputType = outputType
-        this.component = Node
-        this.maxInputs = Math.max.apply(null, this.dynamicFunctions.map(df => df.inputs))
-        this.setInputFromDynamicFunction = this.setInputFromDynamicFunction.bind(this)
-    }
+class DynamicComponent extends Rete.Component {
+	constructor(name, dynamicFunctions, outputType = sockets.numberOrVariable) {
+		super(name)
+		this.dynamicFunctions = dynamicFunctions
 
-    getInputsFromFunctions(function_key)
-    {
-        const index = indexOfObjectProperty(this.dynamicFunctions, 'key', function_key)
-        return index >= 0 ? this.dynamicFunctions[index].inputs : 0
-    }
-    
-    builder(node) 
-    {   
-        const out = new Rete.Output('result', 'out', this.outputType)
+		this.outputType = outputType
+		this.component = Node
+		this.maxInputs = Math.max.apply(
+			null,
+			this.dynamicFunctions.map(df => df.inputs)
+		)
+		this.setInputFromDynamicFunction = this.setInputFromDynamicFunction.bind(this)
+	}
 
-        node.addControl(
-            new SelectControl(
-                this.editor, 
-                'dynamic_function', 
-                node, 
-                this.dynamicFunctions, 
-                node.data.dynamic_function, 
-                this.setInputFromDynamicFunction.bind(null, node)
-            )
-        )
+	getInputsFromFunctions(function_key) {
+		const index = indexOfObjectProperty(this.dynamicFunctions, 'key', function_key)
+		return index >= 0 ? this.dynamicFunctions[index].inputs : 0
+	}
 
-        this.setInputFromDynamicFunction(node, node.data.dynamic_function)
+	builder(node) {
+		const out = new Rete.Output('result', 'out', this.outputType)
 
-        node.addOutput(out)
-    }
+		node.addControl(
+			new SelectControl(
+				this.editor,
+				'dynamic_function',
+				node,
+				this.dynamicFunctions,
+				node.data.dynamic_function,
+				this.setInputFromDynamicFunction.bind(null, node)
+			)
+		)
 
-    getCurrentDynamicFunction(node)
-    {
-        return node.data.dynamic_function && node.data.dynamic_function.length > 0 ? node.data.dynamic_function : null
-    }
+		this.setInputFromDynamicFunction(node, node.data.dynamic_function)
 
-    setInputFromDynamicFunction(node, math_function)
-    {
-        const count_input = this.getInputsFromFunctions(math_function)
+		node.addOutput(out)
+	}
 
-        for (let i = 1; i <= this.maxInputs; i++)
-        {
-            const inputKey = 'input_' + i
-            if (i <= count_input)
-                this.addInput(node, inputKey, ['x', 'y', 'z', 'a', 'b', 'c'][i - 1])
-            else
-                this.removeInput(node, inputKey)
-        }
+	getCurrentDynamicFunction(node) {
+		return node.data.dynamic_function && node.data.dynamic_function.length > 0 ? node.data.dynamic_function : null
+	}
 
-        node.update()
-    }
+	setInputFromDynamicFunction(node, math_function) {
+		const count_input = this.getInputsFromFunctions(math_function)
 
-    addInput(node, key, label)
-    {
-        if (!node.inputs.has(key))
-        {
-            const input = new Rete.Input(key, label, sockets.numberOrVariable)
-            
-            input.addControl(new NumberControl(this.editor, key, node))
-            node.addInput(input)
-        }
-    }
+		for (let i = 1; i <= this.maxInputs; i++) {
+			const inputKey = 'input_' + i
+			if (i <= count_input) this.addInput(node, inputKey, ['x', 'y', 'z', 'a', 'b', 'c'][i - 1])
+			else this.removeInput(node, inputKey)
+		}
 
-    removeInput(node, key)
-    {
-        if (node.inputs.has(key))
-        {
-            const input = node.inputs.get(key)
-            input.connections.slice().map(this.editor.removeConnection.bind(this.editor))
-            node.removeInput(input)
-        }
-    }
+		node.update()
+	}
 
-    getInputValue(node, inputs, key)
-    {
-        return (inputs[key] && inputs[key].length > 0) ? inputs[key][0] : node.data[key]
-    }
+	addInput(node, key, label) {
+		if (!node.inputs.has(key)) {
+			const input = new Rete.Input(key, label, sockets.numberOrVariable)
 
-    code(node, inputs, add)
-    {
-        // add('math', node.data.result_preview)
-    }
+			input.addControl(new NumberControl(this.editor, key, node))
+			node.addInput(input)
+		}
+	}
+
+	removeInput(node, key) {
+		if (node.inputs.has(key)) {
+			const input = node.inputs.get(key)
+			input.connections.slice().map(this.editor.removeConnection.bind(this.editor))
+			node.removeInput(input)
+		}
+	}
+
+	getInputValue(node, inputs, key) {
+		return inputs[key] && inputs[key].length > 0 ? inputs[key][0] : node.data[key]
+	}
+
+	code(node, inputs, add) {
+		// add('math', node.data.result_preview)
+	}
 }
 
 export default DynamicComponent

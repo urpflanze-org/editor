@@ -1,7 +1,7 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom'
 
-import Icon from '@components/icons/Icon'
+import Icon from 'components/icons/Icon'
 
 interface ModalProps {
 	open: boolean

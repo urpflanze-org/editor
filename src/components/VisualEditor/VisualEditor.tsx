@@ -1,10 +1,10 @@
 import * as React from 'react'
 
-import { IReteEditorOptions } from '&types/visual-editor'
+import { IReteEditorOptions } from 'types/visual-editor'
 
 import { createEditor } from './Rete.jsx'
 import { Engine, NodeEditor } from 'rete'
-import { IRawState } from 'urpflanze/dist/services/types/animation'
+import { IRawState } from 'urpflanze-ext'
 
 interface VisualEditorProps {
 	initialReteState: string | null

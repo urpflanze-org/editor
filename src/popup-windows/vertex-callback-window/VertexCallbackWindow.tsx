@@ -1,22 +1,21 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { RootState } from '&types/state'
+import { RootState } from 'types/state'
 
-import useRef from '@hooks/useRef'
+import useRef from 'hooks/useRef'
 
-import { findLayer } from '@window/workspace/layers/layer_utilities'
+import { findLayer } from 'app/workspace/layers/layer_utilities'
 
-import VertexCallbackWindowPanel from '@popup-windows/vertex-callback-window/VertexCallbackWindowPanel'
-import Icon from '@components/icons/Icon'
+import VertexCallbackWindowPanel from 'popup-windows/vertex-callback-window/VertexCallbackWindowPanel'
+import Icon from 'components/icons/Icon'
 import pups from '@pups/js'
 
-import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
-import VertexCallbackWindowVisualEditor from '@popup-windows/vertex-callback-window/VertexCallbackWindowVisualEditor'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
-import { IRawState } from 'urpflanze/dist/services/types/animation'
+import { ctrlKeyPressed } from 'utilities'
+import VertexCallbackWindowVisualEditor from 'popup-windows/vertex-callback-window/VertexCallbackWindowVisualEditor'
 
-import PopupStateHook from '@popup-windows/PupupStateHook'
+import PopupStateHook from 'popup-windows/PupupStateHook'
+import { IProjectSceneChild, IRawState } from 'urpflanze-ext'
 
 interface VertexCallbackWindowProps {
 	layer_id?: string

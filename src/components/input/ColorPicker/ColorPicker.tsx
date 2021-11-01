@@ -2,17 +2,17 @@ import * as React from 'react'
 
 import pups from '@pups/js'
 
-import Portal from '@components/Portal'
-import useWindowSize from '@hooks/useWindowSize'
+import Portal from 'components/Portal'
+import useWindowSize from 'hooks/useWindowSize'
 
-import Slider from '@components/input/Slider'
-import { TSliderMode } from '@hooks/useSlider'
+import Slider from 'components/input/Slider'
+import { TSliderMode } from 'hooks/useSlider'
 
-import { parseColor, ParsedColor, getHSLAFromCoords } from '@components/input/ColorPicker/ColorPickerUtility'
-import ColorWheel from '@components/input/ColorPicker/ColorWheel'
-import ColorPickerInput from '@components/input/ColorPicker/ColorPickerInput'
-import ColorPreview from '@components/ColorPreview'
-import Grid from '@components/Grid'
+import { parseColor, ParsedColor, getHSLAFromCoords } from 'components/input/ColorPicker/ColorPickerUtility'
+import ColorWheel from 'components/input/ColorPicker/ColorWheel'
+import ColorPickerInput from 'components/input/ColorPicker/ColorPickerInput'
+import ColorPreview from 'components/ColorPreview'
+import Grid from 'components/Grid'
 
 const SIZE = 140
 

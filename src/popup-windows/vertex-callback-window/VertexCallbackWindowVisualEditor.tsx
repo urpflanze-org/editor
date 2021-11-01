@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import VisualEditor from '@components/VisualEditor/VisualEditor'
-import { IRawState } from 'urpflanze/dist/services/types/animation'
+import VisualEditor from 'components/VisualEditor/VisualEditor'
+import { IRawState } from 'urpflanze-ext'
 
 interface VertextCallbackWindowVisualEditorProp {
 	initialReteState: string | null

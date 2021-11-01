@@ -1,10 +1,10 @@
-import { ISceneChildProps } from 'urpflanze/dist/core/types/scene-child'
+import { ISceneChildProps } from '@urpflanze/core/dist/cjs'
+import { ISceneChildDrawerData, ISequenceMeta } from '@urpflanze/drawer-canvas/dist/cjs'
 
-import { ICommand } from '&types/command'
-import { ProjectState } from '&types/state'
-import { ISequenceMeta } from 'urpflanze/dist/services/types/timeline'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
-import { ISceneChildDrawerData } from 'urpflanze/dist/services/types/drawer'
+import { ICommand } from 'types/command'
+import { ProjectState } from 'types/state'
+
+import { IProjectSceneChild } from 'urpflanze-ext'
 
 export const IMPORT_PROJECT_STATE = 'IMPORT_PROJECT_STATE'
 

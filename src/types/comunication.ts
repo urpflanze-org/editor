@@ -1,5 +1,5 @@
-import { PossibleAnswer } from '@ui-services/executor/Ask/Ask'
-import { PossibleCommand } from '@ui-services/executor/Command/CommandHistory'
+import { PossibleAnswer } from 'executor/Ask/Ask'
+import { PossibleCommand } from 'executor/Command/CommandHistory'
 
 export type TComunicationType = 'set-drawer' | 'run' | 'ask' | 'undo' | 'redo' | 'history'
 

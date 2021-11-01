@@ -1,22 +1,18 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { RootState } from '&types/state'
+import { RootState } from 'types/state'
 
-import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
-import { IRawState } from 'urpflanze/dist/services/types/animation'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
+import { ctrlKeyPressed } from 'utilities'
 
-import CodeEditorWindowEditor from '@popup-windows/code-editor-window/CodeEditorWindowEditor'
-import CodeEditorWindowPanel from '@popup-windows/visual-editor-window/VisualEditorWindowPanel'
+import CodeEditorWindowEditor from 'popup-windows/code-editor-window/CodeEditorWindowEditor'
+import CodeEditorWindowPanel from 'popup-windows/visual-editor-window/VisualEditorWindowPanel'
 
-import PopupStateHook, { getPropTypeFromName } from '@popup-windows/PupupStateHook'
-import AlertPromise from '@components/Alert'
+import PopupStateHook, { getPropTypeFromName } from 'popup-windows/PupupStateHook'
+import AlertPromise from 'components/Alert'
 
-import { SceneChildPropHead, SceneChildPropHeadWithParent, validateRawCode } from '@ui-services/utilities/ValidateCode'
-import SceneChildUtilitiesData, {
-	TSceneChildPropsDataKeys,
-} from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+import { SceneChildPropHead, SceneChildPropHeadWithParent, validateRawCode } from 'utilities/ValidateCode'
+import { IProjectSceneChild, IRawState, TSceneChildPropsDataKeys } from 'urpflanze-ext'
 
 interface CodeEditorWindowProps {
 	layer_id?: number | string

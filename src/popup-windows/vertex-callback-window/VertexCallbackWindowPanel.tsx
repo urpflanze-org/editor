@@ -1,12 +1,9 @@
 import * as React from 'react'
 
 import pups from '@pups/js'
-import Range from '@components/input/Range'
-import SceneChildUtilitiesData, {
-	ISceneChildUtiltiesData,
-} from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
-import Checkbox from '@components/input/Checkbox'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
+import Range from 'components/input/Range'
+import { SceneChildUtilitiesData, ISceneChildUtiltiesData, IProjectSceneChild } from 'urpflanze-ext'
+import Checkbox from 'components/input/Checkbox'
 
 export interface LoopMeta {
 	start: number

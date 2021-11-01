@@ -1,10 +1,12 @@
+import { Spiral } from '@urpflanze/core/dist/cjs'
+import { EAdaptMode } from '@urpflanze/core/dist/cjs/modifiers/Adapt'
+
 import {
-	TTransformableType,
-	TSceneChildPropsExtendedKeys,
+	TProjectSceneChildPropsKeys,
 	TDrawerPropsExtendedKeys,
 	TSettingsExtendedKeys,
-} from '@urpflanze-ext'
-import { Spiral } from '@urpflanze/core/dist/cjs'
+	TTransformableType,
+} from 'urpflanze-ext'
 
 /**
  * @category Services.Scene Utilities
@@ -44,7 +46,7 @@ export interface ISceneChildUtiltiesData {
  * @category Services.Scene Utilities
  */
 export type TSceneChildPropsDataKeys =
-	| (Exclude<TSceneChildPropsExtendedKeys, 'loop'> | ('loop.start' | 'loop.end' | 'loop.inc'))
+	| (Exclude<TProjectSceneChildPropsKeys, 'loop'> | ('loop.start' | 'loop.end' | 'loop.inc'))
 	| TDrawerPropsExtendedKeys
 	| Exclude<TSettingsExtendedKeys, 'id' | 'name' | 'order'>
 
@@ -53,10 +55,10 @@ type TSceneChildUtilitiesData = {
 }
 
 const OptionShapePrimitiveAdaptMode = [
-	{ key: 'None', value: EShapePrimitiveAdaptMode.None },
-	{ key: 'Scale', value: EShapePrimitiveAdaptMode.Scale },
-	{ key: 'Center', value: EShapePrimitiveAdaptMode.Center },
-	{ key: 'Fill', value: EShapePrimitiveAdaptMode.Fill },
+	{ key: 'None', value: EAdaptMode.None },
+	{ key: 'Scale', value: EAdaptMode.Scale },
+	{ key: 'Center', value: EAdaptMode.Center },
+	{ key: 'Fill', value: EAdaptMode.Fill },
 ]
 
 const OptionSpiralType = [
@@ -70,7 +72,7 @@ const OptionSpiralType = [
 /**
  * @category Services.Scene Utilities
  */
-const SceneChildUtilitiesData: TSceneChildUtilitiesData = {
+export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = {
 	repetitions: {
 		animable: true,
 		name: 'repetitions',
@@ -656,5 +658,3 @@ const SceneChildUtilitiesData: TSceneChildUtilitiesData = {
 		dataType: 'props',
 	},
 }
-
-export default SceneChildUtilitiesData

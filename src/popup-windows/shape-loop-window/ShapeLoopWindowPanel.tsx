@@ -1,11 +1,9 @@
 import * as React from 'react'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
 
 import pups from '@pups/js'
-import Range from '@components/input/Range'
-import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
-import { ISceneChildUtiltiesData } from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
-import Checkbox from '@components/input/Checkbox'
+import Range from 'components/input/Range'
+import { ISceneChildUtiltiesData, SceneChildUtilitiesData, IProjectSceneChild } from 'urpflanze-ext'
+import Checkbox from 'components/input/Checkbox'
 
 export interface LoopMeta {
 	start: number
@@ -23,9 +21,9 @@ interface ShapeLoopWindowPanelProp {
 
 const ShapeLoopWindowPanel: React.FunctionComponent<ShapeLoopWindowPanelProp> = (props: ShapeLoopWindowPanelProp) => {
 	const inputs: Array<ISceneChildUtiltiesData> = [
-		SceneChildPropsData['loop.start'],
-		SceneChildPropsData['loop.end'],
-		SceneChildPropsData['loop.inc'],
+		SceneChildUtilitiesData['loop.start'],
+		SceneChildUtilitiesData['loop.end'],
+		SceneChildUtilitiesData['loop.inc'],
 	]
 
 	return (

@@ -1,6 +1,6 @@
-import ExecutorProxy from '@ui-services/executor/ExecutorProxy'
-import TimelineClass from 'urpflanze/dist/services/timeline/Timeline'
-import store from '@redux-store/root'
+import ExecutorProxy from 'executor/ExecutorProxy'
+import { Timeline } from '@urpflanze/drawer-canvas/dist/cjs'
+import store from 'redux-store/root'
 import {
 	updateLayers,
 	historyChange,
@@ -9,14 +9,14 @@ import {
 	importProjectState,
 	updateProjectProperties,
 	updateLayerDataProps,
-} from '@redux-store/project/actions'
-import { ICommand } from '&types/command'
-import { ProjectState } from '&types/state'
+} from 'redux-store/project/actions'
+import { ICommand } from 'types/command'
+import { ProjectState } from 'types/state'
 
-import { setTimelineStarted } from '@redux-store/app/actions'
-import { bRunOnServiceWorker } from '@ui-services/utilities/utilies'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
-import { ISequenceMeta } from 'urpflanze/dist/services/types/timeline'
+import { setTimelineStarted } from 'redux-store/app/actions'
+import { bRunOnServiceWorker } from 'utilities'
+import { IProjectSceneChild } from 'urpflanze-ext'
+import { ISequenceMeta } from '@urpflanze/drawer-canvas/dist/cjs'
 
 const executor = new ExecutorProxy(!bRunOnServiceWorker())
 
@@ -47,7 +47,7 @@ executor.attach('scene:update-scene_child-ui-prop', (data: any) => {
 })
 
 executor.attach('timeline:change_status', data => {
-	store.dispatch(setTimelineStarted((data as string) == TimelineClass.START))
+	store.dispatch(setTimelineStarted((data as string) == Timeline.START))
 })
 
 executor.attach('timeline:update_sequence', data => {

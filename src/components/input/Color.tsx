@@ -1,11 +1,11 @@
 import * as React from 'react'
 
-import ColorPreview from '@components/ColorPreview'
-import ColorPicker from '@components/input/ColorPicker/ColorPicker'
+import ColorPreview from 'components/ColorPreview'
+import ColorPicker from 'components/input/ColorPicker/ColorPicker'
 
-import { Coords, ctrlKeyPressed } from '@ui-services/utilities/utilies'
+import { Coords, ctrlKeyPressed } from 'utilities'
 
-import { TSliderMode } from '@hooks/useSlider'
+import { TSliderMode } from 'hooks/useSlider'
 
 interface ColorProps {
 	value: string

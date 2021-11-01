@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import Icon from '@components/icons/Icon'
+import Icon from 'components/icons/Icon'
 
 interface ISelect {
 	options: Array<{ key: any; value: any }>

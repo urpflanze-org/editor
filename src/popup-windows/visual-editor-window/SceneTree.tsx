@@ -1,10 +1,10 @@
 import * as React from 'react'
 
-import Icon from '@components/icons/Icon'
+import Icon from 'components/icons/Icon'
 import pups from '@pups/js'
 
-import { isParentOf } from '@window/workspace/layers/layer_utilities'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
+import { isParentOf } from 'app/workspace/layers/layer_utilities'
+import { IProjectSceneChild } from 'urpflanze-ext'
 
 interface SceneTreeProps {
 	selectLayer: (layer: IProjectSceneChild) => void

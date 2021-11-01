@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { clamp } from '@pups/utility/build/Number'
 
-import Icon from '@components/icons/Icon'
-import useSlider, { TSliderMode } from '@hooks/useSlider'
-import useRef from '@hooks/useRef'
+import Icon from 'components/icons/Icon'
+import useSlider, { TSliderMode } from 'hooks/useSlider'
+import useRef from 'hooks/useRef'
 
 export interface IRange {
 	min: number

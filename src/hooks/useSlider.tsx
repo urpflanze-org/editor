@@ -1,9 +1,9 @@
 import * as React from 'react'
 
-import useDraggable from '@hooks/useDraggable'
-import useRect from '@hooks/useRect'
-import useWheel from '@hooks/useWheel'
-import { clamp, relativeClamp } from 'urpflanze/dist/Utilites'
+import useDraggable from 'hooks/useDraggable'
+import useRect from 'hooks/useRect'
+import useWheel from 'hooks/useWheel'
+import { clamp, relativeClamp } from '@urpflanze/core/dist/cjs'
 
 type TChangeMode = 'slider' | 'none'
 

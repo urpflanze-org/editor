@@ -2,10 +2,9 @@ import * as React from 'react'
 
 import pups from '@pups/js'
 
-import SceneTree from '@popup-windows/visual-editor-window/SceneTree'
-import Select from '@components/input/Select'
-import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
+import SceneTree from 'popup-windows/visual-editor-window/SceneTree'
+import Select from 'components/input/Select'
+import { IProjectSceneChild, SceneChildUtilitiesData } from 'urpflanze-ext'
 
 interface VisualEditorWindowPanelProp {
 	scene: { [key: string]: IProjectSceneChild }
@@ -24,7 +23,7 @@ const VisualEditorWindowPanel: React.FunctionComponent<VisualEditorWindowPanelPr
 				<div style={Name}>{props.layer ? props.layer.name : 'select layer'}</div>
 				<div>
 					<Select
-						options={Object.keys(SceneChildPropsData).map(e => ({ key: e, value: e }))}
+						options={Object.keys(SceneChildUtilitiesData).map(e => ({ key: e, value: e }))}
 						placeholder="Select property"
 						value={props.prop_name}
 						onChange={props.selectPropName}

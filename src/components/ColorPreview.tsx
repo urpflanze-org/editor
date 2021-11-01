@@ -1,9 +1,9 @@
 import * as React from 'react'
 import pups from '@pups/js'
 
-import dispatchMessage from '@window/messages/dispatchMessage'
+import dispatchMessage from 'app/messages/dispatchMessage'
 
-import useClipboard from '@hooks/useClipboard'
+import useClipboard from 'hooks/useClipboard'
 
 interface ColorPreviewProps {
 	color: string

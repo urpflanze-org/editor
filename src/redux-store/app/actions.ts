@@ -9,8 +9,8 @@ import {
 	HIDE_MESSAGE,
 	IMPORT_APP_STATE,
 	OPEN_MODAL,
-} from '@redux-store/app/types'
-import { AppState, TOpenModal } from '&types/state'
+} from 'redux-store/app/types'
+import { AppState, TOpenModal } from 'types/state'
 
 export function importAppState(state: AppState): AppActionTypes {
 	return {

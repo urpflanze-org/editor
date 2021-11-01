@@ -10,10 +10,10 @@ import {
 	AnyAction,
 } from 'redux'
 
-import { appReducer } from '@redux-store/app/reducers'
-import { projectReducer } from '@redux-store/project/reducers'
-import { RootState } from '&types/state'
-import Storage from '@ui-services/storage/Storage'
+import { appReducer } from 'redux-store/app/reducers'
+import { projectReducer } from 'redux-store/project/reducers'
+import { RootState } from 'types/state'
+import Storage from 'storage/Storage'
 import { isOpenPopup, LOCAL_STORAGE_KEY } from 'popup-windows/PupupUtilities'
 
 const sanitizeProject = (key: string, value: any): any => {
@@ -33,21 +33,22 @@ const sanitizeProject = (key: string, value: any): any => {
 	}
 }
 
-const storageMiddleware: Middleware<{}, RootState> = <S extends RootState>(api: MiddlewareAPI<Dispatch, S>) => (
-	next: Dispatch<AnyAction>
-) => <A extends Action>(action: A): A => {
-	const result = next(action)
+const storageMiddleware: Middleware<{}, RootState> =
+	<S extends RootState>(api: MiddlewareAPI<Dispatch, S>) =>
+	(next: Dispatch<AnyAction>) =>
+	<A extends Action>(action: A): A => {
+		const result = next(action)
 
-	// Save store only if main window
-	if (window.opener === null && isOpenPopup()) {
-		const store = api.getState()
-		// TODO: if app e project as same kay thi will error
+		// Save store only if main window
+		if (window.opener === null && isOpenPopup()) {
+			const store = api.getState()
+			// TODO: if app e project as same kay thi will error
 
-		Storage.set(LOCAL_STORAGE_KEY, JSON.stringify(store, sanitizeProject), true)
+			Storage.set(LOCAL_STORAGE_KEY, JSON.stringify(store, sanitizeProject), true)
+		}
+
+		return result
 	}
-
-	return result
-}
 
 const appliedMStorageiddleware = applyMiddleware(storageMiddleware)
 

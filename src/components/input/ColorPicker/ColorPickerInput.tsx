@@ -1,11 +1,11 @@
 import * as React from 'react'
 import pups from '@pups/js'
 
-import useClipboard from '@hooks/useClipboard'
+import useClipboard from 'hooks/useClipboard'
 
-import ColorPreview from '@components/ColorPreview'
-import Grid from '@components/Grid'
-import { validateColor } from '@components/input/ColorPicker/ColorPickerUtility'
+import ColorPreview from 'components/ColorPreview'
+import Grid from 'components/Grid'
+import { validateColor } from 'components/input/ColorPicker/ColorPickerUtility'
 
 interface IProps {
 	color: string

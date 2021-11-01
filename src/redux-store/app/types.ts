@@ -1,4 +1,4 @@
-import { AppState, TOpenModal } from '&types/state'
+import { AppState, TOpenModal } from 'types/state'
 
 export const IMPORT_APP_STATE = 'IMPORT_APP_STATE'
 

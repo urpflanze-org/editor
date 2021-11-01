@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import useSlider, { TSliderMode } from '@hooks/useSlider'
+import useSlider, { TSliderMode } from 'hooks/useSlider'
 
 interface SliderProp {
 	vertical?: boolean

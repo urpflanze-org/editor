@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import Grid from '@components/Grid'
+import Grid from 'components/Grid'
 import pups from '@pups/js'
 
 interface IRadio {

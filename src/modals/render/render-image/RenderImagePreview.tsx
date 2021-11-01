@@ -1,11 +1,12 @@
 import * as React from 'react'
 
-import { IRenderSettings } from 'urpflanze/dist/services/types/renderer'
-
-import Icon from '@components/icons/Icon'
-import Radio from '@components/input/Radio'
+import Icon from 'components/icons/Icon'
+import Radio from 'components/input/Radio'
 import pups from '@pups/js'
 
+interface IRenderSettings {
+	size: number
+}
 interface RenderImagePreviewProps {
 	render: HTMLImageElement | null
 	ratio: number

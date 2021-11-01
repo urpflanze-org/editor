@@ -1,15 +1,13 @@
-import { ICommand } from '&types/command'
-import { ProjectState } from '&types/state'
-import { IRenderFrame, IRenderStart } from 'urpflanze/dist/services/types/renderer'
+import { IDrawerCanvasEvents, ITimelineEvents } from '@urpflanze/drawer-canvas/dist/cjs'
+import { ICommand } from 'types/command'
+import { ProjectState } from 'types/state'
+import { IProjectSceneChild } from 'urpflanze-ext'
 
-import { ITimelineEvents } from 'urpflanze/dist/services/types/timeline'
-import { IDrawerCanvasEvents } from 'urpflanze/dist/services/types/drawer'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
-
-export interface IRenderEvents {
-	'renderer:start': IRenderStart
-	'renderer:render-frame': IRenderFrame
-}
+export type IRenderEvents = null
+// export interface IRenderEvents {
+// 'renderer:start': IRenderStart
+// 'renderer:render-frame': IRenderFrame
+// }
 
 export interface ICommandHistoryEvents {
 	'command_history:update_history': Array<ICommand>
@@ -29,9 +27,15 @@ interface IExecutorProxyEvents {
 	'executor-work': { waiting: number }
 }
 
+// export interface ExecutorEvents
+// 	extends IDrawerCanvasEvents,
+// 		ITimelineEvents,
+// 		IExecutorProxyEvents,
+// 		ICommandHistoryEvents,
+// 		IRenderEvents {}
+
 export interface ExecutorEvents
 	extends IDrawerCanvasEvents,
 		ITimelineEvents,
 		IExecutorProxyEvents,
-		ICommandHistoryEvents,
-		IRenderEvents {}
+		ICommandHistoryEvents {}

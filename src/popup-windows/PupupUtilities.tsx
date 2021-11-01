@@ -1,13 +1,13 @@
 import { shallowEqual } from 'react-redux'
 
-import { importAppState } from '@redux-store/app/actions'
-import { importProjectState } from '@redux-store/project/actions'
+import { importAppState } from 'redux-store/app/actions'
+import { importProjectState } from 'redux-store/project/actions'
 
-import { RootState } from '&types/state'
-import Storage from '@ui-services/storage/Storage'
-import { debounce } from '@ui-services/utilities/utilies'
+import { RootState } from 'types/state'
+import Storage from 'storage/Storage'
+import { debounce } from 'utilities'
 
-import store from '@redux-store/root'
+import store from 'redux-store/root'
 
 export const LOCAL_STORAGE_KEY = 'redux-storage'
 

@@ -9,9 +9,9 @@ import {
 	OPEN_MODAL,
 	SHOW_TUTORIAL,
 	HIDE_TUTORIAL,
-} from '@redux-store/app/types'
+} from 'redux-store/app/types'
 
-import { AppState } from '&types/state'
+import { AppState } from 'types/state'
 
 export const initialAppState: AppState = {
 	messages: {},

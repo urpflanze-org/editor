@@ -1,25 +1,23 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { RootState } from '&types/state'
+import { RootState } from 'types/state'
 
-import useRef from '@hooks/useRef'
+import useRef from 'hooks/useRef'
 
-import { findLayer } from '@window/workspace/layers/layer_utilities'
+import { findLayer } from 'app/workspace/layers/layer_utilities'
 
-import VisualEditorWindowPanel from '@popup-windows/visual-editor-window/VisualEditorWindowPanel'
-import VisualEditorWindowVisualEditor from '@popup-windows/visual-editor-window/VisualEditorWindowVisualEditor'
-import Icon from '@components/icons/Icon'
+import VisualEditorWindowPanel from 'popup-windows/visual-editor-window/VisualEditorWindowPanel'
+import VisualEditorWindowVisualEditor from 'popup-windows/visual-editor-window/VisualEditorWindowVisualEditor'
+import Icon from 'components/icons/Icon'
 import pups from '@pups/js'
 
-import SceneUtilitiesExtended from 'urpflanze/dist/services/scene-utilities/SceneUtilitiesExtended'
-import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
-import { IRawState } from 'urpflanze/dist/services/types/animation'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
+import { ctrlKeyPressed } from 'utilities'
 
-import PopupStateHook, { getPropTypeFromName } from '@popup-windows/PupupStateHook'
-import { SceneChildPropHeadWithParent, validateRawCode } from '@ui-services/utilities/ValidateCode'
-import AlertPromise from '@components/Alert'
+import PopupStateHook, { getPropTypeFromName } from 'popup-windows/PupupStateHook'
+import { SceneChildPropHeadWithParent, validateRawCode } from 'utilities/ValidateCode'
+import AlertPromise from 'components/Alert'
+import { bValueAnimation, IProjectSceneChild, IRawState, RAW_ARGUMENTS } from 'urpflanze-ext'
 
 interface VisualEditorWindowProps {
 	layer_id?: number | string
@@ -57,7 +55,7 @@ const VisualEditorWindow: React.FunctionComponent<VisualEditorWindowProps> = (pr
 			const newInitialReteState =
 				state.layer &&
 				state.prop_name &&
-				SceneUtilitiesExtended.bValueAnimation(state.layer.props[state.prop_name]) &&
+				bValueAnimation(state.layer.props[state.prop_name]) &&
 				state.layer.props[state.prop_name].type === 'raw'
 					? state.layer.props[state.prop_name].value.state
 					: null
@@ -78,7 +76,7 @@ const VisualEditorWindow: React.FunctionComponent<VisualEditorWindowProps> = (pr
 	function save() {
 		if (state.layer && state.prop_name) {
 			const value = {
-				raw: `(${SceneUtilitiesExtended.RAW_ARGUMENTS}) => ${reteAnimation?.raw}`,
+				raw: `(${RAW_ARGUMENTS}) => ${reteAnimation?.raw}`,
 				state: reteAnimation?.state,
 			}
 			const validator = validateRawCode(state.layer, value.raw)

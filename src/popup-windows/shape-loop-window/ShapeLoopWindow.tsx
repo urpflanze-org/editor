@@ -1,22 +1,21 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { RootState } from '&types/state'
+import { RootState } from 'types/state'
 
-import useRef from '@hooks/useRef'
+import useRef from 'hooks/useRef'
 
-import { findLayer } from '@window/workspace/layers/layer_utilities'
+import { findLayer } from 'app/workspace/layers/layer_utilities'
 
-import ShapeLoopWindowPanel, { LoopMeta } from '@popup-windows/shape-loop-window/ShapeLoopWindowPanel'
-import Icon from '@components/icons/Icon'
+import ShapeLoopWindowPanel, { LoopMeta } from 'popup-windows/shape-loop-window/ShapeLoopWindowPanel'
+import Icon from 'components/icons/Icon'
 import pups from '@pups/js'
 
-import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
-import ShapeLoopWindowVisualEditor from '@popup-windows/shape-loop-window/ShapeLoopWindowVisualEditor'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
-import { IRawState } from 'urpflanze/dist/services/types/animation'
+import { ctrlKeyPressed } from 'utilities'
+import ShapeLoopWindowVisualEditor from 'popup-windows/shape-loop-window/ShapeLoopWindowVisualEditor'
+import { IProjectSceneChild, IRawState } from 'urpflanze-ext'
 
-import PopupStateHook from '@popup-windows/PupupStateHook'
+import PopupStateHook from 'popup-windows/PupupStateHook'
 
 interface ShapeLoopWindowProps {
 	layer_id?: number | string

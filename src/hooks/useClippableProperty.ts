@@ -1,11 +1,8 @@
 import * as React from 'react'
-import { ctrlKeyPressed } from '@ui-services/utilities/utilies'
-import dispatchMessage from '@window/messages/dispatchMessage'
-import {
-	ISceneChildUtiltiesData,
-	TPropInputType,
-} from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
-import { TAnimation } from 'urpflanze/dist/services/types/animation'
+import { ctrlKeyPressed } from 'utilities'
+import dispatchMessage from 'app/messages/dispatchMessage'
+
+import { ISceneChildUtiltiesData, TAnimation, TPropInputType } from 'urpflanze-ext'
 
 interface ClippedProp {
 	value: any

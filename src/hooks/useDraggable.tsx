@@ -1,7 +1,7 @@
 import * as React from 'react'
-import useRef from '@hooks/useRef'
+import useRef from 'hooks/useRef'
 
-import { now } from '@ui-services/utilities/utilies'
+import { now } from '@urpflanze/core/dist/cjs'
 
 interface IDraggableEvents {
 	onNotDrag?: () => void

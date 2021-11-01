@@ -1,18 +1,21 @@
 import { v1 as uuidv1 } from 'uuid'
 
 import { vec2 } from 'gl-matrix'
-import SceneChildUtilitiesData from './SceneChildUtilitiesData'
-import SceneUtilitiesExtended from './SceneUtilitiesExtended'
+
 import {
-	TSceneChildUtilitiesSettings,
-	TSceneChildPropExtendedValue,
-	TDrawerPropExtendedValue,
-	TSceneChildPropsExtendedKeys,
-	TDrawerPropsExtendedKeys,
-	TSettingsExtendedKeys,
-	ISceneChildPropsExtendedShapeLoop,
+	SceneChildUtilitiesData,
+	bValueVertexCallback,
+	composeVertexCallback,
 	TAnimation,
-} from '@urpflanze-ext'
+	TSceneChildUtilitiesSettings,
+	TSettingsExtendedKeys,
+	bValueLoop,
+	composeLoop,
+	bValueAnimation,
+	bPropInSceneChildUtilitiesData,
+	bValueTransformable,
+	getTransformedValue,
+} from 'urpflanze-ext'
 import {
 	SceneChild,
 	Line,
@@ -42,7 +45,7 @@ type SceneChildInstance = new (props: any) => SceneChild
  * @category Services.Scene Utilities
  * @class SceneUtilities
  */
-class SceneUtilities {
+class SceneUtilitiesInstance {
 	private registeredSceneChilds: { [type: string]: SceneChildInstance } = {}
 
 	constructor() {
@@ -203,8 +206,9 @@ class SceneUtilities {
 		const setting: TSceneChildUtilitiesSettings = sceneChild.getProps()
 
 		if (sceneChild instanceof ShapeBase) {
-			setting.bUseParent = sceneChild.bUseParent
-			setting.bUseRecursion = sceneChild.bUseRecursion
+			// TODO: shapeUseParent
+			// setting.bUseParent = sceneChild.bUseParent
+			// setting.bUseRecursion = sceneChild.bUseRecursion
 		}
 
 		if (sceneChild instanceof ShapeBuffer) {
@@ -213,7 +217,6 @@ class SceneUtilities {
 
 		if (sceneChild instanceof ShapePrimitive) {
 			setting.bClosed = sceneChild.bClosed
-			setting.adaptMode = sceneChild.adaptMode
 			setting.vertexCallback = sceneChild.vertexCallback
 		}
 
@@ -221,8 +224,8 @@ class SceneUtilities {
 			setting.loopDependencies = sceneChild.loopDependencies
 		}
 
-		if (sceneChild instanceof ShapeLoop) {
-			setting.loopDependencies = sceneChild.loopDependencies
+		if (sceneChild instanceof ShapeBuffer) {
+			setting.adaptMode = sceneChild.adaptMode
 		}
 
 		if (strict) {
@@ -244,7 +247,7 @@ class SceneUtilities {
 				const copiedShape: SceneChild | null = this.copy(sceneChild.shape, scene)
 				copiedShape && (copied.shape = copiedShape)
 			} else if (sceneChild instanceof ShapeBuffer && copied instanceof ShapeBuffer && sceneChild.shape) {
-				copied.setShape(new Float32Array(sceneChild.shape))
+				copied.setShape(sceneChild.shape)
 			}
 
 			return copied
@@ -504,29 +507,14 @@ class SceneUtilities {
 
 	//#endregion
 
-	set(
-		sceneChild: SceneChild,
-		name: keyof typeof SceneChildUtilitiesData,
-		value: TSceneChildPropExtendedValue | TDrawerPropExtendedValue | TSettingExtendedValue,
-		scene: Scene
-	): void {
+	set(sceneChild: SceneChild, name: keyof typeof SceneChildUtilitiesData, value: any, scene: Scene): void {
 		switch (SceneChildUtilitiesData[name].dataType) {
 			case 'props':
-				return this.setProp(
-					sceneChild,
-					name as TSceneChildPropsExtendedKeys,
-					value as TSceneChildPropExtendedValue,
-					scene
-				)
+				return this.setProp(sceneChild, name, value, scene)
 			case 'drawer':
-				return this.setDrawerProp(
-					sceneChild,
-					name as TDrawerPropsExtendedKeys,
-					value as TDrawerPropExtendedValue,
-					scene
-				)
+				return this.setDrawerProp(sceneChild, name, value, scene)
 			case 'settings':
-				return this.setSetting(sceneChild, name as TSettingsExtendedKeys, value as TSettingExtendedValue, scene)
+				return this.setSetting(sceneChild, name as TSettingsExtendedKeys, value, scene)
 		}
 	}
 	/**
@@ -538,12 +526,7 @@ class SceneUtilities {
 	 * @param {Scene} scene
 	 * @memberof SceneUtilities
 	 */
-	setProp(
-		sceneChild: SceneChild,
-		name: TSceneChildPropsExtendedKeys,
-		value: TSceneChildPropExtendedValue,
-		scene: Scene
-	): void {
+	setProp(sceneChild: SceneChild, name: keyof typeof SceneChildUtilitiesData, value: any, scene: Scene): void {
 		if (typeof sceneChild.data === 'undefined') {
 			sceneChild.data = { props: {} }
 		} else if (typeof sceneChild.data.props === 'undefined') {
@@ -554,10 +537,10 @@ class SceneUtilities {
 
 		// Check LoopAnimation
 		if (name === 'loop') {
-			if (sceneChild instanceof ShapeLoop && SceneUtilitiesExtended.bValueLoop(value)) {
-				const shapeLoopAnimation = value as ISceneChildPropsExtendedShapeLoop
+			if (sceneChild instanceof ShapeLoop && bValueLoop(value)) {
+				const shapeLoopAnimation = value
 				sceneChild.data.props.loop = value
-				sceneChild.setProp('loop', SceneUtilitiesExtended.composeLoop(shapeLoopAnimation))
+				sceneChild.setProp('loop', composeLoop(shapeLoopAnimation))
 
 				// Set loopDependencies
 				const dynamic = shapeLoopAnimation.dynamyc
@@ -575,28 +558,23 @@ class SceneUtilities {
 		}
 
 		// Check Animation
-		if (SceneUtilitiesExtended.bValueAnimation(value)) {
+		if (bValueAnimation(value)) {
 			sceneChild.data.props[name] = value
-			sceneChild.setProp(name as keyof ISceneChildProps, Animation.composeAnimation(scene, name, value as TAnimation))
+			// TODO: apply animation
+			// sceneChild.setProp(name as keyof ISceneChildProps, Animation.composeAnimation(scene, name, value as TAnimation))
 			return
 		}
 
 		// Check Transormable prop
-		if (
-			SceneUtilitiesExtended.bPropInSceneChildUtilitiesData(name) &&
-			SceneUtilitiesExtended.bValueTransformable(value)
-		) {
+		if (bPropInSceneChildUtilitiesData(name) && bValueTransformable(value)) {
 			sceneChild.data.props[name] = value
-			;(sceneChild as ShapePrimitive).setProp(
-				name as keyof ISceneChildProps,
-				SceneUtilitiesExtended.getTransformedValue(scene, name, value)
-			)
+			;(sceneChild as ShapePrimitive).setProp(name as keyof ISceneChildProps, getTransformedValue(scene, name, value))
 			return
 		}
 
 		// Otherwise, set prop without transformation
 		//Equivalent of: if (name in SceneChildPropsData && SceneChildPropsData[name].transformation !== 'none')
-		sceneChild.setProp(name as keyof ISceneChildProps, value as number | vec2, true)
+		sceneChild.setProp(name as keyof ISceneChildProps, value as number | [number, number], true)
 		delete sceneChild.data.props[name]
 
 		// Not set to data because exporter override sceneChild.data.props on sceneChild.props (default)
@@ -613,42 +591,35 @@ class SceneUtilities {
 	 * @param {Scene} scene
 	 * @memberof SceneUtilities
 	 */
-	setDrawerProp(
-		sceneChild: SceneChild,
-		name: TDrawerPropsExtendedKeys,
-		value: TDrawerPropExtendedValue,
-		scene: Scene
-	): void {
+	setDrawerProp(sceneChild: SceneChild, name: any, value: any, scene: Scene): void {
 		if (this.isAPrimitive(sceneChild)) {
 			if (typeof sceneChild.data === 'undefined') {
-				sceneChild.data = { style: {} }
-			} else if (typeof sceneChild.data.style === 'undefined') {
-				sceneChild.data.style = {}
+				sceneChild.data = { drawer: {} }
+			} else if (typeof sceneChild.data.drawer === 'undefined') {
+				sceneChild.data.drawer = {}
 			}
 
-			if (SceneUtilitiesExtended.bValueAnimation(value)) {
-				sceneChild.data.style[name] = value
-				;(sceneChild as ShapePrimitive).style[name] = Animation.composeAnimation(scene, name, value as TAnimation)
+			if (bValueAnimation(value)) {
+				sceneChild.data.drawer[name] = value
+				// TODO: apply animation
+				// ;(sceneChild as ShapePrimitive).drawer[name] = Animation.composeAnimation(scene, name, value as TAnimation)
 				return
 			}
 
 			// Check Transormable prop
-			if (
-				SceneUtilitiesExtended.bPropInSceneChildUtilitiesData(name) &&
-				SceneUtilitiesExtended.bValueTransformable(value)
-			) {
-				sceneChild.data.style[name] = value
+			if (bPropInSceneChildUtilitiesData(name) && bValueTransformable(value)) {
+				sceneChild.data.drawer[name] = value
 
 				//@ts-ignore
-				;(sceneChild as ShapePrimitive).style[name] = SceneUtilitiesExtended.getTransformedValue(scene, name, value)
+				;(sceneChild as ShapePrimitive).drawer[name] = getTransformedValue(scene, name, value)
 				return
 			}
 
 			// Otherwise, set prop without transformation
 			//Equivalent of: if (name in SceneChildPropsData && SceneChildPropsData[name].transformation !== 'none')
 			// @ts-ignore
-			sceneChild.style[name] = value
-			delete sceneChild.data.style[name]
+			sceneChild.drawer[name] = value
+			delete sceneChild.data.drawer[name]
 		}
 	}
 
@@ -657,13 +628,13 @@ class SceneUtilities {
 	 * Set Args (props, drawer, other settings)
 	 * SceneChildPropData refactoring
 	 */
-	setSetting(sceneChild: SceneChild, name: TSettingsExtendedKeys, value: TSettingExtendedValue, scene: Scene): void {
+	setSetting(sceneChild: SceneChild, name: TSettingsExtendedKeys, value: any, scene: Scene): void {
 		sceneChild.clearBuffer(true, true)
 
 		if (name === 'vertexCallback') {
-			if (sceneChild instanceof ShapeBase && SceneUtilitiesExtended.bValueVertexCallback(value)) {
+			if (sceneChild instanceof ShapeBase && bValueVertexCallback(value)) {
 				sceneChild.data.vertexCallback = value
-				sceneChild.vertexCallback = SceneUtilitiesExtended.composeVertexCallback(value)
+				sceneChild.vertexCallback = composeVertexCallback(value)
 				// If shape is static vertexCallback has no effect
 				// sceneChild.bUseParent = true
 			}
@@ -672,16 +643,16 @@ class SceneUtilities {
 
 		switch (name) {
 			case 'bUseParent':
-				if (sceneChild instanceof ShapeBase) sceneChild.bUseParent = value as boolean
+				// if (sceneChild instanceof ShapeBase) sceneChild.bUseParent = value as boolean
 				break
 			case 'bUseRecursion':
-				if (sceneChild instanceof ShapeBase) sceneChild.bUseRecursion = value as boolean
+				// if (sceneChild instanceof ShapeBase) sceneChild.bUseRecursion = value as boolean
 				break
 			case 'bClosed':
 				if (sceneChild instanceof ShapePrimitive) sceneChild.setClosed(value as boolean)
 				break
 			case 'adaptMode':
-				if (sceneChild instanceof ShapePrimitive) sceneChild.adapt(value as EShapePrimitiveAdaptMode)
+				// if (sceneChild instanceof ShapePrimitive) sceneChild.adapt(value as EShapePrimitiveAdaptMode)
 				break
 			default:
 				if (typeof sceneChild[name] !== 'undefined') {
@@ -694,4 +665,6 @@ class SceneUtilities {
 	}
 }
 
-export default new SceneUtilities()
+const SceneUtilities = new SceneUtilitiesInstance()
+
+export { SceneUtilities }

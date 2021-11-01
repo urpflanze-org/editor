@@ -1,10 +1,10 @@
 import * as React from 'react'
-import useDraggable from '@hooks/useDraggable'
-import useRect from '@hooks/useRect'
+import useDraggable from 'hooks/useDraggable'
+import useRect from 'hooks/useRect'
 import pups from '@pups/js'
 
-import { getHSLAFromCoords, getWheelImage } from '@components/input/ColorPicker/ColorPickerUtility'
-import { TSliderMode } from '@hooks/useSlider'
+import { getHSLAFromCoords, getWheelImage } from 'components/input/ColorPicker/ColorPickerUtility'
+import { TSliderMode } from 'hooks/useSlider'
 
 interface ColorWheelProps {
 	coords: { x: number; y: number }

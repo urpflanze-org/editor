@@ -1,34 +1,31 @@
 import * as React from 'react'
-import Loading from '@bootstrap/Loading'
-import pups from '@pups/js'
-import useWindowSize from '@hooks/useWindowSize'
-import { relativeClamp } from 'urpflanze/dist/Utilites'
-// import executor from '@redux-store/executor'
-import CodeEditorWindow from '@popup-windows/code-editor-window/CodeEditorWindow'
+import Loading from 'bootstrap/Loading'
+// import executor from 'redux-store/executor'
+import CodeEditorWindow from 'popup-windows/code-editor-window/CodeEditorWindow'
 
 const Main = React.lazy(
-	() => import(/* webpackChunkName: "main" */ /* webpackPreload: true */ /* webpackMode: "lazy" */ '@window/Main')
+	() => import(/* webpackChunkName: "main" */ /* webpackPreload: true */ /* webpackMode: "lazy" */ 'app/Main')
 )
 
 const AnimatePropWindow = React.lazy(
 	() =>
 		import(
 			/* webpackChunkName: "animate-prop-window" */ /* webpackPreload: true */ /* webpackMode: "lazy" */
-			'@popup-windows/visual-editor-window/VisualEditorWindow'
+			'popup-windows/visual-editor-window/VisualEditorWindow'
 		)
 )
 const ShapeLoopWindow = React.lazy(
 	() =>
 		import(
 			/* webpackChunkName: "shape-loop-window" */ /* webpackPreload: true */ /* webpackMode: "lazy" */
-			'@popup-windows/shape-loop-window/ShapeLoopWindow'
+			'popup-windows/shape-loop-window/ShapeLoopWindow'
 		)
 )
 const VertexCallbackWindow = React.lazy(
 	() =>
 		import(
 			/* webpackChunkName: "shape-loop-window" */ /* webpackPreload: true */ /* webpackMode: "lazy" */
-			'@popup-windows/vertex-callback-window/VertexCallbackWindow'
+			'popup-windows/vertex-callback-window/VertexCallbackWindow'
 		)
 )
 
@@ -94,13 +91,6 @@ const Router: React.FunctionComponent = () => {
 
 	// CurrentComponent = ShapeLoopWindow
 	// props = { layer_id: 'b17d5bf0-ee18-11ea-9fed-8d112b15e91e' }
-
-	const size = useWindowSize()
-
-	const rootBase = Math.floor(relativeClamp(600, 2560, size.width, 13, 18))
-
-	pups.modularScale.setRootBase(rootBase + 'px')
-	document.documentElement.style.fontSize = rootBase + 'px'
 
 	return (
 		<React.Suspense fallback={<Loading />}>

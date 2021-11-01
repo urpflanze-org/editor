@@ -1,20 +1,19 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { RootState } from '&types/state'
-import { IGCODESettings } from 'urpflanze/dist/services/types/exporters-importers'
-import GCODEExporter from 'urpflanze/dist/services/exporters/GCODEExporter'
-import executor from '@redux-store/executor'
+import { RootState } from 'types/state'
+
+import executor from 'redux-store/executor'
 
 const GenerateGCODE = () => {
-	const [settings, setSettings] = React.useState<IGCODESettings>(GCODEExporter.defaults)
+	// const [settings, setSettings] = React.useState<IGCODESettings>(GCODEExporter.defaults)
 	const [gcode, setGCODE] = React.useState<string>('')
 
 	async function setGCode() {
-		console.log('settings', settings)
-		const _gcode = await executor.ask('export-gcode', { settings })
-		console.log('OK')
-		setGCODE(_gcode)
+		// console.log('settings', settings)
+		// const _gcode = await executor.ask('export-gcode', { settings })
+		// console.log('OK')
+		// setGCODE(_gcode)
 	}
 
 	function update(name: string, value: string | number) {
@@ -22,13 +21,13 @@ const GenerateGCODE = () => {
 			value = parseFloat(value as string)
 		}
 
-		setSettings({ ...settings, [name]: value })
+		// setSettings({ ...settings, [name]: value })
 	}
-	console.log(settings)
+	// console.log(settings)
 
 	return (
 		<div>
-			{Object.keys(settings).map(key => (
+			{/* {Object.keys(settings).map(key => (
 				<div key={key}>
 					{key}{' '}
 					<input
@@ -39,7 +38,7 @@ const GenerateGCODE = () => {
 						onChange={e => update(e.target.name, e.target.value)}
 					/>
 				</div>
-			))}
+			))} */}
 
 			<button onClick={setGCode}>Generate</button>
 

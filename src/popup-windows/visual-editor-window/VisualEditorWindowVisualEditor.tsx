@@ -1,9 +1,7 @@
 import * as React from 'react'
 
-import VisualEditor from '@components/VisualEditor/VisualEditor'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
-import { IRawState } from 'urpflanze/dist/services/types/animation'
-import SceneChildPropsData from '@ui-services/utilities/SceneChildUtilitiesData'
+import VisualEditor from 'components/VisualEditor/VisualEditor'
+import { IProjectSceneChild, IRawState, SceneChildUtilitiesData } from 'urpflanze-ext'
 
 interface VisualEditorWindowVisualEditorProp {
 	prop_name: string | undefined
@@ -17,8 +15,8 @@ const VisualEditorWindowVisualEditor: React.FunctionComponent<VisualEditorWindow
 ) => {
 	const options = {
 		bMatrixRepetitions: props.layer?.props.repetitions ? Array.isArray(props.layer?.props.repetitions) : false,
-		bVector: props.prop_name ? SceneChildPropsData[props.prop_name].type === 'multiple-range' : false,
-		bColor: props.prop_name ? SceneChildPropsData[props.prop_name].type === 'color' : false,
+		bVector: props.prop_name ? SceneChildUtilitiesData[props.prop_name].type === 'multiple-range' : false,
+		bColor: props.prop_name ? SceneChildUtilitiesData[props.prop_name].type === 'color' : false,
 		// canbVector?: boolean
 		// shapeLoop?: boolean
 		// bVertexCallback?: boolean

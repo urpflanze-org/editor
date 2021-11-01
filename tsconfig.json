@@ -17,21 +17,8 @@
 		"suppressExcessPropertyErrors": true,
 		"strict": true,
 		"typeRoots": ["./node_modules/@types"],
-		"paths": {
-			"&types/*": ["./types/*"],
-			"@bootstrap/*": ["./bootstrap/*"],
-			"@hooks/*": ["./hooks/*"],
-			"@workers/*": ["./workers/*"],
-			"@redux-store/*": ["./redux-store/*"],
-			"@window/*": ["./window/*"],
-			"@modals/*": ["./modals/*"],
-			"@components/*": ["./components/*"],
-			"@ui-services/*": ["./ui-services/*"],
-			"@popup-windows/*": ["./popup-windows/*"],
-			"@executor/*": ["./ui-services/executor/*"],
-			"@urpflanze-ext": ["./urpflanze-ext/index.ts"]
-		},
-		"noErrorTruncation": true
+		"noErrorTruncation": true,
+		"resolveJsonModule": true
 	},
 	"compileOnSave": true,
 	"include": ["src/**/*"],

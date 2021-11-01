@@ -1,6 +1,6 @@
 import ColorManager from '@pups/core/build/Models/Color/ColorManager'
-import { Coords } from '@ui-services/utilities/utilies'
-import { clamp } from 'urpflanze/dist/Utilites'
+import { Coords } from 'utilities'
+import { clamp } from '@urpflanze/core/dist/cjs'
 
 export interface ParsedColor {
 	value: number

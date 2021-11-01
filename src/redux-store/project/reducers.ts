@@ -15,20 +15,19 @@ import {
 	// UPDATE_RESOLUTION,
 	UPDATE_PROJECT_PROPERTIES,
 	UPDATE_LAYER_UI_PROPS,
-} from '@redux-store/project/types'
+} from 'redux-store/project/types'
 
-import { ProjectState } from '&types/state'
+import { ProjectState } from 'types/state'
 
-import { findLayer, toSceneLayers } from '@window/workspace/layers/layer_utilities'
+import { findLayer, toSceneLayers } from 'app/workspace/layers/layer_utilities'
 import app_utilities from 'app_utilities'
 import pups from '@pups/js'
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
-import { version } from 'urpflanze/dist/meta'
-import SceneChildUtilitiesData from 'urpflanze/dist/services/scene-utilities/SceneChildUtilitiesData'
+import npmpackage from '../../../package.json'
+import { SceneChildUtilitiesData, IProjectSceneChild } from 'urpflanze-ext'
 
 export const initialProjectState: ProjectState = {
 	id: uuidv1(),
-	urpflanze_version: version,
+	urpflanze_version: npmpackage.version,
 	name: '',
 	background: pups.color('dark').toString('hex'),
 	color: pups.color('primary').toString('hex'),
@@ -97,8 +96,8 @@ export function projectReducer(state = initialProjectState, action: ProjectActio
 								break
 							}
 							case 'drawer': {
-								if (layer.style[current_layer_prop.name] !== current_layer_prop.value) {
-									layer.style[current_layer_prop.name] = current_layer_prop.value
+								if (layer.drawer[current_layer_prop.name] !== current_layer_prop.value) {
+									layer.drawer[current_layer_prop.name] = current_layer_prop.value
 								}
 								break
 							}

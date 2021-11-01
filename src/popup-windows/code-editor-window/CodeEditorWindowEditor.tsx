@@ -4,9 +4,8 @@ import 'ace-builds/src-noconflict/mode-javascript'
 import 'ace-builds/src-noconflict/theme-monokai'
 import 'ace-builds/src-noconflict/ext-language_tools'
 
-import { IProjectSceneChild } from 'urpflanze/dist/services/types/exporters-importers'
-import { IRawState } from 'urpflanze/dist/services/types/animation'
-import useRect from '@hooks/useRect'
+import { IProjectSceneChild, IRawState } from 'urpflanze-ext'
+import useRect from 'hooks/useRect'
 
 interface CodeEditorWindowEditorProp {
 	prop_name: string | undefined

@@ -35,19 +35,22 @@ class Executor extends Emitter<EventIterceptor> {
 		scene.color = pups.color('primary').toString('hex')
 		scene.background = pups.color('dark').toString('hex')
 
-		const initialDrawer = new UIDrawerCanvas(scene)
+		const initialDrawer = new UIDrawerCanvas(scene, undefined, {
+			sceneFit: 'cover',
+		})
 		initialDrawer.timeline.setSequence(6000, 60)
 		this.updateDrawer(initialDrawer)
 
-		this.renderer = new Renderer(initialDrawer)
+		console.log('/assets/js/ffmpeg/ffmpeg.min.js')
+		// this.renderer = new Renderer(initialDrawer, '/assets/js/ffmpeg/ffmpeg.min.js')
 		this.commandHistory = new CommandHistory()
 
 		this.commandHistory.attach(
 			'command_history:update_history',
 			this.sendEvent.bind(this, 'command_history:update_history')
 		)
-		this.renderer.attach('renderer:video_start', this.sendEvent.bind(this, 'renderer:start'))
-		this.renderer.attach('renderer:video_progress', this.sendEvent.bind(this, 'renderer:render-frame'))
+		// this.renderer.attach('renderer:video_start', this.sendEvent.bind(this, 'renderer:start'))
+		// this.renderer.attach('renderer:video_progress', this.sendEvent.bind(this, 'renderer:render-frame'))
 
 		// SceneUtilities.register('Desidus', DesidusShape)
 	}
@@ -111,6 +114,7 @@ class Executor extends Emitter<EventIterceptor> {
 		ratio: number
 		// resolution: 'low' | 'medium' | 'high' | 'ultra'
 	}): void {
+		console.log('set-drawer', props)
 		if (props.canvas) this.drawer.setCanvas(props.canvas)
 
 		// if (props.size || props.ratio || props.resolution)

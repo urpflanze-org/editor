@@ -4,6 +4,7 @@ import npmPkg from '../../../package.json'
 import { UIDrawerCanvas, SceneUtilities } from 'urpflanze-ext'
 import { IProject, IProjectSceneChild, TProjectSceneChildProps, TProjectDrawerProps } from './types'
 import { parseFunction } from 'utilities'
+import { IBrowserDrawerCanvasOptions } from '@urpflanze/drawer-canvas'
 
 /**
  *
@@ -78,10 +79,11 @@ export class JSONImporter {
 			sequence: { ...emptyProject.sequence, ...parsed.sequence },
 		}
 
-		const drawOptions = {
+		const drawOptions: IBrowserDrawerCanvasOptions = {
 			clear: project.clear,
 			ghosts: project.ghosts,
 			ghostSkipTime: parseFunction.unparse(project.ghostSkipTime),
+			sceneFit: 'cover',
 		}
 
 		const scene = new Scene({

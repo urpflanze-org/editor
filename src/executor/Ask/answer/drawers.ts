@@ -56,6 +56,7 @@ export const resize = (
 	// const finalResolution = size / resolution_scale
 
 	// drawer.resize(size, size, ratio, finalResolution)
+	console.log('resize', size)
 	drawer.resize(size, size)
 	drawer.redraw()
 }

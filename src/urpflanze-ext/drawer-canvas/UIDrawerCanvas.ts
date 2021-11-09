@@ -3,6 +3,7 @@ import {
 	DrawerCanvas,
 	BrowserDrawerCanvas,
 	IBrowserDrawerCanvasOptions,
+	fit,
 } from '@urpflanze/drawer-canvas/dist/cjs'
 
 import {
@@ -68,21 +69,15 @@ export class UIDrawerCanvas extends BrowserDrawerCanvas {
 	 */
 	public realDraw(options: IBrowserDrawerCanvasOptions & { ghostIndex?: number }): number {
 		const start_time = now()
-		const scene = this.scene as Scene
-		const context = this.context as CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
-
-		if (!context) return 0
-
-		context.globalCompositeOperation = 'source-over'
-
 		const scale: number = this.scale
 		const translate: Array<number> = this.translate
-		const time: number = options.time ?? 0
-		const simmetricLines: number = options.simmetricLines ?? 0
-		// const fixedLineWidth: boolean | undefined = true
-		const clear: boolean | undefined = options.clear
-		const noBackground: boolean | undefined = options.noBackground
-		const backgroundImage: CanvasImageSource | undefined = options.backgroundImage
+		const width = this.drawerOptions.width
+		const height = this.drawerOptions.height
+
+		const context = this.context as CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
+		const scene = this.scene as Scene
+		const time = options.time ?? 0
+
 		const bGhost: boolean =
 			typeof options.ghosts !== 'undefined' &&
 			options.ghosts > 0 &&
@@ -90,9 +85,11 @@ export class UIDrawerCanvas extends BrowserDrawerCanvas {
 			options.ghostIndex > 0
 		const ghostMultiplier: number = bGhost ? 1 - (options.ghostIndex as number) / ((options.ghosts as number) + 0.5) : 0
 		const ghostAlpha: boolean = options.ghostAlpha === true
-		const width: number = scene.width
-		const height: number = scene.height
-		const ratio = width / height
+
+		const sceneFit = fit(scene.width, scene.height, width, height, this.drawerOptions.sceneFit)
+
+		const translateX = sceneFit.x
+		const translateY = sceneFit.y
 
 		const final_scale = [scale, scale]
 
@@ -101,202 +98,147 @@ export class UIDrawerCanvas extends BrowserDrawerCanvas {
 			height / 2 - (scale > 1 ? (translate[1] * height) / (1 / ((scale - 1) / 2)) : 0),
 		]
 
-		if (clear) {
-			if (noBackground) {
-				context.clearRect(0, 0, width, height)
-			} else {
-				context.fillStyle = scene.background
-				context.fillRect(0, 0, width, height)
+		options.clear &&
+			DrawerCanvas.clear(
+				context,
+				width,
+				height,
+				options.noBackground ? false : scene.background,
+				options.backgroundImage,
+				options.backgroundImageFit
+			)
 
-				if (backgroundImage) {
-					const sourceWidth =
-						backgroundImage instanceof SVGImageElement ? backgroundImage.width.baseVal.value : backgroundImage.width
-					const sourceHeight =
-						backgroundImage instanceof SVGImageElement ? backgroundImage.height.baseVal.value : backgroundImage.height
-					const sourceRatio = sourceWidth / sourceHeight
+		let logFillColorWarn = false
+		let logStrokeColorWarn = false
 
-					let x = 0,
-						y = 0,
-						bgWidth = width,
-						bgHeight = height
-					if (sourceRatio !== ratio) {
-						if (options.backgroundImageFit === 'contain') {
-							bgWidth = ratio > sourceRatio ? (sourceWidth * height) / sourceHeight : width
-							bgHeight = ratio > sourceRatio ? height : (sourceHeight * width) / sourceWidth
-						} else {
-							bgWidth = ratio < sourceRatio ? (sourceWidth * height) / sourceHeight : width
-							bgHeight = ratio < sourceRatio ? height : (sourceHeight * width) / sourceWidth
-						}
+		scene.currentTime = time
 
-						x = (width - bgWidth) / 2
-						y = (height - bgHeight) / 2
+		const sceneChilds = scene.getChildren()
+		for (let i = 0, len = sceneChilds.length; i < len; i++) {
+			const sceneChild = sceneChilds[i]
+
+			if (
+				!sceneChild.data ||
+				(!(sceneChild.data.visible === false) && !(bGhost && sceneChild.data.disableGhost === true))
+			) {
+				sceneChilds[i].generate(time, true)
+
+				const childIndexedBuffer = sceneChilds[i].getIndexedBuffer() || []
+				const childBuffer = sceneChilds[i].getBuffer() || []
+
+				let childVertexIndex = 0
+
+				for (
+					let currentBufferIndex = 0, len = childIndexedBuffer.length;
+					currentBufferIndex < len;
+					currentBufferIndex++
+				) {
+					const currentIndexing = childIndexedBuffer[currentBufferIndex]
+					const shape = currentIndexing.shape as ShapePrimitive
+					const propArguments: IDrawerCanvasPropArguments = {
+						canvasContext: context,
+						...currentIndexing,
 					}
 
-					context.drawImage(backgroundImage, x, y, bgWidth, bgHeight)
-				}
-			}
+					const composite = DrawerCanvas.getStreamDrawerProp(shape, 'composite', propArguments, 'source-over')
 
-			if (simmetricLines > 0) {
-				UIDrawerCanvas.drawSimmetricLinesWithScaleAndTranslate(
-					context,
-					simmetricLines,
-					width,
-					height,
-					scene.color,
-					final_scale,
-					final_translate
-				)
-			}
-		}
+					context.globalCompositeOperation = composite
+					context.beginPath()
+					context.moveTo(
+						((childBuffer[childVertexIndex] - width / 2) * final_scale[0] + final_translate[0]) * sceneFit.scale +
+							translateX,
+						((childBuffer[childVertexIndex + 1] - height / 2) * final_scale[1] + final_translate[1]) * sceneFit.scale +
+							translateY
+					)
 
-		{
-			let logFillColorWarn = false
-			let logStrokeColorWarn = false
-
-			scene.currentTime = time
-			scene.getChildren().forEach((sceneChild: SceneChild) => {
-				if (
-					!sceneChild.data ||
-					(!(sceneChild.data.visible === false) && !(bGhost && sceneChild.data.disableGhost === true))
-				) {
-					sceneChild.generate(time, true)
-					context.save()
-					sceneChild.stream((stream: IStreamArguments) => {
-						const currentIndex: IBufferIndex = stream.currentIndexing
-						const shape = currentIndex.shape as ShapePrimitive
-						const shapeData: any = shape.data || {}
-						const propArguments: IDrawerCanvasPropArguments = {
-							canvasContext: context,
-							shape,
-							// singleRepetitionBounding: currentIndex.singleRepetitionBounding,
-							repetition: currentIndex.repetition,
-							parent: currentIndex.parent,
-							time: scene.currentTime,
-						}
-
-						// const composite = Drawer.getStreamDrawerProp<IDrawerCanvasStreamProps>(
-						// 	shape,
-						// 	'composite',
-						// 	propArguments,
-						// 	'source-over'
-						// )
-
-						// context.globalCompositeOperation = composite
-
-						context.beginPath()
-						context.moveTo(
-							(stream.buffer[stream.frameBufferIndex] - width / 2) * final_scale[0] + final_translate[0],
-							(stream.buffer[stream.frameBufferIndex + 1] - height / 2) * final_scale[1] + final_translate[1]
+					childVertexIndex += 2
+					for (
+						let currentFrameLength = childVertexIndex + currentIndexing.frameLength - 2;
+						childVertexIndex < currentFrameLength;
+						childVertexIndex += 2
+					)
+						context.lineTo(
+							((childBuffer[childVertexIndex] - width / 2) * final_scale[0] + final_translate[0]) * sceneFit.scale +
+								translateX,
+							((childBuffer[childVertexIndex + 1] - height / 2) * final_scale[1] + final_translate[1]) *
+								sceneFit.scale +
+								translateY
 						)
 
-						for (let i = 2; i < stream.frameLength; i += 2) {
-							context.lineTo(
-								(stream.buffer[stream.frameBufferIndex + i] - width / 2) * final_scale[0] + final_translate[0],
-								(stream.buffer[stream.frameBufferIndex + i + 1] - height / 2) * final_scale[1] + final_translate[1]
-							)
-						}
+					if (shape.isClosed()) context.closePath()
 
-						shape.isClosed() && context.closePath()
+					const alpha = DrawerCanvas.getStreamDrawerProp(shape, 'opacity', propArguments, 1)
 
-						if (shapeData && shapeData.highlighted) {
-							const lineWidth = DrawerCanvas.getStreamDrawerProp(shape, 'lineWidth', propArguments, 1)
-							context.lineWidth = lineWidth * 3 * scale
-							context.strokeStyle = scene.color
-							context.stroke()
+					context.globalAlpha = alpha
 
-							return
-						}
+					const shadowColor = DrawerCanvas.getStreamDrawerProp(shape, 'shadowColor', propArguments)
+					const shadowBlur = DrawerCanvas.getStreamDrawerProp(shape, 'shadowBlur', propArguments)
+					const shadowOffsetX = DrawerCanvas.getStreamDrawerProp(shape, 'shadowOffsetX', propArguments)
+					const shadowOffsetY = DrawerCanvas.getStreamDrawerProp(shape, 'shadowOffsetY', propArguments)
 
-						// const shadowColor = Drawer.getStreamDrawerProp<IDrawerCanvasStreamProps>(
-						// 	shape,
-						// 	'shadowColor',
-						// 	propArguments
-						// )
-						// const shadowBlur = Drawer.getStreamDrawerProp<IDrawerCanvasStreamProps>(shape, 'shadowBlur', propArguments)
-						// const shadowOffsetX = Drawer.getStreamDrawerProp<IDrawerCanvasStreamProps>(
-						// 	shape,
-						// 	'shadowOffsetX',
-						// 	propArguments
-						// )
-						// const shadowOffsetY = Drawer.getStreamDrawerProp<IDrawerCanvasStreamProps>(
-						// 	shape,
-						// 	'shadowOffsetY',
-						// 	propArguments
-						// )
+					context.shadowColor = shadowColor
+					context.shadowBlur = shadowBlur
+					shadowOffsetX && (context.shadowOffsetX = shadowOffsetX)
+					shadowOffsetY && (context.shadowOffsetY = shadowOffsetY)
 
-						// context.shadowColor = shadowColor
-						// context.shadowBlur = shadowBlur
-						// shadowOffsetX && (context.shadowOffsetX = shadowOffsetX)
-						// shadowOffsetY && (context.shadowOffsetY = shadowOffsetY)
+					let fill = DrawerCanvas.getStreamDrawerProp(shape, 'fill', propArguments)
 
-						let fill = DrawerCanvas.getStreamDrawerProp(shape, 'fill', propArguments)
-
-						if (typeof fill !== 'undefined') {
-							if (bGhost && ghostAlpha) {
-								const color = DrawerCanvas.ghostifyColor(fill, ghostMultiplier)
-								if (color) {
-									fill = color
-								} else if (!logFillColorWarn) {
-									console.warn(`[Urpflanze:DrawerCanvas] Unable ghost fill color '${fill}',
+					if (typeof fill !== 'undefined') {
+						if (bGhost && ghostAlpha) {
+							const color = DrawerCanvas.ghostifyColor(fill, ghostMultiplier)
+							if (color) {
+								fill = color
+							} else if (!logFillColorWarn) {
+								console.warn(`[Urpflanze:DrawerCanvas] Unable ghost fill color '${fill}',
 								please enter a rgba or hsla color`)
-									logFillColorWarn = true
-								}
+								logFillColorWarn = true
 							}
-
-							context.fillStyle = fill
-							context.fill()
 						}
 
-						let stroke = DrawerCanvas.getStreamDrawerProp(
-							shape,
-							'stroke',
-							propArguments,
-							typeof fill === 'undefined' ? scene.color : undefined
-						)
-						let lineWidth = DrawerCanvas.getStreamDrawerProp(shape, 'lineWidth', propArguments, 1)
+						context.fillStyle = fill
+						context.fill()
+					}
 
-						if (stroke) {
-							if (bGhost && ghostAlpha) {
-								const color = DrawerCanvas.ghostifyColor(stroke, ghostMultiplier)
-								if (color) {
-									stroke = color
-								} else if (!logStrokeColorWarn) {
-									console.warn(`[Urpflanze:DrawerCanvas] Unable ghost stroke color '${stroke}',
+					let stroke = DrawerCanvas.getStreamDrawerProp(
+						shape,
+						'stroke',
+						propArguments,
+						typeof fill === 'undefined' ? scene.color : undefined
+					)
+					let lineWidth = DrawerCanvas.getStreamDrawerProp(shape, 'lineWidth', propArguments, 1)
+
+					if (stroke) {
+						if (bGhost && ghostAlpha) {
+							const color = DrawerCanvas.ghostifyColor(stroke, ghostMultiplier)
+							if (color) {
+								stroke = color
+							} else if (!logStrokeColorWarn) {
+								console.warn(`[Urpflanze:DrawerCanvas] Unable ghost stroke color '${stroke}',
 								please enter a rgba or hsla color`)
-									logStrokeColorWarn = true
-								}
-								lineWidth *= ghostMultiplier
+								logStrokeColorWarn = true
 							}
-
-							// const lineJoin = Drawer.getStreamDrawerProp<IDrawerCanvasStreamProps>(shape, 'lineJoin', propArguments)
-							// const lineCap = Drawer.getStreamDrawerProp<IDrawerCanvasStreamProps>(shape, 'lineCap', propArguments)
-							// const lineDash = Drawer.getStreamDrawerProp<IDrawerCanvasStreamProps>(shape, 'lineDash', propArguments)
-							// const lineDashOffset = Drawer.getStreamDrawerProp<IDrawerCanvasStreamProps>(
-							// 	shape,
-							// 	'lineDashOffset',
-							// 	propArguments
-							// )
-							// const miterLimit = Drawer.getStreamDrawerProp<IDrawerCanvasStreamProps>(
-							// 	shape,
-							// 	'miterLimit',
-							// 	propArguments
-							// )
-
-							// context.setLineDash.call(context, lineDash || [])
-							// context.lineJoin = lineJoin
-							// context.lineCap = lineCap
-							// context.lineDashOffset = lineDashOffset
-							// context.miterLimit = miterLimit
-
-							// context.lineWidth = fixedLineWidth ? lineWidth : lineWidth * scale
-							context.lineWidth = lineWidth * scale
-							context.strokeStyle = stroke
-							context.stroke()
+							lineWidth *= ghostMultiplier
 						}
-					})
-					context.restore()
+
+						const lineJoin = DrawerCanvas.getStreamDrawerProp(shape, 'lineJoin', propArguments)
+						const lineCap = DrawerCanvas.getStreamDrawerProp(shape, 'lineCap', propArguments)
+						const lineDash = DrawerCanvas.getStreamDrawerProp(shape, 'lineDash', propArguments)
+						const lineDashOffset = DrawerCanvas.getStreamDrawerProp(shape, 'lineDashOffset', propArguments)
+						const miterLimit = DrawerCanvas.getStreamDrawerProp(shape, 'miterLimit', propArguments)
+
+						context.setLineDash.call(context, lineDash || [])
+						context.lineJoin = lineJoin
+						context.lineCap = lineCap
+						context.lineDashOffset = lineDashOffset
+						context.miterLimit = miterLimit
+
+						context.lineWidth = lineWidth * sceneFit.scale
+						context.strokeStyle = stroke
+						context.stroke()
+					}
 				}
-			})
+				context.restore()
+			}
 		}
 
 		const end_time = now()
@@ -395,7 +337,10 @@ export class UIDrawerCanvas extends BrowserDrawerCanvas {
 		return new Promise(resolve => {
 			if (typeof OffscreenCanvas !== 'undefined') {
 				const canvas: OffscreenCanvas = new OffscreenCanvas(width, height)
-				const drawer = new UIDrawerCanvas(scene, canvas)
+				const drawer = new UIDrawerCanvas(scene, canvas, {
+					scale,
+					sceneFit: 'cover',
+				})
 				drawer.realDraw({ time: 0, fixedLineWidth, scale })
 
 				canvas.convertToBlob({ type: 'image/png', quality: 1 }).then(blob => {
@@ -415,7 +360,7 @@ export class UIDrawerCanvas extends BrowserDrawerCanvas {
 				canvas.style.width = width + 'px'
 				canvas.style.height = height + 'px'
 
-				const drawer = new UIDrawerCanvas(scene, canvas, { time: 0, fixedLineWidth, scale })
+				const drawer = new UIDrawerCanvas(scene, canvas, { time: 0, fixedLineWidth, scale, sceneFit: 'cover' })
 				drawer.realDraw({ time: 0, fixedLineWidth, scale })
 
 				resolve(canvas.toDataURL())

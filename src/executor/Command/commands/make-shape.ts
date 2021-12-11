@@ -36,24 +36,10 @@ class MakeShape extends Command {
 		}
 	}
 
-	private hasSameParents(sceneChilds: Array<SceneChild>): boolean {
-		if (sceneChilds.length <= 1) return true
-
-		const parents = sceneChilds.map(sceneChild => SceneUtilities.getParent(sceneChild))
-		let prevParent = parents[0]
-
-		for (let i = 1, len = parents.length; i < len; i++) {
-			if (prevParent != parents[i]) return false
-			prevParent = parents[i]
-		}
-
-		return true
-	}
-
 	protected handleRedo(executor: Executor): boolean | undefined {
 		const scene = executor.getScene()
 
-		if (this.data.sceneChilds.length > 0 && this.hasSameParents(this.data.sceneChilds)) {
+		if (this.data.sceneChilds.length > 0 && MakeShape.hasSameParents(this.data.sceneChilds)) {
 			const sceneChilds = this.data.sceneChilds
 			const parent = SceneUtilities.getParent(sceneChilds[0])
 
@@ -67,6 +53,7 @@ class MakeShape extends Command {
 
 			sceneChilds.forEach(sceneChild => {
 				SceneUtilities.remove(sceneChild)
+				sceneChild.clearBuffer(true, false)
 				SceneUtilities.add(shape, sceneChild, undefined, scene)
 			})
 
@@ -98,6 +85,20 @@ class MakeShape extends Command {
 
 	protected setDescriptor(): void {
 		this.descriptor = `make shape`
+	}
+
+	private static hasSameParents(sceneChilds: Array<SceneChild>): boolean {
+		if (sceneChilds.length <= 1) return true
+
+		const parents = sceneChilds.map(sceneChild => SceneUtilities.getParent(sceneChild))
+		let prevParent = parents[0]
+
+		for (let i = 1, len = parents.length; i < len; i++) {
+			if (prevParent != parents[i]) return false
+			prevParent = parents[i]
+		}
+
+		return true
 	}
 }
 

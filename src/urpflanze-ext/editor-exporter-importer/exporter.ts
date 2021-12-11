@@ -117,7 +117,7 @@ export class JSONExporter {
 		// projectSceneChild.props = JSONExporter.filterDataTye({ ...props, ...sceneChild.data.props }, 'props')
 
 		if (sceneChild instanceof ShapeBuffer) {
-			projectSceneChild.shape = sceneChild.shape
+			projectSceneChild.shape = sceneChild.shape instanceof Float32Array ? sceneChild.shape.slice() : sceneChild.shape
 		}
 
 		if (sceneChild instanceof ShapeBase) {

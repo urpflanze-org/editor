@@ -271,13 +271,16 @@ export class UIDrawerCanvas extends BrowserDrawerCanvas {
 
 		if (sceneChild) {
 			const shape = SceneUtilities.copy(sceneChild, scene, true)
-			// if (shape instanceof ShapePrimitive) {
-			// 	shape.style.lineWidth = 3
-			// } else if (shape) {
-			// 	SceneUtilities.getChildrenPrimitives(shape).forEach(shape => {
-			// 		shape.style.lineWidth = 3
-			// 	})
-			// }
+
+			if (shape instanceof ShapePrimitive) {
+				shape.drawer.lineWidth = 3
+				shape.setProp('sideLength', width / 2)
+			} else if (shape) {
+				SceneUtilities.getChildrenPrimitives(shape).forEach(shape => {
+					shape.drawer.lineWidth = 3
+					shape.setProp('sideLength', width / 2)
+				})
+			}
 
 			if (shape) {
 				scene.add(shape)

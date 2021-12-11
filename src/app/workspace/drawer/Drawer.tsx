@@ -50,7 +50,7 @@ const Drawer: React.FunctionComponent<IDrawerProps> = ({
 			<DrawerCanvas setSize={setSize} offsets={offsets} setOffsets={setOffsets} />
 
 			<Grid columns={7} gap={pups.ms(0)} flow="repeat(7, max-content)" halign="center" valign="start">
-				<DrawerOffsetsViewer height={pups.ms(1) as string} {...offsets} />
+				{/* <DrawerOffsetsViewer height={pups.ms(1) as string} {...offsets} /> */}
 
 				<DrawerBackground offsets={offsets} background={background} backgroundImage={backgroundImage} />
 

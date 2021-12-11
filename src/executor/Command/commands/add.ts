@@ -40,7 +40,7 @@ class Add extends Command {
 			scene
 		)
 
-		if (sceneChild && scene.find(this.data.added_id) == null) {
+		if (sceneChild && scene.find(this.data.added_id) === null) {
 			sceneChild.scene = scene
 
 			if (this.data.props) {

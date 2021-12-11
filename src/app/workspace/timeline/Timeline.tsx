@@ -47,15 +47,13 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 		})
 
 		if (Log.level < LogLevel.ComunicationResponse) {
-			const itv = setInterval(async () => {
-				const _renderedFrames = await executor.ask('get-rendered-frames')
-
-				setRenderedFrames(_renderedFrames)
-			}, 500)
-
-			return () => {
-				clearInterval(itv)
-			}
+			// const itv = setInterval(async () => {
+			// 	const _renderedFrames = await executor.ask('get-rendered-frames')
+			// 	setRenderedFrames(_renderedFrames)
+			// }, 500)
+			// return () => {
+			// 	clearInterval(itv)
+			// }
 		}
 	}, [])
 

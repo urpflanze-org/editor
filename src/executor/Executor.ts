@@ -41,7 +41,6 @@ class Executor extends Emitter<EventIterceptor> {
 		initialDrawer.timeline.setSequence(6000, 60)
 		this.updateDrawer(initialDrawer)
 
-		console.log('/assets/js/ffmpeg/ffmpeg.min.js')
 		// this.renderer = new Renderer(initialDrawer, '/assets/js/ffmpeg/ffmpeg.min.js')
 		this.commandHistory = new CommandHistory()
 
@@ -114,7 +113,6 @@ class Executor extends Emitter<EventIterceptor> {
 		ratio: number
 		// resolution: 'low' | 'medium' | 'high' | 'ultra'
 	}): void {
-		console.log('set-drawer', props)
 		if (props.canvas) this.drawer.setCanvas(props.canvas)
 
 		// if (props.size || props.ratio || props.resolution)
@@ -184,7 +182,7 @@ class Executor extends Emitter<EventIterceptor> {
 	 * @memberof Executor
 	 */
 	async read(comunication: IComunication): Promise<IComunicationResponse> {
-		Log.log('Comunication', comunication.deferred_id, comunication)
+		Log.log(`Comunication`, comunication.type + ':' + comunication.command, comunication.deferred_id, comunication)
 
 		try {
 			let execution_effects: ICommandEffects | void

@@ -89,23 +89,23 @@ const Prop: React.FunctionComponent<IPropWithValue> = ({
 
 				// Convert value to transformable-prop (responsivity)
 
-				if (bPropInSceneChildUtilitiesData(name)) {
-					if (!bValueTransformable(new_value)) {
-						if (bValueAnimation(new_value)) {
-							if (!bValueTransformable(new_value.value.from)) {
-								new_value.value.from = { type: 'transformable-prop', value: new_value.value.from }
-							}
-							if (!bValueTransformable(new_value.value.to)) {
-								new_value.value.to = { type: 'transformable-prop', value: new_value.value.to }
-							}
-						} else {
-							new_value = forceArray ? toArray(new_value as number) : new_value
-							new_value = { type: 'transformable-prop', value: new_value }
-						}
-					}
-				} else {
-					new_value = forceArray ? toArray(new_value as number) : new_value
-				}
+				// if (bPropInSceneChildUtilitiesData(name)) {
+				// 	if (!bValueTransformable(new_value)) {
+				// 		if (bValueAnimation(new_value)) {
+				// 			if (!bValueTransformable(new_value.value.from)) {
+				// 				new_value.value.from = { type: 'transformable-prop', value: new_value.value.from }
+				// 			}
+				// 			if (!bValueTransformable(new_value.value.to)) {
+				// 				new_value.value.to = { type: 'transformable-prop', value: new_value.value.to }
+				// 			}
+				// 		} else {
+				// 			new_value = forceArray ? toArray(new_value as number) : new_value
+				// 			new_value = { type: 'transformable-prop', value: new_value }
+				// 		}
+				// 	}
+				// } else {
+				new_value = forceArray ? toArray(new_value as number) : new_value
+				// }
 			}
 			executor.run(
 				'set-prop',

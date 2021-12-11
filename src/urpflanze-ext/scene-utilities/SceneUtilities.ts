@@ -153,7 +153,8 @@ class SceneUtilitiesInstance {
 				this.set(
 					sceneChild,
 					'sideLength',
-					{ type: 'transformable-prop', value: SceneChildUtilitiesData.sideLength?.default },
+					// { type: 'transformable-prop', value: SceneChildUtilitiesData.sideLength?.default },
+					SceneChildUtilitiesData.sideLength?.default,
 					scene
 				)
 				// this.setProp(
@@ -212,7 +213,7 @@ class SceneUtilitiesInstance {
 		}
 
 		if (sceneChild instanceof ShapeBuffer) {
-			setting.shape = sceneChild.shape
+			setting.shape = sceneChild.shape instanceof Float32Array ? sceneChild.shape.slice() : sceneChild.shape
 		}
 
 		if (sceneChild instanceof ShapePrimitive) {
@@ -566,11 +567,11 @@ class SceneUtilitiesInstance {
 		}
 
 		// Check Transormable prop
-		if (bPropInSceneChildUtilitiesData(name) && bValueTransformable(value)) {
-			sceneChild.data.props[name] = value
-			;(sceneChild as ShapePrimitive).setProp(name as keyof ISceneChildProps, getTransformedValue(scene, name, value))
-			return
-		}
+		// if (bPropInSceneChildUtilitiesData(name) && bValueTransformable(value)) {
+		// 	sceneChild.data.props[name] = value
+		// 	;(sceneChild as ShapePrimitive).setProp(name as keyof ISceneChildProps, getTransformedValue(scene, name, value))
+		// 	return
+		// }
 
 		// Otherwise, set prop without transformation
 		//Equivalent of: if (name in SceneChildPropsData && SceneChildPropsData[name].transformation !== 'none')

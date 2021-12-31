@@ -122,10 +122,10 @@ const RenderImage: React.FunctionComponent<RenderImageProps> = ({ project, close
 			<div style={{ padding: `${pups.ms(0)} ${pups.ms(-1)} 0` }}>
 				<Bar
 					enableMoveTime={true}
-					sequence_duration={project.sequence.duration}
-					sequence_framerate={project.sequence.framerate}
+					duration={project.sequence.duration}
+					framerate={project.sequence.framerate}
 					renderedFrames={[]}
-					current_time={settings.time}
+					time={settings.time}
 					onChange={t => setSettings({ ...settings, time: t })}
 					steps={8}
 				/>

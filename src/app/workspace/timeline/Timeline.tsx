@@ -14,8 +14,8 @@ import { IProjectSequence } from 'urpflanze-ext'
 import Log, { LogLevel } from 'Log'
 
 interface SequenceState {
-	current_frame: number
-	current_time: number
+	currentFrame: number
+	currentTime: number
 	fps: number
 }
 
@@ -34,8 +34,8 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 	const FRAMERATES = [10, 24, 30, 60, 120, 144].map(v => ({ key: v, value: v }))
 
 	const [sequenceState, setSequenceState] = React.useState<SequenceState>({
-		current_frame: 0,
-		current_time: 0,
+		currentFrame: 0,
+		currentTime: 0,
 		fps: sequence.framerate,
 	})
 	const [renderedFrames, setRenderedFrames] = React.useState<Array<number>>([])
@@ -115,9 +115,9 @@ const Timeline: React.FunctionComponent<TimelineProps> = ({
 
 			<Bar
 				enableMoveTime={bEnableMoveBar}
-				sequence_framerate={sequence.framerate}
-				sequence_duration={sequence.duration}
-				current_time={sequenceState.current_time}
+				framerate={sequence.framerate}
+				duration={sequence.duration}
+				time={sequenceState.currentTime}
 				onChange={t => executor.ask('set-timeline', t)}
 				renderedFrames={renderedFrames}
 				steps={12}

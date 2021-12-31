@@ -53,7 +53,6 @@ class MakeShape extends Command {
 
 			sceneChilds.forEach(sceneChild => {
 				SceneUtilities.remove(sceneChild)
-				sceneChild.clearBuffer(true, false)
 				SceneUtilities.add(shape, sceneChild, undefined, scene)
 			})
 

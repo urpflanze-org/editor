@@ -52,16 +52,18 @@ class SetProp extends Command {
 			const sceneChild = scene.find(id) as SceneChild
 
 			if (sceneChild && this.effects.scene_child_prop_update) {
-				SceneUtilities.set(sceneChild, name, value, scene)
-				this.effects.scene_child_prop_update[effect_index++].value = value
-
-				if (sceneChild instanceof Group)
+				if (sceneChild instanceof Group) {
 					SceneUtilities.getChildren(sceneChild).forEach(child => {
+						SceneUtilities.set(child, name, value, scene)
 						;(this.effects.scene_child_prop_update as Array<any>)[effect_index++] = { id: child.id, name, value }
 					})
+				} else {
+					SceneUtilities.set(sceneChild, name, value, scene)
+					this.effects.scene_child_prop_update[effect_index++].value = value
+				}
 
 				const parent = SceneUtilities.getParent(sceneChild)
-				if (parent && parent instanceof Group) {
+				if (parent && parent instanceof Group && parent.hasProp(name as keyof ISceneChildProps)) {
 					parent.setPropUnsafe(name as keyof ISceneChildProps, undefined)
 					;(this.effects.scene_child_prop_update as Array<any>)[effect_index++] = {
 						id: parent.id,
@@ -87,20 +89,22 @@ class SetProp extends Command {
 			const sceneChild = scene.find(id)
 
 			if (sceneChild && this.effects.scene_child_prop_update) {
-				SceneUtilities.set(sceneChild, name, prev_value, scene)
-				this.effects.scene_child_prop_update[effect_index++].value = prev_value
-
-				if (sceneChild instanceof Group)
+				if (sceneChild instanceof Group) {
 					SceneUtilities.getChildren(sceneChild).forEach(child => {
+						SceneUtilities.set(child, name, prev_value, scene)
 						;(this.effects.scene_child_prop_update as Array<any>)[effect_index++] = {
 							id: child.id,
 							name,
 							value: prev_value,
 						}
 					})
+				} else {
+					SceneUtilities.set(sceneChild, name, prev_value, scene)
+					this.effects.scene_child_prop_update[effect_index++].value = prev_value
+				}
 
 				const parent = SceneUtilities.getParent(sceneChild)
-				if (parent && parent instanceof Group) {
+				if (parent && parent instanceof Group && parent.hasProp(name as keyof ISceneChildProps)) {
 					// TODO: check 'name' is prop (not drawerProp or settings)
 					parent.setPropUnsafe(name as keyof ISceneChildProps, prev_value)
 					;(this.effects.scene_child_prop_update as Array<any>)[effect_index++] = {

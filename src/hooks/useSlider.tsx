@@ -21,6 +21,7 @@ interface ISliderInteface {
 		dragStart?: () => void
 		drag?: (coords: { x: number; y: number }) => void
 		dragEnd?: (dragged: boolean) => void
+		click?: (coords: { x: number; y: number }) => void
 	}
 }
 
@@ -64,6 +65,7 @@ function useSlider<T extends HTMLElement>({
 			dragged && onChange(valueFromCoords(coords).value, 'none')
 			events && events.dragEnd && events.dragEnd(dragged)
 		},
+		onClick: events?.click,
 	})
 
 	const rect = useRect(sliderRef)

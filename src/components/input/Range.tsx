@@ -70,6 +70,7 @@ const Range: React.FunctionComponent<IRange> = ({ min, max, step, value, small, 
 					ref={inputRef}
 					defaultValue={value}
 					autoFocus={true}
+					onClick={() => setRawEdit(false)}
 					onKeyDown={e =>
 						e.key === 'Enter' && handleInputValue((e.target as HTMLInputElement).value) && setRawEdit(false)
 					}

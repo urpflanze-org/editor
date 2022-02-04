@@ -30,7 +30,7 @@ function useDraggable<T extends HTMLElement>(events: IDraggableEvents): React.Re
 				events.onDragStart && events.onDragStart()
 			}
 
-			if (!drag) events.onNotDrag && events.onNotDrag()
+			if (!drag && state.bDrag) events.onNotDrag && events.onNotDrag()
 		},
 		[ref.current, state.bDrag]
 	)

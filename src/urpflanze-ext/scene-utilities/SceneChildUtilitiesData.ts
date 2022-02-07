@@ -100,6 +100,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		canBArray: true,
 		default_animate: 25,
 		transformation: 'scene-size-percentage',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	displace: {
@@ -113,6 +114,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 0,
 		default_animate: 360,
 		transformation: 'angle',
+		type_value: 'float',
 		dataType: 'props',
 	},
 
@@ -127,6 +129,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 0,
 		default_animate: 0.1,
 		transformation: 'scene-size-percentage-inverse',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	squeezeY: {
@@ -140,6 +143,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 0,
 		default_animate: 0.1,
 		transformation: 'scene-size-percentage-inverse',
+		type_value: 'float',
 		dataType: 'props',
 	},
 
@@ -154,6 +158,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 0,
 		default_animate: 360,
 		transformation: 'angle',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	rotateY: {
@@ -167,6 +172,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 0,
 		default_animate: 360,
 		transformation: 'angle',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	rotateZ: {
@@ -180,6 +186,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 0,
 		default_animate: 360,
 		transformation: 'angle',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	skewX: {
@@ -193,6 +200,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 0,
 		default_animate: 1,
 		transformation: 'angle',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	skewY: {
@@ -206,6 +214,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 0,
 		default_animate: 1,
 		transformation: 'angle',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	translate: {
@@ -220,6 +229,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default_animate: 0,
 		initialArray: true,
 		transformation: 'scene-size-percentage',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	scale: {
@@ -233,6 +243,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 1,
 		default_animate: 3,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 
@@ -248,6 +259,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default_animate: [-1, 1],
 		initialArray: true,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 
@@ -262,6 +274,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 0,
 		default_animate: 0.8,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 
@@ -277,6 +290,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default_animate: [-1, 1],
 		initialArray: true,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 
@@ -312,6 +326,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 0.1,
 		default_animate: 3,
 		transformation: 'scene-size-percentage',
+		type_value: 'float',
 		dataType: 'drawer',
 	},
 
@@ -387,6 +402,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 1,
 		default_animate: 2,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 
@@ -418,6 +434,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default_animate: 50,
 		transformation: 'scene-size-percentage',
 		dataType: 'props',
+		type_value: 'float',
 	},
 
 	// polygon
@@ -432,6 +449,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 5,
 		default_animate: 2,
 		transformation: 'none',
+		type_value: 'int',
 		dataType: 'props',
 	},
 
@@ -447,6 +465,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 1,
 		default_animate: 3,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	d: {
@@ -460,6 +479,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 2,
 		default_animate: 4,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 
@@ -475,6 +495,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 1,
 		default_animate: 3,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	wy: {
@@ -488,6 +509,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 2,
 		default_animate: 4,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	wz: {
@@ -501,6 +523,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 0,
 		default_animate: 360,
 		transformation: 'angle',
+		type_value: 'float',
 		dataType: 'props',
 	},
 
@@ -516,6 +539,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 1,
 		default_animate: 3,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	twistsStart: {
@@ -529,6 +553,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 0,
 		default_animate: 1,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 
@@ -554,6 +579,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 1,
 		default_animate: 0.1,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	b: {
@@ -567,6 +593,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 1,
 		default_animate: 0.1,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	m: {
@@ -594,6 +621,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 1,
 		default_animate: 0.1,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	n2: {
@@ -607,6 +635,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 1,
 		default_animate: 0.1,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	n3: {
@@ -620,6 +649,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		default: 1,
 		default_animate: 0.1,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 
@@ -633,6 +663,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		max: 100,
 		step: 0.01,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	'loop.end': {
@@ -644,6 +675,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		max: 100,
 		step: 0.01,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 	'loop.inc': {
@@ -655,6 +687,7 @@ export const SceneChildUtilitiesData: Record<string, ISceneChildUtiltiesData> = 
 		max: 100,
 		step: 0.01,
 		transformation: 'none',
+		type_value: 'float',
 		dataType: 'props',
 	},
 }

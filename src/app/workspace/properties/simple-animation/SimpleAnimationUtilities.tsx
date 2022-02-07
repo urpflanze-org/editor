@@ -17,23 +17,19 @@ export function getSimpleAnimationInitialState(
 	value: any,
 	sceneChildProp: ISceneChildUtiltiesData,
 	defaultDuration = 1000
-): ISimpleAnimation {
+): Required<ISimpleAnimation> {
 	const initialValue = bValueAnimation(value) && (value as TAnimation).type == 'simple' ? value.value : {}
 
-	const initialState: ISimpleAnimation = {
+	const initialState: Required<ISimpleAnimation> = {
 		from: Array.isArray(sceneChildProp.default) ? toNumber(sceneChildProp.default) : sceneChildProp.default,
 		to: sceneChildProp.default_animate,
 		duration: defaultDuration,
-		invertOdd: false,
 		colorTransitionMode: 'rgb',
-		type: 'loop',
-		mode: 'sinusoidal',
-		modeFunction: 'sin',
-
 		type_value: sceneChildProp.type_value,
-
 		delay: 0,
-
+		loop: true,
+		direction: 'alternate',
+		interpolator: 'linear',
 		...initialValue,
 	}
 
@@ -47,15 +43,15 @@ export function getSimpleAnimationInitialState(
 }
 
 export function sanitizeAnimation(sceneChildProp: ISceneChildUtiltiesData, value: ISimpleAnimation): ISimpleAnimation {
-	// const newValue = {
-	// 	...value,
-	// 	from: sceneChildProp.type == 'color' ? value.from : parseFloat(value.from + ''),
-	// 	to: sceneChildProp.type == 'color' ? value.to : parseFloat(value.to + ''),
-	// 	durate: parseFloat(value.durate + ''),
-	// 	delay: parseFloat(value.delay + ''),
-	// }
+	const newValue: Partial<ISimpleAnimation> = {
+		...value,
+		from: sceneChildProp.type == 'color' ? value.from : parseFloat(value.from + ''),
+		to: sceneChildProp.type == 'color' ? value.to : parseFloat(value.to + ''),
+		duration: parseFloat(value.duration + ''),
+		delay: parseFloat(value.delay + ''),
+	}
 
-	return value
+	return newValue as ISimpleAnimation
 }
 
 export function isAdvancedAnimation(animation: ISimpleAnimation): boolean {

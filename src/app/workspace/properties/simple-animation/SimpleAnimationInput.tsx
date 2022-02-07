@@ -11,7 +11,7 @@ import { ISimpleAnimation } from '@urpflanze/animation/dist/cjs/types'
 import { bValueTransformable } from 'urpflanze-ext'
 
 interface ISimpleAnimationInputProp {
-	value: TTransformable | string | number | Array<number>
+	value: ISimpleAnimation['from']
 	name: keyof ISimpleAnimation
 	onChange: (key: keyof ISimpleAnimation, value: ISimpleAnimation[keyof ISimpleAnimation]) => void
 	sceneChildProp: ISceneChildUtiltiesData
@@ -29,7 +29,7 @@ const SimpleAnimationInput: React.FunctionComponent<ISimpleAnimationInputProp> =
 		case 'range':
 			return (
 				<Range
-					value={(bValueTransformable(value) ? (value as TTransformable).value : value) as number}
+					value={value as number}
 					onChange={(value, p) => p === 'none' && onChange(name, value)}
 					min={sceneChildProp.min as number}
 					max={sceneChildProp.max as number}
@@ -49,7 +49,7 @@ const SimpleAnimationInput: React.FunctionComponent<ISimpleAnimationInputProp> =
 					/>
 					<MultipleRange
 						locked={locked}
-						value={(bValueTransformable(value) ? (value as TTransformable).value : value) as Array<number>}
+						value={value as number[]}
 						onChange={(value, p) => p === 'none' && onChange(name, value)}
 						min={sceneChildProp.min as number}
 						max={sceneChildProp.max as number}

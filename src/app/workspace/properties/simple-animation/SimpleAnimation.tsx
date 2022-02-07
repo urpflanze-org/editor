@@ -49,7 +49,7 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 	const sceneChildProp: ISceneChildUtiltiesData = SceneChildUtilitiesData[prop_name]
 	const _bValueIsAnimation = bValueAnimation(value)
 	const initialState = getSimpleAnimationInitialState(value, sceneChildProp, Math.min(2000, sequence.duration))
-	const [state, setState] = React.useState<ISimpleAnimation>(initialState)
+	const [state, setState] = React.useState<Required<ISimpleAnimation>>(initialState)
 	const [bAdvanceMode, setAdvanceMode] = React.useState<boolean>(
 		_bValueIsAnimation && isAdvancedAnimation(initialState)
 	)
@@ -70,6 +70,7 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 		// } else {
 		// 	setState({ ...state, [key]: value })
 		// }
+		setState({ ...state, [key]: value })
 	}
 
 	function handleChange() {
@@ -104,19 +105,12 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 			>
 				<div>From</div>
 
-				{/* <SimpleAnimationInput value={state.from} onChange={set} name="from" sceneChildProp={sceneChildProp} /> */}
+				<SimpleAnimationInput value={state.from} onChange={set} name="from" sceneChildProp={sceneChildProp} />
 				<div>To</div>
-				{/* <SimpleAnimationInput value={state.to} onChange={set} name="to" sceneChildProp={sceneChildProp} /> */}
+				<SimpleAnimationInput value={state.to} onChange={set} name="to" sceneChildProp={sceneChildProp} />
 
 				<div>Durate</div>
-				{/* <Range
-					small={true}
-					min={0}
-					max={sequence.duration}
-					step={100}
-					value={state.duration}
-					onChange={(e, mode) => mode == 'none' && set('duration', e)}
-				/> */}
+				<Range min={0} max={sequence.duration} step={100} value={state.duration} onChange={e => set('duration', e)} />
 			</Grid>
 
 			<Checkbox checked={bAdvanceMode} onChange={c => setAdvanceMode(c)} name="Advance mode" size={0} />

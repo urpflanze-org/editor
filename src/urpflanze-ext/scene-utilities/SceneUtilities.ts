@@ -38,6 +38,8 @@ import {
 	ShapeRecursive,
 } from '@urpflanze/core/dist/cjs'
 
+import * as Animation from '@urpflanze/animation/dist/cjs'
+
 type SceneChildInstance = new (props: any) => SceneChild
 
 /**
@@ -560,10 +562,21 @@ class SceneUtilitiesInstance {
 
 		// Check Animation
 		if (bValueAnimation(value)) {
+			console.log('value', value)
 			sceneChild.data.props[name] = value
 			// TODO: apply animation
-			// sceneChild.setProp(name as keyof ISceneChildProps, Animation.composeAnimation(scene, name, value as TAnimation))
-			return
+			if (value.type === 'simple') {
+				const animationCallback = Animation.resolveSimpleAnimation(value.value)
+
+				if (animationCallback)
+					sceneChild.setProp(
+						name as keyof ISceneChildProps,
+						(() => {
+							return animationCallback(scene.currentTime)
+						}) as any
+					)
+				return
+			}
 		}
 
 		// Check Transormable prop

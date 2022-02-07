@@ -27,6 +27,7 @@ const SimpleAnimationAdvanceSettings: React.FunctionComponent<SimpleAnimationAdv
 	// const rows = (state.type === 'loop' && state.mode === 'easing') ? 5 : 4
 	const rows = 5
 
+	console.log(state)
 	return (
 		<Grid
 			gap={pups.ms(-2)}
@@ -37,6 +38,10 @@ const SimpleAnimationAdvanceSettings: React.FunctionComponent<SimpleAnimationAdv
 			flow={`repeat(${rows}, 1fr) / max-content ${pups.ms(4)}`}
 		>
 			<div style={{ gridColumn: '1 / span 2' }}>
+				<Checkbox
+					checked={typeof state.loop !== 'undefined' && state.loop !== false}
+					onChange={c => onChange('loop', c)}
+				/>
 				{/* <Radio
 					name="Type"
 					align="flex-start"

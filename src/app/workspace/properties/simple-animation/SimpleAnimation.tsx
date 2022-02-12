@@ -28,6 +28,11 @@ import {
 	SceneChildUtilitiesData,
 	bValueAnimation,
 } from 'urpflanze-ext'
+import Select from 'components/input/Select'
+import SimpleAnimationLoop from './SimpleAnimationLoop'
+import SimpleAnimationDirection from './SimpleAnimationDirection'
+import SimpleAnimationInterpolator from './SimpleAnimationInterpolator'
+import Radio from 'components/input/Radio'
 
 interface SimpleAnimationPropProps {
 	layer: IProjectSceneChild
@@ -47,29 +52,12 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 	prop_name,
 }: SimpleAnimationPropProps) => {
 	const sceneChildProp: ISceneChildUtiltiesData = SceneChildUtilitiesData[prop_name]
-	const _bValueIsAnimation = bValueAnimation(value)
+	const bValueIsAnimation = bValueAnimation(value)
 	const initialState = getSimpleAnimationInitialState(value, sceneChildProp, Math.min(2000, sequence.duration))
+	const bColor = sceneChildProp.type === 'color'
 	const [state, setState] = React.useState<Required<ISimpleAnimation>>(initialState)
-	const [bAdvanceMode, setAdvanceMode] = React.useState<boolean>(
-		_bValueIsAnimation && isAdvancedAnimation(initialState)
-	)
 
 	function set(key: keyof ISimpleAnimation, value: any) {
-		//TODO: set
-		// if (key === 'mode') {
-		// 	const mf = MODE_FUNCTIONS[value]
-		// 	setState({ ...state, mode: value, modeFunction: mf[0].value })
-		// } else if (key === 'type') {
-		// 	setState({
-		// 		...state,
-		// 		type: value,
-		// 		mode: value === 'static' ? 'easing' : state.mode,
-		// 		modeFunction:
-		// 			value === 'static' && state.mode != 'easing' ? MODE_FUNCTIONS.easing[0].value : state.modeFunction,
-		// 	})
-		// } else {
-		// 	setState({ ...state, [key]: value })
-		// }
 		setState({ ...state, [key]: value })
 	}
 
@@ -113,15 +101,43 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 				<Range min={0} max={sequence.duration} step={100} value={state.duration} onChange={e => set('duration', e)} />
 			</Grid>
 
-			<Checkbox checked={bAdvanceMode} onChange={c => setAdvanceMode(c)} name="Advance mode" size={0} />
+			<SimpleAnimationLoop value={state.loop} onChange={loop => set('loop', loop)} />
 
-			{bAdvanceMode && (
-				<SimpleAnimationAdvanceSettings
-					state={state}
-					bColor={sceneChildProp.type === 'color'}
-					sequence={sequence}
-					onChange={set}
-				/>
+			<div>
+				Delay
+				<Range min={0} max={sequence.duration} step={100} value={state.delay} onChange={e => set('delay', e)} />
+			</div>
+			{state.loop && (
+				<div>
+					AfterDelay
+					<Range
+						min={0}
+						max={sequence.duration}
+						step={100}
+						value={state.afterDelay}
+						onChange={e => set('afterDelay', e)}
+					/>
+				</div>
+			)}
+
+			<SimpleAnimationDirection value={state.direction} onChange={direction => set('direction', direction)} />
+			<SimpleAnimationInterpolator
+				value={state.interpolator}
+				onChange={interpolator => set('interpolator', interpolator)}
+			/>
+
+			{bColor && (
+				<div>
+					<Radio
+						name="Color mode"
+						values={[
+							{ key: 'rgb', value: 'rgb' },
+							{ key: 'hue', value: 'hue' },
+						]}
+						selected={state.colorTransitionMode}
+						onChange={c => set('colorTransitionMode', c)}
+					/>
+				</div>
 			)}
 
 			<div>
@@ -141,7 +157,7 @@ const SimpleAnimationProp: React.FunctionComponent<SimpleAnimationPropProps> = (
 
 			<Button onClick={handleChange} label="Apply" />
 
-			{_bValueIsAnimation && <Button onClick={handleRemove} label="Remove" />}
+			{bValueIsAnimation && <Button onClick={handleRemove} label="Remove" />}
 		</div>
 	)
 }
@@ -151,3 +167,5 @@ export default React.memo(
 		sequence: state.project.sequence as ISequenceMeta,
 	}))(SimpleAnimationProp)
 )
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

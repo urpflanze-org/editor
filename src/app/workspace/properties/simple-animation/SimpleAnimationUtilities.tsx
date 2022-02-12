@@ -27,6 +27,7 @@ export function getSimpleAnimationInitialState(
 		colorTransitionMode: 'rgb',
 		type_value: sceneChildProp.type_value,
 		delay: 0,
+		afterDelay: 0,
 		loop: true,
 		direction: 'alternate',
 		interpolator: 'linear',

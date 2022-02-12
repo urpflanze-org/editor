@@ -562,9 +562,8 @@ class SceneUtilitiesInstance {
 
 		// Check Animation
 		if (bValueAnimation(value)) {
-			console.log('value', value)
 			sceneChild.data.props[name] = value
-			// TODO: apply animation
+			// TODO: apply raw animation
 			if (value.type === 'simple') {
 				const animationCallback = Animation.resolveSimpleAnimation(value.value)
 
@@ -614,9 +613,20 @@ class SceneUtilitiesInstance {
 			}
 
 			if (bValueAnimation(value)) {
+				console.log(3)
 				sceneChild.data.drawer[name] = value
-				// TODO: apply animation
-				// ;(sceneChild as ShapePrimitive).drawer[name] = Animation.composeAnimation(scene, name, value as TAnimation)
+				// TODO: apply raw animation
+				if (value.type === 'simple') {
+					const animationCallback = Animation.resolveSimpleAnimation(value.value)
+
+					if (animationCallback)
+						(sceneChild as ShapePrimitive).drawer[name] = (() => {
+							return animationCallback(scene.currentTime)
+						}) as any
+
+					return
+				}
+
 				return
 			}
 

@@ -28,7 +28,7 @@ const Select: React.FunctionComponent<ISelect> = (props: ISelect) => {
 
 	function getKeyFromValue() {
 		for (let i = 0, len = props.options.length; i < len; i++)
-			if (props.options[i].value == props.value) return props.options[i].key
+			if (props.options[i].value === props.value) return props.options[i].key
 	}
 
 	function onChange(value) {
@@ -41,7 +41,9 @@ const Select: React.FunctionComponent<ISelect> = (props: ISelect) => {
 			style={{ width: props.width }}
 		>
 			<div className="select__value" onClick={() => setOpen(true)}>
-				<span>{props.value ? getKeyFromValue() : <i>{props.placeholder}</i>}</span>
+				<span>
+					{typeof props.value !== 'undefined' && props.value !== null ? getKeyFromValue() : <i>{props.placeholder}</i>}
+				</span>
 				<Icon
 					rotate={90}
 					style={{ transform: `scale(${(open ? -1 : 1) * (props.position == 'top' ? -1 : 1)})` }}
@@ -53,7 +55,7 @@ const Select: React.FunctionComponent<ISelect> = (props: ISelect) => {
 				{props.options.map(option => (
 					<div
 						className={`select__options__option ${
-							option.value == props.value ? 'select__options__option--selected' : ''
+							option.value === props.value ? 'select__options__option--selected' : ''
 						}`}
 						key={option.key}
 						onClick={() => onChange(option.value)}

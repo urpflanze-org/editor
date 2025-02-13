@@ -2,6 +2,6 @@
 
 GUI for Urpflanze library
 
-[editor.urpflanze.org](https://editor.urpflanze.org)
+[urpflanze-editor.genbs.dev](https://urpflanze-editor.genbs.dev)
 
 ## UNSTABLE
